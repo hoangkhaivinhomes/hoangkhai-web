@@ -564,6 +564,10 @@ input::placeholder{color:#9fb29a}
 .tabs button[aria-pressed=true]{background:linear-gradient(160deg,rgba(240,214,138,.28),rgba(240,214,138,.1))!important;color:#f6e3a1!important;box-shadow:inset 0 0 0 1px rgba(240,214,138,.7),0 0 14px -2px rgba(240,214,138,.35)!important}
 #lf .btn{background:linear-gradient(160deg,rgba(240,214,138,.26),rgba(240,214,138,.08))!important;color:#f6e3a1!important;border:1px solid rgba(240,214,138,.7)!important;box-shadow:0 0 16px -4px rgba(240,214,138,.4),inset 0 1px 0 rgba(255,255,255,.25)!important;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);text-shadow:0 1px 6px rgba(0,0,0,.5)}
 #lf .btn::before,#lf .btn::after{display:none!important}
+/* hiện dần mượt khi cuộn */
+.rv{opacity:0;transform:translate3d(0,34px,0) scale(.985);filter:blur(6px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1),filter 1s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s);will-change:opacity,transform}
+.rv.in{opacity:1;transform:none;filter:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;filter:none;transition:none}}
 </style>
 </head>
 <body>
@@ -934,6 +938,19 @@ var L=[].slice.call(fb.children),n=L.length;
 function upd(){var m=Math.max(1,document.documentElement.scrollHeight-innerHeight),d=Math.min(1,Math.max(0,scrollY/m));
  L.forEach(function(el,i){var o=Math.max(0,1-Math.abs(d*(n-1)-i));el.style.opacity=o.toFixed(3)})}
 addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+})();
+</script>
+<script>
+(function(){if(!('IntersectionObserver' in window))return;
+var SEL='.sec h2,.sec>.w>p,.sec>p,.zc,.bar,.unit,.empty,.am,.ab>*,.loc,.lead,.cta,.warn';
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+function scan(){document.querySelectorAll(SEL).forEach(function(el){if(el.__rv||el.closest('header,.hero,.fab,dialog'))return;el.__rv=1;
+ var sib=el.parentElement?[].slice.call(el.parentElement.children).indexOf(el):0;
+ el.style.setProperty('--d',(Math.min(sib,6)*0.09).toFixed(2)+'s');
+ var r=el.getBoundingClientRect();
+ el.classList.add('rv');
+ if(r.top<innerHeight*.9&&r.bottom>0){requestAnimationFrame(function(){requestAnimationFrame(function(){el.classList.add('in')})})}else io.observe(el)})}
+scan();new MutationObserver(function(){scan()}).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
 </body>
