@@ -149,6 +149,8 @@ header nav a{text-decoration:none;color:var(--mute)}header nav a:hover{color:var
 .hero p{font-size:clamp(15px,2.1vw,18px);text-shadow:0 1px 10px rgba(0,0,0,.45)}
 .hero p.sub{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(19px,3.1vw,30px);line-height:1.4;letter-spacing:.01em;max-width:none;color:#f6e7bd;background:linear-gradient(180deg,#fff6d8,#e4c277);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 2px 8px rgba(0,0,0,.55));margin:0 0 24px}
 @media(min-width:701px){.zones .zc:last-child:nth-child(3n+1){grid-column:2}}
+.bar label{flex:1 1 130px;min-width:0}.bar label select,.bar label input{width:100%;box-sizing:border-box}
+@media(max-width:700px){.bar .tabs{flex:1 1 100%;display:flex}.bar .tabs button{flex:1}.bar label{flex:1 1 42%}}
 </style>
 </head>
 <body>
@@ -165,8 +167,9 @@ header nav a{text-decoration:none;color:var(--mute)}header nav a:hover{color:var
 <div class="bar">
 <div class="tabs" role="group" aria-label="Loại giao dịch"><button data-m="sale" aria-pressed="true">Mua</button><button data-m="rent" aria-pressed="false">Thuê</button></div>
 <label>Phân khu<select id="fz"></select></label>
-<label>Phòng ngủ<select id="fb"><option value="">Tất cả</option><option>1</option><option>2</option><option>3</option></select></label>
-<label id="fpl">Giá tối đa (tỷ)<input id="fp" type="number" min="0" step="0.1" placeholder="Không giới hạn"></label>
+<label>Loại căn<select id="fb"></select></label>
+<label>Hướng<select id="fd"></select></label>
+<label>Mức giá<select id="fp"></select></label>
 </div>
 <div id="grid" class="grid"></div>
 <section class="sec" id="tienich"><h2>Sống tại Grand Park</h2><p>Đại đô thị phía Đông thành phố, đủ đầy ngay trong khu.</p></section>
@@ -199,7 +202,7 @@ header nav a{text-decoration:none;color:var(--mute)}header nav a:hover{color:var
 <label>Mã căn<input id="u-code" required></label>
 <label>Phân khu<input id="u-zone" list="zl" required></label>
 <datalist id="zl"><option>The Rainbow</option><option>The Origami</option><option>The Manhattan</option><option>The Beverly</option><option>The Opus One</option><option>Lumière Boulevard</option></datalist>
-<label>Phòng ngủ<input id="u-beds" placeholder="Ví dụ: 1PN+ hoặc 2"></label>
+<label>Loại căn<input id="u-beds" placeholder="Ví dụ: 1PN+ hoặc 2"></label>
 <label>Diện tích (m²)<input id="u-area" type="number" min="0" step="0.1"></label>
 <label>Giá (triệu đồng)<input id="u-price" type="number" min="0" step="1" required></label>
 <label>Hướng ban công<input id="u-dir"></label>
@@ -242,16 +245,29 @@ function head(){
 }
 function zones(){
   const z=[...new Set([...ZONES.map(x=>x[0]),...S.units.filter(u=>u.type===mode).map(u=>u.zone)])],cur=$('#fz').value;
-  $('#fz').innerHTML='<option value="">Tất cả phân khu</option>'+z.map(x=>`<option${x===cur?' selected':''}>${esc(x)}</option>`).join('');
+  $('#fz').innerHTML='<option value="">Tất cả phân khu</option>'+z.map(x=>`<option${x===cur?' selected':''}>${esc(x)}</option>`).join('');fopts();
+}
+const nz=t=>String(t||'').toLowerCase().replace(/đ/g,'d').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const typeKey=u=>{let t=nz(u.bedsText||u.beds).replace(/\s/g,'').replace('phongngu','pn');return /^\d+$/.test(t)?t+'pn':t};
+const dirKey=u=>nz(u.dir).replace(/[^a-z]/g,'').replace(/dong/g,'d').replace(/tay/g,'t').replace(/nam/g,'n').replace(/bac/g,'b');
+const TYPES=[['studio','Studio'],['1pn','1PN'],['1pn+','1PN+'],['2pn','2PN'],['2pn+','2PN+'],['3pn','3PN']];
+const DIRS=[['d','Đông'],['t','Tây'],['n','Nam'],['b','Bắc'],['dn','Đông Nam'],['db','Đông Bắc'],['tn','Tây Nam'],['tb','Tây Bắc']];
+const PR={sale:[['Dưới 2 tỷ',0,2000],['2 – 3 tỷ',2000,3000],['3 – 6 tỷ',3000,6000],['Trên 6 tỷ',6000,1e12]],rent:[['Dưới 10 triệu',0,10],['10 – 20 triệu',10,20],['Trên 20 triệu',20,1e12]]};
+Object.keys(PR).forEach(k=>{const a=PR[k];PR[k]=a.reduce((o,x,i)=>(o[i]=[x[1],x[2]],o),{});PR[k].labels=a.map(x=>x[0])});
+function popts(){const L=PR[mode].labels,c=$('#fp').value;$('#fp').innerHTML='<option value="">Tất cả mức giá</option>'+L.map((x,i)=>`<option value="${i}"${String(i)===c?' selected':''}>${x}</option>`).join('')}
+function fopts(){popts();
+  const cur=$('#fb').value,cd=$('#fd').value;
+  const ex=[];S.units.filter(u=>u.type===mode).forEach(u=>{const k=typeKey(u);if(k&&!TYPES.some(x=>x[0]===k)&&!ex.some(x=>x[0]===k))ex.push([k,String(u.bedsText||u.beds)])});
+  $('#fb').innerHTML='<option value="">Tất cả loại căn</option>'+[...TYPES,...ex].map(x=>`<option value="${esc(x[0])}"${x[0]===cur?' selected':''}>${esc(x[1])}</option>`).join('');
+  $('#fd').innerHTML='<option value="">Tất cả hướng</option>'+DIRS.map(x=>`<option value="${x[0]}"${x[0]===cd?' selected':''}>${x[1]}</option>`).join('');
 }
 function render(){
-  const z=$('#fz').value,b=$('#fb').value,p=parseFloat($('#fp').value);
-  const max=isNaN(p)?Infinity:(mode==='rent'?p:p*1000);
-  const L=S.units.filter(u=>u.type===mode&&(!z||u.zone===z)&&(!b||u.beds==b)&&u.price<=max).sort((a,c)=>c.hot-a.hot);
+  const z=$('#fz').value,b=$('#fb').value,d=$('#fd').value,r=PR[mode][$('#fp').value];
+  const L=S.units.filter(u=>u.type===mode&&(!z||u.zone===z)&&(!b||typeKey(u)===b)&&(!d||dirKey(u)===d)&&(!r||(u.price>=r[0]&&u.price<r[1]))).sort((a,c)=>c.hot-a.hot);
   $('#grid').innerHTML=L.length?L.map(u=>`<article class="unit"><div class="ph"${phAttr(u)}>${phImg(u)}${u.hot?'<span class="tag">Giá tốt</span>':''}${u.sample?'<span class="tag s">Tin mẫu</span>':''}${cnt(u)}</div><div class="body"><h3>${esc(u.zone)}</h3><div class="price">${money(u)}</div><dl class="spec">${[['Diện tích',u.area?u.area+' m²':''],['Hướng',u.dir],['Nội thất',u.furn],['Pháp lý',u.legal]].filter(r=>r[1]).map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl><div class="row"><a class="btn" href="${tel()}">Gọi ngay</a><a class="btn alt" href="${zl()}" target="_blank" rel="noopener">Zalo</a></div></div></article>`).join(''):'<p class="empty" style="grid-column:1/-1">Hiện chưa có căn trong mục này. Gọi hoặc nhắn Zalo cho mình, mình gửi danh sách căn mới nhất.</p>';
 }
-$$('.tabs button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$$('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#fpl').firstChild.nodeValue=mode==='rent'?'Giá tối đa (triệu/tháng)':'Giá tối đa (tỷ)';zones();render()});
-['#fz','#fb','#fp'].forEach(s=>$(s).addEventListener('input',render));
+$$('.tabs button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$$('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#fp').value='';zones();render()});
+['#fz','#fb','#fd','#fp'].forEach(s=>$(s).addEventListener('input',render));
 $('#lf').onsubmit=e=>{e.preventDefault();if(!S.phone){alert('Môi giới chưa cập nhật số điện thoại.');return}
   location.href='sms:'+S.phone.replace(/\s/g,'')+'?body='+encodeURIComponent('Mình là '+$('#ln').value+', SĐT '+$('#lp').value+'. Nhờ bạn gọi lại tư vấn căn hộ Vinhomes Grand Park.')};
 
