@@ -261,6 +261,19 @@ header{border-image:linear-gradient(90deg,rgba(205,214,232,0),#cdd6e8,rgba(205,2
 .flare .b1{height:3px!important;margin-top:-1.5px!important;width:900px!important;margin-left:-450px!important}
 @keyframes wash{from{opacity:.15}to{opacity:.7}}
 @media(max-width:760px){.flare .core{width:260px!important;height:260px!important;margin:-130px 0 0 -130px!important}.flare .b1{width:460px!important;margin-left:-230px!important}.flare .sp{scale:.65}.flare .wash{opacity:.5}@keyframes wash{from{opacity:.1}to{opacity:.45}}}
+/* hiệu ứng sang: zoom điện ảnh, ánh hoàng hôn thở, vệt sáng lướt, bụi vàng */
+.hero::before,.hero::after{display:none!important}
+.hero .kb{position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(10,14,24,.62),rgba(10,14,24,.22) 50%,rgba(10,14,24,0) 75%),linear-gradient(0deg,rgba(10,14,24,.45),rgba(10,14,24,0) 45%),var(--hero-img) center 60%/cover no-repeat;transform-origin:70% 35%;animation:kenburns 26s ease-in-out infinite alternate}
+@media(max-width:760px){.hero .kb{background:linear-gradient(0deg,rgba(10,14,24,.82),rgba(10,14,24,.2) 58%,rgba(10,14,24,0) 82%),var(--hero-img) 58% center/cover no-repeat}}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.09)}}
+.hero .lux{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.lux .hz{position:absolute;inset:0;mix-blend-mode:screen;background:radial-gradient(ellipse 52% 26% at var(--sx) var(--sy),rgba(255,214,150,.62),rgba(255,160,90,.22) 50%,rgba(255,130,80,0) 78%);animation:hzbreath 7s ease-in-out infinite alternate}
+@keyframes hzbreath{from{opacity:.35}to{opacity:1}}
+.lux .sweep{position:absolute;top:-20%;bottom:-20%;left:-40%;width:34%;mix-blend-mode:soft-light;background:linear-gradient(100deg,rgba(255,245,220,0),rgba(255,240,205,.55) 50%,rgba(255,245,220,0));transform:skewX(-18deg);animation:sweepx 11s ease-in-out infinite}
+@keyframes sweepx{0%,18%{left:-40%}62%,100%{left:120%}}
+.lux .dust{position:absolute;width:var(--z);height:var(--z);border-radius:50%;background:radial-gradient(circle,#fff6d6,rgba(243,214,140,.85) 55%,rgba(243,214,140,0) 72%);box-shadow:0 0 8px 2px rgba(243,214,140,.35);opacity:0;animation:dustup var(--d) linear var(--l) infinite}
+@keyframes dustup{0%{opacity:0;transform:translate(0,0)}15%{opacity:.85}70%{opacity:.6}100%{opacity:0;transform:translate(var(--x),-110px)}}
+@media (prefers-reduced-motion:reduce){.hero .kb,.lux *{animation:none!important}.lux .dust{opacity:.5}}
 </style>
 </head>
 <body>
@@ -533,15 +546,14 @@ $('#a-pub').onclick=async()=>{
 </script>
 <script>
 (function(){const h=document.querySelector('.hero');if(!h)return;
-const f=document.createElement('div');f.className='flare';f.setAttribute('aria-hidden','true');
-f.innerHTML='<div class="wash"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="orb o4"></div><div class="sun"><div class="core"></div><div class="bar b1"></div><div class="bar b2"></div><div class="bar b3"></div><div class="bar b4"></div></div>';
-let r=7;const rnd=()=>(r=(r*9301+49297)%233280)/233280;
-for(let i=0;i<64;i++){const e=document.createElement('i');e.className='sp';
- const sky=i<34;
- e.style.cssText='left:'+(sky?35+rnd()*63:8+rnd()*88)+'%;top:'+(sky?2+rnd()*34:50+rnd()*46)+'%;--z:'+(16+rnd()*24).toFixed(0)+'px;--d:'+(1.8+rnd()*2.2).toFixed(1)+'s;--l:-'+(rnd()*5).toFixed(1)+'s';
+const kb=document.createElement('div');kb.className='kb';kb.setAttribute('aria-hidden','true');
+const f=document.createElement('div');f.className='lux';f.setAttribute('aria-hidden','true');
+f.innerHTML='<div class="hz"></div><div class="sweep"></div>';
+let r=11;const rnd=()=>(r=(r*9301+49297)%233280)/233280;
+for(let i=0;i<26;i++){const e=document.createElement('i');e.className='dust';
+ e.style.cssText='left:'+(4+rnd()*92)+'%;top:'+(30+rnd()*62)+'%;--z:'+(2+rnd()*2.4).toFixed(1)+'px;--d:'+(9+rnd()*9).toFixed(1)+'s;--l:-'+(rnd()*16).toFixed(1)+'s;--x:'+((rnd()-.5)*50).toFixed(0)+'px';
  f.appendChild(e)}
-for(let i=0;i<60;i++){const g=document.createElement('i');g.className='gl';g.style.cssText='left:'+(2+rnd()*96)+'%;top:'+(i<30?48+rnd()*48:3+rnd()*42)+'%;--z:'+(2+rnd()*3).toFixed(1)+'px;--d:'+(1.2+rnd()*1.8).toFixed(1)+'s;--l:-'+(rnd()*3).toFixed(1)+'s';f.appendChild(g)}
-h.insertBefore(f,h.firstChild)})();
+h.insertBefore(f,h.firstChild);h.insertBefore(kb,h.firstChild)})();
 </script>
 </body>
 </html>
