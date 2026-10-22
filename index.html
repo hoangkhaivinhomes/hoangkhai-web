@@ -244,6 +244,23 @@ header{border-image:linear-gradient(90deg,rgba(205,214,232,0),#cdd6e8,rgba(205,2
 .flare .b2{width:300px!important;margin-left:-150px!important;opacity:.8}
 .flare .core{background:radial-gradient(circle,#fff 0,#fff 6%,rgba(255,246,214,.95) 14%,rgba(255,206,130,.65) 30%,rgba(255,150,80,.25) 55%,rgba(255,120,70,0) 74%)}
 @media(max-width:760px){.flare .b1{width:380px!important;margin-left:-190px!important}.flare .b2{width:200px!important;margin-left:-100px!important}}
+/* nắng chói mạnh */
+.flare .core{width:560px!important;height:560px!important;margin:-280px 0 0 -280px!important;background:radial-gradient(circle,#fff 0,#fff 9%,rgba(255,250,225,.98) 18%,rgba(255,214,140,.75) 34%,rgba(255,160,80,.35) 58%,rgba(255,120,70,0) 76%)!important;animation:corepulse2 2.4s ease-in-out infinite alternate!important}
+@keyframes corepulse2{from{opacity:.7;transform:scale(.8)}to{opacity:1;transform:scale(1.25)}}
+.flare .b1{display:block!important;width:1100px!important;height:5px!important;margin:-2.5px 0 0 -550px!important;background:linear-gradient(90deg,rgba(255,240,200,0),rgba(255,255,240,1) 50%,rgba(255,240,200,0))!important;animation:barpulse2 1.9s ease-in-out infinite alternate!important}
+@keyframes barpulse2{from{opacity:.35;transform:scaleX(.7)}to{opacity:1;transform:scaleX(1.1)}}
+.flare .sp{opacity:0;animation:glint2 var(--d) ease-in-out var(--l) infinite!important;filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #ffd98a)!important}
+@keyframes glint2{0%,35%,100%{opacity:0;transform:scale(.1) rotate(0)}50%{opacity:1;transform:scale(1.25) rotate(30deg)}65%{opacity:.15;transform:scale(.4) rotate(60deg)}}
+.flare .gl{position:absolute;width:var(--z);height:var(--z);margin:calc(var(--z)/-2);border-radius:50%;background:#fff;box-shadow:0 0 6px 2px rgba(255,236,170,.95);opacity:0;animation:glitter var(--d) ease-in-out var(--l) infinite}
+@keyframes glitter{0%,40%,100%{opacity:0;transform:scale(.3)}55%{opacity:1;transform:scale(1)}70%{opacity:0}}
+.flare .wash{position:absolute;inset:0;background:radial-gradient(ellipse 60% 45% at var(--sx) var(--sy),rgba(255,236,190,.55),rgba(255,200,130,0) 70%);animation:wash 3s ease-in-out infinite alternate}
+@keyframes wash{from{opacity:.2}to{opacity:1}}
+@media(max-width:760px){.flare .core{width:380px!important;height:380px!important;margin:-190px 0 0 -190px!important}.flare .b1{width:700px!important;margin-left:-350px!important}}
+@media (prefers-reduced-motion:reduce){.flare *{animation:none!important}.flare .sp,.flare .gl{opacity:.8}}
+.flare .core{width:440px!important;height:440px!important;margin:-220px 0 0 -220px!important}
+.flare .b1{height:3px!important;margin-top:-1.5px!important;width:900px!important;margin-left:-450px!important}
+@keyframes wash{from{opacity:.15}to{opacity:.7}}
+@media(max-width:760px){.flare .core{width:260px!important;height:260px!important;margin:-130px 0 0 -130px!important}.flare .b1{width:460px!important;margin-left:-230px!important}.flare .sp{scale:.65}.flare .wash{opacity:.5}@keyframes wash{from{opacity:.1}to{opacity:.45}}}
 </style>
 </head>
 <body>
@@ -517,12 +534,13 @@ $('#a-pub').onclick=async()=>{
 <script>
 (function(){const h=document.querySelector('.hero');if(!h)return;
 const f=document.createElement('div');f.className='flare';f.setAttribute('aria-hidden','true');
-f.innerHTML='<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="orb o4"></div><div class="sun"><div class="core"></div><div class="bar b1"></div><div class="bar b2"></div><div class="bar b3"></div><div class="bar b4"></div></div>';
+f.innerHTML='<div class="wash"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="orb o4"></div><div class="sun"><div class="core"></div><div class="bar b1"></div><div class="bar b2"></div><div class="bar b3"></div><div class="bar b4"></div></div>';
 let r=7;const rnd=()=>(r=(r*9301+49297)%233280)/233280;
-for(let i=0;i<40;i++){const e=document.createElement('i');e.className='sp';
- const sky=i<22;
- e.style.cssText='left:'+(sky?35+rnd()*63:8+rnd()*88)+'%;top:'+(sky?2+rnd()*34:50+rnd()*46)+'%;--z:'+(10+rnd()*16).toFixed(0)+'px;--d:'+(2.2+rnd()*2.6).toFixed(1)+'s;--l:-'+(rnd()*5).toFixed(1)+'s';
+for(let i=0;i<64;i++){const e=document.createElement('i');e.className='sp';
+ const sky=i<34;
+ e.style.cssText='left:'+(sky?35+rnd()*63:8+rnd()*88)+'%;top:'+(sky?2+rnd()*34:50+rnd()*46)+'%;--z:'+(16+rnd()*24).toFixed(0)+'px;--d:'+(1.8+rnd()*2.2).toFixed(1)+'s;--l:-'+(rnd()*5).toFixed(1)+'s';
  f.appendChild(e)}
+for(let i=0;i<60;i++){const g=document.createElement('i');g.className='gl';g.style.cssText='left:'+(2+rnd()*96)+'%;top:'+(i<30?48+rnd()*48:3+rnd()*42)+'%;--z:'+(2+rnd()*3).toFixed(1)+'px;--d:'+(1.2+rnd()*1.8).toFixed(1)+'s;--l:-'+(rnd()*3).toFixed(1)+'s';f.appendChild(g)}
 h.insertBefore(f,h.firstChild)})();
 </script>
 </body>
