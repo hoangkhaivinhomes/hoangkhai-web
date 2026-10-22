@@ -116,16 +116,44 @@ header{border-bottom:1px solid transparent;border-image:linear-gradient(90deg,rg
 select,input,textarea{background:#fff;border-color:var(--line);box-shadow:inset 0 1px 2px rgba(60,45,20,.06)}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){.btn::after{transition:none}.unit{transition:none}}
+
+/* ===== Phân khu + Tiện ích ===== */
+header nav{display:flex;gap:22px;font-size:14px;font-weight:500}
+header nav a{text-decoration:none;color:var(--mute)}header nav a:hover{color:var(--lake)}
+@media(max-width:760px){header nav{display:none}}
+.sec{margin:46px 0 18px}
+.sec h2{font:700 clamp(24px,4vw,32px)/1.2 "Playfair Display",Georgia,serif;margin:0 0 6px}
+.sec p{margin:0;color:var(--mute);font-size:15px}
+.sec h2::after{content:"";display:block;width:54px;height:3px;margin-top:10px;background:var(--gold);border-radius:3px}
+.zones{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin:18px 0}
+.zc{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,#fff,#fbf8f1);border:1px solid var(--line);box-shadow:0 14px 34px -22px rgba(90,65,20,.55);transition:transform .25s,box-shadow .25s}
+.zc:hover{transform:translateY(-4px);box-shadow:0 24px 40px -22px rgba(90,65,20,.65)}
+.zc:focus-visible{outline:3px solid var(--hot);outline-offset:2px}
+.zc svg{display:block;width:100%;aspect-ratio:16/10;height:auto}
+.zc b{font:700 18px "Playfair Display",Georgia,serif;padding:14px 16px 2px;color:var(--ink)}
+.zc span{padding:0 16px;color:var(--mute);font-size:14px;line-height:1.45}
+.zc i{font-style:normal;padding:10px 16px 16px;color:var(--lake);font-weight:600;font-size:14px}
+.amen{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
+.am{background:linear-gradient(160deg,#fff,#fbf8f1);border:1px solid var(--line);border-radius:16px;padding:18px 16px;box-shadow:0 14px 34px -24px rgba(90,65,20,.5);display:grid;gap:4px;align-content:start}
+.am svg{width:38px;height:38px;stroke:var(--lake);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-bottom:6px}
+.am strong{font:700 26px "Playfair Display",Georgia,serif;background:linear-gradient(135deg,#9a7020,#c9a15a 40%,#8a6420);-webkit-background-clip:text;background-clip:text;color:transparent}
+.am b{font-size:15px}.am span{color:var(--mute);font-size:13.5px;line-height:1.45}
+.loc{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;margin:6px 0 30px;padding:16px 18px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(180deg,#fff,#faf7f0)}
+.loc p{margin:0;font-size:15px}.loc small{color:var(--mute)}
+@media(max-width:700px){.amen{grid-template-columns:repeat(2,1fr)}.zones{grid-auto-flow:column;grid-auto-columns:78%;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;margin-inline:-18px;padding-inline:18px;scrollbar-width:none}.zc{scroll-snap-align:start}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header><a class="brand" href="#" aria-label="Hoang Khai Vinhomes"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9d08e"/><stop offset=".5" stop-color="#b98d3e"/><stop offset="1" stop-color="#f1dca0"/></linearGradient></defs><circle cx="20" cy="20" r="18.4"/><text x="20" y="25.5" text-anchor="middle">HK</text></svg><span class="wm"><b>Hoang Khai</b><i>Vinhomes</i></span></a><button class="btn ghost" id="adm-btn" hidden>Quản lý tin</button></header>
+<header><a class="brand" href="#" aria-label="Hoang Khai Vinhomes"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9d08e"/><stop offset=".5" stop-color="#b98d3e"/><stop offset="1" stop-color="#f1dca0"/></linearGradient></defs><circle cx="20" cy="20" r="18.4"/><text x="20" y="25.5" text-anchor="middle">HK</text></svg><span class="wm"><b>Hoang Khai</b><i>Vinhomes</i></span></a><nav aria-label="Mục chính"><a href="#phankhu">Phân khu</a><a href="#canho">Căn đang có</a><a href="#tienich">Tiện ích</a><a href="#lienhe">Liên hệ</a></nav><button class="btn ghost" id="adm-btn" hidden>Quản lý tin</button></header>
 <section class="hero"><div class="hero-txt">
 <h1>Vinhomes Grand Park</h1>
 <p>Mua ở, đầu tư hay thuê, mọi phân khu. Mình theo sát đến khi nhận nhà.</p>
 <div class="cta"><a class="btn" data-call>Gọi tư vấn</a><a class="btn alt" data-zalo target="_blank" rel="noopener">Nhắn Zalo</a></div></div>
 </section>
+<section class="sec" id="phankhu"><h2>Các phân khu</h2><p>Chạm vào một phân khu để xem các căn đang có.</p></section>
+<div class="zones" id="zones"></div>
+<section class="sec" id="canho"><h2>Căn đang có</h2></section>
 <div id="owner-warn" class="warn" hidden>Chưa có số điện thoại và Zalo. Bấm “Quản lý tin” để nhập.</div>
 <div class="bar">
 <div class="tabs" role="group" aria-label="Loại giao dịch"><button data-m="sale" aria-pressed="true">Mua</button><button data-m="rent" aria-pressed="false">Thuê</button></div>
@@ -134,6 +162,9 @@ select,input,textarea{background:#fff;border-color:var(--line);box-shadow:inset 
 <label id="fpl">Giá tối đa (tỷ)<input id="fp" type="number" min="0" step="0.1" placeholder="Không giới hạn"></label>
 </div>
 <div id="grid" class="grid"></div>
+<section class="sec" id="tienich"><h2>Sống tại Grand Park</h2><p>Đại đô thị phía Đông thành phố, đủ đầy ngay trong khu.</p></section>
+<div class="amen" id="amen"></div>
+<div class="loc"><div><p><b>Vị trí:</b> Phường Long Bình, TP. Hồ Chí Minh (Quận 9 cũ)</p><small>Cửa ngõ phía Đông, liền kề Thủ Đức và Đồng Nai.</small></div><a class="btn alt" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Vinhomes+Grand+Park">Xem trên Google Maps</a></div>
 <section class="lead" id="lienhe">
 <h2>Để lại số, mình gọi lại</h2>
 <form id="lf"><input id="ln" placeholder="Tên của bạn" autocomplete="name" required><input id="lp" type="tel" placeholder="Số điện thoại" autocomplete="tel" required><button class="btn" type="submit">Gửi</button></form>
@@ -203,19 +234,53 @@ function head(){
   $$('[data-zalo]').forEach(a=>a.href=zl());
 }
 function zones(){
-  const z=[...new Set(S.units.filter(u=>u.type===mode).map(u=>u.zone))],cur=$('#fz').value;
+  const z=[...new Set([...ZONES.map(x=>x[0]),...S.units.filter(u=>u.type===mode).map(u=>u.zone)])],cur=$('#fz').value;
   $('#fz').innerHTML='<option value="">Tất cả phân khu</option>'+z.map(x=>`<option${x===cur?' selected':''}>${esc(x)}</option>`).join('');
 }
 function render(){
   const z=$('#fz').value,b=$('#fb').value,p=parseFloat($('#fp').value);
   const max=isNaN(p)?Infinity:(mode==='rent'?p:p*1000);
   const L=S.units.filter(u=>u.type===mode&&(!z||u.zone===z)&&(!b||u.beds==b)&&u.price<=max).sort((a,c)=>c.hot-a.hot);
-  $('#grid').innerHTML=L.length?L.map(u=>`<article class="unit"><div class="ph"${phAttr(u)}>${phImg(u)}${u.hot?'<span class="tag">Giá tốt</span>':''}${u.sample?'<span class="tag s">Tin mẫu</span>':''}${cnt(u)}</div><div class="body"><h3>${esc(u.zone)}</h3><div class="price">${money(u)}</div><dl class="spec">${[['Diện tích',u.area?u.area+' m²':''],['Hướng',u.dir],['Nội thất',u.furn],['Pháp lý',u.legal]].filter(r=>r[1]).map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl><div class="row"><a class="btn" href="${tel()}">Gọi ngay</a><a class="btn alt" href="${zl()}" target="_blank" rel="noopener">Zalo</a></div></div></article>`).join(''):'<p class="empty" style="grid-column:1/-1">Chưa có căn phù hợp. Đổi bộ lọc hoặc gọi mình.</p>';
+  $('#grid').innerHTML=L.length?L.map(u=>`<article class="unit"><div class="ph"${phAttr(u)}>${phImg(u)}${u.hot?'<span class="tag">Giá tốt</span>':''}${u.sample?'<span class="tag s">Tin mẫu</span>':''}${cnt(u)}</div><div class="body"><h3>${esc(u.zone)}</h3><div class="price">${money(u)}</div><dl class="spec">${[['Diện tích',u.area?u.area+' m²':''],['Hướng',u.dir],['Nội thất',u.furn],['Pháp lý',u.legal]].filter(r=>r[1]).map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl><div class="row"><a class="btn" href="${tel()}">Gọi ngay</a><a class="btn alt" href="${zl()}" target="_blank" rel="noopener">Zalo</a></div></div></article>`).join(''):'<p class="empty" style="grid-column:1/-1">Hiện chưa có căn trong mục này. Gọi hoặc nhắn Zalo cho mình, mình gửi danh sách căn mới nhất.</p>';
 }
 $$('.tabs button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$$('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#fpl').firstChild.nodeValue=mode==='rent'?'Giá tối đa (triệu/tháng)':'Giá tối đa (tỷ)';zones();render()});
 ['#fz','#fb','#fp'].forEach(s=>$(s).addEventListener('input',render));
 $('#lf').onsubmit=e=>{e.preventDefault();if(!S.phone){alert('Môi giới chưa cập nhật số điện thoại.');return}
   location.href='sms:'+S.phone.replace(/\s/g,'')+'?body='+encodeURIComponent('Mình là '+$('#ln').value+', SĐT '+$('#lp').value+'. Nhờ bạn gọi lại tư vấn căn hộ Vinhomes Grand Park.')};
+
+/* ===== Phân khu & tiện ích ===== */
+const ZONES=[
+ ['The Rainbow','Cao tầng sôi động, nhiều tiện ích ngay dưới chân.','rb'],
+ ['The Origami','Phong cách Nhật, thanh lịch và tinh gọn.','og'],
+ ['The Manhattan','Quần thể Manhattan, nhà phố và căn hộ Glory.','mh'],
+ ['The Beverly','Phong cách Mỹ, cảm hứng Hollywood.','bv'],
+ ['The Opus One','Căn hộ cao cấp, tầm nhìn thoáng.','op'],
+ ['Lumière Boulevard','Khu căn hộ mới, sang trọng về đêm.','lb']];
+function zoneArt(k){
+  const W=320,H=200;let d='',bg=['#dfe8f1','#fbf2dd'];
+  const T=(x,w,h,c,o=1)=>`<rect x="${x}" y="${H-h}" width="${w}" height="${h}" fill="${c}" opacity="${o}"/>`;
+  const win=(x,w,h,c,step=9)=>{let r='';for(let yy=H-h+8;yy<H-8;yy+=step)for(let xx=x+5;xx<x+w-6;xx+=7)r+=`<rect x="${xx}" y="${yy}" width="3.2" height="4.4" fill="${c}"/>`;return r};
+  if(k==='rb'){bg=['#cfe3f5','#fdf1e0'];const cs=['#f6a5a5','#f8c78b','#f6e08a','#a6d9a0','#8fcdea','#9ea8ea','#cc9fe0'];
+    cs.forEach((c,i)=>{const x=18+i*42,h=70+((i*37)%70);d+=T(x,34,h,c)+win(x,34,h,'rgba(255,255,255,.75)')})}
+  if(k==='og'){bg=['#fbd9df','#fff4e6'];[[24,50,118],[84,46,150],[140,52,104],[200,46,138],[254,48,96]].forEach(([x,w,h],i)=>{d+=T(x,w,h,i%2?'#fff':'#f7e6e9')+`<polygon points="${x},${H-h} ${x+w/2},${H-h-18} ${x+w},${H-h}" fill="#e9b9c2"/>`+win(x,w,h,'rgba(190,120,135,.5)')});
+    [[40,60],[290,40],[170,30]].forEach(([x,y])=>d+=`<circle cx="${x}" cy="${y}" r="9" fill="#f6b7c4" opacity=".7"/><circle cx="${x+10}" cy="${y+7}" r="6" fill="#f9cdd6" opacity=".8"/>`)}
+  if(k==='mh'){bg=['#f3dcb8','#fff1d6'];[[10,70,70],[86,60,96],[152,70,64],[228,76,88]].forEach(([x,w,h],i)=>{d+=T(x,w,h,['#c9a27a','#b98f68','#d6b48e','#c09a74'][i])+win(x,w,h,'rgba(255,240,205,.8)',10)});
+    d+=`<rect x="0" y="${H-14}" width="${W}" height="14" fill="#8a6a2f" opacity=".25"/>`}
+  if(k==='bv'){bg=['#ffc9a3','#ffe9d1'];[[40,50,86],[104,56,112],[176,50,96],[236,52,120]].forEach(([x,w,h],i)=>{d+=T(x,w,h,['#fff','#fbefe0','#fff','#f8e6d2'][i])+`<rect x="${x}" y="${H-h}" width="${w}" height="4" fill="#d3a15a"/>`+win(x,w,h,'rgba(210,150,90,.55)',10)});
+    [[18,150],[298,140]].forEach(([x,h])=>{d+=`<path d="M${x} ${H} Q${x+3} ${H-h/2} ${x} ${H-h}" stroke="#7a5a33" stroke-width="3" fill="none"/>`;for(let a=-60;a<=60;a+=30)d+=`<path d="M${x} ${H-h} q${a} -16 ${a*1.4} 6" stroke="#4c8a4a" stroke-width="3.5" fill="none" stroke-linecap="round"/>`})}
+  if(k==='op'){bg=['#a9c1de','#e8eef6'];[[28,36,170],[74,32,128],[116,40,184],[166,34,142],[210,38,166],[258,34,112]].forEach(([x,w,h],i)=>{d+=T(x,w,h,i%2?'#6f8fb6':'#5c7ea8')+`<rect x="${x+w/2-1}" y="${H-h}" width="2" height="${h}" fill="rgba(255,255,255,.4)"/>`+win(x,w,h,'rgba(255,238,190,.85)',8)});}
+  if(k==='lb'){bg=['#8f86c9','#f3d3c4'];[[20,56,130],[90,52,100],[156,60,148],[230,56,112]].forEach(([x,w,h],i)=>{d+=T(x,w,h,i%2?'#4f4a8a':'#5d5799')+`<path d="M${x+8} ${H-h} q${(w-16)/2} -26 ${w-16} 0" fill="#e7c76f" opacity=".9"/>`+win(x,w,h,'rgba(255,225,150,.9)',9)});
+    for(let i=0;i<16;i++)d+=`<circle cx="${12+i*19}" cy="${H-8-(i%2)*4}" r="2.2" fill="#ffe08a"/>`}
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Minh họa ${k}"><defs><linearGradient id="s${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${bg[0]}"/><stop offset="1" stop-color="${bg[1]}"/></linearGradient></defs><rect width="${W}" height="${H}" fill="url(#s${k})"/><circle cx="262" cy="42" r="20" fill="#fff" opacity=".55"/>${d}</svg>`}
+$('#zones').innerHTML=ZONES.map(z=>`<button class="zc" type="button" data-z="${esc(z[0])}">${zoneArt(z[2])}<b>${esc(z[0])}</b><span>${esc(z[1])}</span><i>Xem căn ›</i></button>`).join('');
+$$('.zc').forEach(b=>b.onclick=()=>{zones();$('#fz').value=b.dataset.z;render();$('#canho').scrollIntoView({behavior:'smooth'})});
+const AM=[['271 ha','Đại đô thị','Nằm ở cửa ngõ phía Đông thành phố.','M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6'],
+ ['36 ha','Công viên trung tâm','Đường dạo, hồ sen và không gian xanh.','M12 3c3 3 5 6 5 9a5 5 0 0 1-10 0c0-3 2-6 5-9zM12 17v4'],
+ ['Vinschool','Trường học trong khu','Từ mầm non, thuận tiện đưa đón con.','M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5'],
+ ['Vinmec','Bệnh viện quốc tế','Chăm sóc sức khỏe ngay gần nhà.','M12 4v16M4 12h16'],
+ ['VinBus','Xe buýt điện','Kết nối nội khu và ra các hướng thành phố.','M4 5h16v11H4zM4 11h16M7 19v-3M17 19v-3'],
+ ['Hồ & đại lộ','Cảnh quan buổi tối','Hồ sen, đại lộ ánh sáng, bến thuyền.','M3 15c3 0 3-2 6-2s3 2 6 2 3-2 6-2M3 19c3 0 3-2 6-2s3 2 6 2 3-2 6-2M8 9a4 4 0 1 1 8 0']];
+$('#amen').innerHTML=AM.map(a=>`<div class="am"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${a[3]}"/></svg><strong>${esc(a[0])}</strong><b>${esc(a[1])}</b><span>${esc(a[2])}</span></div>`).join('');
 head();zones();render();
 
 /* ===== Danh sách căn lấy từ Google Sheet (dán link CSV vào SHEET_CSV) ===== */
