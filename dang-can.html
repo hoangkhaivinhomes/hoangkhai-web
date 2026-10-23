@@ -39,7 +39,7 @@ a{color:var(--gold)}
 <div class="f" style="margin-top:10px"><label>Mật khẩu (đã đặt trong Apps Script)</label><input id="ck" type="password"></div>
 <button class="btn" id="cs" style="margin-top:12px">Lưu</button></div>
 
-<div id="main">
+<div id="main"><p class="s"><a href="#" id="ql" style="color:var(--gold)">Lấy link mở nhanh (không phải nhập lại)</a></p><div id="qlb" class="card" hidden></div>
 <h2>1. Dán tin nhắn Zalo</h2>
 <textarea id="tin" placeholder="Dán nội dung căn vào đây, ví dụ: Bán 2PN The Origami 59m2 hướng Đông Nam, nội thất cơ bản, HĐMB, giá 3 tỷ 250"></textarea>
 <p class="s" style="margin-top:6px">Nội dung gốc không được đăng lên web, chỉ các ô ở bước 3.</p>
@@ -119,7 +119,12 @@ function parseTin(raw){
 
 
 const $=s=>document.querySelector(s);
-const ST=(()=>{try{return localStorage}catch(e){return{getItem:()=>null,setItem(){}}}})();
+const MEM={};
+const ST=(()=>{let L=null;try{L=localStorage;L.setItem('dc_t','1');L.removeItem('dc_t')}catch(e){L=null}
+  return{getItem:k=>{try{const v=L&&L.getItem(k);if(v!==null&&v!==undefined)return v}catch(e){}return MEM[k]===undefined?null:MEM[k]},setItem:(k,v)=>{MEM[k]=v;try{L&&L.setItem(k,v)}catch(e){}}}})();
+/* link mở nhanh: #c=<mã hóa địa chỉ + mật khẩu> tự cài đặt, không phải nhập lại */
+(function(){const m=location.hash.match(/^#c=([A-Za-z0-9_\-]+)/);if(!m)return;try{const s=decodeURIComponent(escape(atob(m[1].replace(/-/g,'+').replace(/_/g,'/'))));const i=s.indexOf('\n');const u=s.slice(0,i),k=s.slice(i+1);if(/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(u)&&k){ST.setItem('dc_url',u);ST.setItem('dc_key',k)}}catch(e){}})();
+const quickLink=()=>{const u=ST.getItem('dc_url'),k=ST.getItem('dc_key');if(!u||!k)return'';return location.origin+location.pathname+'#c='+btoa(unescape(encodeURIComponent(u+'\n'+k))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')};
 let imgs=[],busy=false;
 const FIELDS=[['loai','Loại căn','select',['','Bán','Cho thuê'],1],['khu','Phân khu','select',['',...ZONES],1],['pn','Loại căn hộ (Studio, 1PN, 2PN+…)','text','',0],['dt','Diện tích (m²)','text','',0],['gia','Giá (ví dụ 3,25 tỷ hoặc 9 triệu)','text','',1],['huong','Hướng','text','',0],['noithat','Nội thất','text','',0],['phaply','Pháp lý','text','',0],['toa','Tòa','text','',0],['tang','Tầng','text','',0],['view','View','text','',0],['coc','Đặt cọc (căn thuê)','text','',0],['thue','Thuê dự kiến, triệu/tháng (căn bán)','text','',0],['mota','Mô tả ngắn cho khách','text','',0]];
 function build(){$('#fm').innerHTML=FIELDS.map(f=>`<div class="f" data-k="${f[0]}"><label>${f[1]}${f[4]?' *':''}</label>${f[2]==='select'?`<select id="f_${f[0]}">${f[3].map(o=>`<option>${o}</option>`).join('')}</select>`:`<input id="f_${f[0]}">`}</div>`).join('');
@@ -160,5 +165,9 @@ $('#go').onclick=async()=>{if(busy)return;const url=ST.getItem('dc_url'),key=ST.
   catch(e){$('#res').innerHTML='<div class="note">Không nhận được phản hồi. <b>Hãy kiểm tra Google Sheet xem căn đã có chưa trước khi bấm Đăng lại</b>, để tránh đăng trùng.</div>';busy=false;check()}};
 function reset(){$('#tin').value='';FIELDS.forEach(f=>$('#f_'+f[0]).value='');$('#tot').checked=false;imgs=[];drawImgs();$('#res').innerHTML='';$('#warn').innerHTML='';busy=false;check();scrollTo({top:0,behavior:'smooth'})}
 $('#rs').onclick=()=>{if(confirm('Xóa hết để nhập căn mới?'))reset()};
+
+$('#ql').onclick=e=>{e.preventDefault();const l=quickLink();const b=$('#qlb');b.hidden=false;
+ b.innerHTML='<p class="s" style="margin-top:0">Link này đã chứa sẵn cài đặt của bạn. <b>Chỉ bạn dùng, đừng gửi cho ai.</b> Mở link này trên điện thoại, rồi thêm vào màn hình chính (Safari: nút Chia sẻ → Thêm vào MH chính; Chrome: ⋮ → Thêm vào màn hình chính).</p><input id="qlv" readonly><button class="btn" id="qlc" style="margin-top:10px">Sao chép link</button>';
+ $('#qlv').value=l;$('#qlc').onclick=async()=>{try{await navigator.clipboard.writeText(l)}catch(x){$('#qlv').select();document.execCommand('copy')}$('#qlc').textContent='Đã chép'}};
 build();check();cfgShow();
 </script></body></html>
