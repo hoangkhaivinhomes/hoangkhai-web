@@ -595,6 +595,63 @@ select option{color:#fbf1da;background:#2a1608}input::placeholder{color:#c9b085}
 .sub small{display:block;margin-top:10px;font-family:Inter,system-ui,sans-serif;font-style:normal;font-weight:400;font-size:clamp(13px,1.7vw,16px);letter-spacing:.06em;color:#f3e7c6;-webkit-text-fill-color:#f3e7c6;opacity:.92}
 .tw,.tws,.hero .tw,.hero .tws,.hero .lux .tw,.hero .lux .tws,.hero .lux .ray,.hero .lux .shaft{display:none!important}
 .hero .kb{background:linear-gradient(0deg,rgba(10,14,24,.7),rgba(10,14,24,.12) 55%,rgba(10,14,24,0) 80%),var(--hero-img) 45% center/cover no-repeat!important}
+/* ===== Trang chi tiết căn ===== */
+.btn.more{width:100%;background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04))!important;color:#fbeec4!important;border:1px solid rgba(248,220,142,.55)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.25)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.btn.more::before,.btn.more::after{display:none!important}
+.btn.more span{display:inline-block;transition:transform .25s}.btn.more:hover span{transform:translateX(4px)}
+#dt{position:fixed;inset:0;width:100%;max-width:100%;height:100%;max-height:100%;margin:0;padding:0;border:0!important;color:#fbf1da;background:rgba(22,10,3,.84)!important;-webkit-backdrop-filter:blur(22px) saturate(1.1)!important;backdrop-filter:blur(22px) saturate(1.1)!important;overflow:hidden;box-shadow:none!important}
+#dt::backdrop{background:rgba(0,0,0,.4)}
+#dt:not([open]){display:none}
+.dtw{height:100%;overflow:auto;overscroll-behavior:contain;padding:0 18px 110px}.dtw>*{max-width:1000px;margin-left:auto;margin-right:auto}
+.dtn{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;gap:10px;padding:14px 0;background:linear-gradient(180deg,rgba(22,10,3,.95),rgba(22,10,3,.6) 80%,rgba(22,10,3,0))}
+.dtn button{font:600 14px Inter,system-ui,sans-serif;color:#fbeec4;background:rgba(255,255,255,.08);border:1px solid rgba(248,220,142,.45);border-radius:999px;padding:9px 16px;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.dtg{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:16/9;max-height:56vh;background:rgba(255,255,255,.06);cursor:zoom-in}
+.dtg img{width:100%;height:100%;object-fit:cover;display:block}
+.dtg svg{width:100%;height:100%;display:block;opacity:.5}
+.dtt{display:flex;gap:8px;margin-top:8px;overflow-x:auto;padding-bottom:4px}
+.dtt img{width:84px;height:58px;object-fit:cover;border-radius:10px;cursor:pointer;opacity:.6;border:2px solid transparent;flex:none}
+.dtt img.on{opacity:1;border-color:#f8dc8e}
+.dth{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;margin:22px 0 6px}
+.dth h2{font:600 clamp(26px,5vw,38px) "Playfair Display",Georgia,serif;margin:0;color:#fff3d6}
+.dth .p{font:700 clamp(24px,4.4vw,34px) "Playfair Display",Georgia,serif;color:#f8dc8e}
+.dtc{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+.dtc span{font-size:14px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,226,160,.3);color:#f4e3bf}
+.dts{margin-top:30px}
+.dts h3{font:600 22px "Playfair Display",Georgia,serif;color:#fff3d6!important;margin:0 0 12px;display:flex;align-items:center;gap:10px}
+.dts h3::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(248,220,142,.5),rgba(248,220,142,0))}
+.dts p{color:#f1e0bb;line-height:1.65;margin:0 0 10px}
+.dtd{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:rgba(255,226,160,.18);border:1px solid rgba(255,226,160,.18);border-radius:14px;overflow:hidden}
+.dtd div{background:rgba(40,18,5,.75);padding:12px 14px}
+.dtd dt{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#cdb68a}
+.dtd dd{margin:3px 0 0;font-weight:600;color:#fff3d6}
+.dta{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.dta div{padding:14px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,226,160,.22)}
+.dta b{display:block;color:#fff3d6;margin-bottom:3px}.dta span{font-size:14px;color:#e6d3ac;line-height:1.5}
+.dta small{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#f8dc8e;margin-bottom:6px}
+.dtl{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.dtl a{color:#fbeec4;text-decoration:none;font-weight:600;font-size:14px;padding:9px 15px;border:1px solid rgba(248,220,142,.5);border-radius:999px;background:rgba(255,255,255,.06)}
+.dtr{padding:18px;border-radius:18px;background:linear-gradient(160deg,rgba(248,220,142,.14),rgba(255,255,255,.04));border:1px solid rgba(248,220,142,.4)}
+.dtr .big{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+.dtr .big div{padding:12px;border-radius:12px;background:rgba(20,8,2,.45)}
+.dtr .big small{display:block;font-size:12px;color:#cdb68a;margin-bottom:4px}
+.dtr .big b{font:700 24px "Playfair Display",Georgia,serif;color:#f8dc8e}
+.dtr label{display:flex;justify-content:space-between;font-size:14px;color:#f1e0bb;margin-top:6px}
+.dtr input[type=range]{width:100%;accent-color:#f8dc8e;background:none!important;border:0!important;padding:0}
+.dtr .bar2{height:8px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;margin-top:10px}
+.dtr .bar2 i{display:block;height:100%;background:linear-gradient(90deg,#e8c067,#fff3c4);border-radius:99px;transition:width .3s}
+.dtr .note{font-size:13px;color:#cdb68a;margin-top:12px;line-height:1.5}
+.dtf{position:absolute;left:0;right:0;bottom:0;z-index:6;padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(0deg,rgba(18,8,2,.96),rgba(18,8,2,.7));-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid rgba(248,220,142,.3)}
+.dtf div{max-width:1000px;margin:0 auto;display:flex;gap:10px}
+.dtf a{flex:1;text-align:center;text-decoration:none;font-weight:700;padding:13px;border-radius:999px}
+.dtf .c{background:linear-gradient(145deg,#fff3c4,#e8c764 55%,#b98a2c);color:#2a1f06}
+.dtf .z{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.45)}
+@media (max-width:560px){.dtg{aspect-ratio:4/3}.dtn button{padding:8px 13px}}
+@media (min-width:761px){.amen{grid-template-columns:repeat(6,1fr)!important}.amen .am{grid-column:span 2}.amen .am:nth-child(4){grid-column:2/4}.amen .am:nth-child(5){grid-column:4/6}}
+.dtm{border-radius:18px;overflow:hidden;border:1px solid rgba(255,226,160,.35);background:rgba(255,255,255,.06);margin-bottom:14px}
+.dtm iframe{display:block;width:100%;height:min(56vh,420px);border:0;filter:saturate(.9) contrast(1.02)}
+.dtk{display:flex;gap:8px;overflow-x:auto;padding:10px 12px;background:rgba(30,14,4,.7)}
+.dtk button{flex:none;font:600 13px Inter,system-ui,sans-serif;color:#f4e3bf;background:rgba(255,255,255,.07);border:1px solid rgba(248,220,142,.35);border-radius:999px;padding:8px 14px;cursor:pointer}
+.dtk button.on{background:linear-gradient(160deg,rgba(240,214,138,.3),rgba(240,214,138,.1));color:#fbeec4;border-color:rgba(248,220,142,.8)}
 </style>
 </head>
 <body>
@@ -634,6 +691,7 @@ select option{color:#fbf1da;background:#2a1608}input::placeholder{color:#c9b085}
 </div>
 <div class="fab"><a class="btn" data-call aria-label="Gọi cho Khải" title="Gọi cho Khải"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a><a class="btn alt" data-zalo target="_blank" rel="noopener" aria-label="Zalo" title="Zalo">Zalo</a></div>
 
+<dialog id="dt" aria-label="Thông tin chi tiết căn hộ"><div class="dtw" id="dtb"></div><div class="dtf" id="dtf"></div></dialog>
 <dialog id="lb" aria-label="Xem ảnh căn hộ"><button id="lbx" type="button" aria-label="Đóng">×</button><button id="lbp" type="button" aria-label="Ảnh trước">‹</button><img id="lbi" alt=""><button id="lbq" type="button" aria-label="Ảnh sau">›</button><div id="lbc"></div></dialog>
 
 <dialog id="adm">
@@ -715,7 +773,7 @@ function fopts(){popts();
 function render(){
   const z=$('#fz').value,b=$('#fb').value,d=$('#fd').value,r=PR[mode][$('#fp').value];
   const L=S.units.filter(u=>u.type===mode&&(!z||u.zone===z)&&(!b||typeKey(u)===b)&&(!d||dirKey(u)===d)&&(!r||(u.price>=r[0]&&u.price<r[1]))).sort((a,c)=>c.hot-a.hot);
-  $('#grid').innerHTML=L.length?L.map(u=>`<article class="unit"><div class="ph"${phAttr(u)}>${phImg(u)}${u.hot?'<span class="tag">Giá tốt</span>':''}${u.sample?'<span class="tag s">Tin mẫu</span>':''}${cnt(u)}</div><div class="body"><h3>${esc(u.zone)}</h3><div class="price">${money(u)}</div><dl class="spec">${[['Diện tích',u.area?u.area+' m²':''],['Hướng',u.dir],['Nội thất',u.furn],['Pháp lý',u.legal]].filter(r=>r[1]).map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl><div class="row"><a class="btn" href="${tel()}">Gọi ngay</a><a class="btn alt" href="${zl()}" target="_blank" rel="noopener">Zalo</a></div></div></article>`).join(''):'<p class="empty" style="grid-column:1/-1">Hiện chưa có căn trong mục này. Gọi hoặc nhắn Zalo cho mình, mình gửi danh sách căn mới nhất.</p>';
+  $('#grid').innerHTML=L.length?L.map(u=>`<article class="unit"><div class="ph"${phAttr(u)}>${phImg(u)}${u.hot?'<span class="tag">Giá tốt</span>':''}${u.sample?'<span class="tag s">Tin mẫu</span>':''}${cnt(u)}</div><div class="body"><h3>${esc(u.zone)}</h3><div class="price">${money(u)}</div><dl class="spec">${[['Diện tích',u.area?u.area+' m²':''],['Hướng',u.dir],['Nội thất',u.furn],['Pháp lý',u.legal]].filter(r=>r[1]).map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl><div class="row"><button class="btn more" type="button" data-more="${esc(u.id)}">Tìm hiểu thêm <span aria-hidden="true">›</span></button></div></div></article>`).join(''):'<p class="empty" style="grid-column:1/-1">Hiện chưa có căn trong mục này. Gọi hoặc nhắn Zalo cho mình, mình gửi danh sách căn mới nhất.</p>';
 }
 $$('.tabs button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$$('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#fp').value='';zones();render()});
 ['#fz','#fb','#fd','#fp'].forEach(s=>$(s).addEventListener('input',render));
@@ -785,7 +843,6 @@ $$('.zc').forEach(b=>b.onclick=()=>{zones();$('#fz').value=b.dataset.z;render();
 const AM=[['271 ha','Đại đô thị','Nằm ở cửa ngõ phía Đông thành phố.','M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6'],
  ['36 ha','Công viên trung tâm','Đường dạo, hồ sen và không gian xanh.','M12 3c3 3 5 6 5 9a5 5 0 0 1-10 0c0-3 2-6 5-9zM12 17v4'],
  ['Vinschool','Trường học trong khu','Từ mầm non, thuận tiện đưa đón con.','M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5'],
- ['Vinmec','Bệnh viện quốc tế','Chăm sóc sức khỏe ngay gần nhà.','M12 4v16M4 12h16'],
  ['VinBus','Xe buýt điện','Kết nối nội khu và ra các hướng thành phố.','M4 5h16v11H4zM4 11h16M7 19v-3M17 19v-3'],
  ['Hồ & đại lộ','Cảnh quan buổi tối','Hồ sen, đại lộ ánh sáng, bến thuyền.','M3 15c3 0 3-2 6-2s3 2 6 2 3-2 6-2M3 19c3 0 3-2 6-2s3 2 6 2 3-2 6-2M8 9a4 4 0 1 1 8 0']];
 $('#amen').innerHTML=AM.map(a=>`<div class="am"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${a[3]}"/></svg><strong>${esc(a[0])}</strong><b>${esc(a[1])}</b><span>${esc(a[2])}</span></div>`).join('');
@@ -803,16 +860,16 @@ function driveIds(t){return String(t||'').split(/[,\s]+/).map(x=>{const m=x.matc
 function sheetUnits(csv){
   const R=csvRows(csv);if(R.length<2)return [];
   const H=R[0].map(h=>h.toLowerCase());const ix=(...k)=>H.findIndex(h=>k.some(x=>h.includes(x)));
-  const c={type:ix('loại','loai'),zone:ix('khu','phân khu'),beds:ix('phòng'),area:ix('diện tích','dien tich'),price:H.findIndex(h=>h.includes('giá')&&!h.includes('tốt')),dir:ix('hướng','huong'),furn:ix('nội thất','noi that'),legal:ix('pháp lý','phap ly'),img:ix('ảnh','hình'),hot:ix('nổi bật','giá tốt','noi bat'),hide:ix('ẩn','an căn','hide')};
+  const c={type:ix('loại','loai'),zone:ix('khu','phân khu'),beds:ix('phòng'),area:ix('diện tích','dien tich'),price:H.findIndex(h=>h.includes('giá')&&!h.includes('tốt')),dir:ix('hướng','huong'),furn:ix('nội thất','noi that'),legal:ix('pháp lý','phap ly'),img:ix('ảnh','hình'),hot:ix('nổi bật','giá tốt','noi bat'),hide:ix('ẩn','an căn','hide'),tower:ix('tòa','toa'),floor:ix('tầng','tang'),view:ix('view','cảnh'),desc:ix('mô tả','mo ta','ghi chú','ghi chu'),deposit:ix('cọc','coc'),fee:ix('phí quản','phi quan'),rentEst:ix('thuê dự kiến','thue du kien'),amen:ix('tiện ích','tien ich')};
   const g=(row,k)=>c[k]>=0?String(row[c[k]]||'').trim():'';
   return R.slice(1).map((row,n)=>{
     if(/^(x|có|co|true|1|ẩn|an|đã bán|da ban|đã thuê|da thue)/i.test(g(row,'hide')))return null;
     const rent=/thuê|thue/i.test(g(row,'type'));let raw=g(row,'price'),v=num(raw);if(isNaN(v))return null;
     if(!rent&&(/tỷ|tỉ|ty|ti\b/i.test(raw)||v<100))v=Math.round(v*1000);
     const bt=g(row,'beds'),ids=driveIds(g(row,'img'));
-    return{id:'g'+n,type:rent?'rent':'sale',zone:g(row,'zone'),bedsText:bt,beds:/^\d+$/.test(bt)?+bt:bt,area:(n=>isNaN(n)?'':String(n).replace('.',','))(num(g(row,'area'))),price:v,dir:g(row,'dir'),furn:g(row,'furn'),legal:g(row,'legal'),imgs:ids.map(i=>'https://drive.google.com/thumbnail?id='+i+'&sz=w1400'),hot:/^(x|có|co|true|1|giá tốt)/i.test(g(row,'hot'))}
+    return{id:'g'+n,type:rent?'rent':'sale',zone:g(row,'zone'),bedsText:bt,beds:/^\d+$/.test(bt)?+bt:bt,area:(n=>isNaN(n)?'':String(n).replace('.',','))(num(g(row,'area'))),price:v,dir:g(row,'dir'),furn:g(row,'furn'),legal:g(row,'legal'),imgs:ids.map(i=>'https://drive.google.com/thumbnail?id='+i+'&sz=w1400'),hot:/^(x|có|co|true|1|giá tốt)/i.test(g(row,'hot')),tower:g(row,'tower'),floor:g(row,'floor'),view:g(row,'view'),desc:g(row,'desc'),deposit:g(row,'deposit'),fee:g(row,'fee'),rentEst:num(g(row,'rentEst')),amen:g(row,'amen')}
   }).filter(Boolean)}
-async function loadSheet(){if(!SHEET_CSV)return;try{const r=await fetch(SHEET_CSV,{cache:'no-store'});if(!r.ok)return;const u=sheetUnits(await r.text());if(u.length){S.units=S.units.concat(u);zones();render()}}catch(e){}}
+async function loadSheet(){if(!SHEET_CSV)return;try{const r=await fetch(SHEET_CSV,{cache:'no-store'});if(!r.ok)return;const u=sheetUnits(await r.text());if(u.length){S.units=S.units.concat(u);zones();render();dtHash()}}catch(e){}}
 loadSheet();
 function lbShow(){$('#lbi').src=G[gi];$('#lbc').textContent=(gi+1)+' / '+G.length;const m=G.length>1;$('#lbp').hidden=!m;$('#lbq').hidden=!m}
 function lbGo(d){if(G.length<2)return;gi=(gi+d+G.length)%G.length;lbShow()}
@@ -825,6 +882,66 @@ $('#lb').addEventListener('keydown',e=>{if(e.key==='ArrowLeft')lbGo(-1);if(e.key
 let tx=null;$('#lb').addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
 $('#lb').addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(d)>50)lbGo(d<0?1:-1)},{passive:true});
 
+
+
+/* ===== Trang chi tiết căn ===== */
+const NEAR_IN=[['Công viên 36 ha','Đường dạo, hồ sen, sân chơi ngay trong khu.'],['Vinschool','Trường mầm non đến phổ thông trong đại đô thị.'],['Trung tâm thương mại','Mua sắm, ăn uống, vui chơi trong khu.'],['VinBus','Xe buýt điện kết nối nội khu và ra các hướng thành phố.'],['Hồ & đại lộ','Hồ sen, đại lộ ánh sáng, bến thuyền.']];
+const NEAR_OUT=[['Thủ Đức','Liền kề, thuận tiện đi làm, đi học.'],['Đồng Nai','Cửa ngõ phía Đông, nối tuyến đi các tỉnh.'],['Quận 1','Đi về trung tâm thành phố theo trục đại lộ phía Đông.']];
+function dtRent(u){
+  const base=u.rentEst&&u.rentEst>0?u.rentEst:+(u.price*0.045/12).toFixed(1),est=!(u.rentEst&&u.rentEst>0);
+  const lo=Math.max(1,+(base*.6).toFixed(1)),hi=+(base*1.6).toFixed(1);
+  return `<section class="dts"><h3>Phân tích cho thuê</h3><div class="dtr"><p>Nếu mua căn này để cho thuê, bạn có thể thu về khoảng:</p>
+  <label><span>Giá thuê mỗi tháng</span><b id="rv">${base} triệu</b></label><input id="rs" type="range" min="${lo}" max="${hi}" step="0.5" value="${base}" aria-label="Giá thuê mỗi tháng">
+  <div class="big"><div><small>Thu mỗi năm</small><b id="ry"></b></div><div><small>Tỷ suất / năm</small><b id="rp"></b></div><div><small>Hoàn vốn sau</small><b id="rb"></b></div></div>
+  <div class="bar2"><i id="rg"></i></div>
+  <p class="note">${est?'Mức thuê ban đầu là ước tính tham khảo (khoảng 4,5%/năm trên giá mua). Bạn kéo thanh trượt để xem các mức khác; mình sẽ báo giá thuê thực tế của căn này khi bạn hỏi.':'Mức thuê do Khải cập nhật theo giá thực tế của căn. Bạn kéo thanh trượt để xem thêm các mức khác.'} Chưa trừ phí quản lý, thuế và thời gian trống người thuê.</p></div></section>`}
+function dtRentCalc(u){const rs=$('#rs');if(!rs)return;const f=()=>{const r=+rs.value,y=r*12,p=y/u.price*100;
+  $('#rv').textContent=String(r).replace('.',',')+' triệu';$('#ry').textContent=(y>=1000?String(+(y/1000).toFixed(2)).replace('.',',')+' tỷ':Math.round(y)+' triệu');
+  $('#rp').textContent=p.toFixed(1).replace('.',',')+'%';$('#rb').textContent=(100/p).toFixed(0)+' năm';$('#rg').style.width=Math.min(100,p*12)+'%'};
+  rs.oninput=f;f()}
+function dtRentOut(u){const m=u.price,dep=num(u.deposit),y=m*12;
+  return `<section class="dts"><h3>Chi phí thuê</h3><div class="dtr"><div class="big"><div><small>Mỗi tháng</small><b>${m} triệu</b></div><div><small>Mỗi năm</small><b>${y} triệu</b></div><div><small>Đặt cọc</small><b>${u.deposit?esc(u.deposit):'Trao đổi'}</b></div>${!isNaN(dep)&&u.deposit?`<div><small>Chi phí ban đầu</small><b>${dep+m} triệu</b></div>`:''}</div>
+  <p class="note">${u.fee?'Phí quản lý: '+esc(u.fee)+'. ':''}Điều khoản thuê (thời hạn, thanh toán, nhận nhà) mình sẽ trao đổi rõ trước khi bạn quyết định.</p></div></section>`}
+const DMAPK=[['Vị trí căn',''],['Trường học','trường học'],['Bệnh viện','bệnh viện'],['Siêu thị & TTTM','siêu thị trung tâm thương mại'],['Công viên','công viên'],['Xe buýt','trạm xe buýt']];
+const dmapSrc=(zone,k)=>'https://maps.google.com/maps?hl=vi&z='+(k?15:16)+'&output=embed&q='+encodeURIComponent(k?k+' gần Vinhomes Grand Park':(zone?zone+' ':'')+'Vinhomes Grand Park');
+let dtId=null;
+function dtOpen(id,noHash){
+  const u=S.units.find(x=>x.id===id);if(!u)return;dtId=id;const a=imgsOf(u),zinfo=(ZONES.find(z=>z[0]===u.zone)||[])[1]||'';
+  const chips=[bedsLabel(u),u.area?u.area+' m²':'',u.dir,u.furn,u.view].filter(Boolean);
+  const rows=[['Phân khu',u.zone],['Tòa',u.tower],['Tầng',u.floor],['Loại căn',bedsLabel(u)],['Diện tích',u.area?u.area+' m²':''],['Hướng',u.dir],['View',u.view],['Nội thất',u.furn],['Pháp lý',u.legal],['Hình thức',u.type==='rent'?'Cho thuê':'Bán']].filter(r=>r[1]);
+  const amen=u.amen?String(u.amen).split(/[;,\n]+/).map(x=>x.trim()).filter(Boolean).map(x=>[x,'']):null;
+  const near=a=>a.map(x=>`<div><b>${esc(x[0])}</b>${x[1]?`<span>${esc(x[1])}</span>`:''}</div>`).join('');
+  const q=encodeURIComponent('Vinhomes Grand Park '+(u.zone||''));
+  $('#dtb').innerHTML=`<div class="dtn"><button type="button" id="dtx">‹ Quay lại</button><button type="button" id="dts">Chia sẻ</button></div>
+  <div class="dtg" id="dtg">${a.length?`<img src="${esc(a[0])}" alt="Căn hộ ${esc(u.zone)}">`:PH}</div>
+  ${a.length>1?`<div class="dtt">${a.map((x,i)=>`<img src="${esc(x)}" alt="Ảnh ${i+1}" data-i="${i}" class="${i?'':'on'}">`).join('')}</div>`:''}
+  <div class="dth"><h2>${esc(u.zone)}</h2><div class="p">${money(u)}</div></div>
+  <div class="dtc">${chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div>
+  <section class="dts"><h3>Thông tin căn</h3><dl class="dtd">${rows.map(r=>`<div><dt>${r[0]}</dt><dd>${esc(r[1])}</dd></div>`).join('')}</dl></section>
+  ${u.desc?`<section class="dts"><h3>Về căn này</h3><p>${esc(u.desc).replace(/\n/g,'<br>')}</p></section>`:''}
+  <section class="dts"><h3>Vị trí</h3><p>${esc(u.zone)} nằm trong Vinhomes Grand Park, phường Long Bình, TP. Hồ Chí Minh (Quận 9 cũ), cửa ngõ phía Đông thành phố, liền kề Thủ Đức và Đồng Nai.${zinfo?' '+esc(zinfo):''}</p><div class="dtl"><a href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">Xem trên Google Maps</a></div></section>
+  <section class="dts"><h3>Tiện ích quanh tòa</h3><div class="dtm"><iframe id="dmap" title="Bản đồ khu vực" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><div class="dtk" id="dtk">${DMAPK.map((k,i)=>`<button type="button" data-q="${esc(k[1])}" class="${i?'':'on'}">${k[0]}</button>`).join('')}</div></div><div class="dta">${amen?near(amen):'<div style="grid-column:1/-1;background:none;border:0;padding:0"><small>Trong đại đô thị</small></div>'+near(NEAR_IN)}</div>
+  ${amen?'':`<div class="dta" style="margin-top:14px"><div style="grid-column:1/-1;background:none;border:0;padding:0"><small>Kết nối khu vực</small></div>${near(NEAR_OUT)}</div>`}</section>
+  ${u.type==='rent'?dtRentOut(u):dtRent(u)}
+  <p class="note" style="color:#cdb68a;font-size:13px;margin-top:26px">Thông tin mang tính tham khảo, có thể thay đổi theo thời điểm. Liên hệ Khải để xác nhận chi tiết và xem căn thực tế.</p>
+`;
+  $('#dtf').innerHTML='<div><a class="c" href="'+tel()+'">Gọi ngay</a><a class="z" href="'+zl()+'" target="_blank" rel="noopener">Nhắn Zalo</a></div>';
+  G=a;gi=0;
+  $('#dtx').onclick=dtClose;
+  $('#dts').onclick=async()=>{const url=location.href.split('#')[0]+'#can='+id;try{if(navigator.share){await navigator.share({title:'Căn hộ '+u.zone,url});return}await navigator.clipboard.writeText(url);$('#dts').textContent='Đã chép link'}catch(e){prompt('Link căn hộ:',url)}};
+  $('#dtg').onclick=()=>{if(G.length){lbShow();$('#lb').showModal()}};
+  $$('.dtt img').forEach(im=>im.onclick=()=>{gi=+im.dataset.i;$('#dtg img').src=G[gi];$$('.dtt img').forEach(x=>x.classList.toggle('on',x===im))});
+  $('#dmap').src=dmapSrc(u.zone,'');
+  $$('#dtk button').forEach(b=>b.onclick=()=>{$$('#dtk button').forEach(x=>x.classList.toggle('on',x===b));$('#dmap').src=dmapSrc(u.zone,b.dataset.q)});
+  if(u.type!=='rent')dtRentCalc(u);
+  const d=$('#dt');if(!d.open)d.showModal();$('#dtb').scrollTop=0;document.documentElement.style.overflow='hidden';
+  if(!noHash)history.replaceState(null,'','#can='+id);
+}
+function dtClose(){const d=$('#dt');if(d.open)d.close();document.documentElement.style.overflow='';history.replaceState(null,'',location.pathname+location.search)}
+$('#dt').addEventListener('cancel',()=>{document.documentElement.style.overflow='';history.replaceState(null,'',location.pathname+location.search)});
+$('#grid').addEventListener('click',e=>{const b=e.target.closest('[data-more]');if(b)dtOpen(b.dataset.more)});
+function dtHash(){const m=location.hash.match(/^#can=(.+)$/);if(m&&S.units.some(u=>u.id===decodeURIComponent(m[1])))dtOpen(decodeURIComponent(m[1]),true)}
+addEventListener('hashchange',dtHash);
 
 /* ---- Owner admin ---- */
 function adminList(){
