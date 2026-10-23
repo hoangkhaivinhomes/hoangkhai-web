@@ -62,7 +62,7 @@ const SKIP_INTERNAL=true;
 const nz=t=>String(t||'').toLowerCase().replace(/đ/g,'d').normalize('NFD').replace(/[̀-ͯ]/g,'');
 const DIRS={dn:'Đông Nam',db:'Đông Bắc',tn:'Tây Nam',tb:'Tây Bắc',d:'Đông',t:'Tây',n:'Nam',b:'Bắc'};
 function parseTin(raw){
-  const t=String(raw||'').replace(/ /g,' '),n=nz(t),r={loai:'',khu:'',pn:'',dt:'',gia:'',huong:'',noithat:'',phaply:'',tang:'',toa:'',mota:'',view:'',coc:'',tot:false,ghi:[]};
+  const t=String(raw||'').replace(/ /g,' '),n=nz(t),r={loai:'',khu:'',pn:'',dt:'',gia:'',huong:'',noithat:'',phaply:'',tang:'',toa:'',ma:'',mota:'',view:'',coc:'',tot:false,ghi:[]};
   /* mua / thuê */
   const rentW=/\b(cho thue|can cho thue|thue)\b/.test(n),saleW=/\b(ban|can ban|chuyen nhuong)\b/.test(n);
   /* giá */
@@ -75,7 +75,7 @@ function parseTin(raw){
   const Z=[['The Beverly Solari',/solari/],['The Beverly',/beverly/],['The Origami',/origami/],['The Rainbow',/rainbow/],['The Opus One',/opus/],['Lumière Boulevard',/lumiere/],['Masteri Centre Point',/masteri|centre point|centrepoint/]];
   for(const [z,re] of Z){if(re.test(n)){r.khu=z;break}}
   const code=n.match(/\bs\s?(\d{1,2})\s*[.\-]?\s*(\d{2})\s*[.\-]?\s*(\d{1,2})\s*[.\-]\s*(\d{1,2})\b/)||n.match(/\bs\s?(\d{1,2})\s*[.\-]\s*(\d{2})(\d{2})\s*[.\-]\s*(\d{1,2})\b/);
-  if(code){r.toa='S'+code[1]+'.'+code[2];r.tang=String(+code[3]);r._tw='S'+code[1];r.ghi.push('Đã đọc mã căn: tòa '+r.toa+', tầng '+r.tang+'. Số phòng được bỏ đi, không hiện lên web.')}
+  if(code){r.toa='S'+code[1]+'.'+code[2];r.tang=String(+code[3]);r.ma='S'+code[1]+'.'+code[2]+'.'+code[3].padStart(2,'0')+'.'+code[4].padStart(2,'0');r._tw='S'+code[1];r.ghi.push('Đã đọc mã căn: tòa '+r.toa+', tầng '+r.tang+'. Số phòng được bỏ đi, không hiện lên web.')}
   if(!r.khu&&code)r.ghi.push('Tin không ghi tên phân khu, bạn chọn giúp. Trang sẽ nhớ để lần sau tòa '+r._tw+' tự điền.');
   /* phòng ngủ */
   if(/studio|\bst\b/.test(n))r.pn='Studio';
@@ -126,11 +126,11 @@ const ST=(()=>{let L=null;try{L=localStorage;L.setItem('dc_t','1');L.removeItem(
 (function(){const m=location.hash.match(/^#c=([A-Za-z0-9_\-]+)/);if(!m)return;try{const s=decodeURIComponent(escape(atob(m[1].replace(/-/g,'+').replace(/_/g,'/'))));const i=s.indexOf('\n');const u=s.slice(0,i),k=s.slice(i+1);if(/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(u)&&k){ST.setItem('dc_url',u);ST.setItem('dc_key',k)}}catch(e){}})();
 const quickLink=()=>{const u=ST.getItem('dc_url'),k=ST.getItem('dc_key');if(!u||!k)return'';return location.origin+location.pathname+'#c='+btoa(unescape(encodeURIComponent(u+'\n'+k))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')};
 let imgs=[],busy=false;
-const FIELDS=[['loai','Loại căn','select',['','Bán','Cho thuê'],1],['khu','Phân khu','select',['',...ZONES],1],['pn','Loại căn hộ (Studio, 1PN, 2PN+…)','text','',0],['dt','Diện tích (m²)','text','',0],['gia','Giá (ví dụ 3,25 tỷ hoặc 9 triệu)','text','',1],['huong','Hướng','text','',0],['noithat','Nội thất','text','',0],['phaply','Pháp lý','text','',0],['toa','Tòa','text','',0],['tang','Tầng','text','',0],['view','View','text','',0],['coc','Đặt cọc (căn thuê)','text','',0],['thue','Thuê dự kiến, triệu/tháng (căn bán)','text','',0],['mota','Mô tả ngắn cho khách','text','',0]];
+const FIELDS=[['loai','Loại căn','select',['','Bán','Cho thuê'],1],['khu','Phân khu','select',['',...ZONES],1],['pn','Loại căn hộ (Studio, 1PN, 2PN+…)','text','',0],['dt','Diện tích (m²)','text','',0],['gia','Giá (ví dụ 3,25 tỷ hoặc 9 triệu)','text','',1],['huong','Hướng','text','',0],['noithat','Nội thất','text','',0],['phaply','Pháp lý','text','',0],['toa','Tòa','text','',0],['ma','Mã căn (chỉ để bạn xem trong Sheet, không hiện lên web)','text','',0],['tang','Tầng','text','',0],['view','View','text','',0],['coc','Đặt cọc (căn thuê)','text','',0],['thue','Thuê dự kiến, triệu/tháng (căn bán)','text','',0],['mota','Mô tả ngắn cho khách','text','',0]];
 function build(){$('#fm').innerHTML=FIELDS.map(f=>`<div class="f" data-k="${f[0]}"><label>${f[1]}${f[4]?' *':''}</label>${f[2]==='select'?`<select id="f_${f[0]}">${f[3].map(o=>`<option>${o}</option>`).join('')}</select>`:`<input id="f_${f[0]}">`}</div>`).join('');
   FIELDS.forEach(f=>$('#f_'+f[0]).addEventListener('input',check))}
 function val(k){return ($('#f_'+k).value||'').trim()}
-function fill(r){['loai','khu','pn','dt','gia','huong','noithat','phaply','toa','tang','view','coc','mota'].forEach(k=>{if(r[k])$('#f_'+k).value=r[k]});$('#tot').checked=!!r.tot;
+function fill(r){['loai','khu','pn','dt','gia','huong','noithat','phaply','toa','ma','tang','view','coc','mota'].forEach(k=>{if(r[k])$('#f_'+k).value=r[k]});$('#tot').checked=!!r.tot;
   $('#warn').innerHTML=r.ghi&&r.ghi.length?r.ghi.map(x=>`<div class="note">${x}</div>`).join(''):'';check()}
 function check(){let miss=[];FIELDS.filter(f=>f[4]).forEach(f=>{const e=document.querySelector(`.f[data-k="${f[0]}"]`);const m=!val(f[0]);e.classList.toggle('miss',m);if(m)miss.push(f[1])});
   const ok=!miss.length&&!busy;$('#go').disabled=!ok;$('#st').textContent=miss.length?'Còn thiếu: '+miss.map(x=>x.split(' (')[0]).join(', '):(imgs.length?'Sẵn sàng đăng · '+imgs.length+' ảnh':'Sẵn sàng đăng · chưa có ảnh')}
@@ -155,7 +155,7 @@ function cfgShow(){const has=ST.getItem('dc_url')&&ST.getItem('dc_key');$('#cfg'
 let cfgForce=false;$('#cs').onclick=()=>{const u=$('#cu').value.trim(),k=$('#ck').value;if(!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(u)){alert('Địa chỉ chưa đúng. Phải bắt đầu bằng https://script.google.com/macros/s/ và kết thúc bằng /exec');return}if(!k){alert('Nhập mật khẩu');return}ST.setItem('dc_url',u);ST.setItem('dc_key',k);cfgForce=false;cfgShow()};
 /* đăng */
 $('#go').onclick=async()=>{if(busy)return;const url=ST.getItem('dc_url'),key=ST.getItem('dc_key');if(!url||!key){cfgForce=true;cfgShow();return}
-  const f={};['loai','khu','pn','dt','gia','huong','noithat','phaply','toa','tang','view','coc','thue','mota'].forEach(k=>{const v=val(k);if(v)f[k]=v});if($('#tot').checked)f.tot='Có';
+  const f={};['loai','khu','pn','dt','gia','huong','noithat','phaply','toa','ma','tang','view','coc','thue','mota'].forEach(k=>{const v=val(k);if(v)f[k]=v});if($('#tot').checked)f.tot='Có';
   const sum=`${f.loai} · ${f.khu}\n${f.pn||''} ${f.dt?f.dt+' m²':''} · ${f.gia}\n${imgs.length} ảnh\n\nĐăng căn này lên web?`;if(!confirm(sum))return;
   busy=true;$('#go').disabled=true;$('#st').textContent='Đang đăng, vui lòng chờ…';
   const id='c'+Date.now()+Math.random().toString(36).slice(2,6);
