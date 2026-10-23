@@ -57,7 +57,7 @@ a{color:var(--gold)}
 <div class="bar"><div><span class="m" id="st">Chưa có thông tin</span><button class="btn o" id="rs" type="button">Làm lại</button><button class="btn" id="go" type="button" disabled>Đăng căn</button></div></div>
 
 <script>
-const ZONES=['The Rainbow','The Origami','The Beverly','The Beverly Solari','The Opus One','Lumière Boulevard','Masteri Centre Point'];
+const ZONES=['The Rainbow','The Origami','The Beverly','The Beverly Solari','The Opus One','Lumière Boulevard','Masteri Centre Point','Glory Heights'];
 const SKIP_INTERNAL=true;
 const nz=t=>String(t||'').toLowerCase().replace(/đ/g,'d').normalize('NFD').replace(/[̀-ͯ]/g,'');
 const DIRS={dn:'Đông Nam',db:'Đông Bắc',tn:'Tây Nam',tb:'Tây Bắc',d:'Đông',t:'Tây',n:'Nam',b:'Bắc'};
@@ -78,7 +78,7 @@ function parseTin(raw){
   if(mr&&!r.gia){r.gia=String(parseFloat(mr[1].replace(',','.'))).replace('.',',')+' triệu';r._rent=1}
   r.loai=rentW&&!saleW?'Cho thuê':saleW&&!rentW?'Bán':r._rent&&!r._sale?'Cho thuê':r._sale&&!r._rent?'Bán':rentW?'Cho thuê':'';
   /* phân khu */
-  const Z=[['The Beverly Solari',/solari/],['The Beverly',/beverly/],['The Origami',/origami/],['The Rainbow',/rainbow/],['The Opus One',/opus/],['Lumière Boulevard',/lumiere/],['Masteri Centre Point',/masteri|centre point|centrepoint/]];
+  const Z=[['The Beverly Solari',/solari/],['The Beverly',/beverly/],['The Origami',/origami/],['The Rainbow',/rainbow/],['The Opus One',/opus/],['Lumière Boulevard',/lumiere/],['Glory Heights',/glory/],['Masteri Centre Point',/masteri|centre point|centrepoint/]];
   for(const [z,re] of Z){if(re.test(n)){r.khu=z;break}}
   const code=n.match(/\bs\s?(\d{1,2})\s*[.\-]?\s*(\d{2})\s*[.\-]?\s*(\d{1,2})\s*[.\-]\s*(\d{1,2})\b/)||n.match(/\bs\s?(\d{1,2})\s*[.\-]\s*(\d{2})(\d{2})\s*[.\-]\s*(\d{1,2})\b/);
   if(code){r.toa='S'+code[1]+'.'+code[2];r.tang=String(+code[3]);r.ma='S'+code[1]+'.'+code[2]+'.'+code[3].padStart(2,'0')+'.'+code[4].padStart(2,'0');r._tw='S'+code[1];r.ghi.push('Đã đọc mã căn: tòa '+r.toa+', tầng '+r.tang+'. Số phòng được bỏ đi, không hiện lên web.')}
