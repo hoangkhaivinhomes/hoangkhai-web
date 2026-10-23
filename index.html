@@ -912,8 +912,8 @@ function dtRentCalc(u){const rs=$('#rs');if(!rs)return;const f=()=>{const r=+rs.
   $('#rv').textContent=String(r).replace('.',',')+' triệu';$('#ry').textContent=(y>=1000?String(+(y/1000).toFixed(2)).replace('.',',')+' tỷ':Math.round(y)+' triệu');
   $('#rp').textContent=p.toFixed(1).replace('.',',')+'%';$('#rg').style.width=Math.min(100,p*12)+'%'};
   rs.oninput=f;f()}
-function dtRentOut(u){const m=u.price,dep=num(u.deposit),y=m*12;
-  return `<section class="dts"><h3>Chi phí thuê</h3><div class="dtr"><div class="big"><div><small>Mỗi tháng</small><b>${m} triệu</b></div><div><small>Mỗi năm</small><b>${y} triệu</b></div><div><small>Đặt cọc</small><b>${u.deposit?esc(u.deposit):'Trao đổi'}</b></div>${!isNaN(dep)&&u.deposit?`<div><small>Chi phí ban đầu</small><b>${dep+m} triệu</b></div>`:''}</div>
+function dtRentOut(u){const m=u.price,y=m*12,dn=num(u.deposit),dep=/th[áa]ng/i.test(u.deposit||'')?dn*m:dn;
+  return `<section class="dts"><h3>Chi phí thuê</h3><div class="dtr"><div class="big"><div><small>Mỗi tháng</small><b>${m} triệu</b></div><div><small>Đặt cọc</small><b>${u.deposit?esc(u.deposit):'Trao đổi'}</b></div></div>
   <p class="note">${u.fee?'Phí quản lý: '+esc(u.fee)+'. ':''}Điều khoản thuê (thời hạn, thanh toán, nhận nhà) mình sẽ trao đổi rõ trước khi bạn quyết định.</p></div></section>`}
 
 function dtMini(u){
