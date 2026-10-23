@@ -76,6 +76,8 @@ function parseTin(raw){
   for(const [z,re] of Z){if(re.test(n)){r.khu=z;break}}
   const code=n.match(/\bs\s?(\d{1,2})\s*[.\-]?\s*(\d{2})\s*[.\-]?\s*(\d{1,2})\s*[.\-]\s*(\d{1,2})\b/)||n.match(/\bs\s?(\d{1,2})\s*[.\-]\s*(\d{2})(\d{2})\s*[.\-]\s*(\d{1,2})\b/);
   if(code){r.toa='S'+code[1]+'.'+code[2];r.tang=String(+code[3]);r.ma='S'+code[1]+'.'+code[2]+'.'+code[3].padStart(2,'0')+'.'+code[4].padStart(2,'0');r._tw='S'+code[1];r.ghi.push('Đã đọc mã căn: tòa '+r.toa+', tầng '+r.tang+'. Số phòng được bỏ đi, không hiện lên web.')}
+  if(!code){const m1=t.match(/(?:m[ãa]\s*c[ăa]n|m[ãa]\s*s[ốo]|code)\s*[:：\-]?\s*([A-Za-z]{0,4}\d[A-Za-z0-9]*(?:\s*[.\-\/]\s*[A-Za-z0-9]+)*)/i)||t.match(/(?:^|[\s(\[])([A-Za-z]{1,4}\d{0,2}(?:[.\-][A-Za-z0-9]{1,4}){2,4})(?=$|[\s,;)\]])/);
+    if(m1){r.ma=m1[1].replace(/\s+/g,'').toUpperCase();r.ghi.push('Đã đọc mã căn: '+r.ma+'. Mã chỉ để bạn xem trong Sheet, không hiện lên web.')}}
   if(!r.khu&&code)r.ghi.push('Tin không ghi tên phân khu, bạn chọn giúp. Trang sẽ nhớ để lần sau tòa '+r._tw+' tự điền.');
   /* phòng ngủ */
   if(/studio|\bst\b/.test(n))r.pn='Studio';
