@@ -955,8 +955,7 @@ function dtOpen(id,noHash){
   <section class="dts"><h3>Thông tin căn</h3><dl class="dtd">${rows.map(r=>`<div><dt>${r[0]}</dt><dd>${esc(r[1])}</dd></div>`).join('')}</dl></section>
   ${u.desc?`<section class="dts"><h3>Về căn này</h3><p>${esc(u.desc).replace(/\n/g,'<br>')}</p></section>`:''}
   <section class="dts"><h3>Vị trí</h3><p>${esc(u.zone)} nằm trong Vinhomes Grand Park, phường Long Bình, TP. Hồ Chí Minh (Quận 9 cũ), cửa ngõ phía Đông thành phố, liền kề Thủ Đức và Đồng Nai.${zinfo?' '+esc(zinfo):''}</p><div class="dtl"><a href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">Xem trên Google Maps</a></div></section>
-  <section class="dts"><h3>Tiện ích quanh tòa</h3>${dtMini(u)}<div class="dta">${amen?near(amen):'<div style="grid-column:1/-1;background:none;border:0;padding:0"><small>Trong đại đô thị</small></div>'+near(NEAR_IN)}</div>
-  ${amen?'':`<div class="dta" style="margin-top:14px"><div style="grid-column:1/-1;background:none;border:0;padding:0"><small>Kết nối khu vực</small></div>${near(NEAR_OUT)}</div>`}</section>
+  
   ${u.type==='rent'?dtRentOut(u):dtRent(u)}
   <p class="note" style="color:#cdb68a;font-size:13px;margin-top:26px">Thông tin mang tính tham khảo, có thể thay đổi theo thời điểm. Liên hệ Khải để xác nhận chi tiết và xem căn thực tế.</p>
 `;
