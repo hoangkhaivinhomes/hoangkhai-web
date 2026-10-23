@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Đăng căn nhanh</title>
+<style>
+:root{--bg:#1a0f07;--card:#2a1a0d;--line:rgba(248,220,142,.3);--gold:#f8dc8e;--ink:#fbf1da;--mute:#cdb68a;--bad:#ff9b8a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif}
+.w{max-width:760px;margin:0 auto;padding:18px 16px 120px}
+h1{font:600 28px Georgia,serif;margin:6px 0 4px}h2{font:600 18px Georgia,serif;margin:26px 0 10px;color:var(--gold)}
+p.s{color:var(--mute);margin:0 0 12px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+textarea,input,select{width:100%;font:inherit;color:var(--ink);background:#150b04;border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+textarea{min-height:140px;resize:vertical}
+label{display:block;font-size:13px;color:var(--mute);margin:0 0 4px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.f.miss input,.f.miss select{border-color:var(--bad)}
+.drop{border:2px dashed var(--line);border-radius:16px;padding:22px;text-align:center;color:var(--mute);cursor:pointer}
+.drop.on{background:rgba(248,220,142,.1);border-color:var(--gold)}
+.th{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin-top:12px}
+.th div{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;border:2px solid transparent}
+.th div:first-child{border-color:var(--gold)}.th img{width:100%;height:100%;object-fit:cover}
+.th b{position:absolute;left:4px;top:4px;font-size:11px;background:rgba(0,0,0,.6);padding:2px 6px;border-radius:99px}
+.th button{position:absolute;right:4px;top:4px;border:0;border-radius:99px;background:rgba(0,0,0,.65);color:#fff;width:24px;height:24px;cursor:pointer}
+.btn{font:700 16px Inter,sans-serif;border:0;border-radius:999px;padding:14px 22px;cursor:pointer;color:#2a1f06;background:linear-gradient(145deg,#fff3c4,#e8c764 55%,#b98a2c)}
+.btn.o{background:none;color:var(--gold);border:1px solid var(--line)}
+.btn[disabled]{opacity:.5}
+.bar{position:fixed;left:0;right:0;bottom:0;background:rgba(18,8,2,.95);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px))}
+.bar div{max-width:760px;margin:0 auto;display:flex;gap:10px;align-items:center}
+.bar .m{flex:1;font-size:14px;color:var(--mute)}
+.note{background:rgba(255,155,138,.12);border:1px solid rgba(255,155,138,.5);border-radius:12px;padding:10px 12px;font-size:14px;margin-top:10px}
+.ok{background:rgba(140,220,140,.12);border:1px solid rgba(140,220,140,.5);border-radius:12px;padding:14px;margin-top:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row .btn{flex:1}
+.chk{display:flex;gap:8px;align-items:center;margin-top:12px}.chk input{width:auto}
+a{color:var(--gold)}
+</style></head><body><div class="w">
+<h1>Đăng căn nhanh</h1><p class="s">Dán tin Zalo, thêm ảnh, kiểm tra rồi bấm Đăng. Căn sẽ tự lên web sau ít phút. Trang này chỉ dành cho riêng bạn, đừng gửi link cho người khác.</p>
+
+<div class="card" id="cfg" hidden><h2 style="margin-top:0">Cài đặt (chỉ làm một lần)</h2>
+<div class="f"><label>Địa chỉ ứng dụng (kết thúc bằng /exec)</label><input id="cu" placeholder="https://script.google.com/macros/s/.../exec"></div>
+<div class="f" style="margin-top:10px"><label>Mật khẩu (đã đặt trong Apps Script)</label><input id="ck" type="password"></div>
+<button class="btn" id="cs" style="margin-top:12px">Lưu</button></div>
+
+<div id="main">
+<h2>1. Dán tin nhắn Zalo</h2>
+<textarea id="tin" placeholder="Dán nội dung căn vào đây, ví dụ: Bán 2PN The Origami 59m2 hướng Đông Nam, nội thất cơ bản, HĐMB, giá 3 tỷ 250"></textarea>
+<p class="s" style="margin-top:6px">Nội dung gốc không được đăng lên web, chỉ các ô ở bước 3.</p>
+
+<h2>2. Ảnh căn</h2>
+<div class="drop" id="drop">Kéo ảnh vào đây, bấm để chọn ảnh, hoặc dán ảnh (Ctrl+V)<input id="fi" type="file" accept="image/*" multiple hidden></div>
+<div class="th" id="th"></div><p class="s" id="ts" style="margin-top:8px"></p>
+
+<h2>3. Kiểm tra thông tin</h2>
+<div class="card"><div class="g" id="fm"></div>
+<div class="chk"><input type="checkbox" id="tot"><label for="tot" style="margin:0;color:var(--ink)">Đánh dấu “Giá tốt”</label></div>
+<div id="warn"></div></div>
+<div id="res"></div></div></div>
+
+<div class="bar"><div><span class="m" id="st">Chưa có thông tin</span><button class="btn o" id="rs" type="button">Làm lại</button><button class="btn" id="go" type="button" disabled>Đăng căn</button></div></div>
+
+<script>
+const ZONES=['The Rainbow','The Origami','The Beverly','The Beverly Solari','The Opus One','Lumière Boulevard','Masteri Centre Point'];
+const SKIP_INTERNAL=true;
+const nz=t=>String(t||'').toLowerCase().replace(/đ/g,'d').normalize('NFD').replace(/[̀-ͯ]/g,'');
+const DIRS={dn:'Đông Nam',db:'Đông Bắc',tn:'Tây Nam',tb:'Tây Bắc',d:'Đông',t:'Tây',n:'Nam',b:'Bắc'};
+function parseTin(raw){
+  const t=String(raw||'').replace(/ /g,' '),n=nz(t),r={loai:'',khu:'',pn:'',dt:'',gia:'',huong:'',noithat:'',phaply:'',tang:'',toa:'',mota:'',view:'',coc:'',tot:false,ghi:[]};
+  /* mua / thuê */
+  const rentW=/\b(cho thue|can cho thue|thue)\b/.test(n),saleW=/\b(ban|can ban|chuyen nhuong)\b/.test(n);
+  /* giá */
+  let m=n.match(/(\d+(?:[.,]\d+)?)\s*(?:ty|ti)\s*(\d{1,3})?(?!\w)/);
+  if(m){let v=parseFloat(m[1].replace(',','.'));if(m[2]){const f=m[2];v=v+parseFloat('0.'+f)}r.gia=String(+v.toFixed(3)).replace('.',',')+' tỷ';r._sale=1}
+  const mr=n.match(/(\d+(?:[.,]\d+)?)\s*(?:tr|trieu)\b(?:\s*\/?\s*(?:th|thang))?/);
+  if(mr&&!r.gia){r.gia=String(parseFloat(mr[1].replace(',','.'))).replace('.',',')+' triệu';r._rent=1}
+  r.loai=rentW&&!saleW?'Cho thuê':saleW&&!rentW?'Bán':r._rent&&!r._sale?'Cho thuê':r._sale&&!r._rent?'Bán':rentW?'Cho thuê':'';
+  /* phân khu */
+  const Z=[['The Beverly Solari',/solari/],['The Beverly',/beverly/],['The Origami',/origami/],['The Rainbow',/rainbow/],['The Opus One',/opus/],['Lumière Boulevard',/lumiere/],['Masteri Centre Point',/masteri|centre point|centrepoint/]];
+  for(const [z,re] of Z){if(re.test(n)){r.khu=z;break}}
+  const code=n.match(/\bs\s?(\d{1,2})\s*[.\-]?\s*(\d{2})\s*[.\-]?\s*(\d{1,2})\s*[.\-]\s*(\d{1,2})\b/)||n.match(/\bs\s?(\d{1,2})\s*[.\-]\s*(\d{2})(\d{2})\s*[.\-]\s*(\d{1,2})\b/);
+  if(code){r.toa='S'+code[1]+'.'+code[2];r.tang=String(+code[3]);r._tw='S'+code[1];r.ghi.push('Đã đọc mã căn: tòa '+r.toa+', tầng '+r.tang+'. Số phòng được bỏ đi, không hiện lên web.')}
+  if(!r.khu&&code)r.ghi.push('Tin không ghi tên phân khu, bạn chọn giúp. Trang sẽ nhớ để lần sau tòa '+r._tw+' tự điền.');
+  /* phòng ngủ */
+  if(/studio|\bst\b/.test(n))r.pn='Studio';
+  else{const b=n.match(/(\d)\s*(?:pn|phong ngu|p\.?n)\s*(\+)?/);if(b)r.pn=b[1]+'PN'+(b[2]?'+':'');else{const b2=n.match(/\b(\d)\s*(?:\+\s*1|\+)\s*pn/);if(b2)r.pn=b2[1]+'PN+'}}
+  /* diện tích */
+  const a=n.match(/(\d{2,3}(?:[.,]\d+)?)\s*(?:m2|m²|met vuong|m\b)/);if(a)r.dt=a[1].replace(',','.').replace('.',',');
+  /* hướng */
+  const hd=t.match(/h[ưu]ớng\s*(?:ban c[ôo]ng|c[ửu]a)?\s*[:\-]?\s*([A-Za-zÀ-ỹĐđ ]{1,12})/i);
+  const toDir=s=>{const k=nz(s).replace(/[^a-z ]/g,' ').trim();const w=k.replace(/\s+/g,' ');
+    if(/dong nam/.test(w))return'Đông Nam';if(/dong bac/.test(w))return'Đông Bắc';if(/tay nam/.test(w))return'Tây Nam';if(/tay bac/.test(w))return'Tây Bắc';
+    if(/^dn\b/.test(w))return'Đông Nam';if(/^db\b/.test(w))return'Đông Bắc';if(/^tn\b/.test(w))return'Tây Nam';if(/^tb\b/.test(w))return'Tây Bắc';
+    if(/^dong\b/.test(w))return'Đông';if(/^tay\b/.test(w))return'Tây';if(/^nam\b/.test(w))return'Nam';if(/^bac\b/.test(w))return'Bắc';return''};
+  if(hd)r.huong=toDir(hd[1]);
+  if(!r.huong){const f=n.match(/\b(dong nam|dong bac|tay nam|tay bac)\b/);if(f)r.huong=toDir(f[1]);else{const ab=t.match(/(?<![A-Za-zÀ-ỹ])(ĐN|ĐB|TN|TB|DN|DB)(?![A-Za-zÀ-ỹ])/);if(ab)r.huong=toDir(ab[1])}}
+  /* nội thất */
+  if(/\bntcb\b/.test(n))r.noithat='Cơ bản';
+  else if(/\bntdd\b|\bntfull\b/.test(n))r.noithat='Đầy đủ';
+  else if(/full noi that|day du noi that|noi that day du|full nt|full do/.test(n))r.noithat='Đầy đủ';
+  else if(/noi that co ban|nt co ban|co ban noi that/.test(n))r.noithat='Cơ bản';
+  else if(/nha trong|khong noi that|ban giao tho|noi that trong/.test(n))r.noithat='Nhà trống';
+  else{const nt=t.match(/n[ộo]i th[ấa]t\s*[:\-]\s*([^\n,;.]{2,40})/i);if(nt)r.noithat=nt[1].trim().replace(/^./,c=>c.toUpperCase())}
+  /* pháp lý */
+  const pl=n.match(/hdmb|hop dong mua ban|so hong|hd thue|pmh|hop dong thue/);
+  if(pl)r.phaply={hdmb:'HĐMB','hop dong mua ban':'HĐMB','so hong':'Sổ hồng','hd thue':'HĐ thuê','pmh':'PMH','hop dong thue':'HĐ thuê'}[pl[0]];
+  /* tầng, view, cọc */
+  const tg=n.match(/tang\s*(\d{1,2})\b/);if(tg&&!r.tang)r.tang=tg[1];
+  const vw=t.match(/view\s*[:\-]?\s*([^\n,;.]{2,30})/i);if(vw)r.view=vw[1].trim();
+  const cc=t.match(/c[ọo]c\s*[:\-]?\s*([^\n,;.)]{1,25})/i);if(cc){r.coc=cc[1].trim();if(/^\d+$/.test(r.coc))r.coc+=' tháng'}
+  r.tot=/gia tot|chot nhanh|gia rat tot|giam gia/.test(n);
+  /* mô tả ngắn: chỉ lấy ý công khai, bỏ phí môi giới và cách xem nhà */
+  const md=[];
+  const items=t.match(/n[ộo]i th[ấa]t[^\n(]*\(([^)]{3,120})\)/i);
+  if(items)md.push('Nội thất gồm: '+items[1].split(/\s*[-–,;+]\s*/).map(x=>x.trim()).filter(Boolean).join(', '));
+  if(/o lien|vao o ngay|nhan nha ngay|o duoc ngay/.test(n))md.push('Có thể vào ở ngay');
+  const hdn=n.match(/hop dong\s*(\d{1,2})\s*nam/);if(hdn)md.push('Hợp đồng thuê '+hdn[1]+' năm');
+  r.mota=md.join('. ');
+  if(/phi\b.*tien nha|hoa hong|xem nha|cho pass|chu nha dan/.test(n))r.ghi.push('Đã bỏ qua phí môi giới và cách xem nhà (thông tin nội bộ, không đăng lên web).');
+  if(!r.dt)r.ghi.push('Tin chưa ghi diện tích, bạn điền thêm nếu có.');
+  if(!r.huong)r.ghi.push('Tin chưa ghi hướng, bạn điền thêm nếu có.');
+  delete r._sale;delete r._rent;return r}
+
+
+const $=s=>document.querySelector(s);
+const ST=(()=>{try{return localStorage}catch(e){return{getItem:()=>null,setItem(){}}}})();
+let imgs=[],busy=false;
+const FIELDS=[['loai','Loại căn','select',['','Bán','Cho thuê'],1],['khu','Phân khu','select',['',...ZONES],1],['pn','Loại căn hộ (Studio, 1PN, 2PN+…)','text','',0],['dt','Diện tích (m²)','text','',0],['gia','Giá (ví dụ 3,25 tỷ hoặc 9 triệu)','text','',1],['huong','Hướng','text','',0],['noithat','Nội thất','text','',0],['phaply','Pháp lý','text','',0],['toa','Tòa','text','',0],['tang','Tầng','text','',0],['view','View','text','',0],['coc','Đặt cọc (căn thuê)','text','',0],['thue','Thuê dự kiến, triệu/tháng (căn bán)','text','',0],['mota','Mô tả ngắn cho khách','text','',0]];
+function build(){$('#fm').innerHTML=FIELDS.map(f=>`<div class="f" data-k="${f[0]}"><label>${f[1]}${f[4]?' *':''}</label>${f[2]==='select'?`<select id="f_${f[0]}">${f[3].map(o=>`<option>${o}</option>`).join('')}</select>`:`<input id="f_${f[0]}">`}</div>`).join('');
+  FIELDS.forEach(f=>$('#f_'+f[0]).addEventListener('input',check))}
+function val(k){return ($('#f_'+k).value||'').trim()}
+function fill(r){['loai','khu','pn','dt','gia','huong','noithat','phaply','toa','tang','view','coc','mota'].forEach(k=>{if(r[k])$('#f_'+k).value=r[k]});$('#tot').checked=!!r.tot;
+  $('#warn').innerHTML=r.ghi&&r.ghi.length?r.ghi.map(x=>`<div class="note">${x}</div>`).join(''):'';check()}
+function check(){let miss=[];FIELDS.filter(f=>f[4]).forEach(f=>{const e=document.querySelector(`.f[data-k="${f[0]}"]`);const m=!val(f[0]);e.classList.toggle('miss',m);if(m)miss.push(f[1])});
+  const ok=!miss.length&&!busy;$('#go').disabled=!ok;$('#st').textContent=miss.length?'Còn thiếu: '+miss.map(x=>x.split(' (')[0]).join(', '):(imgs.length?'Sẵn sàng đăng · '+imgs.length+' ảnh':'Sẵn sàng đăng · chưa có ảnh')}
+const ZM=()=>{try{return JSON.parse(ST.getItem('dc_zm')||'{}')}catch(e){return{}}};
+let curTw='';
+let tm;$('#tin').addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(()=>{FIELDS.forEach(f=>$('#f_'+f[0]).value='');const r=parseTin($('#tin').value);curTw=r._tw||'';
+  if(!r.khu&&curTw&&ZM()[curTw]){r.khu=ZM()[curTw];r.ghi=r.ghi.filter(x=>!/không ghi tên phân khu/.test(x));r.ghi.push('Phân khu tự điền theo lần trước (tòa '+curTw+' = '+r.khu+'). Sai thì bạn chọn lại.')}
+  fill(r)},350)});
+document.addEventListener('change',ev=>{if(ev.target.id!=='f_khu')return;if(curTw&&val('khu')){const m=ZM();m[curTw]=val('khu');try{ST.setItem('dc_zm',JSON.stringify(m))}catch(e){}}});
+/* ảnh */
+function shrink(file){return new Promise((ok,no)=>{const u=URL.createObjectURL(file),im=new Image();im.onload=()=>{const M=1600,s=Math.min(1,M/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);const d=c.toDataURL('image/jpeg',.82);ok(d)};im.onerror=()=>{URL.revokeObjectURL(u);no()};im.src=u})}
+async function addFiles(fs){for(const f of fs){if(!/^image\//.test(f.type))continue;if(imgs.length>=15){$('#ts').textContent='Tối đa 15 ảnh.';break}try{imgs.push(await shrink(f))}catch(e){}}drawImgs()}
+function drawImgs(){$('#th').innerHTML=imgs.map((d,i)=>`<div><img src="${d}"><b>${i?i+1:'Ảnh bìa'}</b><button type="button" data-x="${i}" aria-label="Xóa">×</button></div>`).join('');
+  document.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>{imgs.splice(+b.dataset.x,1);drawImgs()});$('#ts').textContent=imgs.length?'Ảnh đầu tiên là ảnh bìa. Bấm × để xóa ảnh.':'';check()}
+$('#drop').onclick=()=>$('#fi').click();$('#fi').onchange=e=>{addFiles([...e.target.files]);e.target.value=''};
+['dragenter','dragover'].forEach(v=>$('#drop').addEventListener(v,e=>{e.preventDefault();$('#drop').classList.add('on')}));
+['dragleave','drop'].forEach(v=>$('#drop').addEventListener(v,e=>{e.preventDefault();$('#drop').classList.remove('on')}));
+$('#drop').addEventListener('drop',e=>addFiles([...e.dataTransfer.files]));
+document.addEventListener('paste',e=>{const fs=[...(e.clipboardData&&e.clipboardData.files||[])];if(fs.length){e.preventDefault();addFiles(fs)}});
+/* cài đặt */
+function cfgShow(){const has=ST.getItem('dc_url')&&ST.getItem('dc_key');$('#cfg').hidden=!!has&&!cfgForce;$('#main').style.display=(has&&!cfgForce)?'block':'none';$('.bar').style.display=(has&&!cfgForce)?'block':'none'}
+let cfgForce=false;$('#cs').onclick=()=>{const u=$('#cu').value.trim(),k=$('#ck').value;if(!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(u)){alert('Địa chỉ chưa đúng. Phải bắt đầu bằng https://script.google.com/macros/s/ và kết thúc bằng /exec');return}if(!k){alert('Nhập mật khẩu');return}ST.setItem('dc_url',u);ST.setItem('dc_key',k);cfgForce=false;cfgShow()};
+/* đăng */
+$('#go').onclick=async()=>{if(busy)return;const url=ST.getItem('dc_url'),key=ST.getItem('dc_key');if(!url||!key){cfgForce=true;cfgShow();return}
+  const f={};['loai','khu','pn','dt','gia','huong','noithat','phaply','toa','tang','view','coc','thue','mota'].forEach(k=>{const v=val(k);if(v)f[k]=v});if($('#tot').checked)f.tot='Có';
+  const sum=`${f.loai} · ${f.khu}\n${f.pn||''} ${f.dt?f.dt+' m²':''} · ${f.gia}\n${imgs.length} ảnh\n\nĐăng căn này lên web?`;if(!confirm(sum))return;
+  busy=true;$('#go').disabled=true;$('#st').textContent='Đang đăng, vui lòng chờ…';
+  const id='c'+Date.now()+Math.random().toString(36).slice(2,6);
+  try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,id,fields:f,images:imgs.map(d=>({data:d.split(',')[1]}))})});const j=await r.json();
+    if(j.ok){$('#res').innerHTML=`<div class="ok"><b>Đã đăng.</b> ${j.trung?'(Căn này đã được gửi trước đó.)':''}Căn sẽ hiện trên web sau khoảng 5 phút.<div class="row" style="margin-top:12px"><button class="btn" id="nx">Đăng căn tiếp</button></div></div>`;$('#nx').onclick=reset;$('#st').textContent='Đã đăng';$('#res').scrollIntoView({behavior:'smooth'})}
+    else{$('#res').innerHTML=`<div class="note">Chưa đăng được: ${j.loi||'lỗi không rõ'}</div>`;busy=false;check()}}
+  catch(e){$('#res').innerHTML='<div class="note">Không nhận được phản hồi. <b>Hãy kiểm tra Google Sheet xem căn đã có chưa trước khi bấm Đăng lại</b>, để tránh đăng trùng.</div>';busy=false;check()}};
+function reset(){$('#tin').value='';FIELDS.forEach(f=>$('#f_'+f[0]).value='');$('#tot').checked=false;imgs=[];drawImgs();$('#res').innerHTML='';$('#warn').innerHTML='';busy=false;check();scrollTo({top:0,behavior:'smooth'})}
+$('#rs').onclick=()=>{if(confirm('Xóa hết để nhập căn mới?'))reset()};
+build();check();cfgShow();
+</script></body></html>
