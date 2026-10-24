@@ -665,6 +665,17 @@ select option{color:#fbf1da;background:#2a1608}input::placeholder{color:#c9b085}
 .mmt div{padding:10px 12px;border-radius:12px;background:rgba(20,8,2,.45);border:1px solid rgba(255,226,160,.2)}
 .mmt b{display:block;color:#f8dc8e;font-size:16px}.mmt span{font-size:12.5px;color:#e6d3ac}
 .mmt.own{margin-bottom:10px}.mmt.own div{border-color:rgba(248,220,142,.6)}
+
+/* hiệu ứng phân khu: thẻ đang chọn sáng lên, các thẻ còn lại dịu xuống */
+.zc{position:relative;transition:transform .35s,box-shadow .45s,border-color .35s,filter .45s,scale .45s,translate .45s!important;will-change:scale,filter}
+.zc img{transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .45s}
+.zc::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;opacity:0;transition:opacity .4s;background:radial-gradient(260px circle at var(--mx,50%) var(--my,35%),rgba(255,226,150,.30),rgba(255,226,150,0) 62%);mix-blend-mode:screen}
+.zones.fx .zc{filter:brightness(.62) saturate(.7) blur(.4px);scale:.975}
+.zones.fx .zc.on{filter:brightness(1.1) saturate(1.12);scale:1.045;translate:0 -8px;z-index:3;border-color:rgba(255,226,150,.95)!important;box-shadow:0 0 0 1px rgba(255,226,150,.65),0 0 30px 3px rgba(255,205,110,.55),0 0 80px 10px rgba(255,190,90,.30),0 34px 60px -24px rgba(0,0,0,.75)!important}
+.zones.fx .zc.on img{transform:scale(1.07)}
+.zones.fx .zc.on::after{opacity:1}
+.zones.fx .zc.on i{letter-spacing:.04em}
+@media(prefers-reduced-motion:reduce){.zc,.zc img{transition:none!important}.zones.fx .zc.on img{transform:none}}
 </style>
 </head>
 <body>
@@ -853,6 +864,19 @@ function zoneArt(k){
   if(P.palm)[[16,100],[304,92]].forEach(([x,h])=>{d+=`<path d="M${x} ${G} Q${x+4} ${G-h/2} ${x} ${G-h}" stroke="#6b4c2a" stroke-width="3" fill="none"/>`;for(let a=-70;a<=70;a+=35)d+=`<path d="M${x} ${G-h} q${a} -18 ${a*1.5} 8" stroke="#3f7f4a" stroke-width="4" fill="none" stroke-linecap="round"/>`});
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Minh họa ${k}">${d}</svg>`}
 $('#zones').innerHTML=ZONES.map(z=>`<button class="zc" type="button" data-z="${esc(z[0])}"><img src="${ZPIC[z[2]]}" alt="${esc(z[0])}" loading="lazy"><b>${esc(z[0])}</b><span>${esc(z[1])}</span><i>Xem căn ›</i></button>`).join('');
+(function(){const g=$('#zones'),cs=()=>[...g.querySelectorAll('.zc')];
+ const set=c=>{cs().forEach(x=>x.classList.toggle('on',x===c));g.classList.toggle('fx',!!c)};
+ if(matchMedia('(hover:hover)').matches){
+  g.addEventListener('pointermove',e=>{const c=e.target.closest('.zc');if(c){const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')}set(c)});
+  g.addEventListener('pointerleave',()=>set(null));
+  g.addEventListener('focusin',e=>set(e.target.closest('.zc')));g.addEventListener('focusout',()=>set(null));
+ }else{
+  let q=0;const pick=()=>{q=0;const gr=g.getBoundingClientRect();if(gr.bottom<0||gr.top>innerHeight){set(null);return}
+   const cx=gr.left+gr.width/2;let best=null,bd=1e9;cs().forEach(c=>{const r=c.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-cx);if(d<bd){bd=d;best=c}});set(best)};
+  const sched=()=>{if(!q)q=requestAnimationFrame(pick)};
+  g.addEventListener('scroll',sched,{passive:true});addEventListener('scroll',sched,{passive:true});addEventListener('resize',sched);setTimeout(pick,400);
+ }
+})();
 $$('.zc').forEach(b=>b.onclick=()=>{zones();$('#fz').value=b.dataset.z;render();$('#canho').scrollIntoView({behavior:'smooth'})});
 const AM=[['271 ha','Đại đô thị','Nằm ở cửa ngõ phía Đông thành phố.','M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6'],
  ['36 ha','Công viên trung tâm','Đường dạo, hồ sen và không gian xanh.','M12 3c3 3 5 6 5 9a5 5 0 0 1-10 0c0-3 2-6 5-9zM12 17v4'],
