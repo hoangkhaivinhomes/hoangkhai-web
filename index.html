@@ -3,7 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Mua bán và cho thuê căn hộ Vinhomes Grand Park, Quận 9. Tư vấn tận tâm, theo sát đến khi nhận nhà.">
+<meta name="description" content="Mua bán và cho thuê căn hộ Vinhomes Grand Park, Quận 9.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hoàng Khai Vinhomes">
+<meta property="og:title" content="Căn hộ Vinhomes Grand Park – Hoàng Khai">
+<meta property="og:description" content="Mua bán và cho thuê căn hộ Vinhomes Grand Park, Quận 9.">
+<meta property="og:url" content="https://hoangkhaivinhomes.com.vn/">
+<meta property="og:image" content="https://hoangkhaivinhomes.com.vn/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hoangkhaivinhomes.com.vn/og.jpg">
 <title>Căn hộ Vinhomes Grand Park – Hoàng Khai</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
@@ -887,7 +897,7 @@ $('#amen').innerHTML=AM.map(a=>`<div class="am"><svg viewBox="0 0 24 24" aria-hi
 head();zones();render();
 
 /* ===== Danh sách căn lấy từ Google Sheet (dán link CSV vào SHEET_CSV) ===== */
-const SHEET_CSV='https://docs.google.com/spreadsheets/d/e/2PACX-1vSHcr70-ByPB3DYMUNAXX4LMPpR8-XhCUyEAeGtUbtQSMS6qL1ETe6HHb1LgS4-EOynheizpYY2lwLn/pub?gid=1869921988&single=true&output=csv';
+const SHEET_CSV='https://docs.google.com/spreadsheets/d/e/2PACX-1vSHcr70-ByPB3DYMUNAXX4LMPpR8-XhCUyEAeGtUbtQSMS6qL1ETe6HHb1LgS4-EOynheizpYY2lwLn/pub?gid=553047661&single=true&output=csv';
 function csvRows(t){const r=[];let row=[],c='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];
   if(q){if(ch==='"'){if(t[i+1]==='"'){c+='"';i++}else q=false}else c+=ch}
   else if(ch==='"')q=true;else if(ch===','){row.push(c);c=''}
