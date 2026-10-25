@@ -3,19 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Mua bán và cho thuê căn hộ Vinhomes Grand Park, Quận 9.">
+<meta name="description" content="Mình giúp bạn chọn ngôi nhà của bạn. Mua bán và cho thuê căn hộ Vinhomes Grand Park.">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Hoàng Khai Vinhomes">
-<meta property="og:title" content="Căn hộ Vinhomes Grand Park – Hoàng Khai">
-<meta property="og:description" content="Mua bán và cho thuê căn hộ Vinhomes Grand Park, Quận 9.">
+<meta property="og:site_name" content="Hoang Khai Vinhomes">
+<meta property="og:title" content="Căn hộ Vinhomes Grand Park – Hoang Khai">
+<meta property="og:description" content="Mình giúp bạn chọn ngôi nhà của bạn. Mua bán và cho thuê căn hộ Vinhomes Grand Park.">
 <meta property="og:url" content="https://hoangkhaivinhomes.com.vn/">
 <meta property="og:image" content="https://hoangkhaivinhomes.com.vn/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hoangkhaivinhomes.com.vn/og.jpg">
-<link rel="preload" as="image" href="anh01.webp" fetchpriority="high">
-<title>Căn hộ Vinhomes Grand Park – Hoàng Khai</title>
+<title>Căn hộ Vinhomes Grand Park – Hoang Khai</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -51,15 +50,15 @@ header nav a:hover{color:var(--ink)}
 .btn.more:hover{border-color:var(--ink)}
 .btn.more span{display:inline-block;transition:transform .25s}.btn.more:hover span{transform:translateX(4px)}
 
-/* ảnh bìa */
-.hero{--hero-img:url("anh01.webp");position:relative;display:flex;align-items:flex-end;min-height:clamp(420px,60vw,600px);margin:28px 0 0;padding:clamp(24px,5vw,56px);border-radius:20px;overflow:hidden;color:#fff;background:linear-gradient(0deg,rgba(14,12,9,.82),rgba(14,12,9,.35) 38%,rgba(14,12,9,0) 72%),var(--hero-img) center 40%/cover no-repeat}
-.hero-txt{position:relative}
-.hero h1{margin:0}
-.h1a{display:block;font:500 12px/1 "Be Vietnam Pro",system-ui,sans-serif;letter-spacing:.42em;text-transform:uppercase;margin:0 0 14px;color:rgba(255,255,255,.9)}
-.h1b{display:block;font:500 clamp(40px,8vw,76px)/1.02 "Playfair Display",Georgia,serif;letter-spacing:.005em}
-.hero p.sub{margin:18px 0 0;font:italic 500 clamp(19px,3vw,28px)/1.3 "Playfair Display",Georgia,serif;color:#fff}
-.hero p.sub small{display:block;margin-top:10px;font:400 clamp(14px,1.8vw,16px)/1.5 "Be Vietnam Pro",system-ui,sans-serif;font-style:normal;letter-spacing:.02em;color:rgba(255,255,255,.85)}
-@media(max-width:760px){.hero{background-position:62% center;border-radius:16px}}
+/* đầu trang: chữ đơn giản */
+.hero{text-align:center;padding:clamp(72px,12vw,150px) 0 clamp(64px,10vw,120px);position:relative}
+.hero::after{content:"";display:block;width:1px;height:56px;margin:clamp(44px,7vw,72px) auto 0;background:linear-gradient(var(--accent),rgba(160,124,59,0))}
+.hero-txt{max-width:820px;margin:0 auto}
+.eyebrow{margin:0 0 26px;font:500 12px/1 "Be Vietnam Pro",system-ui,sans-serif;letter-spacing:.42em;text-transform:uppercase;color:var(--accent)}
+.hero h1{text-wrap:balance;margin:0;font:500 clamp(36px,6.6vw,68px)/1.12 "Playfair Display",Georgia,serif;letter-spacing:-.005em;color:var(--ink)}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--accent)}
+.hero p.sub{text-wrap:balance;margin:26px auto 0;max-width:30em;font:400 clamp(15px,2vw,18px)/1.65 "Be Vietnam Pro",system-ui,sans-serif;color:var(--mute)}
+.hero .cta{justify-content:center;margin-top:34px}
 
 /* tiêu đề từng phần */
 .sec{margin:72px 0 22px}
@@ -238,6 +237,12 @@ dialog::backdrop{background:rgba(20,18,15,.5)}
 #favbar button.go{background:#fff;color:var(--ink);border-color:#fff}
 @media(max-width:560px){#favbar{gap:8px;padding:8px 8px 8px 14px;left:12px;right:76px;transform:none;max-width:none;justify-content:space-between}#favbar span{font-size:13px}#favbar button{padding:8px 11px;font-size:13px}#favsee{display:none}}
 .empty p{margin:0 0 6px}
+
+/* chọn ngôn ngữ */
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:2px;margin-left:22px;background:#fff}
+.lang button{border:0;background:none;color:var(--mute);font:600 12px "Be Vietnam Pro",system-ui,sans-serif;letter-spacing:.06em;padding:6px 11px;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--dark);color:#fff}
+@media(max-width:760px){.lang{margin-left:auto}}
 /* hiện dần nhẹ khi cuộn */
 .rv{opacity:0;transform:translate3d(0,18px,0);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
 .rv.in{opacity:1;transform:none}
@@ -247,11 +252,13 @@ dialog::backdrop{background:rgba(20,18,15,.5)}
 </head>
 <body>
 <div class="wrap">
-<header><a class="brand" href="#" aria-label="Hoàng Khai Vinhomes"><span class="wm"><b>Hoàng Khai</b><i>Vinhomes</i></span></a><nav aria-label="Mục chính"><a href="#canho">Căn hộ</a><a href="#vemink">Về mình</a><a href="#lienhe">Liên hệ</a></nav><button class="btn ghost" id="adm-btn" hidden>Quản lý tin</button></header>
+<header><a class="brand" href="#" aria-label="Hoang Khai Vinhomes"><span class="wm"><b>Hoang Khai</b><i>Vinhomes</i></span></a><nav aria-label="Mục chính"><a href="#canho">Căn hộ</a><a href="#vemink">Về mình</a><a href="#lienhe">Liên hệ</a></nav><div class="lang" role="group" aria-label="Ngôn ngữ"><button type="button" data-l="vi" aria-pressed="true">VI</button><button type="button" data-l="en" aria-pressed="false">EN</button></div><button class="btn ghost" id="adm-btn" hidden>Quản lý tin</button></header>
 <section class="hero"><div class="hero-txt">
-<h1><span class="h1a">Vinhomes</span><span class="h1b">Grand Park</span></h1>
-<p class="sub">Chốn về xứng tầm<small>Tìm đúng căn hộ giữa đại đô thị phía Đông</small></p></div>
-</section>
+<p class="eyebrow">Vinhomes Grand Park</p>
+<h1>Mình giúp bạn chọn<br><em>ngôi nhà của bạn</em></h1>
+<p class="sub">Đừng lo, mình sẽ đồng hành cùng bạn</p>
+<div class="cta"><a class="btn" href="#canho">Xem căn hộ</a><a class="btn alt" data-zalo target="_blank" rel="noopener">Nhắn Zalo</a></div>
+</div></section>
 <section class="sec" id="canho"><h2>Căn hộ tuyển chọn</h2><p>Cập nhật thường xuyên. Nhắn Zalo để nhận danh sách mới nhất.</p></section>
 <div id="owner-warn" class="warn" hidden>Chưa có số điện thoại và Zalo. Bấm “Quản lý tin” để nhập.</div>
 <div class="bar">
@@ -277,7 +284,7 @@ dialog::backdrop{background:rgba(20,18,15,.5)}
 </section>
 <footer id="ft"><strong>CÔNG TY TNHH ĐỊA ỐC AN TÍN GIA</strong><br>Số 46 đường T2 (Khu C), dự án Khu dân cư và Công viên Phước Thiện, khu phố Phước Thiện, Phường Long Bình, Thành phố Hồ Chí Minh, Việt Nam</footer>
 </div>
-<div id="favbar" hidden><span>♥ Đã lưu <b id="favn">0</b> căn</span><button type="button" id="favsee">Xem căn đã lưu</button><button type="button" id="favsend" class="go">Gửi cho Khải qua Zalo</button></div>
+<div id="favbar" hidden><span id="favtxt"></span><button type="button" id="favsee">Xem căn đã lưu</button><button type="button" id="favsend" class="go">Gửi cho Khải qua Zalo</button></div>
 <div class="fab"><a class="btn" data-call aria-label="Gọi cho Khải" title="Gọi cho Khải"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a><a class="btn alt" data-zalo target="_blank" rel="noopener" aria-label="Zalo" title="Zalo">Zalo</a></div>
 
 <dialog id="dt" aria-label="Thông tin chi tiết căn hộ"><div class="dtw" id="dtb"></div><div class="dtf" id="dtf"></div></dialog>
@@ -325,15 +332,29 @@ dialog::backdrop{background:rgba(20,18,15,.5)}
 const PRISTINE='<!doctype html>\n'+document.documentElement.outerHTML;
 const S=JSON.parse(document.getElementById('data').textContent);
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const PH='<svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Chưa có ảnh căn hộ"><rect class="c" width="160" height="100"/><circle class="b" cx="130" cy="24" r="10"/><g class="a"><rect x="30" y="34" width="26" height="52" opacity=".9"/><rect x="60" y="20" width="30" height="66"/><rect x="94" y="44" width="24" height="42" opacity=".8"/></g><rect class="a" y="86" width="160" height="14" opacity=".35"/></svg>';
+const PH='<svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="No photo yet"><rect class="c" width="160" height="100"/><circle class="b" cx="130" cy="24" r="10"/><g class="a"><rect x="30" y="34" width="26" height="52" opacity=".9"/><rect x="60" y="20" width="30" height="66"/><rect x="94" y="44" width="24" height="42" opacity=".8"/></g><rect class="a" y="86" width="160" height="14" opacity=".35"/></svg>';
 let mode='sale',art=null,asg=null,editId=null,imgs=[],G=[],gi=0;
+let LANG='vi';try{LANG=localStorage.getItem('hk_lang')==='en'?'en':'vi'}catch(e){}
+const EN={"Căn hộ": "Apartments", "Về mình": "About me", "Liên hệ": "Contact", "Mình giúp bạn chọn": "Let me help you choose", "ngôi nhà của bạn": "the home that's yours", "Đừng lo, mình sẽ đồng hành cùng bạn": "Don't worry, I'll be with you all the way", "Xem căn hộ": "View apartments", "Nhắn Zalo": "Message on Zalo", "Nhắn Zalo cho mình": "Message me on Zalo", "Căn hộ tuyển chọn": "Selected apartments", "Cập nhật thường xuyên. Nhắn Zalo để nhận danh sách mới nhất.": "Updated regularly. Message me on Zalo for the latest list.", "Mua": "Buy", "Thuê": "Rent", "Phân khu": "Zone", "Loại căn": "Type", "Hướng": "Facing", "Mức giá": "Price range", "Sắp xếp": "Sort by", "Nổi bật": "Featured", "Giá thấp đến cao": "Price: low to high", "Giá cao đến thấp": "Price: high to low", "Diện tích lớn nhất": "Largest area", "Xóa lọc": "Clear filters", "Mình là Khải, tư vấn căn hộ Vinhomes Grand Park tại Công ty TNHH Địa Ốc An Tín Gia. Mình làm việc theo ba cam kết đơn giản.": "I'm Khai, an apartment consultant for Vinhomes Grand Park at An Tin Gia Real Estate Co., Ltd. I work by three simple promises.", "Thông tin rõ ràng": "Clear information", "Cung cấp thông tin một cách trung thực và chính xác.": "Honest and accurate information, always.", "Phản hồi nhanh": "Quick replies", "Bạn nhắn Zalo hoặc gọi, mình trả lời trong ngày.": "Message me on Zalo or call, and I'll reply the same day.", "Đồng hành cùng bạn": "By your side", "Trước, trong và sau khi nhận chìa khóa, mình luôn hỗ trợ trong khả năng của mình.": "Before, during and after you get your keys, I'll help in any way I can.", "Nhận tư vấn riêng": "Get personal advice", "Để lại thông tin, mình sẽ liên hệ và gửi bạn những căn phù hợp nhất.": "Leave your details and I'll get in touch with the apartments that suit you best.", "Họ và tên": "Your name", "Số điện thoại": "Phone number", "Nhận tư vấn": "Get advice", "Số 46 đường T2 (Khu C), dự án Khu dân cư và Công viên Phước Thiện, khu phố Phước Thiện, Phường Long Bình, Thành phố Hồ Chí Minh, Việt Nam": "No. 46, Street T2 (Zone C), Phuoc Thien Residential and Park Project, Phuoc Thien Quarter, Long Binh Ward, Ho Chi Minh City, Vietnam", "Gọi cho Khải": "Call Khai", "Hoang Khai Vinhomes": "Hoang Khai Vinhomes", "Mục chính": "Main menu", "Ngôn ngữ": "Language", "Loại giao dịch": "Transaction type", "Lọc theo phân khu": "Filter by zone", "Thông tin chi tiết căn hộ": "Apartment details", "Xem ảnh căn hộ": "Apartment photos", "Tất cả": "All", "Tất cả phân khu": "All zones", "Tất cả loại căn": "All types", "Tất cả hướng": "All directions", "Tất cả mức giá": "Any price", "Dưới 2 tỷ": "Under 2 billion", "2 – 3 tỷ": "2 – 3 billion", "3 – 6 tỷ": "3 – 6 billion", "Trên 6 tỷ": "Over 6 billion", "Dưới 10 triệu": "Under 10 million", "10 – 20 triệu": "10 – 20 million", "Trên 20 triệu": "Over 20 million", "Diện tích": "Area", "Nội thất": "Furnishing", "Pháp lý": "Legal status", "Giá tốt": "Great price", "Tin mẫu": "Sample", "Tìm hiểu thêm": "View details", "ảnh": "photos", "Lưu căn này": "Save this apartment", "Bỏ lưu căn này": "Remove from saved", "Chưa có căn đúng tiêu chí bạn chọn.": "No apartment matches your filters yet.", "Nhắn Zalo, mình sẽ báo ngay khi có căn phù hợp.": "Message me on Zalo and I'll let you know as soon as a suitable one comes up.", "Bạn chưa lưu căn nào.": "You haven't saved any apartments yet.", "Xem căn đã lưu": "View saved", "Xem tất cả căn": "View all", "Gửi cho Khải qua Zalo": "Send to Khai on Zalo", "Đã lưu": "Saved", "Đã chép danh sách. Bạn dán vào Zalo để gửi cho mình nhé.": "List copied. Paste it into Zalo to send it to me.", "Đã chép sẵn tin nhắn. Khi Zalo mở, bạn nhấn dán rồi gửi cho Khải nhé.": "Message copied. When Zalo opens, just paste it and send it to Khai.", "Cảm ơn bạn! Mình đã nhận thông tin và sẽ liên hệ sớm nhất.": "Thank you! I've received your details and will be in touch soon.", "Chưa gửi được, bạn thử lại hoặc gọi trực tiếp cho mình nhé.": "Couldn't send that. Please try again or call me directly.", "‹ Quay lại": "‹ Back", "Chia sẻ": "Share", "Đã chép link": "Link copied", "Gọi ngay": "Call now", "Thông tin căn": "Apartment details", "Tòa": "Building", "Tầng": "Floor", "View": "View", "Hình thức": "Listing type", "Cho thuê": "For rent", "Bán": "For sale", "Về căn này": "About this apartment", "Thông tin mang tính tham khảo, có thể thay đổi theo thời điểm. Liên hệ Khải để xác nhận chi tiết và xem căn thực tế.": "Information is for reference and may change over time. Contact Khai to confirm details and to view the apartment in person.", "Phân tích cho thuê": "Rental return", "Nếu mua căn này để cho thuê, bạn có thể thu về khoảng:": "If you buy this apartment to rent out, you could earn around:", "Giá thuê mỗi tháng": "Monthly rent", "Thu mỗi năm": "Yearly income", "Tỷ suất / năm": "Yield / year", "Mức thuê ban đầu là ước tính tham khảo (khoảng 4,5%/năm trên giá mua). Bạn kéo thanh trượt để xem các mức khác; mình sẽ báo giá thuê thực tế của căn này khi bạn hỏi.": "The starting rent is a rough estimate (about 4.5% a year on the purchase price). Drag the slider to see other levels, and ask me for the actual rent of this apartment.", "Mức thuê do Khải cập nhật theo giá thực tế của căn. Bạn kéo thanh trượt để xem thêm các mức khác.": "The rent was set by Khai based on this apartment's actual price. Drag the slider to see other levels.", "Chưa trừ phí quản lý, thuế và thời gian trống người thuê.": "Before management fees, taxes and vacancy periods.", "Chi phí thuê": "Rental costs", "Mỗi tháng": "Per month", "Đặt cọc": "Deposit", "Trao đổi": "To be discussed", "Phí quản lý": "Management fee", "Điều khoản thuê (thời hạn, thanh toán, nhận nhà) mình sẽ trao đổi rõ trước khi bạn quyết định.": "I'll go over the lease terms (duration, payment, handover) clearly with you before you decide.", "Link căn hộ:": "Apartment link:", "Chưa có ảnh căn hộ": "No photo yet"};
+const en=()=>LANG==='en';
+const T=s=>LANG==='en'&&Object.prototype.hasOwnProperty.call(EN,s)?EN[s]:s;
+const nz0=t=>String(t||'').toLowerCase().replace(/đ/g,'d').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+const DIR_EN={'dong':'East','tay':'West','nam':'South','bac':'North','dong nam':'South-East','dong bac':'North-East','tay nam':'South-West','tay bac':'North-West'};
+const tDir=v=>{if(!en())return v;const k=nz0(v);return DIR_EN[k]||v};
+const tFurn=v=>{if(!en()||!v)return v;const k=nz0(v);
+  if(/day du|full|dayd/.test(k))return 'Fully furnished';if(/co ban|ntcb|co bản/.test(k))return 'Basic furnishings';if(/cao cap/.test(k))return 'Premium furnishings';if(/^(nha )?trong$|khong noi that|nha trong/.test(k))return 'Unfurnished';return v};
+const tLegal=v=>{if(!en()||!v)return v;const k=nz0(v);
+  if(/hdmb/.test(k))return 'Sale & purchase agreement';if(/so hong|da co so|co so|so do/.test(k))return 'Title deed issued';return v};
+const tBeds=t=>{t=String(t||'');if(!en())return t;return t.replace(/^(\d+)\s*pn(\+?)$/i,'$1BR$2').replace(/^(\d+)\s*phòng ngủ$/i,(m,n)=>n+(n==='1'?' bedroom':' bedrooms'))};
+const tMoney=v=>{if(!en()||!v)return v;return String(v).replace(/cọc\s*/i,'').replace(/(\d+(?:[.,]\d+)?)\s*tháng/i,(m,n)=>n+(+n.replace(',','.')===1?' month':' months')).replace(/triệu/i,'million VND').replace(/tỷ|tỉ/i,'billion VND')};
+const fmt=x=>en()?String(x):String(x).replace('.',',');
 const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const money=u=>u.type==='rent'?u.price+' triệu/tháng':(u.price>=1000?String(+(u.price/1000).toFixed(2)).replace('.',',')+' tỷ':u.price+' triệu');
+const money=u=>{const p=u.price;if(en())return u.type==='rent'?p+' million VND/month':(p>=1000?+(p/1000).toFixed(2)+' billion VND':p+' million VND');return u.type==='rent'?p+' triệu/tháng':(p>=1000?String(+(p/1000).toFixed(2)).replace('.',',')+' tỷ':p+' triệu')};
 const imgsOf=u=>u.imgs&&u.imgs.length?u.imgs:(u.img?[u.img]:[]);
-const bedsLabel=u=>{const t=String(u.bedsText||u.beds||'');return /^\d+$/.test(t)?t+' phòng ngủ':t};
-const phAttr=u=>imgsOf(u).length?` data-id="${esc(u.id)}" tabindex="0" role="button" aria-label="Xem ${imgsOf(u).length} ảnh"`:'';
+const bedsLabel=u=>{const t=String(u.bedsText||u.beds||'');if(/^\d+$/.test(t))return en()?t+(t==='1'?' bedroom':' bedrooms'):t+' phòng ngủ';return tBeds(t)};
+const phAttr=u=>imgsOf(u).length?` data-id="${esc(u.id)}" tabindex="0" role="button" aria-label="${en()?'View '+imgsOf(u).length+' photos':'Xem '+imgsOf(u).length+' ảnh'}"`:'';
 const phImg=u=>{const a=imgsOf(u);return a.length?`<img src="${esc(a[0])}" alt="Căn hộ ${esc(u.zone)}" loading="lazy">`:PH};
-const cnt=u=>imgsOf(u).length>1?`<span class="cnt">${imgsOf(u).length} ảnh</span>`:'';
+const cnt=u=>imgsOf(u).length>1?`<span class="cnt">${imgsOf(u).length} ${T('ảnh')}</span>`:'';
 const tel=()=>S.phone?'tel:'+S.phone.replace(/\s/g,''):'#lienhe';
 const zl=()=>S.zalo?'https://zalo.me/'+S.zalo.replace(/\D/g,''):'#lienhe';
 function head(){
@@ -343,7 +364,7 @@ function head(){
 }
 function zones(){
   const z=[...new Set([...ZONES.map(x=>x[0]),...S.units.filter(u=>u.type===mode).map(u=>u.zone)])],cur=$('#fz').value;
-  $('#fz').innerHTML='<option value="">Tất cả phân khu</option>'+z.map(x=>`<option${x===cur?' selected':''}>${esc(x)}</option>`).join('');fopts();
+  $('#fz').innerHTML='<option value="">'+T('Tất cả phân khu')+'</option>'+z.map(x=>`<option${x===cur?' selected':''}>${esc(x)}</option>`).join('');fopts();
 }
 const nz=t=>String(t||'').toLowerCase().replace(/đ/g,'d').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 const typeKey=u=>{let t=nz(u.bedsText||u.beds).replace(/\s/g,'').replace('phongngu','pn');return /^\d+$/.test(t)?t+'pn':t};
@@ -352,12 +373,12 @@ const TYPES=[['studio','Studio'],['1pn','1PN'],['1pn+','1PN+'],['2pn','2PN'],['2
 const DIRS=[['d','Đông'],['t','Tây'],['n','Nam'],['b','Bắc'],['dn','Đông Nam'],['db','Đông Bắc'],['tn','Tây Nam'],['tb','Tây Bắc']];
 const PR={sale:[['Dưới 2 tỷ',0,2000],['2 – 3 tỷ',2000,3000],['3 – 6 tỷ',3000,6000],['Trên 6 tỷ',6000,1e12]],rent:[['Dưới 10 triệu',0,10],['10 – 20 triệu',10,20],['Trên 20 triệu',20,1e12]]};
 Object.keys(PR).forEach(k=>{const a=PR[k];PR[k]=a.reduce((o,x,i)=>(o[i]=[x[1],x[2]],o),{});PR[k].labels=a.map(x=>x[0])});
-function popts(){const L=PR[mode].labels,c=$('#fp').value;$('#fp').innerHTML='<option value="">Tất cả mức giá</option>'+L.map((x,i)=>`<option value="${i}"${String(i)===c?' selected':''}>${x}</option>`).join('')}
+function popts(){const L=PR[mode].labels,c=$('#fp').value;$('#fp').innerHTML='<option value="">'+T('Tất cả mức giá')+'</option>'+L.map((x,i)=>`<option value="${i}"${String(i)===c?' selected':''}>${T(x)}</option>`).join('')}
 function fopts(){popts();
   const cur=$('#fb').value,cd=$('#fd').value;
   const ex=[];S.units.filter(u=>u.type===mode).forEach(u=>{const k=typeKey(u);if(k&&!TYPES.some(x=>x[0]===k)&&!ex.some(x=>x[0]===k))ex.push([k,String(u.bedsText||u.beds)])});
-  $('#fb').innerHTML='<option value="">Tất cả loại căn</option>'+[...TYPES,...ex].map(x=>`<option value="${esc(x[0])}"${x[0]===cur?' selected':''}>${esc(x[1])}</option>`).join('');
-  $('#fd').innerHTML='<option value="">Tất cả hướng</option>'+DIRS.map(x=>`<option value="${x[0]}"${x[0]===cd?' selected':''}>${x[1]}</option>`).join('');
+  $('#fb').innerHTML='<option value="">'+T('Tất cả loại căn')+'</option>'+[...TYPES,...ex].map(x=>`<option value="${esc(x[0])}"${x[0]===cur?' selected':''}>${esc(tBeds(x[1]))}</option>`).join('');
+  $('#fd').innerHTML='<option value="">'+T('Tất cả hướng')+'</option>'+DIRS.map(x=>`<option value="${x[0]}"${x[0]===cd?' selected':''}>${tDir(x[1])}</option>`).join('');
 }
 const FAV=(()=>{let m={};try{m=JSON.parse(localStorage.getItem('hk_fav')||'{}')||{}}catch(e){}return m})();
 const favSave=()=>{try{localStorage.setItem('hk_fav',JSON.stringify(FAV))}catch(e){}};
@@ -366,11 +387,11 @@ const areaNum=u=>parseFloat(String(u.area||'').replace(',','.'))||0;
 const favList=()=>S.units.filter(u=>FAV[u.id]);
 const HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>';
 function card(u){const on=!!FAV[u.id];
-  return `<article class="unit"><div class="phw"><div class="ph"${phAttr(u)}>${phImg(u)}${u.hot?'<span class="tag">Giá tốt</span>':''}${u.sample?'<span class="tag s">Tin mẫu</span>':''}${cnt(u)}</div><button class="fav" type="button" data-fav="${esc(u.id)}" aria-pressed="${on}" aria-label="${on?'Bỏ lưu căn này':'Lưu căn này'}">${HEART}</button></div><div class="body"><h3>${esc(u.zone)}</h3><div class="price">${money(u)}</div><dl class="spec">${[['Diện tích',u.area?u.area+' m²':''],['Hướng',u.dir],['Nội thất',u.furn],['Pháp lý',u.legal]].filter(r=>r[1]).map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl><div class="row"><button class="btn more" type="button" data-more="${esc(u.id)}">Tìm hiểu thêm <span aria-hidden="true">›</span></button></div></div></article>`}
+  return `<article class="unit"><div class="phw"><div class="ph"${phAttr(u)}>${phImg(u)}${u.hot?'<span class="tag">'+T('Giá tốt')+'</span>':''}${u.sample?'<span class="tag s">'+T('Tin mẫu')+'</span>':''}${cnt(u)}</div><button class="fav" type="button" data-fav="${esc(u.id)}" aria-pressed="${on}" aria-label="${on?T('Bỏ lưu căn này'):T('Lưu căn này')}">${HEART}</button></div><div class="body"><h3>${esc(u.zone)}</h3><div class="price">${money(u)}</div><dl class="spec">${[[T('Diện tích'),u.area?u.area+' m²':''],[T('Hướng'),tDir(u.dir)],[T('Nội thất'),tFurn(u.furn)],[T('Pháp lý'),tLegal(u.legal)]].filter(r=>r[1]).map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl><div class="row"><button class="btn more" type="button" data-more="${esc(u.id)}">${T('Tìm hiểu thêm')} <span aria-hidden="true">›</span></button></div></div></article>`}
 function chips(){const m=S.units.filter(u=>u.type===mode),by={};m.forEach(u=>{by[u.zone]=(by[u.zone]||0)+1});
   const cur=$('#fz').value,zs=Object.keys(by);
-  $('#chips').innerHTML=zs.length?[`<button type="button" class="chip" data-z="" aria-pressed="${!cur}">Tất cả <small>${m.length}</small></button>`].concat(zs.map(z=>`<button type="button" class="chip" data-z="${esc(z)}" aria-pressed="${z===cur}">${esc(z)} <small>${by[z]}</small></button>`)).join(''):''}
-function favbar(){const n=favList().length,el=$('#favbar');if(!el)return;el.hidden=!n;if(n){$('#favn').textContent=n;$('#favsee').textContent=onlyFav?'Xem tất cả căn':'Xem căn đã lưu'}}
+  $('#chips').innerHTML=zs.length?[`<button type="button" class="chip" data-z="" aria-pressed="${!cur}">${T('Tất cả')} <small>${m.length}</small></button>`].concat(zs.map(z=>`<button type="button" class="chip" data-z="${esc(z)}" aria-pressed="${z===cur}">${esc(z)} <small>${by[z]}</small></button>`)).join(''):''}
+function favbar(){const n=favList().length,el=$('#favbar');if(!el)return;el.hidden=!n;if(n){$('#favtxt').innerHTML='♥ '+T('Đã lưu')+' <b>'+n+'</b> '+(en()?(n===1?'apartment':'apartments'):'căn');$('#favsee').textContent=onlyFav?T('Xem tất cả căn'):T('Xem căn đã lưu');$('#favsend').textContent=T('Gửi cho Khải qua Zalo')}}
 function render(){
   const z=$('#fz').value,b=$('#fb').value,d=$('#fd').value,r=PR[mode][$('#fp').value];
   const filtered=!!(z||b||d||$('#fp').value);
@@ -378,9 +399,9 @@ function render(){
   const cmp={new:(a,c)=>c.hot-a.hot,pa:(a,c)=>a.price-c.price,pd:(a,c)=>c.price-a.price,ar:(a,c)=>areaNum(c)-areaNum(a)}[sortBy]||((a,c)=>c.hot-a.hot);
   L=L.slice().sort(cmp);
   chips();favbar();
-  $('#rcnt').textContent=onlyFav?`${L.length} căn đã lưu`:(L.length?`${L.length} căn phù hợp`:'');
+  $('#rcnt').textContent=en()?(onlyFav?`${L.length} saved`:(L.length?`${L.length} ${L.length===1?'apartment':'apartments'} found`:'')):(onlyFav?`${L.length} căn đã lưu`:(L.length?`${L.length} căn phù hợp`:''));
   $('#clr').hidden=!(filtered||onlyFav);
-  $('#grid').innerHTML=L.length?L.map(card).join(''):(onlyFav?'<div class="empty" style="grid-column:1/-1"><p>Bạn chưa lưu căn nào.</p></div>':'<div class="empty" style="grid-column:1/-1"><p>Chưa có căn đúng tiêu chí bạn chọn.</p><p>Nhắn Zalo, mình sẽ báo ngay khi có căn phù hợp.</p><div class="cta" style="justify-content:center;margin-top:14px"><a class="btn" data-zalo target="_blank" rel="noopener">Nhắn Zalo cho mình</a>'+(filtered?'<button class="btn ghost" type="button" data-clr>Xóa lọc</button>':'')+'</div></div>');
+  $('#grid').innerHTML=L.length?L.map(card).join(''):(onlyFav?'<div class="empty" style="grid-column:1/-1"><p>'+T('Bạn chưa lưu căn nào.')+'</p></div>':'<div class="empty" style="grid-column:1/-1"><p>'+T('Chưa có căn đúng tiêu chí bạn chọn.')+'</p><p>'+T('Nhắn Zalo, mình sẽ báo ngay khi có căn phù hợp.')+'</p><div class="cta" style="justify-content:center;margin-top:14px"><a class="btn" data-zalo target="_blank" rel="noopener">'+T('Nhắn Zalo cho mình')+'</a>'+(filtered?'<button class="btn ghost" type="button" data-clr>'+T('Xóa lọc')+'</button>':'')+'</div></div>');
   $$('[data-zalo]').forEach(a=>a.href=zl());
 }
 function clearFilters(){['#fz','#fb','#fd','#fp'].forEach(x=>{$(x).value=''});onlyFav=false;render()}
@@ -392,11 +413,11 @@ $('#grid').addEventListener('click',e=>{
   const f=e.target.closest('[data-fav]');if(!f)return;const id=f.dataset.fav;
   if(FAV[id])delete FAV[id];else FAV[id]=1;favSave();
   if(onlyFav)render();else{const on=!!FAV[id];f.setAttribute('aria-pressed',on);f.setAttribute('aria-label',on?'Bỏ lưu căn này':'Lưu căn này');favbar()}});
-function favMsg(){const L=favList();
-  return 'Mình quan tâm '+L.length+' căn này, nhờ bạn tư vấn giúp:\n'+L.map((u,i)=>(i+1)+') '+u.zone+', '+[bedsLabel(u),u.area?u.area+' m²':'',u.dir?'hướng '+u.dir:''].filter(Boolean).join(', ')+' – '+money(u)+'\n'+location.href.split('#')[0]+'#can='+u.id).join('\n')}
+function favMsg(){const L=favList(),d=u=>[bedsLabel(u),u.area?u.area+' m²':'',u.dir?(en()?'facing '+tDir(u.dir):'hướng '+u.dir):''].filter(Boolean).join(', ');
+  return (en()?'Hi Khai, I\'m interested in these '+L.length+' apartments, could you advise me?\n':'Mình quan tâm '+L.length+' căn này, nhờ bạn tư vấn giúp:\n')+L.map((u,i)=>(i+1)+') '+u.zone+', '+d(u)+' – '+money(u)+'\n'+location.href.split('#')[0]+'#can='+u.id).join('\n')}
 document.addEventListener('click',e=>{
   if(e.target.closest('#favsee')){onlyFav=!onlyFav;render();$('#canho').scrollIntoView({behavior:'smooth'});return}
-  if(e.target.closest('#favsend')){copyTxt(favMsg());toast('Đã chép danh sách. Bạn dán vào Zalo để gửi cho mình nhé.');setTimeout(()=>{window.open(zl(),'_blank','noopener')},700)}});
+  if(e.target.closest('#favsend')){copyTxt(favMsg());toast(T('Đã chép danh sách. Bạn dán vào Zalo để gửi cho mình nhé.'));setTimeout(()=>{window.open(zl(),'_blank','noopener')},700)}});
 $$('.tabs button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$$('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#fp').value='';zones();render()});
 ['#fz','#fb','#fd','#fp'].forEach(s=>$(s).addEventListener('input',render));
 /* Form khách để lại số: dán 3 giá trị mà tao-form-khach.gs in ra */
@@ -407,8 +428,8 @@ $('#lf').onsubmit=async e=>{e.preventDefault();
     btn.disabled=true;
     try{
       await fetch(LEAD.url,{method:'POST',mode:'no-cors',body:new URLSearchParams({['entry.'+LEAD.name]:n,['entry.'+LEAD.phone]:t})});
-      e.target.innerHTML='<p class="lok">Cảm ơn bạn! Mình đã nhận thông tin và sẽ liên hệ sớm nhất.</p>';
-    }catch(x){btn.disabled=false;alert('Chưa gửi được, bạn thử lại hoặc gọi trực tiếp cho mình nhé.')}
+      e.target.innerHTML='<p class="lok">'+T('Cảm ơn bạn! Mình đã nhận thông tin và sẽ liên hệ sớm nhất.')+'</p>';
+    }catch(x){btn.disabled=false;alert(T('Chưa gửi được, bạn thử lại hoặc gọi trực tiếp cho mình nhé.'))}
     return}
   if(!S.phone){alert('Môi giới chưa cập nhật số điện thoại.');return}
   location.href='sms:'+S.phone.replace(/\s/g,'')+'?body='+encodeURIComponent('Mình là '+n+', SĐT '+t+'. Nhờ bạn gọi lại tư vấn căn hộ Vinhomes Grand Park.')};
@@ -424,6 +445,23 @@ const ZONES=[
  ['Masteri Centre Point','Căn hộ cao tầng, nổi bật về đêm.','mc'],
  ['Glory Heights','Cao tầng sát trung tâm thương mại, sầm uất.','gh']];
 head();zones();render();
+/* ===== Tiếng Việt / English ===== */
+const SKIP='select:not(#fs),#grid,#chips,#rcnt,#favbar,dialog,script,style';
+function trNode(n){if(n.__vi===undefined)n.__vi=n.nodeValue;const k=n.__vi.trim();if(!k)return;
+  const e=(LANG==='en'&&Object.prototype.hasOwnProperty.call(EN,k))?EN[k]:k;n.nodeValue=n.__vi.replace(k,e)}
+function applyStatic(){
+  const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement&&!n.parentElement.closest(SKIP)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT});
+  let n;const L=[];while(n=w.nextNode())L.push(n);L.forEach(trNode);
+  $$('#fs option').forEach(o=>{if(o.__vi===undefined)o.__vi=o.textContent;o.textContent=T(o.__vi)});
+  $$('[placeholder],[aria-label],[title]').forEach(el=>{if(el.closest('dialog,#grid'))return;['placeholder','aria-label','title'].forEach(a=>{if(!el.hasAttribute(a))return;const k='vi_'+a.replace('-','_');if(el.dataset[k]===undefined)el.dataset[k]=el.getAttribute(a);el.setAttribute(a,T(el.dataset[k]))})});
+}
+function setLang(l){LANG=l==='en'?'en':'vi';try{localStorage.setItem('hk_lang',LANG)}catch(e){}
+  document.documentElement.lang=LANG;$$('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===LANG));
+  document.title=en()?'Vinhomes Grand Park Apartments – Hoang Khai':'Căn hộ Vinhomes Grand Park – Hoang Khai';
+  applyStatic();zones();render();if($('#dt').open&&dtId)dtOpen(dtId,true)}
+$$('.lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+if(LANG==='en')setLang('en');
+
 
 /* ===== Danh sách căn lấy từ Google Sheet (dán link CSV vào SHEET_CSV) ===== */
 const SHEET_CSV='https://docs.google.com/spreadsheets/d/e/2PACX-1vSHcr70-ByPB3DYMUNAXX4LMPpR8-XhCUyEAeGtUbtQSMS6qL1ETe6HHb1LgS4-EOynheizpYY2lwLn/pub?gid=553047661&single=true&output=csv';
@@ -462,70 +500,44 @@ $('#lb').addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTo
 
 
 /* ===== Trang chi tiết căn ===== */
-const NEAR_IN=[['Công viên 36 ha','Đường dạo, hồ sen, sân chơi ngay trong khu.'],['Vinschool','Trường mầm non đến phổ thông trong đại đô thị.'],['Trung tâm thương mại','Mua sắm, ăn uống, vui chơi trong khu.'],['VinBus','Xe buýt điện kết nối nội khu và ra các hướng thành phố.'],['Hồ & đại lộ','Hồ sen, đại lộ ánh sáng, bến thuyền.']];
-const NEAR_OUT=[['Thủ Đức','Liền kề, thuận tiện đi làm, đi học.'],['Đồng Nai','Cửa ngõ phía Đông, nối tuyến đi các tỉnh.'],['Quận 1','Đi về trung tâm thành phố theo trục đại lộ phía Đông.']];
 function dtRent(u){
   const base=u.rentEst&&u.rentEst>0?u.rentEst:+(u.price*0.045/12).toFixed(1),est=!(u.rentEst&&u.rentEst>0);
   const lo=Math.max(1,+(base*.6).toFixed(1)),hi=+(base*1.6).toFixed(1);
-  return `<section class="dts"><h3>Phân tích cho thuê</h3><div class="dtr"><p>Nếu mua căn này để cho thuê, bạn có thể thu về khoảng:</p>
-  <label><span>Giá thuê mỗi tháng</span><b id="rv">${base} triệu</b></label><input id="rs" type="range" min="${lo}" max="${hi}" step="0.5" value="${base}" aria-label="Giá thuê mỗi tháng">
-  <div class="big"><div><small>Thu mỗi năm</small><b id="ry"></b></div><div><small>Tỷ suất / năm</small><b id="rp"></b></div></div>
+  return `<section class="dts"><h3>${T('Phân tích cho thuê')}</h3><div class="dtr"><p>${T('Nếu mua căn này để cho thuê, bạn có thể thu về khoảng:')}</p>
+  <label><span>${T('Giá thuê mỗi tháng')}</span><b id="rv">${base} ${en()?'million VND':'triệu'}</b></label><input id="rs" type="range" min="${lo}" max="${hi}" step="0.5" value="${base}" aria-label="${T('Giá thuê mỗi tháng')}">
+  <div class="big"><div><small>${T('Thu mỗi năm')}</small><b id="ry"></b></div><div><small>${T('Tỷ suất / năm')}</small><b id="rp"></b></div></div>
   <div class="bar2"><i id="rg"></i></div>
-  <p class="note">${est?'Mức thuê ban đầu là ước tính tham khảo (khoảng 4,5%/năm trên giá mua). Bạn kéo thanh trượt để xem các mức khác; mình sẽ báo giá thuê thực tế của căn này khi bạn hỏi.':'Mức thuê do Khải cập nhật theo giá thực tế của căn. Bạn kéo thanh trượt để xem thêm các mức khác.'} Chưa trừ phí quản lý, thuế và thời gian trống người thuê.</p></div></section>`}
+  <p class="note">${est?T('Mức thuê ban đầu là ước tính tham khảo (khoảng 4,5%/năm trên giá mua). Bạn kéo thanh trượt để xem các mức khác; mình sẽ báo giá thuê thực tế của căn này khi bạn hỏi.'):T('Mức thuê do Khải cập nhật theo giá thực tế của căn. Bạn kéo thanh trượt để xem thêm các mức khác.')} ${T('Chưa trừ phí quản lý, thuế và thời gian trống người thuê.')}</p></div></section>`}
 function dtRentCalc(u){const rs=$('#rs');if(!rs)return;const f=()=>{const r=+rs.value,y=r*12,p=y/u.price*100;
-  $('#rv').textContent=String(r).replace('.',',')+' triệu';$('#ry').textContent=(y>=1000?String(+(y/1000).toFixed(2)).replace('.',',')+' tỷ':Math.round(y)+' triệu');
-  $('#rp').textContent=p.toFixed(1).replace('.',',')+'%';$('#rg').style.width=Math.min(100,p*12)+'%'};
+  $('#rv').textContent=fmt(r)+(en()?' million VND':' triệu');$('#ry').textContent=(y>=1000?fmt(+(y/1000).toFixed(2))+(en()?' billion VND':' tỷ'):Math.round(y)+(en()?' million VND':' triệu'));
+  $('#rp').textContent=fmt(p.toFixed(1))+'%';$('#rg').style.width=Math.min(100,p*12)+'%'};
   rs.oninput=f;f()}
-function dtRentOut(u){const m=u.price,y=m*12,dn=num(u.deposit),dep=/th[áa]ng/i.test(u.deposit||'')?dn*m:dn;
-  return `<section class="dts"><h3>Chi phí thuê</h3><div class="dtr"><div class="big"><div><small>Mỗi tháng</small><b>${m} triệu</b></div><div><small>Đặt cọc</small><b>${u.deposit?esc(u.deposit):'Trao đổi'}</b></div></div>
-  <p class="note">${u.fee?'Phí quản lý: '+esc(u.fee)+'. ':''}Điều khoản thuê (thời hạn, thanh toán, nhận nhà) mình sẽ trao đổi rõ trước khi bạn quyết định.</p></div></section>`}
-
-function dtMini(u){
-  const mm=(l,v)=>v?`<div><b>${esc(v)}</b><span>${l}</span></div>`:'';
-  const own=[['Đến Vincom Mega Mall',u.toVincom],['Đến đường Nguyễn Xiển',u.toNX]].filter(x=>x[1]).map(x=>mm(x[0],x[1])).join('');
-  const reg=[['Khu Công nghệ cao 2','5 phút'],['Bến xe Miền Đông mới','8 phút'],['Khu du lịch Suối Tiên','10 phút'],['Quận 1 (chợ Bến Thành)','khoảng 15 km']].map(x=>mm(x[0],x[1])).join('');
-  return `<div class="mm"><svg viewBox="0 0 360 250" role="img" aria-label="Sơ đồ minh họa khu vực Vinhomes Grand Park">
-  <defs><linearGradient id="mmg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8dc8e" stop-opacity=".22"/><stop offset="1" stop-color="#f8dc8e" stop-opacity=".07"/></linearGradient><radialGradient id="mmp"><stop offset="0" stop-color="#9fd27a" stop-opacity=".9"/><stop offset="1" stop-color="#5f9a4a" stop-opacity=".55"/></radialGradient></defs>
-  <rect x="62" y="34" width="236" height="176" rx="22" fill="url(#mmg)" stroke="#f8dc8e" stroke-width="1.4" stroke-dasharray="5 4"/>
-  <path d="M298 40 q14 22 0 44 t0 44 t0 44" fill="none" stroke="#8fc4e8" stroke-width="5" stroke-linecap="round" opacity=".75"/>
-  <path d="M70 212 q40 14 80 0 t80 0 t66 -2" fill="none" stroke="#8fc4e8" stroke-width="5" stroke-linecap="round" opacity=".75"/>
-  <path d="M62 34 V210" stroke="#fff3d6" stroke-width="5" stroke-linecap="round" opacity=".9"/>
-  <path d="M70 34 H290" stroke="#fff3d6" stroke-width="3.5" stroke-linecap="round" opacity=".7"/>
-  <ellipse cx="180" cy="122" rx="62" ry="38" fill="url(#mmp)" stroke="#bfe39e" stroke-width="1.2"/>
-  <g font-family="Inter,system-ui,sans-serif" fill="#fff3d6" font-size="11" font-weight="600" text-anchor="middle">
-   <text x="180" y="119">Công viên</text><text x="180" y="133">trung tâm 36 ha</text>
-   <text x="36" y="125" transform="rotate(-90 36 125)" font-size="11">Đường Nguyễn Xiển</text>
-   <text x="180" y="24" font-size="11">Đường Phước Thiện</text>
-   <text x="328" y="128" transform="rotate(90 328 128)" font-size="11">Sông Đồng Nai</text>
-   <text x="180" y="239" font-size="11">Sông Tắc</text>
-   <text x="180" y="62" fill="#f8dc8e" font-size="12">VINHOMES GRAND PARK</text></g></svg>
-  <p class="mmn">Sơ đồ minh họa ranh giới khu, không theo tỷ lệ.</p>
-  ${own?`<div class="mmt own">${own}</div>`:''}
-  <div class="mmt">${reg}</div>
-  <div class="dtl"><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Vinhomes Grand Park '+(u.zone||''))}" target="_blank" rel="noopener">Mở bản đồ chi tiết</a></div></div>`}
+function dtRentOut(u){const m=u.price;
+  return `<section class="dts"><h3>${T('Chi phí thuê')}</h3><div class="dtr"><div class="big"><div><small>${T('Mỗi tháng')}</small><b>${m} ${en()?'million VND':'triệu'}</b></div><div><small>${T('Đặt cọc')}</small><b>${u.deposit?esc(tMoney(u.deposit)):T('Trao đổi')}</b></div></div>
+  <p class="note">${u.fee?T('Phí quản lý')+': '+esc(tMoney(u.fee))+'. ':''}${T('Điều khoản thuê (thời hạn, thanh toán, nhận nhà) mình sẽ trao đổi rõ trước khi bạn quyết định.')}</p></div></section>`}
 let dtId=null;
 function dtOpen(id,noHash){
   const u=S.units.find(x=>x.id===id);if(!u)return;dtId=id;const a=imgsOf(u);
-  const chips=[bedsLabel(u),u.area?u.area+' m²':'',u.dir,u.furn,u.view].filter(Boolean);
-  const rows=[['Phân khu',u.zone],['Tòa',u.tower],['Tầng',u.floor],['Loại căn',bedsLabel(u)],['Diện tích',u.area?u.area+' m²':''],['Hướng',u.dir],['View',u.view],['Nội thất',u.furn],['Pháp lý',u.legal],['Hình thức',u.type==='rent'?'Cho thuê':'Bán']].filter(r=>r[1]);
+  const chips=[bedsLabel(u),u.area?u.area+' m²':'',tDir(u.dir),tFurn(u.furn),u.view].filter(Boolean);
+  const rows=[[T('Phân khu'),u.zone],[T('Tòa'),u.tower],[T('Tầng'),u.floor],[T('Loại căn'),bedsLabel(u)],[T('Diện tích'),u.area?u.area+' m²':''],[T('Hướng'),tDir(u.dir)],[T('View'),u.view],[T('Nội thất'),tFurn(u.furn)],[T('Pháp lý'),tLegal(u.legal)],[T('Hình thức'),u.type==='rent'?T('Cho thuê'):T('Bán')]].filter(r=>r[1]);
   const amen=u.amen?String(u.amen).split(/[;,\n]+/).map(x=>x.trim()).filter(Boolean).map(x=>[x,'']):null;
   const near=a=>a.map(x=>`<div><b>${esc(x[0])}</b>${x[1]?`<span>${esc(x[1])}</span>`:''}</div>`).join('');
   const q=encodeURIComponent('Vinhomes Grand Park '+(u.zone||''));
-  $('#dtb').innerHTML=`<div class="dtn"><button type="button" id="dtx">‹ Quay lại</button><button type="button" id="dts">Chia sẻ</button></div>
+  $('#dtb').innerHTML=`<div class="dtn"><button type="button" id="dtx">${T('‹ Quay lại')}</button><button type="button" id="dts">${T('Chia sẻ')}</button></div>
   <div class="dtg" id="dtg">${a.length?`<img src="${esc(a[0])}" alt="Căn hộ ${esc(u.zone)}">`:PH}</div>
   ${a.length>1?`<div class="dtt">${a.map((x,i)=>`<img src="${esc(x)}" alt="Ảnh ${i+1}" data-i="${i}" class="${i?'':'on'}">`).join('')}</div>`:''}
   <div class="dth"><h2>${esc(u.zone)}</h2><div class="p">${money(u)}</div></div>
   <div class="dtc">${chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div>
-  <section class="dts"><h3>Thông tin căn</h3><dl class="dtd">${rows.map(r=>`<div><dt>${r[0]}</dt><dd>${esc(r[1])}</dd></div>`).join('')}</dl></section>
-  ${u.desc?`<section class="dts"><h3>Về căn này</h3><p>${esc(u.desc).replace(/\n/g,'<br>')}</p></section>`:''}
+  <section class="dts"><h3>${T('Thông tin căn')}</h3><dl class="dtd">${rows.map(r=>`<div><dt>${r[0]}</dt><dd>${esc(r[1])}</dd></div>`).join('')}</dl></section>
+  ${u.desc?`<section class="dts"><h3>${T('Về căn này')}</h3><p>${esc(u.desc).replace(/\n/g,'<br>')}</p></section>`:''}
   
   ${u.type==='rent'?dtRentOut(u):dtRent(u)}
-  <p class="note" style="font-size:13px;margin-top:30px">Thông tin mang tính tham khảo, có thể thay đổi theo thời điểm. Liên hệ Khải để xác nhận chi tiết và xem căn thực tế.</p>
+  <p class="note" style="font-size:13px;margin-top:30px">${T('Thông tin mang tính tham khảo, có thể thay đổi theo thời điểm. Liên hệ Khải để xác nhận chi tiết và xem căn thực tế.')}</p>
 `;
-  $('#dtf').innerHTML='<div><a class="c" href="'+tel()+'">Gọi ngay</a><a class="z" href="'+zl()+'" target="_blank" rel="noopener">Nhắn Zalo</a></div>';
+  $('#dtf').innerHTML='<div><a class="c" href="'+tel()+'">'+T('Gọi ngay')+'</a><a class="z" href="'+zl()+'" target="_blank" rel="noopener">'+T('Nhắn Zalo')+'</a></div>';
   G=a;gi=0;
   $('#dtx').onclick=dtClose;
-  $('#dts').onclick=async()=>{const url=location.href.split('#')[0]+'#can='+id;try{if(navigator.share){await navigator.share({title:'Căn hộ '+u.zone,url});return}await navigator.clipboard.writeText(url);$('#dts').textContent='Đã chép link'}catch(e){prompt('Link căn hộ:',url)}};
+  $('#dts').onclick=async()=>{const url=location.href.split('#')[0]+'#can='+id;try{if(navigator.share){await navigator.share({title:(en()?'Apartment ':'Căn hộ ')+u.zone,url});return}await navigator.clipboard.writeText(url);$('#dts').textContent=T('Đã chép link')}catch(e){prompt(T('Link căn hộ:'),url)}};
   $('#dtg').onclick=()=>{if(G.length){lbShow();$('#lb').showModal()}};
   $$('.dtt img').forEach(im=>im.onclick=()=>{gi=+im.dataset.i;$('#dtg img').src=G[gi];$$('.dtt img').forEach(x=>x.classList.toggle('on',x===im))});
   if(u.type!=='rent')dtRentCalc(u);
@@ -543,12 +555,15 @@ addEventListener('hashchange',dtHash);
 function toast(t){const d=document.querySelector('dialog[open]:not(#lb)')||document.body;document.querySelectorAll('.toast').forEach(x=>x.remove());const e=document.createElement('div');e.className='toast';e.setAttribute('role','status');e.textContent=t;d.appendChild(e);setTimeout(()=>e.remove(),5000)}
 function copyTxt(t){try{if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t).catch(()=>fb(t))}catch(e){}return fb(t)}
 function fb(t){const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
-function zaloMsg(u){if(!u)return 'Mình cần tư vấn căn hộ tại Vinhomes Grand Park.';
-  const parts=[bedsLabel(u),u.area?u.area+' m²':'',u.dir?'hướng '+u.dir:''].filter(Boolean).join(', ');
-  return 'Mình cần tư vấn căn '+(u.type==='rent'?'cho thuê':'bán')+' '+parts+(u.zone?' tại '+u.zone:'')+', giá '+money(u)+'.\nLink căn: '+location.href.split('#')[0]+'#can='+u.id}
+function zaloMsg(u){
+  if(!u)return en()?"Hi Khai, I'd like advice on apartments at Vinhomes Grand Park.":'Mình cần tư vấn căn hộ tại Vinhomes Grand Park.';
+  const parts=[bedsLabel(u),u.area?u.area+' m²':'',u.dir?(en()?'facing '+tDir(u.dir):'hướng '+u.dir):''].filter(Boolean).join(', ');
+  const link=location.href.split('#')[0]+'#can='+u.id;
+  if(en())return "Hi Khai, I'd like advice on the apartment "+(u.type==='rent'?'for rent':'for sale')+': '+parts+(u.zone?' at '+u.zone:'')+', '+money(u)+'.\nLink: '+link;
+  return 'Mình cần tư vấn căn '+(u.type==='rent'?'cho thuê':'bán')+' '+parts+(u.zone?' tại '+u.zone:'')+', giá '+money(u)+'.\nLink căn: '+link}
 document.addEventListener('click',e=>{const a=e.target.closest('.dtf .z,.fab [data-zalo]');if(!a)return;
   const u=a.closest('.dtf')?S.units.find(x=>x.id===dtId):null;copyTxt(zaloMsg(u));
-  toast('Đã chép sẵn tin nhắn. Khi Zalo mở, bạn nhấn dán rồi gửi cho Khải nhé.')},true);
+  toast(T('Đã chép sẵn tin nhắn. Khi Zalo mở, bạn nhấn dán rồi gửi cho Khải nhé.'))},true);
 
 /* ---- Owner admin ---- */
 function adminList(){
