@@ -247,7 +247,7 @@ dialog::backdrop{background:rgba(20,18,15,.5)}
 </head>
 <body>
 <div class="wrap">
-<header><a class="brand" href="#" aria-label="Hoàng Khai Vinhomes"><span class="wm"><b>Hoàng Khai</b><i>Vinhomes</i></span></a><nav aria-label="Mục chính"><a href="#phankhu">Phân khu</a><a href="#canho">Căn đang có</a><a href="#tienich">Tiện ích</a><a href="#lienhe">Liên hệ</a></nav><button class="btn ghost" id="adm-btn" hidden>Quản lý tin</button></header>
+<header><a class="brand" href="#" aria-label="Hoàng Khai Vinhomes"><span class="wm"><b>Hoàng Khai</b><i>Vinhomes</i></span></a><nav aria-label="Mục chính"><a href="#canho">Căn hộ</a><a href="#vemink">Về mình</a><a href="#lienhe">Liên hệ</a></nav><button class="btn ghost" id="adm-btn" hidden>Quản lý tin</button></header>
 <section class="hero"><div class="hero-txt">
 <h1><span class="h1a">Vinhomes</span><span class="h1b">Grand Park</span></h1>
 <p class="sub">Chốn về xứng tầm<small>Tìm đúng căn hộ giữa đại đô thị phía Đông</small></p></div>
@@ -264,11 +264,6 @@ dialog::backdrop{background:rgba(20,18,15,.5)}
 </div>
 <div class="rbar"><span id="rcnt" role="status"></span><span class="rtools"><button type="button" class="lnk" id="clr" hidden>Xóa lọc</button><label class="sort">Sắp xếp<select id="fs"><option value="new">Nổi bật</option><option value="pa">Giá thấp đến cao</option><option value="pd">Giá cao đến thấp</option><option value="ar">Diện tích lớn nhất</option></select></label></span></div>
 <div id="grid" class="grid"></div>
-<section class="sec" id="phankhu"><h2>Khám phá phân khu</h2><p>Chọn một phân khu để xem các căn đang có.</p></section>
-<div class="zones" id="zones"></div>
-<section class="sec" id="tienich"><h2>Sống tại Grand Park</h2></section>
-<div class="amen" id="amen"></div>
-<div class="loc"><div><p><b>Vị trí:</b> Phường Long Bình, TP. Hồ Chí Minh (Quận 9 cũ)</p><small>Cửa ngõ phía Đông, liền kề Thủ Đức và Đồng Nai.</small></div><a class="btn alt" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Vinhomes+Grand+Park">Xem trên Google Maps</a></div>
 <section class="sec" id="vemink"><h2>Về mình</h2><p>Mình là Khải, tư vấn căn hộ Vinhomes Grand Park tại Công ty TNHH Địa Ốc An Tín Gia. Mình làm việc theo ba cam kết đơn giản.</p></section>
 <div class="ab">
 <div class="am"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4"/></svg><b>Thông tin rõ ràng</b><span>Cung cấp thông tin một cách trung thực và chính xác.</span></div>
@@ -419,7 +414,6 @@ $('#lf').onsubmit=async e=>{e.preventDefault();
   location.href='sms:'+S.phone.replace(/\s/g,'')+'?body='+encodeURIComponent('Mình là '+n+', SĐT '+t+'. Nhờ bạn gọi lại tư vấn căn hộ Vinhomes Grand Park.')};
 
 /* ===== Phân khu & tiện ích ===== */
-const ZPIC={gh:'anh02.webp',mc:'anh03.webp',rb:'anh04.webp',og:'anh05.webp',bv:'anh06.webp',sl:'anh07.webp',op:'anh08.webp',lb:'anh09.webp'};
 const ZONES=[
  ['The Rainbow','Cao tầng sôi động, nhiều tiện ích ngay dưới chân.','rb'],
  ['The Origami','Phong cách Nhật, thanh lịch và tinh gọn.','og'],
@@ -429,64 +423,6 @@ const ZONES=[
  ['Lumière Boulevard','Khu căn hộ mới, xanh và sang trọng.','lb'],
  ['Masteri Centre Point','Căn hộ cao tầng, nổi bật về đêm.','mc'],
  ['Glory Heights','Cao tầng sát trung tâm thương mại, sầm uất.','gh']];
-function zoneArt(k){
-  const W=320,H=200,G=148;
-  const P={
-   rb:{sky:['#7fb7ea','#cfe4f6','#fde9cf'],glow:['#fff3c4',250,52],far:'#7e9cc2',win:'#fff4c9',wat:['#9fc9ea','#5b94c4'],tw:[[14,38,84,'#f7b2a8','#e98a86'],[56,34,112,'#f9d28f','#eeb25f'],[94,38,76,'#f6e592','#e6cb5e'],[136,36,126,'#abdba3','#7cc07a'],[176,36,92,'#97d3ee','#62b4de'],[216,38,118,'#aeb4f0','#7f88dc'],[258,40,88,'#d6aee8','#b27fd0']],top:'flat',tree:'#4f9a5e'},
-   og:{sky:['#f3a9bd','#fbd3d6','#fff1e2'],glow:['#fff7e8',70,50],far:'#d79bab',win:'#fff0d8',wat:['#f2c4cf','#d894a8'],tw:[[22,46,104,'#ffffff','#f1d4da'],[78,42,132,'#fff7f4','#efccd3'],[130,48,90,'#ffffff','#f1d4da'],[188,42,120,'#fff7f4','#efccd3'],[240,46,82,'#ffffff','#f1d4da']],top:'peak',tree:'#e58fa6',sak:1},
-   mh:{sky:['#f2b66f','#f8d9a0','#fff0cf'],glow:['#fff2b8',160,58],far:'#b78a55',win:'#fff0c2',wat:['#e8c58f','#b88a4c'],tw:[[12,62,78,'#d5ad7e','#a97c4c'],[80,54,112,'#c9a070','#9a6f42'],[140,58,70,'#dcb888','#b08556'],[204,52,102,'#cfa675','#a07446'],[262,48,66,'#d9b283','#ab7f50']],top:'step',tree:'#6f8a4a'},
-   bv:{sky:['#f48d5c','#fbbf86','#ffe6c4'],glow:['#fff0b0',240,70],far:'#c97d55',win:'#fff2c0',wat:['#f2b98b','#d98a5a'],tw:[[44,46,82,'#fff8ee','#efd2b0'],[100,52,108,'#fff1de','#e8c294'],[170,46,92,'#fff8ee','#efd2b0'],[226,50,116,'#fff1de','#e8c294']],top:'band',tree:'#3f7f4a',palm:1},
-   op:{sky:['#4d6fa3','#8fb0d8','#e5eef8'],glow:['#ffffff',60,46],far:'#5d7ba6',win:'#fff3c2',wat:['#8fb0d8','#44679a'],tw:[[22,34,128,'#8fb0de','#4f78ac'],[64,30,96,'#9bbbe3','#5d86b8'],[102,38,142,'#86a8d8','#456fa4'],[150,32,108,'#9bbbe3','#5d86b8'],[192,36,132,'#8fb0de','#4f78ac'],[238,32,90,'#9bbbe3','#5d86b8'],[276,30,114,'#86a8d8','#456fa4']],top:'spire',tree:'#3f7a64'},
-   lb:{sky:['#4b3f86','#a0689f','#f5b79a'],glow:['#ffe3a0',90,64],far:'#6f5a9c',win:'#ffd98a',wat:['#8a6aa8','#3d3470'],tw:[[16,52,112,'#6a5bb0','#3f3580'],[78,48,88,'#7a66b8','#4a3d8c'],[136,56,124,'#6a5bb0','#3f3580'],[204,52,96,'#7a66b8','#4a3d8c'],[264,44,76,'#6a5bb0','#3f3580']],top:'arch',tree:'#2f5a5c',lamp:1}
-  }[k];
-  let df=`<linearGradient id="${k}s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${P.sky[0]}"/><stop offset=".55" stop-color="${P.sky[1]}"/><stop offset="1" stop-color="${P.sky[2]}"/></linearGradient>
-   <radialGradient id="${k}g"><stop offset="0" stop-color="${P.glow[0]}" stop-opacity=".95"/><stop offset="1" stop-color="${P.glow[0]}" stop-opacity="0"/></radialGradient>
-   <linearGradient id="${k}w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${P.wat[0]}"/><stop offset="1" stop-color="${P.wat[1]}"/></linearGradient>
-   <clipPath id="${k}c"><rect x="0" y="${G}" width="${W}" height="${H-G}"/></clipPath>`;
-  let d=`<rect width="${W}" height="${H}" fill="url(#${k}s)"/><circle cx="${P.glow[1]}" cy="${P.glow[2]}" r="62" fill="url(#${k}g)"/><circle cx="${P.glow[1]}" cy="${P.glow[2]}" r="11" fill="${P.glow[0]}" opacity=".9"/>`;
-  for(let i=0;i<16;i++){const h=24+((i*53)%38);d+=`<rect x="${i*21-4}" y="${G-h}" width="17" height="${h}" fill="${P.far}" opacity=".3"/>`}
-  let b='';
-  P.tw.forEach(([x,w,h,c1,c2],i)=>{
-    df+=`<linearGradient id="${k}t${i}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>`;
-    const y=G-h,f=`url(#${k}t${i})`;
-    b+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}"/>`;
-    if(P.top==='peak')b+=`<polygon points="${x-2},${y} ${x+w/2},${y-20} ${x+w+2},${y}" fill="${c2}"/>`;
-    if(P.top==='step')b+=`<rect x="${x+8}" y="${y-12}" width="${w-16}" height="12" fill="${c2}"/><rect x="${x+16}" y="${y-20}" width="${w-32}" height="8" fill="${c1}"/>`;
-    if(P.top==='band')b+=`<rect x="${x}" y="${y}" width="${w}" height="5" fill="#d7a24f"/><rect x="${x}" y="${y+14}" width="${w}" height="2" fill="#d7a24f" opacity=".7"/>`;
-    if(P.top==='spire')b+=`<rect x="${x+w/2-1}" y="${y-22}" width="2" height="22" fill="${c2}"/><rect x="${x+w/2-.5}" y="${y}" width="1" height="${h}" fill="#fff" opacity=".35"/>`;
-    if(P.top==='arch')b+=`<path d="M${x+6} ${y} q${(w-12)/2} -26 ${w-12} 0z" fill="#e8c874"/>`;
-    for(let yy=y+9;yy<G-7;yy+=9)for(let xx=x+5;xx<x+w-6;xx+=8){if((xx*7+yy*13+i)%5<3)b+=`<rect x="${xx}" y="${yy}" width="3.4" height="4.6" rx=".6" fill="${P.win}" opacity="${.55+((xx+yy)%4)*.1}"/>`}
-    b+=`<rect x="${x}" y="${y}" width="3" height="${h}" fill="#fff" opacity=".22"/>`;
-  });
-  d+=`<defs>${df}<g id="${k}b">${b}</g></defs><use href="#${k}b"/>`;
-  d+=`<rect x="0" y="${G}" width="${W}" height="${H-G}" fill="url(#${k}w)"/><g clip-path="url(#${k}c)"><use href="#${k}b" transform="translate(0 ${2*G}) scale(1 -1)" opacity=".2"/></g>`;
-  for(let i=0;i<6;i++)d+=`<rect x="${(i*61+20)%300}" y="${G+10+i*7}" width="${34+(i%3)*14}" height="1.6" rx=".8" fill="#fff" opacity=".35"/>`;
-  for(let i=0;i<22;i++){const x=i*15+4,r=7+((i*5)%5);d+=`<circle cx="${x}" cy="${G-2}" r="${r}" fill="${P.sak&&i%3===0?'#eba0b5':P.tree}"/>`}
-  d+=`<rect x="0" y="${G}" width="${W}" height="3" fill="#000" opacity=".12"/>`;
-  if(P.lamp)for(let i=0;i<14;i++)d+=`<circle cx="${12+i*23}" cy="${G+4}" r="2.4" fill="#ffe08a"/><circle cx="${12+i*23}" cy="${G+4}" r="6" fill="#ffe08a" opacity=".25"/>`;
-  if(P.palm)[[16,100],[304,92]].forEach(([x,h])=>{d+=`<path d="M${x} ${G} Q${x+4} ${G-h/2} ${x} ${G-h}" stroke="#6b4c2a" stroke-width="3" fill="none"/>`;for(let a=-70;a<=70;a+=35)d+=`<path d="M${x} ${G-h} q${a} -18 ${a*1.5} 8" stroke="#3f7f4a" stroke-width="4" fill="none" stroke-linecap="round"/>`});
-  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Minh họa ${k}">${d}</svg>`}
-$('#zones').innerHTML=ZONES.map(z=>`<button class="zc" type="button" data-z="${esc(z[0])}"><img src="${ZPIC[z[2]]}" alt="${esc(z[0])}" loading="lazy"><b>${esc(z[0])}</b><span>${esc(z[1])}</span><i>Xem căn ›</i></button>`).join('');
-(function(){const g=$('#zones'),cs=()=>[...g.querySelectorAll('.zc')];
- const set=c=>{cs().forEach(x=>x.classList.toggle('on',x===c));g.classList.toggle('fx',!!c)};
- if(matchMedia('(hover:hover)').matches){
-  g.addEventListener('pointermove',e=>{const c=e.target.closest('.zc');if(c){const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')}set(c)});
-  g.addEventListener('pointerleave',()=>set(null));
-  g.addEventListener('focusin',e=>set(e.target.closest('.zc')));g.addEventListener('focusout',()=>set(null));
- }else{
-  let q=0;const pick=()=>{q=0;const gr=g.getBoundingClientRect();if(gr.bottom<0||gr.top>innerHeight){set(null);return}
-   const cx=gr.left+gr.width/2;let best=null,bd=1e9;cs().forEach(c=>{const r=c.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-cx);if(d<bd){bd=d;best=c}});set(best)};
-  const sched=()=>{if(!q)q=requestAnimationFrame(pick)};
-  g.addEventListener('scroll',sched,{passive:true});addEventListener('scroll',sched,{passive:true});addEventListener('resize',sched);setTimeout(pick,400);
- }
-})();
-$$('.zc').forEach(b=>b.onclick=()=>{zones();$('#fz').value=b.dataset.z;render();$('#canho').scrollIntoView({behavior:'smooth'})});
-const AM=[['271 ha','Đại đô thị','Nằm ở cửa ngõ phía Đông thành phố.','M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6'],
- ['36 ha','Công viên trung tâm','Đường dạo, hồ sen và không gian xanh.','M12 3c3 3 5 6 5 9a5 5 0 0 1-10 0c0-3 2-6 5-9zM12 17v4'],
- ['Vinschool','Trường học trong khu','Từ mầm non, thuận tiện đưa đón con.','M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5'],
- ['VinBus','Xe buýt điện','Kết nối nội khu và ra các hướng thành phố.','M4 5h16v11H4zM4 11h16M7 19v-3M17 19v-3'],
- ['Hồ & đại lộ','Cảnh quan buổi tối','Hồ sen, đại lộ ánh sáng, bến thuyền.','M3 15c3 0 3-2 6-2s3 2 6 2 3-2 6-2M3 19c3 0 3-2 6-2s3 2 6 2 3-2 6-2M8 9a4 4 0 1 1 8 0']];
-$('#amen').innerHTML=AM.map(a=>`<div class="am"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${a[3]}"/></svg><strong>${esc(a[0])}</strong><b>${esc(a[1])}</b><span>${esc(a[2])}</span></div>`).join('');
 head();zones();render();
 
 /* ===== Danh sách căn lấy từ Google Sheet (dán link CSV vào SHEET_CSV) ===== */
@@ -569,7 +505,7 @@ function dtMini(u){
   <div class="dtl"><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Vinhomes Grand Park '+(u.zone||''))}" target="_blank" rel="noopener">Mở bản đồ chi tiết</a></div></div>`}
 let dtId=null;
 function dtOpen(id,noHash){
-  const u=S.units.find(x=>x.id===id);if(!u)return;dtId=id;const a=imgsOf(u),zinfo=(ZONES.find(z=>z[0]===u.zone)||[])[1]||'';
+  const u=S.units.find(x=>x.id===id);if(!u)return;dtId=id;const a=imgsOf(u);
   const chips=[bedsLabel(u),u.area?u.area+' m²':'',u.dir,u.furn,u.view].filter(Boolean);
   const rows=[['Phân khu',u.zone],['Tòa',u.tower],['Tầng',u.floor],['Loại căn',bedsLabel(u)],['Diện tích',u.area?u.area+' m²':''],['Hướng',u.dir],['View',u.view],['Nội thất',u.furn],['Pháp lý',u.legal],['Hình thức',u.type==='rent'?'Cho thuê':'Bán']].filter(r=>r[1]);
   const amen=u.amen?String(u.amen).split(/[;,\n]+/).map(x=>x.trim()).filter(Boolean).map(x=>[x,'']):null;
@@ -582,10 +518,9 @@ function dtOpen(id,noHash){
   <div class="dtc">${chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div>
   <section class="dts"><h3>Thông tin căn</h3><dl class="dtd">${rows.map(r=>`<div><dt>${r[0]}</dt><dd>${esc(r[1])}</dd></div>`).join('')}</dl></section>
   ${u.desc?`<section class="dts"><h3>Về căn này</h3><p>${esc(u.desc).replace(/\n/g,'<br>')}</p></section>`:''}
-  <section class="dts"><h3>Vị trí</h3><p>${esc(u.zone)} nằm trong Vinhomes Grand Park, phường Long Bình, TP. Hồ Chí Minh (Quận 9 cũ), cửa ngõ phía Đông thành phố, liền kề Thủ Đức và Đồng Nai.${zinfo?' '+esc(zinfo):''}</p><div class="dtl"><a href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">Xem trên Google Maps</a></div></section>
   
   ${u.type==='rent'?dtRentOut(u):dtRent(u)}
-  <p class="note" style="color:#cdb68a;font-size:13px;margin-top:26px">Thông tin mang tính tham khảo, có thể thay đổi theo thời điểm. Liên hệ Khải để xác nhận chi tiết và xem căn thực tế.</p>
+  <p class="note" style="font-size:13px;margin-top:30px">Thông tin mang tính tham khảo, có thể thay đổi theo thời điểm. Liên hệ Khải để xác nhận chi tiết và xem căn thực tế.</p>
 `;
   $('#dtf').innerHTML='<div><a class="c" href="'+tel()+'">Gọi ngay</a><a class="z" href="'+zl()+'" target="_blank" rel="noopener">Nhắn Zalo</a></div>';
   G=a;gi=0;
