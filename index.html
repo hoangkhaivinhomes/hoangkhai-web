@@ -209,6 +209,35 @@ dialog::backdrop{background:rgba(20,18,15,.5)}
 .toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:2147483000;max-width:min(92vw,420px);padding:12px 20px;border-radius:12px;font:500 14px/1.45 "Be Vietnam Pro",system-ui,sans-serif;color:#fff;background:rgba(28,26,23,.94);box-shadow:0 12px 30px -12px rgba(0,0,0,.5);animation:toast .3s ease both}
 @keyframes toast{from{opacity:0;transform:translate(-50%,-10px)}to{opacity:1;transform:translate(-50%,0)}}
 
+
+/* chọn căn dễ hơn: nút lọc phân khu, đếm, sắp xếp, lưu căn */
+.bar .zsel{display:none}
+.chips{flex:1 1 100%;display:flex;gap:8px;flex-wrap:wrap;padding-top:12px;margin-top:4px;border-top:1px solid var(--line)}
+.chip{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:8px 15px;font:500 14px "Be Vietnam Pro",system-ui,sans-serif;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.chip small{font-size:12px;opacity:.6;margin-left:2px}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--dark);color:#fff;border-color:var(--dark)}
+@media(max-width:700px){.chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-4px;padding-inline:4px}.chip{flex:none}}
+.rbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px;min-height:38px}
+#rcnt{font-size:15px;color:var(--mute)}
+.rtools{display:flex;align-items:center;gap:16px}
+.lnk{border:0;background:none;color:var(--accent);font:500 14px "Be Vietnam Pro",system-ui,sans-serif;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:4px}
+.sort{display:flex;align-items:center;gap:8px;font-size:13px;letter-spacing:0}
+.sort select{padding:7px 10px;font-size:14px}
+.phw{position:relative}
+.fav{position:absolute;right:12px;top:12px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.92);display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 14px -6px rgba(0,0,0,.4);transition:transform .2s}
+.fav:hover{transform:scale(1.08)}
+.fav svg{width:20px;height:20px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.fav[aria-pressed=true] svg{fill:#c8453b;stroke:#c8453b}
+.fav:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tag.s{right:60px}
+#favbar{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:99;display:flex;align-items:center;gap:14px;padding:10px 12px 10px 20px;background:var(--dark);color:#fff;border-radius:999px;box-shadow:0 16px 40px -14px rgba(0,0,0,.55);max-width:calc(100vw - 90px);white-space:nowrap}
+#favbar[hidden]{display:none}
+#favbar span{font-size:14px}
+#favbar button{border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;border-radius:999px;padding:9px 16px;font:500 14px "Be Vietnam Pro",system-ui,sans-serif;cursor:pointer}
+#favbar button.go{background:#fff;color:var(--ink);border-color:#fff}
+@media(max-width:560px){#favbar{gap:8px;padding:8px 8px 8px 14px;left:12px;right:76px;transform:none;max-width:none;justify-content:space-between}#favbar span{font-size:13px}#favbar button{padding:8px 11px;font-size:13px}#favsee{display:none}}
+.empty p{margin:0 0 6px}
 /* hiện dần nhẹ khi cuộn */
 .rv{opacity:0;transform:translate3d(0,18px,0);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
 .rv.in{opacity:1;transform:none}
@@ -223,18 +252,20 @@ dialog::backdrop{background:rgba(20,18,15,.5)}
 <h1><span class="h1a">Vinhomes</span><span class="h1b">Grand Park</span></h1>
 <p class="sub">Chốn về xứng tầm<small>Tìm đúng căn hộ giữa đại đô thị phía Đông</small></p></div>
 </section>
-<section class="sec" id="phankhu"><h2>Các phân khu</h2><p>Chạm vào một phân khu để xem các căn đang có.</p></section>
-<div class="zones" id="zones"></div>
-<section class="sec" id="canho"><h2>Căn đang có</h2></section>
+<section class="sec" id="canho"><h2>Căn hộ tuyển chọn</h2><p>Cập nhật thường xuyên. Nhắn Zalo để nhận danh sách mới nhất.</p></section>
 <div id="owner-warn" class="warn" hidden>Chưa có số điện thoại và Zalo. Bấm “Quản lý tin” để nhập.</div>
 <div class="bar">
 <div class="tabs" role="group" aria-label="Loại giao dịch"><button data-m="sale" aria-pressed="true">Mua</button><button data-m="rent" aria-pressed="false">Thuê</button></div>
-<label>Phân khu<select id="fz"></select></label>
+<label class="zsel">Phân khu<select id="fz"></select></label>
 <label>Loại căn<select id="fb"></select></label>
 <label>Hướng<select id="fd"></select></label>
 <label>Mức giá<select id="fp"></select></label>
+<div class="chips" id="chips" role="group" aria-label="Lọc theo phân khu"></div>
 </div>
+<div class="rbar"><span id="rcnt" role="status"></span><span class="rtools"><button type="button" class="lnk" id="clr" hidden>Xóa lọc</button><label class="sort">Sắp xếp<select id="fs"><option value="new">Nổi bật</option><option value="pa">Giá thấp đến cao</option><option value="pd">Giá cao đến thấp</option><option value="ar">Diện tích lớn nhất</option></select></label></span></div>
 <div id="grid" class="grid"></div>
+<section class="sec" id="phankhu"><h2>Khám phá phân khu</h2><p>Chọn một phân khu để xem các căn đang có.</p></section>
+<div class="zones" id="zones"></div>
 <section class="sec" id="tienich"><h2>Sống tại Grand Park</h2></section>
 <div class="amen" id="amen"></div>
 <div class="loc"><div><p><b>Vị trí:</b> Phường Long Bình, TP. Hồ Chí Minh (Quận 9 cũ)</p><small>Cửa ngõ phía Đông, liền kề Thủ Đức và Đồng Nai.</small></div><a class="btn alt" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Vinhomes+Grand+Park">Xem trên Google Maps</a></div>
@@ -251,6 +282,7 @@ dialog::backdrop{background:rgba(20,18,15,.5)}
 </section>
 <footer id="ft"><strong>CÔNG TY TNHH ĐỊA ỐC AN TÍN GIA</strong><br>Số 46 đường T2 (Khu C), dự án Khu dân cư và Công viên Phước Thiện, khu phố Phước Thiện, Phường Long Bình, Thành phố Hồ Chí Minh, Việt Nam</footer>
 </div>
+<div id="favbar" hidden><span>♥ Đã lưu <b id="favn">0</b> căn</span><button type="button" id="favsee">Xem căn đã lưu</button><button type="button" id="favsend" class="go">Gửi cho Khải qua Zalo</button></div>
 <div class="fab"><a class="btn" data-call aria-label="Gọi cho Khải" title="Gọi cho Khải"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a><a class="btn alt" data-zalo target="_blank" rel="noopener" aria-label="Zalo" title="Zalo">Zalo</a></div>
 
 <dialog id="dt" aria-label="Thông tin chi tiết căn hộ"><div class="dtw" id="dtb"></div><div class="dtf" id="dtf"></div></dialog>
@@ -332,11 +364,44 @@ function fopts(){popts();
   $('#fb').innerHTML='<option value="">Tất cả loại căn</option>'+[...TYPES,...ex].map(x=>`<option value="${esc(x[0])}"${x[0]===cur?' selected':''}>${esc(x[1])}</option>`).join('');
   $('#fd').innerHTML='<option value="">Tất cả hướng</option>'+DIRS.map(x=>`<option value="${x[0]}"${x[0]===cd?' selected':''}>${x[1]}</option>`).join('');
 }
+const FAV=(()=>{let m={};try{m=JSON.parse(localStorage.getItem('hk_fav')||'{}')||{}}catch(e){}return m})();
+const favSave=()=>{try{localStorage.setItem('hk_fav',JSON.stringify(FAV))}catch(e){}};
+let sortBy='new',onlyFav=false;
+const areaNum=u=>parseFloat(String(u.area||'').replace(',','.'))||0;
+const favList=()=>S.units.filter(u=>FAV[u.id]);
+const HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>';
+function card(u){const on=!!FAV[u.id];
+  return `<article class="unit"><div class="phw"><div class="ph"${phAttr(u)}>${phImg(u)}${u.hot?'<span class="tag">Giá tốt</span>':''}${u.sample?'<span class="tag s">Tin mẫu</span>':''}${cnt(u)}</div><button class="fav" type="button" data-fav="${esc(u.id)}" aria-pressed="${on}" aria-label="${on?'Bỏ lưu căn này':'Lưu căn này'}">${HEART}</button></div><div class="body"><h3>${esc(u.zone)}</h3><div class="price">${money(u)}</div><dl class="spec">${[['Diện tích',u.area?u.area+' m²':''],['Hướng',u.dir],['Nội thất',u.furn],['Pháp lý',u.legal]].filter(r=>r[1]).map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl><div class="row"><button class="btn more" type="button" data-more="${esc(u.id)}">Tìm hiểu thêm <span aria-hidden="true">›</span></button></div></div></article>`}
+function chips(){const m=S.units.filter(u=>u.type===mode),by={};m.forEach(u=>{by[u.zone]=(by[u.zone]||0)+1});
+  const cur=$('#fz').value,zs=Object.keys(by);
+  $('#chips').innerHTML=zs.length?[`<button type="button" class="chip" data-z="" aria-pressed="${!cur}">Tất cả <small>${m.length}</small></button>`].concat(zs.map(z=>`<button type="button" class="chip" data-z="${esc(z)}" aria-pressed="${z===cur}">${esc(z)} <small>${by[z]}</small></button>`)).join(''):''}
+function favbar(){const n=favList().length,el=$('#favbar');if(!el)return;el.hidden=!n;if(n){$('#favn').textContent=n;$('#favsee').textContent=onlyFav?'Xem tất cả căn':'Xem căn đã lưu'}}
 function render(){
   const z=$('#fz').value,b=$('#fb').value,d=$('#fd').value,r=PR[mode][$('#fp').value];
-  const L=S.units.filter(u=>u.type===mode&&(!z||u.zone===z)&&(!b||typeKey(u)===b)&&(!d||dirKey(u)===d)&&(!r||(u.price>=r[0]&&u.price<r[1]))).sort((a,c)=>c.hot-a.hot);
-  $('#grid').innerHTML=L.length?L.map(u=>`<article class="unit"><div class="ph"${phAttr(u)}>${phImg(u)}${u.hot?'<span class="tag">Giá tốt</span>':''}${u.sample?'<span class="tag s">Tin mẫu</span>':''}${cnt(u)}</div><div class="body"><h3>${esc(u.zone)}</h3><div class="price">${money(u)}</div><dl class="spec">${[['Diện tích',u.area?u.area+' m²':''],['Hướng',u.dir],['Nội thất',u.furn],['Pháp lý',u.legal]].filter(r=>r[1]).map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl><div class="row"><button class="btn more" type="button" data-more="${esc(u.id)}">Tìm hiểu thêm <span aria-hidden="true">›</span></button></div></div></article>`).join(''):'<p class="empty" style="grid-column:1/-1">Hiện chưa có căn trong mục này. Gọi hoặc nhắn Zalo cho mình, mình gửi danh sách căn mới nhất.</p>';
+  const filtered=!!(z||b||d||$('#fp').value);
+  let L=onlyFav?favList():S.units.filter(u=>u.type===mode&&(!z||u.zone===z)&&(!b||typeKey(u)===b)&&(!d||dirKey(u)===d)&&(!r||(u.price>=r[0]&&u.price<r[1])));
+  const cmp={new:(a,c)=>c.hot-a.hot,pa:(a,c)=>a.price-c.price,pd:(a,c)=>c.price-a.price,ar:(a,c)=>areaNum(c)-areaNum(a)}[sortBy]||((a,c)=>c.hot-a.hot);
+  L=L.slice().sort(cmp);
+  chips();favbar();
+  $('#rcnt').textContent=onlyFav?`${L.length} căn đã lưu`:(L.length?`${L.length} căn phù hợp`:'');
+  $('#clr').hidden=!(filtered||onlyFav);
+  $('#grid').innerHTML=L.length?L.map(card).join(''):(onlyFav?'<div class="empty" style="grid-column:1/-1"><p>Bạn chưa lưu căn nào.</p></div>':'<div class="empty" style="grid-column:1/-1"><p>Chưa có căn đúng tiêu chí bạn chọn.</p><p>Nhắn Zalo, mình sẽ báo ngay khi có căn phù hợp.</p><div class="cta" style="justify-content:center;margin-top:14px"><a class="btn" data-zalo target="_blank" rel="noopener">Nhắn Zalo cho mình</a>'+(filtered?'<button class="btn ghost" type="button" data-clr>Xóa lọc</button>':'')+'</div></div>');
+  $$('[data-zalo]').forEach(a=>a.href=zl());
 }
+function clearFilters(){['#fz','#fb','#fd','#fp'].forEach(x=>{$(x).value=''});onlyFav=false;render()}
+$('#clr').onclick=clearFilters;
+$('#fs').addEventListener('input',e=>{sortBy=e.target.value;render()});
+$('#chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;$('#fz').value=c.dataset.z;onlyFav=false;render()});
+$('#grid').addEventListener('click',e=>{
+  if(e.target.closest('[data-clr]')){clearFilters();return}
+  const f=e.target.closest('[data-fav]');if(!f)return;const id=f.dataset.fav;
+  if(FAV[id])delete FAV[id];else FAV[id]=1;favSave();
+  if(onlyFav)render();else{const on=!!FAV[id];f.setAttribute('aria-pressed',on);f.setAttribute('aria-label',on?'Bỏ lưu căn này':'Lưu căn này');favbar()}});
+function favMsg(){const L=favList();
+  return 'Mình quan tâm '+L.length+' căn này, nhờ bạn tư vấn giúp:\n'+L.map((u,i)=>(i+1)+') '+u.zone+', '+[bedsLabel(u),u.area?u.area+' m²':'',u.dir?'hướng '+u.dir:''].filter(Boolean).join(', ')+' – '+money(u)+'\n'+location.href.split('#')[0]+'#can='+u.id).join('\n')}
+document.addEventListener('click',e=>{
+  if(e.target.closest('#favsee')){onlyFav=!onlyFav;render();$('#canho').scrollIntoView({behavior:'smooth'});return}
+  if(e.target.closest('#favsend')){copyTxt(favMsg());toast('Đã chép danh sách. Bạn dán vào Zalo để gửi cho mình nhé.');setTimeout(()=>{window.open(zl(),'_blank','noopener')},700)}});
 $$('.tabs button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$$('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#fp').value='';zones();render()});
 ['#fz','#fb','#fd','#fp'].forEach(s=>$(s).addEventListener('input',render));
 /* Form khách để lại số: dán 3 giá trị mà tao-form-khach.gs in ra */
