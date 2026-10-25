@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Mình giúp bạn chọn ngôi nhà của bạn. Mua bán và cho thuê căn hộ Vinhomes Grand Park.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hoang Khai Vinhomes">
+<meta property="og:title" content="Mình giúp bạn chọn ngôi nhà của bạn">
+<meta property="og:description" content="Đừng lo, mình sẽ đồng hành cùng bạn">
+<meta property="og:url" content="https://hoangkhaivinhomes.com.vn/chon-nha">
+<meta property="og:image" content="https://hoangkhaivinhomes.com.vn/og2.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hoangkhaivinhomes.com.vn/og2.jpg">
+<title>Căn hộ Vinhomes Grand Park – Hoang Khai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfaf7;--card:#fff;--ink:#1c1a17;--mute:#6f6a62;--line:#e7e3da;--accent:#a07c3b;--soft:#f3f0e9;--dark:#1c1a17;--on:#fff;color-scheme:light;
+ --lake:var(--accent);--hot:#b8924a;--mint:var(--soft);
+ padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+[hidden]{display:none!important}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;font-weight:600;letter-spacing:.005em}
+
+/* đầu trang */
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.brand{text-decoration:none;color:var(--ink)}
+.wm{display:grid;line-height:1.1}
+.wm b{font:600 24px "Playfair Display",Georgia,serif;letter-spacing:.01em}
+.wm i{font-style:normal;font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--accent);margin-top:3px}
+header nav{display:flex;gap:30px;margin-left:auto}
+header nav a{text-decoration:none;font-size:14px;color:var(--mute);transition:color .2s}
+header nav a:hover{color:var(--ink)}
+@media(max-width:760px){header nav{display:none}}
+
+/* nút */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--dark);border-radius:999px;padding:12px 22px;font:500 15px/1 "Be Vietnam Pro",system-ui,sans-serif;cursor:pointer;text-decoration:none;background:var(--dark);color:#fff;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.btn:hover{background:#000}
+.btn.alt,.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.alt:hover,.btn.ghost:hover{border-color:var(--ink);background:transparent}
+.btn:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,.zc:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn.more{width:100%;background:transparent;color:var(--ink);border-color:var(--line);padding:11px 14px}
+.btn.more:hover{border-color:var(--ink)}
+.btn.more span{display:inline-block;transition:transform .25s}.btn.more:hover span{transform:translateX(4px)}
+
+/* đầu trang: chữ đơn giản */
+.hero{text-align:center;padding:clamp(28px,5vw,56px) 0 clamp(24px,4vw,48px);position:relative}
+.hero::after{content:"";display:block;width:1px;height:56px;margin:clamp(44px,7vw,72px) auto 0;background:linear-gradient(var(--accent),rgba(160,124,59,0))}
+.hero-txt{margin:0 auto}
+.eyebrow{margin:0 0 26px;font:500 12px/1 "Be Vietnam Pro",system-ui,sans-serif;letter-spacing:.42em;text-transform:uppercase;color:var(--accent)}
+.hero h1{white-space:nowrap;margin:0;font:500 min(36px,5vw)/1.14 "Playfair Display",Georgia,serif;letter-spacing:-.005em;color:var(--ink)}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--accent)}
+.hero p.sub{text-wrap:balance;margin:14px auto 0;max-width:30em;font:400 max(11.5px,min(15px,3.2vw))/1.65 "Be Vietnam Pro",system-ui,sans-serif;color:var(--mute)}
+.hero .cta{justify-content:center;margin-top:30px}
+
+/* tiêu đề từng phần */
+.sec{margin:72px 0 22px}
+.sec h2{font-size:clamp(26px,4vw,34px);line-height:1.2;margin:0 0 8px}
+.sec h2::after{content:"";display:block;width:36px;height:2px;margin-top:14px;background:var(--accent)}
+.sec p{margin:0;color:var(--mute);font-size:15.5px;max-width:42em}
+
+/* phân khu */
+.zones{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin:22px 0}
+.zc{all:unset;box-sizing:border-box;position:relative;cursor:pointer;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:transform .35s,box-shadow .35s,opacity .35s,border-color .35s}
+.zc img,.zc svg{display:block;width:100%;aspect-ratio:16/10;height:auto;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.zc b{font:600 19px "Playfair Display",Georgia,serif;padding:16px 18px 2px;color:var(--ink)}
+.zc span{padding:0 18px;color:var(--mute);font-size:14px;line-height:1.5}
+.zc i{font-style:normal;padding:12px 18px 18px;color:var(--accent);font-weight:600;font-size:14px}
+.zones.fx .zc{opacity:.5}
+.zones.fx .zc.on{opacity:1;transform:translateY(-6px);border-color:var(--accent);box-shadow:0 22px 44px -22px rgba(28,26,23,.45);z-index:2}
+.zones.fx .zc.on img{transform:scale(1.05)}
+@media(min-width:701px){.zones .zc:last-child:nth-child(3n+1){grid-column:2}}
+@media(max-width:700px){.zones{grid-auto-flow:column;grid-auto-columns:80%;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;margin-inline:-20px;padding-inline:20px;scrollbar-width:none}.zc{scroll-snap-align:start}}
+
+/* bộ lọc */
+.bar{display:flex;gap:12px;flex-wrap:wrap;align-items:end;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:8px 0 22px}
+.bar label{flex:1 1 140px;min-width:0}.bar label select{width:100%}
+.tabs{display:flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--soft)}
+.tabs button{border:0;background:none;color:var(--mute);padding:9px 20px;border-radius:999px;font:500 15px "Be Vietnam Pro",system-ui,sans-serif;cursor:pointer;transition:background .2s,color .2s}
+.tabs button[aria-pressed=true]{background:var(--dark);color:#fff}
+label{display:grid;gap:5px;font-size:12.5px;letter-spacing:.04em;color:var(--mute)}
+select,input,textarea{font:inherit;font-size:15px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+@media(max-width:700px){.bar .tabs{flex:1 1 100%;display:flex}.bar .tabs button{flex:1}.bar label{flex:1 1 42%}}
+
+/* danh sách căn */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.unit{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .3s,transform .3s}
+.unit:hover{box-shadow:0 20px 40px -26px rgba(28,26,23,.4);transform:translateY(-3px)}
+.ph{aspect-ratio:16/10;background:var(--soft);position:relative;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph[data-id]{cursor:zoom-in}
+.ph svg{width:100%;height:100%;display:block}
+.a{fill:#cfc7b6}.b{fill:#e4dccb}.c{fill:var(--soft)}.d{fill:var(--card)}
+.cnt{position:absolute;right:12px;bottom:12px;background:rgba(20,18,15,.7);color:#fff;font-size:12px;padding:3px 10px;border-radius:99px}
+.tag{position:absolute;left:12px;top:12px;background:#fff;color:var(--ink);font-weight:600;font-size:12px;padding:4px 11px;border-radius:99px;letter-spacing:.02em}
+.tag.s{left:auto;right:12px;color:var(--mute)}
+.body{padding:18px;display:grid;gap:10px;flex:1}
+.body h3{margin:0;font-size:19px}
+.price{font:600 24px "Playfair Display",Georgia,serif;color:var(--ink)}
+.meta{margin:0;font-size:15px;font-weight:500}
+.spec{display:grid;grid-template-columns:auto 1fr;gap:7px 16px;margin:0;font-size:14px;line-height:1.45}
+.spec dt{color:var(--mute)}
+.spec dd{margin:0;color:var(--ink);font-weight:500}
+.note{font-size:14px;color:var(--mute);padding-top:10px;border-top:1px solid var(--line)}
+details{font-size:14px;color:var(--mute)}details summary{cursor:pointer;color:var(--accent);font-weight:500}details p{margin:8px 0 0;line-height:1.5}
+.row{display:flex;gap:8px;margin-top:auto;padding-top:8px}.row .btn{flex:1}
+.empty{padding:44px 8px;text-align:center;color:var(--mute)}
+
+/* tiện ích, vị trí, cam kết */
+.amen{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0}
+.am,.why div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 20px;display:grid;gap:6px;align-content:start}
+.am svg,.why svg{width:30px;height:30px;stroke:var(--accent);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:6px}
+.am strong{font:600 28px "Playfair Display",Georgia,serif;color:var(--ink)}
+.am b{font-size:16px}.am span{color:var(--mute);font-size:14px;line-height:1.55}
+@media(min-width:761px){.amen{grid-template-columns:repeat(6,1fr)}.amen .am{grid-column:span 2}.amen .am:nth-child(4){grid-column:2/4}.amen .am:nth-child(5){grid-column:4/6}}
+@media(max-width:760px){.amen{grid-template-columns:repeat(2,1fr)}}
+.loc{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;margin:8px 0 0;padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.loc p{margin:0;font-size:15px}.loc small{color:var(--mute)}
+.ab{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0}
+@media(max-width:700px){.ab{grid-template-columns:1fr}}
+
+/* để lại thông tin */
+.lead{margin:72px 0 0;background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;gap:10px}
+.lead h2{margin:0;font-size:clamp(26px,4vw,34px)}
+.lead .lsub{margin:0 0 12px;color:var(--mute);font-size:15.5px}
+.lead form{display:flex;gap:10px;flex-wrap:wrap}.lead input{flex:1 1 200px;padding:13px 14px}
+.lok{margin:6px 0;font-weight:600}
+.hero-txt{container-type:inline-size;position:relative;width:min(660px,100%);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 17%}
+.enso svg{display:block;width:100%;height:100%}
+.enso{position:absolute;inset:0;color:var(--ink);pointer-events:none;}
+.rv-p{stroke-dasharray:100;stroke-dashoffset:0;animation:ens 2.2s cubic-bezier(.4,.1,.3,1) .1s both}
+@keyframes ens{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){.rv-p{animation:none}}
+@media(max-width:600px){.hero-txt{padding:0 16%}.hero .eyebrow{letter-spacing:.14em;font-size:8.5px;margin-bottom:10px}.hero::after{margin-top:12px}}
+footer{color:var(--mute);font-size:13.5px;line-height:1.65;padding:36px 0 56px;max-width:48em}footer strong{color:var(--ink)}
+.warn{background:var(--soft);border-radius:10px;padding:10px 12px;font-size:14px;margin-bottom:14px}
+
+/* nút nổi gọi / zalo */
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:100;display:flex;flex-direction:column;gap:10px}
+.fab .btn{width:52px;height:52px;padding:0;border-radius:50%;font-size:13px;font-weight:600;background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:0 8px 22px -8px rgba(28,26,23,.35)}
+.fab .btn:hover{background:#fff;border-color:var(--ink)}
+
+/* hộp thoại chung + quản lý tin */
+dialog{border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink);width:min(680px,94vw);max-height:90vh;padding:20px}
+dialog::backdrop{background:rgba(20,18,15,.5)}
+.f{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:12px 0}.f .w{grid-column:1/-1}
+.li{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+
+/* xem ảnh lớn */
+#lb{position:fixed;inset:0;margin:0;width:100vw;height:100vh;max-width:none;max-height:none;border:0;padding:0;border-radius:0;background:rgba(14,12,9,.95);place-items:center}
+#lb[open]{display:grid}
+#lb img{max-width:100vw;max-height:86vh;object-fit:contain;display:block}
+#lb button{position:absolute;width:46px;height:46px;border:0;border-radius:50%;background:rgba(255,255,255,.16);color:#fff;font:400 28px/1 inherit;font-family:inherit;cursor:pointer}
+#lbp{left:10px;top:50%;transform:translateY(-50%)}#lbq{right:10px;top:50%;transform:translateY(-50%)}#lbx{right:10px;top:calc(10px + env(safe-area-inset-top,0px))}
+#lbc{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom,0px));color:#fff;font-size:14px}
+
+/* trang chi tiết căn */
+#dt{position:fixed;inset:0;width:100%;max-width:100%;height:100%;max-height:100%;margin:0;padding:0;border:0;border-radius:0;background:var(--bg);color:var(--ink);overflow:hidden}
+#dt::backdrop{background:rgba(20,18,15,.4)}
+#dt:not([open]){display:none}
+.dtw{height:100%;overflow:auto;overscroll-behavior:contain;padding:0 20px 120px}.dtw>*{max-width:1000px;margin-left:auto;margin-right:auto}
+.dtn{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;gap:10px;padding:14px 0;background:linear-gradient(180deg,var(--bg) 70%,rgba(251,250,247,0))}
+.dtn button{font:500 14px "Be Vietnam Pro",system-ui,sans-serif;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 18px;cursor:pointer}
+.dtn button:hover{border-color:var(--ink)}
+.dtg{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/9;max-height:56vh;background:var(--soft);cursor:zoom-in}
+.dtg img{width:100%;height:100%;object-fit:cover;display:block}
+.dtg svg{width:100%;height:100%;display:block;opacity:.6}
+.dtt{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding-bottom:4px}
+.dtt img{width:84px;height:58px;object-fit:cover;border-radius:8px;cursor:pointer;opacity:.55;border:2px solid transparent;flex:none}
+.dtt img.on{opacity:1;border-color:var(--ink)}
+.dth{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;margin-top:26px;margin-bottom:8px}
+.dth h2{font-size:clamp(26px,5vw,38px);margin:0}
+.dth .p{font:600 clamp(24px,4.4vw,34px) "Playfair Display",Georgia,serif;color:var(--ink)}
+.dtc{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.dtc span{font-size:14px;padding:6px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--mute)}
+.dts{margin-top:38px}
+.dts h3{font-size:22px;margin:0 0 14px;display:flex;align-items:center;gap:14px}
+.dts h3::after{content:"";flex:1;height:1px;background:var(--line)}
+.dts p{color:var(--mute);line-height:1.7;margin:0 0 10px}
+.dtd{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.dtd div{background:#fff;padding:14px 16px}
+.dtd dt{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.dtd dd{margin:4px 0 0;font-weight:600;color:var(--ink)}
+.dta{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.dta div{padding:16px;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.dta b{display:block;margin-bottom:3px}.dta span{font-size:14px;color:var(--mute);line-height:1.5}
+.dta small{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.dtl{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.dtl a{text-decoration:none;font-weight:500;font-size:14px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:#fff}
+.dtl a:hover{border-color:var(--ink)}
+.dtr{padding:22px;border-radius:16px;background:#fff;border:1px solid var(--line)}
+.dtr .big{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+.dtr .big div{padding:14px;border-radius:12px;background:var(--soft)}
+.dtr .big small{display:block;font-size:12px;color:var(--mute);margin-bottom:4px}
+.dtr .big b{font:600 24px "Playfair Display",Georgia,serif;color:var(--ink)}
+.dtr label{display:flex;justify-content:space-between;font-size:14px;color:var(--mute);margin-top:6px}
+.dtr input[type=range]{width:100%;accent-color:var(--ink);background:none;border:0;padding:0}
+.dtr .bar2{height:6px;border-radius:99px;background:var(--soft);overflow:hidden;margin-top:10px}
+.dtr .bar2 i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .3s}
+.dtr .note{font-size:13px;color:var(--mute);margin-top:12px;line-height:1.55;border:0;padding:0}
+.dtf{position:absolute;left:0;right:0;bottom:0;z-index:6;padding:14px 20px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(0deg,var(--bg) 62%,rgba(251,250,247,0))}
+.dtf div{max-width:1000px;margin:0 auto;display:flex;gap:10px}
+.dtf a{flex:1;text-align:center;text-decoration:none;font-weight:600;padding:14px;border-radius:999px;font-size:15px}
+.dtf .c{background:var(--dark);color:#fff;border:1px solid var(--dark)}
+.dtf .z{background:#fff;color:var(--ink);border:1px solid var(--ink)}
+@media(max-width:560px){.dtg{aspect-ratio:4/3}}
+.toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:2147483000;max-width:min(92vw,420px);padding:12px 20px;border-radius:12px;font:500 14px/1.45 "Be Vietnam Pro",system-ui,sans-serif;color:#fff;background:rgba(28,26,23,.94);box-shadow:0 12px 30px -12px rgba(0,0,0,.5);animation:toast .3s ease both}
+@keyframes toast{from{opacity:0;transform:translate(-50%,-10px)}to{opacity:1;transform:translate(-50%,0)}}
+
+
+/* chọn căn dễ hơn: nút lọc phân khu, đếm, sắp xếp, lưu căn */
+.bar .zsel{display:none}
+.chips{flex:1 1 100%;display:flex;gap:8px;flex-wrap:wrap;padding-top:12px;margin-top:4px;border-top:1px solid var(--line)}
+.chip{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:8px 15px;font:500 14px "Be Vietnam Pro",system-ui,sans-serif;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.chip small{font-size:12px;opacity:.6;margin-left:2px}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--dark);color:#fff;border-color:var(--dark)}
+@media(max-width:700px){.chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-4px;padding-inline:4px}.chip{flex:none}}
+.rbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px;min-height:38px}
+#rcnt{font-size:15px;color:var(--mute)}
+.rtools{display:flex;align-items:center;gap:16px}
+.lnk{border:0;background:none;color:var(--accent);font:500 14px "Be Vietnam Pro",system-ui,sans-serif;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:4px}
+.sort{display:flex;align-items:center;gap:8px;font-size:13px;letter-spacing:0}
+.sort select{padding:7px 10px;font-size:14px}
+.phw{position:relative}
+.fav{position:absolute;right:12px;top:12px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.92);display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 14px -6px rgba(0,0,0,.4);transition:transform .2s}
+.fav:hover{transform:scale(1.08)}
+.fav svg{width:20px;height:20px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.fav[aria-pressed=true] svg{fill:#c8453b;stroke:#c8453b}
+.fav:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tag.s{right:60px}
+#favbar{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:99;display:flex;align-items:center;gap:14px;padding:10px 12px 10px 20px;background:var(--dark);color:#fff;border-radius:999px;box-shadow:0 16px 40px -14px rgba(0,0,0,.55);max-width:calc(100vw - 90px);white-space:nowrap}
+#favbar[hidden]{display:none}
+#favbar span{font-size:14px}
+#favbar button{border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;border-radius:999px;padding:9px 16px;font:500 14px "Be Vietnam Pro",system-ui,sans-serif;cursor:pointer}
+#favbar button.go{background:#fff;color:var(--ink);border-color:#fff}
+@media(max-width:560px){#favbar{gap:8px;padding:8px 8px 8px 14px;left:12px;right:76px;transform:none;max-width:none;justify-content:space-between}#favbar span{font-size:13px}#favbar button{padding:8px 11px;font-size:13px}#favsee{display:none}}
+.empty p{margin:0 0 6px}
+
+/* chọn ngôn ngữ */
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:2px;margin-left:22px;background:#fff}
+.lang button{border:0;background:none;color:var(--mute);font:600 12px "Be Vietnam Pro",system-ui,sans-serif;letter-spacing:.06em;padding:6px 11px;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--dark);color:#fff}
+@media(max-width:760px){.lang{margin-left:auto}}
+/* hiện dần nhẹ khi cuộn */
+.rv{opacity:0;transform:translate3d(0,18px,0);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.zc.rv.in{transition:transform .35s,box-shadow .35s,opacity .35s,border-color .35s;transition-delay:0s}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.zc,.zc img,.unit{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><a class="brand" href="#" aria-label="Hoang Khai Vinhomes"><span class="wm"><b>Hoang Khai</b><i>Vinhomes</i></span></a><nav aria-label="Mục chính"><a href="#canho">Căn hộ</a><a href="#vemink">Về mình</a></nav><div class="lang" role="group" aria-label="Ngôn ngữ"><button type="button" data-l="vi" aria-pressed="true">VI</button><button type="button" data-l="en" aria-pressed="false">EN</button></div><button class="btn ghost" id="adm-btn" hidden>Quản lý tin</button></header>
+<section class="hero"><div class="hero-txt"><div class="enso" role="presentation"><svg viewBox="0 0 400 400" fill="currentColor" aria-hidden="true"><defs><mask id="ensoR" maskUnits="userSpaceOnUse" x="0" y="0" width="400" height="400"><path class="rv-p" pathLength="100" fill="none" stroke="#fff" stroke-width="90" stroke-linecap="round" d="M140.8 346.5 A158 158 0 1 1 180.7 356.8"/></mask><mask id="ensoM" maskUnits="userSpaceOnUse" x="0" y="0" width="400" height="400"><rect width="400" height="400" fill="#fff"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.4" opacity="0.87" d="M316.4 102.5 L319.7 106.8 L322.7 111.3 L325.7 115.8 L328.4 120.5 L331.0 125.2 L333.4 130.0 L335.7 134.9 L337.8 139.9 L339.7 144.9 L341.4 150.0 L342.9 155.1 L344.3 160.3 L345.5 165.5 L346.5 170.7 L347.3 176.0 L347.9 181.3 L348.4 186.6 L348.6 191.9 L348.7 197.2 L348.6 202.5 L348.3 207.8 L347.8 213.1 L347.2 218.4 L346.3 223.6"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.6" opacity="0.80" d="M265.2 66.6 L271.1 69.9 L276.9 73.4 L282.5 77.2 L287.9 81.3 L293.1 85.6 L298.2 90.1 L303.0 94.8 L307.5 99.8 L311.9 104.9 L316.0 110.2 L319.8 115.7 L323.4 121.4 L326.8 127.2 L329.8 133.1 L332.6 139.2 L335.2 145.4 L337.4 151.7 L339.4 158.0 L341.0 164.5 L342.4 171.0 L343.5 177.5 L344.3 184.1 L344.8 190.8 L345.0 197.4"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.8" opacity="0.67" d="M333.6 141.9 L334.9 145.1 L336.1 148.3 L337.2 151.6 L338.3 154.9 L339.3 158.2 L340.2 161.5 L341.0 164.9 L341.7 168.3 L342.4 171.6 L343.0 175.0 L343.5 178.5 L343.9 181.9 L344.3 185.3 L344.6 188.7 L344.8 192.2 L344.9 195.6 L344.9 199.1 L344.9 202.5 L344.7 205.9 L344.5 209.4 L344.3 212.8 L343.9 216.2 L343.5 219.6 L342.9 223.0"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.8" opacity="0.70" d="M297.6 90.2 L300.0 92.6 L302.4 94.9 L304.7 97.4 L307.0 99.9 L309.2 102.4 L311.3 105.0 L313.4 107.6 L315.4 110.3 L317.4 113.0 L319.3 115.7 L321.1 118.5 L322.9 121.3 L324.6 124.2 L326.3 127.1 L327.8 130.1 L329.4 133.0 L330.8 136.1 L332.2 139.1 L333.5 142.2 L334.7 145.2 L335.9 148.4 L337.0 151.5 L338.0 154.7 L338.9 157.9"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.6" opacity="0.85" d="M149.8 59.4 L154.0 58.1 L158.2 56.9 L162.5 55.8 L166.8 54.9 L171.1 54.0 L175.4 53.3 L179.8 52.8 L184.1 52.3 L188.5 52.0 L192.8 51.8 L197.2 51.8 L201.6 51.9 L205.9 52.1 L210.3 52.4 L214.6 52.9 L218.9 53.5 L223.2 54.2 L227.5 55.0 L231.7 56.0 L235.9 57.1 L240.1 58.3 L244.2 59.7 L248.3 61.1 L252.4 62.7"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="1.1" opacity="0.70" d="M269.1 69.7 L273.2 72.1 L277.2 74.6 L281.2 77.3 L285.0 80.1 L288.8 83.0 L292.4 86.0 L296.0 89.1 L299.4 92.4 L302.8 95.7 L306.0 99.2 L309.1 102.7 L312.1 106.4 L315.0 110.1 L317.7 113.9 L320.4 117.8 L322.9 121.8 L325.3 125.8 L327.5 130.0 L329.6 134.2 L331.6 138.4 L333.4 142.7 L335.1 147.1 L336.7 151.5 L338.1 156.0"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.8" opacity="0.88" d="M208.4 49.4 L213.0 49.9 L217.6 50.5 L222.1 51.3 L226.7 52.2 L231.2 53.2 L235.6 54.3 L240.0 55.6 L244.4 57.1 L248.7 58.6 L253.0 60.3 L257.2 62.2 L261.4 64.1 L265.4 66.2 L269.5 68.4 L273.4 70.7 L277.3 73.1 L281.1 75.7 L284.8 78.3 L288.4 81.1 L291.9 84.0 L295.3 87.0 L298.7 90.0 L301.9 93.2 L305.1 96.5"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.6" opacity="0.73" d="M275.9 73.9 L280.4 76.8 L284.7 79.9 L288.9 83.1 L292.9 86.5 L296.9 90.0 L300.7 93.7 L304.4 97.5 L307.9 101.4 L311.3 105.4 L314.5 109.6 L317.6 113.8 L320.6 118.2 L323.4 122.6 L326.0 127.2 L328.4 131.8 L330.7 136.6 L332.8 141.3 L334.8 146.2 L336.5 151.1 L338.1 156.1 L339.6 161.1 L340.8 166.2 L341.9 171.3 L342.8 176.5"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.6" opacity="0.87" d="M222.0 42.6 L228.6 44.0 L235.1 45.8 L241.5 47.7 L247.9 50.0 L254.1 52.5 L260.2 55.2 L266.1 58.2 L271.9 61.5 L277.6 65.0 L283.1 68.7 L288.4 72.6 L293.6 76.7 L298.5 81.0 L303.3 85.6 L307.9 90.3 L312.2 95.2 L316.3 100.2 L320.3 105.4 L324.0 110.8 L327.4 116.3 L330.6 121.9 L333.6 127.7 L336.4 133.5 L338.8 139.5"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="1.1" opacity="0.93" d="M336.8 151.3 L337.7 154.2 L338.6 157.1 L339.5 160.0 L340.2 162.9 L340.9 165.9 L341.6 168.9 L342.1 171.8 L342.7 174.8 L343.1 177.8 L343.5 180.8 L343.9 183.8 L344.1 186.8 L344.4 189.9 L344.5 192.9 L344.6 195.9 L344.6 198.9 L344.6 201.9 L344.5 205.0 L344.4 208.0 L344.2 211.0 L343.9 214.0 L343.6 217.0 L343.2 220.0 L342.7 223.0"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.6" opacity="0.62" d="M125.6 68.8 L129.2 66.9 L133.0 65.1 L136.8 63.4 L140.6 61.8 L144.4 60.3 L148.4 58.9 L152.3 57.6 L156.3 56.4 L160.3 55.4 L164.3 54.4 L168.3 53.6 L172.4 52.9 L176.5 52.3 L180.6 51.8 L184.7 51.4 L188.8 51.1 L192.9 51.0 L197.0 50.9 L201.1 51.0 L205.2 51.2 L209.3 51.5 L213.4 51.9 L217.4 52.4 L221.5 53.1"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.8" opacity="0.78" d="M123.6 53.1 L126.4 51.9 L129.2 50.7 L131.9 49.5 L134.8 48.5 L137.6 47.5 L140.4 46.5 L143.3 45.6 L146.2 44.7 L149.0 43.9 L151.9 43.2 L154.8 42.5 L157.7 41.8 L160.7 41.2 L163.6 40.7 L166.5 40.2 L169.5 39.8 L172.4 39.4 L175.4 39.1 L178.3 38.9 L181.3 38.7 L184.2 38.5 L187.2 38.4 L190.1 38.4 L193.1 38.4"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.8" opacity="0.72" d="M137.6 63.0 L142.0 61.2 L146.5 59.6 L151.0 58.0 L155.5 56.7 L160.1 55.4 L164.7 54.4 L169.4 53.4 L174.0 52.6 L178.7 52.0 L183.4 51.5 L188.1 51.2 L192.8 51.0 L197.6 50.9 L202.3 51.1 L207.0 51.3 L211.7 51.7 L216.3 52.3 L221.0 53.0 L225.6 53.8 L230.2 54.8 L234.7 56.0 L239.2 57.3 L243.7 58.7 L248.1 60.3"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="1.1" opacity="0.63" d="M53.0 131.1 L55.4 126.6 L57.9 122.1 L60.5 117.7 L63.3 113.4 L66.2 109.2 L69.2 105.1 L72.4 101.1 L75.7 97.2 L79.1 93.4 L82.7 89.8 L86.3 86.2 L90.1 82.8 L93.9 79.5 L97.9 76.4 L102.0 73.3 L106.1 70.4 L110.4 67.7 L114.7 65.1 L119.1 62.6 L123.6 60.3 L128.1 58.1 L132.7 56.1 L137.4 54.2 L142.1 52.5"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.4" opacity="0.86" d="M341.6 149.9 L342.5 152.9 L343.4 155.9 L344.2 159.0 L344.9 162.0 L345.6 165.0 L346.2 168.1 L346.8 171.2 L347.3 174.2 L347.7 177.3 L348.0 180.4 L348.3 183.5 L348.6 186.6 L348.8 189.7 L348.9 192.8 L348.9 195.9 L348.9 199.0 L348.8 202.1 L348.7 205.2 L348.5 208.3 L348.2 211.4 L347.9 214.5 L347.5 217.5 L347.1 220.6 L346.5 223.6"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.8" opacity="0.60" d="M197.9 37.6 L204.9 38.0 L211.9 38.8 L218.9 39.9 L225.7 41.3 L232.5 42.9 L239.2 44.9 L245.8 47.1 L252.2 49.6 L258.6 52.4 L264.8 55.5 L270.8 58.8 L276.7 62.3 L282.4 66.1 L287.9 70.1 L293.3 74.3 L298.4 78.7 L303.4 83.4 L308.1 88.2 L312.6 93.3 L316.9 98.5 L320.9 103.8 L324.7 109.3 L328.3 115.0 L331.6 120.8"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.8" opacity="0.86" d="M259.0 53.2 L264.3 55.8 L269.6 58.6 L274.7 61.6 L279.7 64.8 L284.5 68.1 L289.2 71.6 L293.8 75.3 L298.2 79.2 L302.5 83.2 L306.6 87.3 L310.6 91.6 L314.4 96.0 L318.0 100.5 L321.4 105.2 L324.7 110.0 L327.8 114.9 L330.7 119.9 L333.4 124.9 L335.9 130.1 L338.2 135.4 L340.3 140.7 L342.3 146.1 L344.0 151.5 L345.5 157.0"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="1.1" opacity="0.94" d="M287.6 82.9 L289.3 84.3 L291.0 85.7 L292.7 87.1 L294.3 88.5 L296.0 90.0 L297.6 91.5 L299.1 93.0 L300.7 94.5 L302.2 96.1 L303.7 97.7 L305.2 99.3 L306.7 100.9 L308.1 102.6 L309.6 104.2 L310.9 105.9 L312.3 107.6 L313.6 109.3 L315.0 111.1 L316.2 112.8 L317.5 114.6 L318.7 116.4 L319.9 118.2 L321.1 120.0 L322.3 121.9"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.6" opacity="0.64" d="M90.9 89.3 L95.3 85.3 L99.8 81.6 L104.5 78.0 L109.2 74.6 L114.2 71.4 L119.2 68.3 L124.3 65.5 L129.6 62.9 L134.9 60.5 L140.3 58.2 L145.8 56.2 L151.3 54.5 L156.9 52.9 L162.6 51.5 L168.3 50.4 L174.0 49.5 L179.8 48.8 L185.6 48.3 L191.3 48.1 L197.1 48.0 L202.9 48.2 L208.6 48.6 L214.3 49.2 L220.0 50.1"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="1.1" opacity="0.67" d="M127.6 55.0 L133.1 52.6 L138.8 50.5 L144.5 48.6 L150.2 46.9 L156.0 45.4 L161.8 44.2 L167.7 43.1 L173.6 42.3 L179.5 41.7 L185.5 41.4 L191.4 41.2 L197.3 41.3 L203.2 41.6 L209.0 42.1 L214.9 42.9 L220.7 43.8 L226.4 45.0 L232.1 46.4 L237.7 47.9 L243.2 49.7 L248.7 51.7 L254.1 53.9 L259.4 56.2 L264.5 58.8"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.8" opacity="0.94" d="M130.4 51.6 L134.7 49.9 L139.0 48.3 L143.3 46.9 L147.7 45.6 L152.1 44.4 L156.5 43.4 L160.9 42.4 L165.4 41.6 L169.8 41.0 L174.3 40.4 L178.8 40.0 L183.3 39.7 L187.8 39.5 L192.3 39.5 L196.7 39.6 L201.2 39.8 L205.7 40.1 L210.1 40.6 L214.5 41.2 L218.9 41.9 L223.2 42.7 L227.6 43.7 L231.9 44.7 L236.1 45.9"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="1.1" opacity="0.96" d="M61.1 129.7 L62.5 127.2 L63.8 124.7 L65.3 122.3 L66.8 119.9 L68.3 117.6 L69.8 115.2 L71.4 112.9 L73.1 110.7 L74.8 108.4 L76.5 106.2 L78.3 104.0 L80.1 101.9 L81.9 99.8 L83.8 97.7 L85.7 95.7 L87.7 93.7 L89.6 91.7 L91.7 89.8 L93.7 87.9 L95.8 86.0 L97.9 84.2 L100.1 82.4 L102.3 80.7 L104.5 79.0"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.6" opacity="1.00" d="M200.4 37.9 L205.7 38.3 L211.0 38.9 L216.2 39.6 L221.4 40.5 L226.6 41.6 L231.7 42.9 L236.7 44.3 L241.7 45.9 L246.7 47.6 L251.5 49.5 L256.3 51.6 L261.1 53.8 L265.7 56.1 L270.2 58.6 L274.7 61.2 L279.1 64.0 L283.3 66.9 L287.5 69.9 L291.6 73.1 L295.5 76.4 L299.3 79.8 L303.0 83.3 L306.6 86.9 L310.1 90.6"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.6" opacity="0.67" d="M251.0 54.3 L253.7 55.4 L256.5 56.6 L259.2 57.9 L261.9 59.2 L264.5 60.5 L267.2 61.9 L269.8 63.3 L272.3 64.8 L274.9 66.4 L277.4 67.9 L279.9 69.6 L282.3 71.3 L284.7 73.0 L287.1 74.7 L289.4 76.6 L291.7 78.4 L294.0 80.3 L296.2 82.2 L298.4 84.2 L300.6 86.2 L302.7 88.3 L304.7 90.4 L306.7 92.5 L308.7 94.7"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.4" opacity="0.94" d="M338.1 147.1 L338.9 149.5 L339.7 151.9 L340.5 154.4 L341.2 156.9 L341.9 159.4 L342.5 161.8 L343.1 164.3 L343.6 166.9 L344.1 169.4 L344.6 171.9 L345.0 174.4 L345.4 177.0 L345.7 179.5 L346.0 182.0 L346.2 184.6 L346.5 187.1 L346.6 189.7 L346.7 192.3 L346.8 194.8 L346.8 197.4 L346.8 199.9 L346.8 202.5 L346.7 205.0 L346.5 207.6"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="0.4" opacity="0.94" d="M98.2 78.1 L101.7 75.4 L105.3 72.8 L109.0 70.4 L112.8 68.0 L116.6 65.7 L120.5 63.6 L124.4 61.5 L128.4 59.6 L132.4 57.8 L136.5 56.1 L140.6 54.5 L144.7 53.1 L148.9 51.7 L153.1 50.5 L157.4 49.4 L161.7 48.5 L166.0 47.6 L170.3 46.9 L174.6 46.3 L178.9 45.8 L183.3 45.4 L187.6 45.2 L192.0 45.1 L196.3 45.1"/></mask></defs><g mask="url(#ensoR)"><path mask="url(#ensoM)" d="M115.9 358.1 L113.2 357.2 L110.5 356.1 L107.9 354.7 L105.3 353.5 L102.7 352.2 L100.1 351.0 L97.6 349.4 L95.0 348.1 L92.6 346.5 L90.1 344.9 L87.9 343.1 L85.8 341.0 L83.6 339.2 L81.5 337.2 L79.3 335.3 L77.3 333.2 L75.5 330.9 L73.4 328.9 L71.7 326.5 L69.9 324.2 L68.0 322.0 L66.5 319.5 L64.8 317.2 L63.1 314.9 L61.5 312.5 L60.2 309.9 L58.8 307.4 L57.4 304.9 L55.7 302.6 L54.3 300.2 L53.0 297.7 L51.7 295.1 L50.2 292.7 L49.1 290.1 L48.0 287.5 L46.5 285.1 L45.2 282.6 L44.2 280.0 L43.2 277.4 L42.0 274.8 L40.9 272.2 L39.8 269.7 L38.7 267.1 L37.8 264.5 L36.6 261.9 L35.5 259.4 L34.9 256.6 L34.0 254.0 L32.9 251.4 L32.5 248.6 L31.7 245.9 L30.8 243.3 L30.5 240.5 L29.7 237.8 L28.8 235.1 L28.5 232.3 L27.9 229.6 L27.4 226.9 L27.0 224.1 L26.9 221.3 L26.8 218.5 L26.5 215.7 L26.2 213.0 L26.0 210.2 L26.1 207.4 L25.9 204.6 L26.0 201.8 L25.6 199.0 L25.9 196.2 L26.0 193.5 L25.8 190.7 L26.2 187.9 L26.7 185.1 L26.9 182.4 L26.9 179.6 L27.8 176.9 L27.9 174.1 L28.4 171.3 L28.9 168.6 L29.3 165.8 L30.2 163.2 L30.9 160.5 L31.4 157.8 L32.3 155.1 L32.8 152.4 L33.6 149.7 L34.5 147.1 L35.8 144.6 L36.7 141.9 L37.9 139.4 L38.8 136.8 L39.4 134.1 L40.6 131.6 L41.7 129.0 L43.4 126.8 L44.7 124.3 L45.7 121.7 L46.9 119.2 L48.4 116.9 L50.2 114.7 L51.1 112.1 L52.7 109.8 L54.6 107.7 L56.1 105.4 L57.3 102.9 L59.3 100.9 L60.8 98.6 L62.8 96.7 L64.1 94.2 L66.3 92.5 L67.7 90.0 L69.9 88.3 L71.9 86.4 L73.3 84.0 L75.5 82.3 L77.6 80.5 L79.4 78.4 L81.7 76.9 L83.8 75.1 L85.8 73.3 L88.0 71.7 L90.1 69.9 L92.1 68.1 L94.4 66.6 L96.6 65.0 L98.8 63.4 L101.1 62.0 L103.6 60.8 L105.9 59.3 L108.0 57.5 L110.5 56.5 L112.8 55.0 L115.4 54.1 L117.7 52.7 L120.0 51.2 L122.5 50.2 L124.8 48.9 L127.4 48.0 L130.0 47.1 L132.5 46.2 L135.0 45.2 L137.5 44.2 L140.0 43.2 L142.6 42.7 L145.1 41.7 L147.9 41.6 L150.5 40.9 L153.1 40.3 L155.6 39.2 L158.3 39.1 L160.8 38.2 L163.4 37.6 L166.2 37.7 L168.8 37.2 L171.3 36.4 L174.1 36.8 L176.7 36.3 L179.3 36.4 L181.9 35.8 L184.6 35.8 L187.3 36.2 L189.9 35.7 L192.5 36.2 L195.1 35.6 L197.8 36.3 L200.4 36.5 L203.0 36.5 L205.6 36.6 L208.2 36.5 L210.8 37.5 L213.4 37.4 L215.9 38.3 L218.6 38.2 L221.1 39.2 L223.7 39.2 L226.1 40.3 L228.7 40.9 L231.2 41.2 L233.8 41.8 L236.2 42.7 L238.7 43.3 L241.1 44.4 L243.5 45.3 L246.0 45.9 L248.5 46.5 L250.9 47.6 L253.2 48.8 L255.5 49.9 L258.0 50.5 L260.2 52.0 L262.7 52.5 L265.0 53.8 L267.1 55.3 L269.3 56.6 L271.7 57.6 L273.7 59.2 L276.0 60.2 L278.1 61.8 L280.0 63.5 L282.1 64.9 L284.3 66.2 L286.2 67.8 L288.7 68.7 L290.4 70.7 L292.3 72.3 L294.2 74.0 L296.2 75.6 L298.5 76.7 L299.9 78.9 L301.8 80.6 L303.4 82.6 L305.5 84.0 L307.1 86.0 L308.6 88.0 L310.4 89.8 L312.0 91.7 L313.8 93.4 L315.6 95.1 L317.3 96.9 L318.8 98.9 L320.1 101.1 L322.0 102.8 L323.3 105.0 L324.1 107.5 L326.2 109.0 L327.4 111.2 L328.2 113.7 L329.8 115.6 L331.3 117.6 L332.3 119.8 L333.5 122.0 L334.3 124.4 L335.3 126.7 L336.3 128.9 L337.7 130.9 L338.8 133.2 L339.6 135.5 L340.8 137.6 L341.4 140.1 L342.4 142.3 L343.3 144.6 L343.4 147.2 L344.8 149.3 L345.6 151.6 L346.0 154.1 L346.6 156.4 L347.5 158.7 L347.9 161.2 L347.9 163.7 L349.0 165.9 L349.2 168.4 L349.1 170.9 L350.1 173.2 L350.4 175.6 L350.6 178.0 L350.7 180.5 L351.4 182.8 L351.7 185.3 L350.8 187.8 L351.8 190.1 L342.2 190.8 L342.7 188.4 L341.9 186.2 L342.5 183.8 L342.3 181.5 L341.7 179.3 L341.5 177.0 L340.7 174.8 L340.8 172.5 L340.6 170.2 L339.8 168.0 L339.3 165.8 L339.0 163.5 L337.8 161.4 L337.1 159.2 L336.8 157.0 L335.5 155.0 L335.6 152.5 L334.8 150.4 L334.0 148.2 L333.4 146.0 L332.0 144.1 L330.9 142.0 L330.7 139.6 L329.1 137.8 L328.2 135.7 L327.0 133.8 L326.4 131.5 L325.6 129.3 L323.9 127.6 L322.5 125.7 L321.4 123.7 L320.2 121.8 L319.3 119.7 L317.7 117.9 L316.6 115.9 L315.1 114.2 L313.9 112.2 L312.9 110.0 L311.3 108.3 L309.5 106.9 L308.2 105.0 L306.7 103.2 L305.4 101.2 L304.0 99.4 L302.2 98.0 L300.6 96.2 L298.8 94.8 L297.2 93.2 L295.5 91.5 L293.8 90.0 L291.7 88.9 L290.2 87.1 L288.2 86.0 L286.7 84.1 L284.8 82.7 L283.1 81.2 L281.0 80.2 L279.0 79.0 L277.4 77.2 L275.1 76.4 L273.5 74.6 L271.4 73.6 L269.2 72.7 L267.1 71.7 L265.0 70.8 L263.2 69.3 L261.0 68.5 L259.0 67.2 L257.0 65.9 L254.8 65.3 L252.6 64.5 L250.6 63.2 L248.4 62.3 L246.2 61.7 L243.9 61.0 L241.7 60.3 L239.5 59.5 L237.3 58.8 L235.0 58.3 L232.8 57.6 L230.4 57.8 L228.2 56.7 L225.8 56.7 L223.5 56.3 L221.2 55.8 L218.9 55.6 L216.7 54.8 L214.4 54.2 L212.0 54.5 L209.7 54.5 L207.4 53.7 L205.0 54.2 L202.7 53.4 L200.3 53.9 L198.0 53.4 L195.7 54.0 L193.3 54.1 L191.0 53.8 L188.6 53.8 L186.3 54.0 L183.9 53.9 L181.6 54.3 L179.3 54.6 L177.0 55.0 L174.7 55.7 L172.3 55.8 L170.1 56.6 L167.8 57.1 L165.3 56.9 L163.2 57.9 L160.9 58.6 L158.6 59.1 L156.3 59.4 L154.0 60.2 L151.7 60.7 L149.7 62.1 L147.3 62.3 L145.3 63.6 L143.1 64.5 L140.8 65.1 L138.7 66.2 L136.5 67.0 L134.3 67.9 L132.3 69.2 L130.1 70.1 L127.9 71.0 L126.0 72.4 L124.0 73.7 L121.9 74.7 L119.9 76.0 L117.8 77.2 L116.0 78.7 L113.8 79.6 L111.8 80.9 L110.1 82.6 L108.4 84.2 L106.5 85.7 L104.5 86.9 L102.9 88.7 L100.8 89.9 L99.1 91.6 L97.2 93.0 L95.5 94.6 L94.1 96.6 L92.5 98.3 L90.7 99.9 L88.7 101.3 L87.4 103.3 L85.9 105.2 L84.5 107.1 L82.9 108.9 L81.1 110.5 L79.7 112.4 L78.7 114.6 L77.0 116.3 L75.9 118.4 L74.5 120.4 L73.1 122.3 L72.0 124.4 L70.7 126.4 L69.6 128.5 L68.2 130.5 L67.3 132.7 L65.8 134.6 L64.8 136.8 L63.8 138.9 L63.2 141.3 L61.9 143.3 L61.1 145.6 L60.0 147.7 L59.0 149.9 L58.5 152.2 L57.8 154.5 L57.1 156.8 L56.5 159.1 L55.4 161.3 L55.1 163.7 L54.5 166.0 L53.7 168.3 L53.4 170.7 L53.1 173.0 L52.0 175.3 L51.7 177.7 L51.8 180.1 L51.0 182.4 L50.8 184.8 L50.4 187.2 L50.4 189.6 L50.6 192.0 L49.9 194.4 L50.0 196.8 L49.8 199.2 L50.2 201.6 L49.9 204.0 L49.9 206.4 L49.9 208.8 L50.1 211.2 L50.3 213.6 L50.8 215.9 L50.9 218.3 L51.5 220.7 L51.8 223.1 L51.8 225.5 L52.5 227.8 L53.0 230.2 L53.4 232.5 L53.9 234.9 L54.4 237.2 L55.1 239.5 L55.7 241.9 L56.3 244.2 L57.4 246.3 L58.0 248.7 L59.0 250.9 L59.9 253.1 L60.6 255.4 L61.8 257.5 L62.5 259.8 L63.8 261.9 L64.6 264.1 L65.9 266.2 L67.1 268.2 L68.2 270.3 L69.8 272.2 L71.0 274.2 L72.4 276.2 L73.9 278.0 L75.2 280.0 L76.8 281.8 L78.2 283.7 L79.9 285.4 L81.6 287.1 L83.3 288.8 L85.1 290.3 L86.6 292.1 L88.5 293.6 L90.5 294.9 L92.2 296.5 L94.1 297.9 L95.9 299.4 L97.8 300.7 L99.7 302.1 L101.5 303.5 L103.3 304.9 L105.3 306.1 L107.2 307.4 L109.1 308.6 L110.8 310.2 L112.6 311.5 L114.4 312.9 L116.3 314.1 L118.3 315.3 L119.9 316.9 L121.9 318.1 L123.5 319.7 L125.4 320.9 L127.2 322.3 L129.1 323.7 L130.9 325.2 L132.8 326.5 L136.7 329.1 L139.6 332.7 L141.6 337.0 L142.4 341.6 L141.9 346.3 L140.3 350.7 L137.5 354.6 L133.9 357.5 L129.6 359.5 L125.0 360.3 L120.3 359.8Z"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.3" opacity="0.74" d="M338.1 146.5 L339.0 150.0 L340.2 153.4 L341.1 156.8 L342.1 160.2 L343.1 163.7 L343.6 167.2 L344.5 170.7 L345.0 174.2 L345.6 177.7 L346.0 181.2 L346.2 184.8 L346.7 188.3 L346.7 191.9 L346.7 195.4 L346.7 199.0 L346.8 202.5 L346.6 206.1 L346.3 209.6 L346.0 213.1 L345.6 216.6 L345.1 220.1 L344.7 223.7 L343.8 227.1 L343.3 230.6 L342.6 234.1 L341.5 237.4 L340.7 240.9 L339.6 244.3 L338.6 247.6 L337.2 250.9 L335.9 254.2 L334.6 257.5 L333.3 260.8 L331.7 263.9 L330.1 267.1 L328.4 270.2 L326.7 273.3 L324.8 276.3 L322.9 279.3 L321.2 282.4"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.9" opacity="0.60" d="M309.3 103.2 L313.0 107.5 L316.4 112.0 L319.5 116.7 L322.5 121.6 L325.5 126.3 L328.1 131.3 L330.7 136.3 L332.9 141.5 L334.9 146.8 L336.7 152.1 L338.6 157.4 L339.9 162.9 L341.3 168.3 L342.2 173.8 L343.2 179.3 L343.8 184.9 L344.3 190.5 L344.4 196.1 L344.3 201.7 L344.2 207.3 L343.7 212.9 L343.1 218.4 L342.4 224.0 L341.4 229.5 L340.1 234.9 L338.6 240.3 L337.0 245.7 L335.2 251.0 L333.0 256.2 L330.9 261.4 L328.3 266.3 L325.8 271.3 L323.1 276.2 L320.0 281.0 L316.8 285.6 L313.5 290.1 L310.1 294.5 L306.3 298.7 L302.5 302.9 L298.5 306.8"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3.0" opacity="0.77" d="M335.5 149.8 L336.8 153.2 L337.8 156.7 L338.7 160.2 L339.6 163.7 L340.5 167.2 L341.2 170.7 L341.8 174.3 L342.3 177.9 L342.8 181.4 L343.4 185.0 L343.5 188.6 L343.8 192.2 L344.0 195.8 L344.1 199.4 L343.9 203.0 L343.7 206.6 L343.5 210.2 L343.3 213.8 L342.9 217.3 L342.6 220.9 L342.0 224.5 L341.3 228.0 L340.3 231.5 L339.5 235.0 L338.8 238.5 L337.9 242.0 L336.7 245.4 L335.5 248.8 L334.1 252.2 L332.9 255.6 L331.7 258.9 L330.2 262.2 L328.6 265.5 L327.0 268.7 L325.1 271.8 L323.3 274.9 L321.4 278.0 L319.5 281.1 L317.6 284.1 L315.5 287.1"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" opacity="0.54" d="M318.9 102.6 L321.4 106.3 L323.9 110.0 L326.4 113.6 L328.6 117.5 L330.9 121.3 L333.0 125.1 L334.9 129.1 L336.7 133.1 L338.4 137.2 L340.1 141.3 L341.4 145.5 L342.9 149.6 L344.3 153.8 L345.2 158.0 L346.2 162.3 L347.3 166.5 L347.8 170.9 L348.6 175.2 L349.3 179.5 L349.5 183.8 L349.8 188.2 L350.1 192.5 L350.0 196.9 L350.0 201.2 L349.8 205.5 L349.3 209.8 L349.0 214.1 L348.5 218.4 L347.6 222.7 L346.9 226.9 L346.1 231.2 L345.0 235.4 L343.7 239.5 L342.5 243.6 L341.2 247.7 L339.6 251.8 L338.1 255.8 L336.4 259.7 L334.6 263.6 L332.6 267.4"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity="0.70" d="M325.2 113.0 L328.4 117.7 L331.0 122.8 L333.8 127.8 L336.1 133.1 L338.3 138.3 L340.5 143.6 L342.2 149.0 L344.0 154.4 L345.3 159.9 L346.4 165.5 L347.5 171.0 L348.4 176.6 L349.0 182.2 L349.5 187.8 L349.5 193.4 L349.6 199.1 L349.3 204.7 L349.2 210.3 L348.3 215.8 L347.5 221.4 L346.5 226.9 L345.4 232.4 L344.1 237.8 L342.5 243.2 L340.6 248.5 L338.7 253.7 L336.5 258.9 L334.0 263.8 L331.4 268.8 L328.9 273.8 L326.0 278.5 L322.7 283.1 L319.7 287.7 L316.2 292.1 L312.7 296.4 L308.9 300.5 L305.1 304.5 L301.0 308.3 L297.0 312.1 L292.7 315.7"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" opacity="0.51" d="M337.6 137.6 L339.9 143.1 L341.7 148.9 L343.6 154.5 L345.0 160.4 L346.3 166.2 L347.4 172.0 L348.2 177.9 L348.9 183.8 L349.2 189.8 L349.4 195.7 L349.2 201.6 L349.0 207.6 L348.4 213.4 L347.6 219.3 L346.6 225.1 L345.5 230.9 L343.9 236.6 L342.3 242.3 L340.4 247.9 L338.5 253.4 L336.1 258.8 L333.6 264.2 L331.1 269.5 L328.0 274.5 L325.0 279.6 L321.8 284.5 L318.3 289.3 L314.6 293.8 L310.8 298.3 L306.8 302.6 L302.7 306.8 L298.4 310.9 L293.8 314.5 L289.3 318.3 L284.5 321.6 L279.7 325.1 L274.6 328.1 L269.6 331.1 L264.3 333.8 L259.0 336.3"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.3" opacity="0.85" d="M343.7 165.2 L344.9 170.8 L345.7 176.5 L346.4 182.3 L347.0 188.0 L347.2 193.8 L347.3 199.5 L347.1 205.3 L346.6 211.0 L346.0 216.7 L345.1 222.4 L344.1 228.1 L342.9 233.7 L341.4 239.2 L339.8 244.7 L337.8 250.1 L335.8 255.5 L333.4 260.7 L330.9 265.8 L328.4 271.0 L325.4 275.9 L322.4 280.8 L319.3 285.6 L315.9 290.2 L312.1 294.6 L308.3 298.9 L304.5 303.2 L300.5 307.3 L296.1 311.0 L291.8 314.8 L287.3 318.5 L282.7 321.8 L277.9 325.1 L272.9 328.0 L267.9 330.8 L262.8 333.4 L257.6 335.9 L252.2 338.1 L246.9 340.2 L241.3 342.0 L235.8 343.6"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" opacity="0.70" d="M337.7 142.0 L339.1 146.2 L340.4 150.4 L341.9 154.6 L343.0 158.8 L344.2 163.1 L344.8 167.5 L345.7 171.8 L346.5 176.1 L347.1 180.4 L347.5 184.8 L347.5 189.2 L347.8 193.6 L347.8 198.0 L347.7 202.3 L347.7 206.7 L347.3 211.1 L346.9 215.4 L346.2 219.7 L345.6 224.1 L344.7 228.3 L343.7 232.6 L342.8 236.8 L341.6 241.1 L340.1 245.1 L338.8 249.3 L337.2 253.4 L335.5 257.4 L333.7 261.4 L331.8 265.2 L329.8 269.1 L327.7 272.9 L325.6 276.7 L323.3 280.4 L320.7 284.0 L318.1 287.5 L315.6 291.0 L312.9 294.5 L310.0 297.7 L307.1 300.9 L304.1 304.0"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.9" opacity="0.59" d="M338.3 159.5 L339.3 163.2 L340.0 167.0 L340.9 170.8 L341.7 174.5 L342.2 178.3 L342.7 182.2 L343.1 186.0 L343.6 189.8 L343.6 193.6 L343.8 197.5 L343.7 201.3 L343.6 205.2 L343.6 209.0 L343.3 212.9 L342.7 216.7 L342.2 220.5 L341.8 224.3 L340.9 228.0 L340.1 231.8 L339.4 235.6 L338.3 239.3 L337.4 243.0 L336.1 246.6 L334.9 250.3 L333.4 253.8 L331.9 257.4 L330.3 260.9 L328.8 264.4 L327.1 267.9 L325.4 271.3 L323.3 274.6 L321.4 277.9 L319.3 281.1 L317.1 284.4 L314.8 287.4 L312.5 290.5 L310.2 293.6 L307.8 296.7 L305.0 299.4 L302.5 302.3"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" opacity="0.79" d="M346.1 161.8 L347.3 167.6 L348.3 173.4 L348.9 179.3 L349.6 185.1 L349.9 191.0 L350.1 196.8 L349.9 202.7 L349.6 208.6 L348.9 214.4 L348.1 220.2 L347.0 225.9 L345.8 231.6 L344.4 237.3 L342.6 242.8 L341.0 248.4 L338.7 253.8 L336.5 259.2 L334.0 264.4 L331.5 269.7 L328.6 274.7 L325.4 279.6 L322.3 284.5 L318.9 289.2 L315.3 293.7 L311.5 298.1 L307.5 302.3 L303.4 306.5 L299.2 310.4 L294.9 314.3 L290.3 317.9 L285.7 321.4 L280.8 324.6 L275.9 327.6 L270.9 330.6 L265.7 333.3 L260.5 335.8 L255.1 338.0 L249.7 340.1 L244.3 342.2 L238.7 343.8"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.3" opacity="0.73" d="M335.5 132.0 L336.9 135.6 L338.4 139.2 L339.9 142.8 L341.1 146.5 L342.4 150.2 L343.6 153.9 L344.4 157.7 L345.5 161.4 L346.2 165.3 L347.1 169.0 L347.8 172.9 L348.3 176.7 L348.6 180.6 L349.0 184.4 L349.3 188.3 L349.6 192.1 L349.4 196.0 L349.6 199.8 L349.5 203.7 L349.2 207.5 L348.9 211.4 L348.3 215.2 L348.0 219.0 L347.2 222.8 L346.7 226.6 L345.9 230.4 L344.7 234.0 L343.9 237.8 L342.9 241.5 L341.5 245.1 L340.3 248.7 L339.1 252.4 L337.5 255.8 L336.2 259.4 L334.4 262.8 L332.8 266.3 L330.9 269.6 L329.1 273.0 L327.3 276.4 L325.0 279.5"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.3" opacity="0.85" d="M333.2 140.2 L334.7 143.6 L335.9 147.1 L337.1 150.5 L338.3 154.0 L339.5 157.5 L340.3 161.1 L341.3 164.6 L341.9 168.2 L342.8 171.8 L343.5 175.4 L343.8 179.0 L344.3 182.7 L344.7 186.3 L345.0 190.0 L345.0 193.6 L345.2 197.3 L345.2 200.9 L345.1 204.6 L344.8 208.2 L344.5 211.9 L344.2 215.5 L343.7 219.1 L343.2 222.8 L342.5 226.3 L341.8 229.9 L341.1 233.5 L340.3 237.1 L339.1 240.6 L338.1 244.1 L336.9 247.5 L335.9 251.0 L334.5 254.4 L333.2 257.8 L331.7 261.1 L330.1 264.4 L328.4 267.7 L326.6 270.9 L324.8 274.0 L323.0 277.2 L321.0 280.3"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.9" opacity="0.68" d="M336.0 150.6 L337.6 155.4 L339.1 160.2 L340.2 165.1 L341.4 170.0 L342.2 175.0 L343.1 179.9 L343.7 184.9 L343.9 189.9 L344.3 195.0 L344.3 200.0 L344.1 205.0 L344.1 210.1 L343.4 215.0 L342.7 220.0 L341.9 225.0 L341.2 229.9 L340.1 234.9 L338.8 239.7 L337.2 244.5 L335.6 249.3 L333.7 253.9 L332.0 258.6 L329.9 263.2 L327.6 267.7 L325.3 272.2 L322.7 276.5 L320.1 280.8 L317.2 285.0 L314.2 289.0 L311.2 293.1 L307.8 296.8 L304.5 300.6 L301.0 304.3 L297.3 307.8 L293.5 311.1 L289.8 314.6 L285.7 317.5 L281.7 320.7 L277.6 323.7 L273.2 326.2"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.4" opacity="0.56" d="M327.6 119.8 L330.1 124.3 L332.3 128.9 L334.7 133.5 L336.8 138.2 L338.6 143.0 L340.3 147.8 L341.9 152.7 L343.2 157.6 L344.5 162.5 L345.7 167.5 L346.3 172.5 L347.2 177.5 L347.6 182.6 L348.3 187.7 L348.3 192.7 L348.4 197.8 L348.2 202.9 L348.1 207.9 L347.7 213.0 L347.1 218.0 L346.1 223.0 L345.1 227.9 L344.2 232.9 L342.9 237.8 L341.5 242.6 L340.0 247.4 L338.3 252.2 L336.2 256.8 L334.3 261.5 L332.1 266.0 L329.5 270.3 L327.2 274.8 L324.4 279.0 L321.8 283.3 L318.9 287.4 L315.7 291.3 L312.5 295.2 L309.4 299.2 L305.8 302.7 L302.3 306.3"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3.0" opacity="0.49" d="M330.6 119.5 L333.7 125.0 L336.3 130.7 L338.9 136.4 L341.1 142.2 L343.2 148.1 L344.8 154.1 L346.4 160.1 L347.7 166.2 L348.7 172.3 L349.5 178.5 L350.2 184.6 L350.3 190.8 L350.7 197.0 L350.3 203.1 L349.8 209.3 L349.2 215.4 L348.5 221.5 L347.2 227.5 L345.8 233.5 L344.2 239.4 L342.3 245.2 L340.5 251.0 L338.2 256.7 L335.7 262.3 L332.9 267.7 L329.8 273.0 L326.8 278.3 L323.4 283.4 L320.0 288.4 L316.2 293.2 L312.3 297.9 L308.0 302.2 L303.9 306.7 L299.4 310.9 L294.8 314.9 L289.9 318.4 L285.0 322.0 L279.9 325.4 L274.7 328.6 L269.5 331.8"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.9" opacity="0.58" d="M329.1 120.3 L331.8 124.9 L334.2 129.8 L336.3 134.7 L338.4 139.7 L340.2 144.7 L342.0 149.7 L343.7 154.8 L344.8 160.1 L346.1 165.2 L347.2 170.4 L347.9 175.7 L348.5 181.0 L348.9 186.3 L349.1 191.6 L349.4 196.9 L349.3 202.2 L348.7 207.5 L348.4 212.8 L347.7 218.0 L346.9 223.3 L345.8 228.4 L344.8 233.6 L343.5 238.7 L342.0 243.8 L340.2 248.7 L338.2 253.6 L336.2 258.5 L334.0 263.3 L331.6 268.0 L329.2 272.6 L326.3 277.1 L323.6 281.5 L320.5 285.8 L317.5 290.1 L314.3 294.3 L310.9 298.3 L307.3 302.1 L303.6 305.9 L299.7 309.5 L295.8 313.0"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.3" opacity="0.79" d="M321.7 119.0 L324.7 123.5 L327.1 128.3 L329.8 133.0 L332.1 137.9 L334.2 142.8 L336.1 147.9 L337.7 153.0 L339.3 158.1 L340.7 163.3 L342.0 168.5 L342.7 173.8 L343.8 179.1 L344.1 184.4 L344.6 189.8 L344.9 195.1 L345.1 200.5 L344.8 205.8 L344.4 211.1 L344.1 216.5 L343.1 221.7 L342.3 227.0 L341.2 232.2 L340.0 237.5 L338.5 242.6 L336.8 247.7 L334.9 252.7 L332.9 257.6 L330.7 262.5 L328.5 267.4 L325.9 272.0 L323.2 276.7 L320.2 281.1 L317.3 285.6 L314.2 290.0 L310.8 294.1 L307.2 298.1 L303.6 302.1 L299.9 306.0 L295.9 309.6 L291.8 313.1"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3.0" opacity="0.77" d="M330.5 120.8 L333.4 126.4 L336.1 132.1 L338.5 138.0 L340.7 143.9 L342.9 149.8 L344.5 155.9 L346.2 161.9 L347.5 168.1 L348.2 174.3 L349.1 180.5 L349.5 186.7 L349.7 192.9 L349.8 199.2 L349.6 205.4 L349.1 211.6 L348.3 217.7 L347.3 223.9 L346.3 230.0 L344.6 236.0 L343.1 242.0 L341.0 247.8 L338.7 253.5 L336.5 259.3 L333.8 264.9 L330.8 270.3 L328.0 275.8 L324.5 280.9 L320.9 285.9 L317.3 290.9 L313.5 295.8 L309.3 300.2 L305.0 304.7 L300.7 309.2 L296.1 313.2 L291.3 317.1 L286.4 320.8 L281.3 324.4 L276.1 327.6 L270.7 330.7 L265.3 333.6"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity="0.78" d="M328.2 116.5 L331.2 121.9 L334.1 127.3 L336.6 132.9 L339.0 138.6 L341.3 144.2 L343.2 150.1 L344.8 155.9 L346.2 161.9 L347.5 167.8 L348.5 173.8 L349.3 179.8 L349.7 185.9 L350.1 191.9 L350.2 198.0 L349.8 204.0 L349.5 210.0 L348.9 216.0 L347.9 222.0 L346.8 227.9 L345.6 233.8 L343.7 239.5 L342.1 245.3 L339.9 250.9 L337.9 256.6 L335.5 262.1 L332.7 267.4 L329.7 272.6 L326.8 277.8 L323.5 282.8 L320.1 287.7 L316.4 292.4 L312.6 297.0 L308.6 301.5 L304.3 305.7 L300.0 309.8 L295.6 313.9 L290.8 317.5 L286.1 321.2 L281.1 324.5 L276.1 327.8"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.3" opacity="0.61" d="M327.7 120.6 L329.8 124.6 L331.9 128.6 L334.0 132.5 L335.8 136.7 L337.5 140.8 L339.1 145.0 L340.4 149.3 L341.8 153.5 L343.0 157.8 L344.3 162.1 L345.2 166.4 L346.0 170.8 L346.7 175.2 L347.2 179.7 L347.5 184.1 L348.1 188.5 L348.0 192.9 L348.3 197.4 L348.0 201.8 L347.9 206.2 L347.6 210.6 L347.2 215.0 L346.4 219.4 L345.9 223.8 L345.1 228.1 L344.1 232.4 L342.9 236.7 L341.9 241.0 L340.5 245.2 L339.0 249.3 L337.5 253.5 L335.7 257.5 L334.0 261.6 L331.9 265.5 L330.0 269.4 L327.9 273.3 L325.7 277.1 L323.3 280.8 L320.7 284.4 L318.2 288.1"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" opacity="0.56" d="M338.4 142.2 L339.9 146.7 L341.6 151.2 L342.8 155.8 L344.0 160.4 L345.1 165.0 L345.9 169.7 L346.8 174.3 L347.4 179.0 L348.1 183.7 L348.3 188.4 L348.4 193.2 L348.5 197.9 L348.4 202.6 L348.1 207.3 L347.6 212.0 L347.2 216.7 L346.6 221.3 L345.8 226.0 L344.9 230.6 L343.6 235.1 L342.4 239.7 L341.1 244.2 L339.4 248.6 L337.9 253.0 L336.1 257.3 L334.2 261.6 L332.2 265.9 L330.1 270.0 L327.5 274.0 L325.3 278.1 L322.7 282.0 L320.0 285.9 L317.2 289.6 L314.3 293.3 L311.2 296.8 L308.1 300.3 L305.0 303.9 L301.6 307.1 L298.1 310.2 L294.6 313.3"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.3" opacity="0.61" d="M328.6 132.6 L330.0 135.6 L331.5 138.6 L332.8 141.7 L334.1 144.8 L335.4 147.9 L336.3 151.2 L337.6 154.3 L338.4 157.5 L339.4 160.8 L340.2 164.0 L341.0 167.3 L341.6 170.6 L342.2 173.9 L342.9 177.2 L343.1 180.5 L343.6 183.8 L343.9 187.1 L344.0 190.5 L344.3 193.8 L344.4 197.2 L344.5 200.5 L344.2 203.9 L344.3 207.2 L343.9 210.5 L343.6 213.9 L343.4 217.2 L342.7 220.5 L342.4 223.8 L341.8 227.1 L341.0 230.4 L340.4 233.7 L339.5 236.9 L338.6 240.1 L337.7 243.3 L336.7 246.5 L335.5 249.6 L334.4 252.8 L333.1 255.9 L331.9 259.0 L330.6 262.1"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.9" opacity="0.80" d="M336.7 141.8 L338.9 148.1 L340.8 154.4 L342.7 160.7 L344.0 167.2 L345.2 173.7 L346.3 180.1 L346.7 186.7 L347.3 193.3 L347.1 199.8 L347.1 206.4 L346.4 212.9 L345.7 219.4 L344.5 225.9 L343.2 232.3 L341.6 238.6 L339.6 244.8 L337.4 251.0 L335.2 257.1 L332.4 263.0 L329.5 268.9 L326.1 274.5 L322.8 280.1 L319.2 285.6 L315.2 290.8 L311.0 295.8 L306.8 300.8 L302.3 305.5 L297.5 310.0 L292.4 314.1 L287.3 318.2 L282.1 322.2 L276.6 325.8 L270.9 329.1 L265.2 332.3 L259.3 335.3 L253.2 337.8 L247.0 340.0 L240.9 342.4 L234.5 343.9 L228.1 345.7"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3.0" opacity="0.79" d="M339.2 147.0 L340.4 150.7 L341.6 154.4 L342.7 158.2 L343.7 162.0 L344.3 165.9 L345.2 169.7 L345.8 173.5 L346.3 177.4 L347.0 181.3 L347.3 185.2 L347.7 189.0 L347.7 192.9 L347.6 196.8 L347.7 200.7 L347.6 204.6 L347.5 208.5 L347.2 212.4 L346.6 216.2 L346.0 220.1 L345.3 223.9 L344.7 227.8 L343.8 231.5 L342.9 235.3 L341.8 239.0 L340.7 242.7 L339.7 246.5 L338.2 250.1 L337.1 253.8 L335.3 257.3 L334.0 260.9 L332.1 264.3 L330.3 267.8 L328.7 271.3 L326.6 274.6 L324.8 277.9 L322.5 281.1 L320.3 284.3 L318.2 287.6 L315.9 290.7 L313.5 293.7"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.4" opacity="0.64" d="M327.9 127.6 L330.3 132.1 L332.5 136.8 L334.3 141.6 L336.1 146.4 L337.8 151.2 L339.6 156.1 L340.9 161.0 L342.1 166.0 L343.0 171.1 L343.9 176.1 L344.6 181.2 L345.2 186.3 L345.5 191.4 L345.6 196.5 L345.5 201.6 L345.5 206.7 L345.1 211.8 L344.5 216.9 L343.7 221.9 L343.0 227.0 L341.7 231.9 L340.7 236.9 L339.1 241.8 L337.8 246.7 L335.9 251.5 L334.1 256.3 L332.0 260.9 L329.8 265.5 L327.5 270.1 L324.9 274.5 L322.3 278.8 L319.5 283.1 L316.6 287.3 L313.5 291.4 L310.3 295.4 L307.0 299.3 L303.4 303.0 L299.7 306.4 L295.9 310.0 L292.2 313.5"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.3" opacity="0.85" d="M338.9 137.3 L341.1 142.6 L342.9 148.0 L344.4 153.5 L345.8 159.0 L347.1 164.6 L348.2 170.1 L349.1 175.7 L349.8 181.4 L350.2 187.0 L350.2 192.7 L350.5 198.3 L350.3 204.0 L349.9 209.6 L349.2 215.2 L348.3 220.8 L347.5 226.3 L346.3 231.8 L344.8 237.2 L343.3 242.6 L341.4 247.9 L339.3 253.1 L337.3 258.3 L335.0 263.4 L332.3 268.4 L329.7 273.3 L326.9 278.1 L323.7 282.7 L320.5 287.3 L317.2 291.8 L313.6 296.1 L309.8 300.2 L306.0 304.2 L302.1 308.2 L297.9 312.0 L293.6 315.5 L289.2 318.9 L284.8 322.3 L280.1 325.4 L275.3 328.2 L270.5 331.1"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity="0.84" d="M332.5 131.9 L334.7 136.9 L336.8 141.9 L338.8 146.9 L340.4 152.0 L342.0 157.2 L343.3 162.4 L344.5 167.7 L345.3 173.0 L346.1 178.4 L347.0 183.7 L347.2 189.0 L347.3 194.4 L347.5 199.8 L347.3 205.1 L346.8 210.5 L346.4 215.8 L345.6 221.1 L344.7 226.4 L343.4 231.6 L342.1 236.8 L340.9 242.0 L339.3 247.1 L337.3 252.0 L335.3 257.0 L333.1 261.8 L330.9 266.7 L328.3 271.4 L325.7 276.1 L322.8 280.6 L319.8 285.0 L316.7 289.4 L313.2 293.4 L309.7 297.5 L306.2 301.4 L302.5 305.3 L298.6 308.9 L294.6 312.5 L290.5 316.0 L286.4 319.4 L281.9 322.4"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.9" opacity="0.81" d="M315.7 102.5 L319.9 107.9 L323.7 113.6 L327.2 119.4 L330.7 125.2 L333.6 131.3 L336.3 137.5 L338.9 143.7 L341.0 150.1 L342.9 156.6 L344.6 163.0 L345.8 169.7 L347.1 176.2 L347.9 182.9 L348.1 189.6 L348.4 196.3 L348.1 202.9 L348.0 209.6 L347.1 216.2 L346.2 222.8 L345.0 229.3 L343.5 235.8 L341.6 242.2 L339.4 248.4 L337.0 254.7 L334.3 260.7 L331.5 266.7 L328.5 272.6 L325.0 278.3 L321.3 283.8 L317.5 289.2 L313.3 294.4 L309.0 299.4 L304.4 304.2 L299.6 308.8 L294.7 313.2 L289.5 317.4 L284.3 321.5 L278.8 325.2 L273.1 328.7 L267.2 331.8"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" opacity="0.90" d="M315.8 111.1 L318.1 114.5 L320.5 117.8 L322.6 121.2 L324.8 124.7 L326.7 128.3 L328.5 131.9 L330.2 135.7 L331.9 139.3 L333.7 143.0 L335.0 146.8 L336.3 150.7 L337.6 154.5 L338.8 158.4 L339.8 162.3 L340.9 166.2 L341.6 170.2 L342.4 174.2 L343.2 178.1 L343.5 182.2 L343.9 186.2 L344.2 190.2 L344.4 194.3 L344.4 198.3 L344.5 202.3 L344.3 206.4 L344.2 210.4 L343.7 214.4 L343.1 218.4 L342.7 222.4 L342.0 226.4 L341.1 230.3 L340.3 234.3 L339.3 238.2 L338.3 242.1 L337.1 246.0 L335.7 249.8 L334.3 253.6 L332.6 257.2 L331.1 261.0 L329.5 264.7"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3.0" opacity="0.84" d="M318.7 99.7 L321.6 103.3 L324.0 107.2 L326.7 111.0 L329.0 114.9 L331.4 118.8 L333.4 123.0 L335.6 126.9 L337.4 131.1 L339.2 135.4 L340.8 139.6 L342.6 143.8 L343.9 148.1 L345.2 152.5 L346.4 156.8 L347.6 161.2 L348.3 165.7 L349.2 170.1 L349.8 174.6 L350.3 179.0 L350.9 183.5 L351.2 188.0 L351.1 192.5 L351.1 197.0 L351.0 201.4 L351.0 205.9 L350.6 210.4 L350.0 214.8 L349.4 219.2 L348.7 223.6 L347.9 228.0 L346.9 232.4 L345.8 236.7 L344.4 240.9 L343.0 245.1 L341.7 249.4 L340.0 253.5 L338.4 257.6 L336.4 261.6 L334.7 265.7 L332.5 269.5"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.4" opacity="0.66" d="M343.6 164.7 L344.8 170.2 L345.6 175.9 L346.3 181.6 L346.9 187.2 L347.1 192.9 L347.1 198.6 L347.0 204.3 L346.7 210.0 L346.0 215.6 L345.4 221.3 L344.4 226.9 L343.2 232.4 L341.7 237.9 L340.2 243.4 L338.4 248.8 L336.4 254.1 L334.1 259.2 L331.8 264.4 L329.1 269.4 L326.4 274.4 L323.3 279.2 L320.4 284.0 L317.1 288.6 L313.5 293.0 L309.8 297.4 L306.0 301.6 L302.0 305.6 L297.8 309.4 L293.7 313.4 L289.2 316.8 L284.6 320.2 L280.0 323.5 L275.2 326.6 L270.4 329.6 L265.2 332.1 L260.1 334.6 L255.0 337.1 L249.6 339.1 L244.2 341.0 L238.8 342.9"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity="0.69" d="M331.0 135.4 L332.8 139.4 L334.5 143.4 L336.1 147.5 L337.6 151.6 L338.9 155.7 L339.9 160.0 L341.0 164.2 L342.2 168.4 L342.9 172.7 L343.5 177.0 L344.1 181.3 L344.6 185.6 L344.9 190.0 L345.1 194.3 L345.3 198.7 L345.0 203.0 L345.0 207.4 L344.7 211.7 L344.2 216.0 L343.6 220.3 L342.8 224.6 L342.2 228.9 L341.0 233.1 L340.1 237.3 L338.9 241.5 L337.7 245.7 L336.3 249.8 L334.8 253.9 L333.0 257.8 L331.4 261.9 L329.3 265.7 L327.3 269.6 L325.3 273.4 L323.0 277.1 L320.6 280.7 L318.3 284.4 L315.7 287.9 L313.2 291.4 L310.4 294.8 L307.4 298.0"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.4" opacity="0.76" d="M329.8 136.9 L331.8 141.3 L333.9 145.7 L335.5 150.3 L337.1 154.9 L338.4 159.6 L339.7 164.3 L340.8 169.0 L341.7 173.8 L342.2 178.6 L343.0 183.4 L343.3 188.2 L343.7 193.1 L343.7 197.9 L343.8 202.8 L343.7 207.6 L343.3 212.4 L342.7 217.2 L342.1 222.1 L341.3 226.8 L340.4 231.6 L339.1 236.3 L337.8 240.9 L336.5 245.6 L334.8 250.1 L333.2 254.7 L331.4 259.2 L329.3 263.6 L327.0 267.9 L324.8 272.2 L322.3 276.4 L319.7 280.5 L316.9 284.5 L314.1 288.4 L311.2 292.3 L308.1 296.1 L304.8 299.7 L301.5 303.3 L298.0 306.7 L294.5 310.1 L290.8 313.4"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3.0" opacity="0.86" d="M332.6 139.3 L334.7 143.9 L336.3 148.6 L337.9 153.3 L339.5 158.0 L340.5 162.9 L341.7 167.7 L342.6 172.6 L343.5 177.5 L344.3 182.4 L344.6 187.4 L345.0 192.4 L344.9 197.3 L345.1 202.3 L344.7 207.2 L344.4 212.2 L343.8 217.1 L343.3 222.0 L342.3 226.9 L341.2 231.7 L340.0 236.5 L338.9 241.4 L337.4 246.1 L335.7 250.7 L334.0 255.4 L332.0 259.9 L330.0 264.5 L327.6 268.8 L325.3 273.3 L322.7 277.5 L320.1 281.7 L317.2 285.8 L314.4 289.8 L311.1 293.6 L308.0 297.5 L304.5 301.1 L301.1 304.7 L297.6 308.2 L293.8 311.5 L290.1 314.8 L286.1 317.8"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity="0.47" d="M342.8 144.7 L344.5 149.8 L345.9 154.9 L347.1 160.1 L348.3 165.2 L349.2 170.5 L349.9 175.7 L350.5 181.0 L351.1 186.2 L351.1 191.5 L351.3 196.8 L351.0 202.0 L350.8 207.3 L350.2 212.5 L349.8 217.7 L348.9 222.9 L347.8 228.0 L346.6 233.1 L345.2 238.2 L343.8 243.2 L342.1 248.1 L340.3 253.0 L338.1 257.8 L336.1 262.6 L333.9 267.3 L331.2 271.8 L328.6 276.3 L325.8 280.7 L323.0 285.0 L319.8 289.2 L316.6 293.3 L313.2 297.2 L309.9 301.2 L306.2 304.8 L302.6 308.6 L298.6 312.0 L294.6 315.2 L290.5 318.5 L286.5 321.7 L282.2 324.6 L277.8 327.4"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.4" opacity="0.54" d="M332.4 130.2 L335.1 136.4 L337.8 142.6 L339.9 148.9 L341.9 155.3 L343.6 161.8 L345.0 168.3 L346.1 174.9 L347.0 181.5 L347.5 188.2 L347.9 194.8 L347.8 201.5 L347.4 208.1 L346.7 214.7 L345.8 221.3 L344.7 227.9 L343.2 234.3 L341.5 240.7 L339.6 247.1 L337.3 253.3 L334.6 259.3 L331.7 265.3 L328.7 271.2 L325.5 277.0 L321.7 282.4 L317.9 287.9 L314.0 293.2 L309.5 298.1 L305.1 303.0 L300.5 307.8 L295.5 312.2 L290.4 316.4 L285.0 320.3 L279.7 324.2 L274.0 327.7 L268.3 331.0 L262.4 334.1 L256.3 336.9 L250.1 339.2 L243.8 341.4 L237.4 343.4"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3.0" opacity="0.49" d="M337.9 134.7 L339.1 137.9 L340.4 141.0 L341.6 144.2 L342.7 147.4 L343.7 150.6 L344.5 153.9 L345.4 157.1 L346.4 160.4 L347.1 163.6 L347.8 166.9 L348.3 170.3 L348.7 173.6 L349.1 176.9 L349.5 180.2 L349.8 183.6 L350.2 186.9 L350.3 190.2 L350.5 193.6 L350.5 196.9 L350.4 200.3 L350.1 203.6 L349.9 206.9 L349.8 210.2 L349.3 213.6 L349.0 216.9 L348.5 220.2 L347.8 223.4 L347.2 226.7 L346.8 230.0 L345.9 233.2 L345.0 236.4 L344.1 239.6 L343.3 242.8 L342.2 245.9 L341.1 249.1 L339.9 252.1 L338.5 255.2 L337.3 258.2 L335.9 261.2 L334.4 264.2"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.3" opacity="0.70" d="M332.3 122.8 L334.5 127.1 L336.5 131.6 L338.6 135.9 L340.3 140.4 L342.1 144.9 L343.4 149.6 L344.9 154.2 L346.0 158.8 L347.0 163.5 L348.2 168.2 L348.9 172.9 L349.4 177.7 L350.0 182.4 L350.4 187.2 L350.4 192.0 L350.5 196.7 L350.5 201.5 L350.2 206.2 L349.9 211.0 L349.2 215.7 L348.5 220.4 L347.8 225.1 L346.7 229.7 L345.6 234.3 L344.5 238.9 L343.0 243.4 L341.6 247.9 L339.8 252.3 L338.0 256.7 L336.1 261.0 L334.0 265.2 L332.1 269.5 L329.6 273.5 L327.2 277.6 L324.5 281.5 L322.0 285.4 L319.2 289.2 L316.3 292.9 L313.2 296.5 L310.0 300.0"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity="0.63" d="M331.7 133.2 L333.5 137.2 L335.1 141.3 L337.0 145.4 L338.3 149.6 L339.6 153.8 L340.9 158.1 L342.1 162.3 L343.1 166.6 L343.9 171.0 L344.6 175.3 L345.3 179.7 L345.6 184.1 L346.0 188.5 L346.2 192.9 L346.3 197.3 L346.4 201.7 L346.2 206.1 L345.8 210.5 L345.4 214.8 L344.8 219.2 L344.3 223.6 L343.4 227.9 L342.6 232.2 L341.6 236.4 L340.3 240.6 L338.9 244.8 L337.7 249.0 L336.0 253.1 L334.3 257.2 L332.6 261.2 L330.6 265.1 L328.7 269.1 L326.6 272.9 L324.2 276.6 L322.0 280.4 L319.6 284.1 L317.0 287.7 L314.2 291.0 L311.6 294.6 L308.6 297.8"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" opacity="0.78" d="M336.8 154.2 L338.6 159.6 L339.8 165.1 L341.1 170.6 L342.1 176.2 L342.9 181.8 L343.4 187.4 L343.7 193.0 L343.9 198.7 L343.8 204.3 L343.5 209.9 L343.1 215.6 L342.3 221.1 L341.4 226.7 L340.4 232.3 L339.0 237.7 L337.5 243.2 L335.7 248.6 L333.5 253.8 L331.4 259.0 L329.0 264.1 L326.6 269.2 L323.8 274.2 L320.8 279.0 L317.7 283.7 L314.5 288.4 L311.0 292.8 L307.3 297.1 L303.6 301.4 L299.5 305.4 L295.4 309.4 L291.1 313.0 L286.6 316.6 L282.2 320.2 L277.5 323.4 L272.7 326.5 L267.6 329.2 L262.6 331.9 L257.4 334.5 L252.2 336.8 L246.9 339.0"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity=".5" d="M309.4 298.3 L306.1 301.9 L302.7 305.4 L299.1 308.8 L295.5 312.1 L291.8 315.2 L287.9 318.3 L284.0 321.2 L280.0 323.9 L275.8 326.6 L271.6 329.1 L267.3 331.5 L263.0 333.7 L258.5 335.8 L254.0 337.8 L249.5 339.6 L244.8 341.2 L240.1 342.7 L235.4 344.1 L230.6 345.3 L225.8 346.3"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity=".5" d="M333.1 262.4 L331.3 266.1 L329.4 269.8 L327.4 273.4 L325.3 276.9 L323.1 280.4 L320.8 283.9 L318.4 287.2 L315.9 290.5 L313.3 293.7 L310.7 296.9 L307.9 300.0 L305.1 303.0 L302.2 305.9 L299.2 308.8 L296.2 311.6 L293.0 314.3 L289.8 316.9 L286.5 319.4 L283.2 321.8 L279.8 324.1"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity=".5" d="M285.8 319.6 L283.1 321.6 L280.4 323.4 L277.7 325.2 L274.9 327.0 L272.0 328.7 L269.2 330.3 L266.2 331.9 L263.3 333.4 L260.3 334.8 L257.3 336.2 L254.3 337.5 L251.2 338.7 L248.1 339.9 L245.0 341.0 L241.8 342.0 L238.7 343.0 L235.5 343.9 L232.3 344.7 L229.0 345.5 L225.8 346.2"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity=".5" d="M285.1 320.5 L282.8 322.2 L280.4 323.8 L278.0 325.3 L275.6 326.9 L273.2 328.3 L270.7 329.8 L268.2 331.2 L265.6 332.5 L263.1 333.8 L260.5 335.0 L257.9 336.2 L255.3 337.4 L252.6 338.5 L249.9 339.5 L247.2 340.5 L244.5 341.5 L241.8 342.3 L239.0 343.2 L236.3 344.0 L233.5 344.7"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity=".5" d="M308.3 301.1 L305.0 304.6 L301.6 307.9 L298.1 311.2 L294.5 314.3 L290.8 317.4 L287.0 320.3 L283.1 323.1 L279.1 325.8 L275.1 328.3 L270.9 330.7 L266.7 333.0 L262.4 335.2 L258.1 337.2 L253.6 339.1 L249.1 340.8 L244.6 342.4 L240.0 343.9 L235.4 345.2 L230.7 346.3 L226.0 347.4"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity=".5" d="M313.7 295.7 L310.6 299.4 L307.3 303.0 L303.9 306.4 L300.5 309.8 L296.9 313.0 L293.2 316.2 L289.4 319.2 L285.5 322.1 L281.5 324.8 L277.5 327.5 L273.3 330.0 L269.1 332.4 L264.8 334.6 L260.4 336.7 L256.0 338.7 L251.4 340.5 L246.9 342.2 L242.3 343.8 L237.6 345.2 L232.9 346.4"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity=".5" d="M307.1 303.9 L305.3 305.8 L303.4 307.6 L301.5 309.5 L299.6 311.3 L297.6 313.0 L295.6 314.7 L293.6 316.4 L291.5 318.1 L289.5 319.7 L287.4 321.3 L285.2 322.9 L283.0 324.4 L280.8 325.9 L278.6 327.3 L276.4 328.7 L274.1 330.1 L271.8 331.4 L269.5 332.7 L267.2 334.0 L264.8 335.2"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity=".5" d="M297.5 308.8 L294.8 311.1 L292.0 313.5 L289.3 315.7 L286.4 317.9 L283.5 320.1 L280.5 322.1 L277.5 324.1 L274.5 326.0 L271.4 327.9 L268.2 329.7 L265.1 331.4 L261.8 333.0 L258.6 334.5 L255.3 336.0 L251.9 337.4 L248.5 338.7 L245.1 339.9 L241.7 341.0 L238.2 342.1 L234.7 343.1"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity=".5" d="M324.7 281.2 L321.9 285.3 L319.0 289.4 L315.9 293.3 L312.7 297.2 L309.4 300.9 L306.0 304.6 L302.5 308.1 L298.8 311.5 L295.1 314.8 L291.2 318.0 L287.2 321.1 L283.1 324.0 L279.0 326.8 L274.7 329.4 L270.3 331.9 L265.9 334.3 L261.4 336.5 L256.8 338.5 L252.2 340.5 L247.5 342.2"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity=".5" d="M312.1 298.6 L309.9 301.1 L307.7 303.5 L305.4 305.8 L303.1 308.1 L300.7 310.4 L298.3 312.6 L295.9 314.7 L293.4 316.8 L290.8 318.8 L288.2 320.8 L285.6 322.8 L282.9 324.6 L280.2 326.4 L277.5 328.2 L274.7 329.9 L271.8 331.6 L269.0 333.1 L266.1 334.7 L263.1 336.1 L260.2 337.5"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity=".5" d="M326.9 273.9 L324.0 278.7 L320.9 283.4 L317.6 287.9 L314.2 292.4 L310.6 296.7 L306.9 300.9 L303.0 304.9 L298.9 308.8 L294.7 312.6 L290.4 316.2 L286.0 319.6 L281.4 322.8 L276.7 325.9 L271.8 328.8 L266.9 331.6 L261.9 334.1 L256.7 336.5 L251.5 338.6 L246.2 340.6 L240.8 342.4"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="0.6" opacity=".5" d="M327.0 272.9 L324.9 276.4 L322.7 279.9 L320.4 283.3 L318.0 286.7 L315.5 290.0 L313.0 293.2 L310.3 296.4 L307.6 299.5 L304.8 302.5 L301.9 305.4 L298.9 308.3 L295.8 311.1 L292.7 313.8 L289.5 316.4 L286.2 318.9 L282.8 321.3 L279.4 323.6 L275.9 325.9 L272.4 328.0 L268.8 330.1"/></g></svg></div>
+<p class="eyebrow">Hoang Khai Vinhomes</p>
+<h1>Mình giúp bạn chọn<br><em>ngôi nhà của bạn</em></h1>
+<p class="sub">Đừng lo, mình sẽ đồng hành cùng bạn</p>
+
+</div></section>
+<section class="sec" id="canho"><h2>Căn hộ tuyển chọn</h2><p>Cập nhật thường xuyên. Nhắn Zalo để nhận danh sách mới nhất.</p></section>
+<div id="owner-warn" class="warn" hidden>Chưa có số điện thoại và Zalo. Bấm “Quản lý tin” để nhập.</div>
+<div class="bar">
+<div class="tabs" role="group" aria-label="Loại giao dịch"><button data-m="rent" aria-pressed="true">Thuê</button><button data-m="sale" aria-pressed="false">Mua</button></div>
+<label class="zsel">Phân khu<select id="fz"></select></label>
+<label>Loại căn<select id="fb"></select></label>
+<label>Hướng<select id="fd"></select></label>
+<label>Mức giá<select id="fp"></select></label>
+<div class="chips" id="chips" role="group" aria-label="Lọc theo phân khu"></div>
+</div>
+<div class="rbar"><span id="rcnt" role="status"></span><span class="rtools"><button type="button" class="lnk" id="clr" hidden>Xóa lọc</button><label class="sort">Sắp xếp<select id="fs"><option value="new">Nổi bật</option><option value="pa">Giá thấp đến cao</option><option value="pd">Giá cao đến thấp</option><option value="ar">Diện tích lớn nhất</option></select></label></span></div>
+<div id="grid" class="grid"></div>
+<section class="sec" id="vemink"><h2>Về mình</h2><p>Mình là Khải, tư vấn căn hộ Vinhomes Grand Park tại Công ty TNHH Địa Ốc An Tín Gia. Mình làm việc theo ba cam kết đơn giản.</p></section>
+<div class="ab">
+<div class="am"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4"/></svg><b>Thông tin rõ ràng</b><span>Cung cấp thông tin một cách trung thực và chính xác.</span></div>
+<div class="am"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><b>Phản hồi nhanh</b><span>Bạn nhắn Zalo hoặc gọi, mình sẽ trả lời sớm nhất có thể.</span></div>
+<div class="am"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg><b>Đồng hành cùng bạn</b><span>Trước, trong và sau khi nhận chìa khóa, mình luôn hỗ trợ trong khả năng của mình.</span></div>
+</div>
+
+<footer id="ft"><strong>CÔNG TY TNHH ĐỊA ỐC AN TÍN GIA</strong><br>Số 46 đường T2 (Khu C), dự án Khu dân cư và Công viên Phước Thiện, khu phố Phước Thiện, Phường Long Bình, Thành phố Hồ Chí Minh, Việt Nam</footer>
+</div>
+<div id="favbar" hidden><span id="favtxt"></span><button type="button" id="favsee">Xem căn đã lưu</button><button type="button" id="favsend" class="go">Gửi cho Khải qua Zalo</button></div>
+<div class="fab"><a class="btn" data-call aria-label="Gọi cho Khải" title="Gọi cho Khải"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a><a class="btn alt" data-zalo target="_blank" rel="noopener" aria-label="Zalo" title="Zalo">Zalo</a></div>
+
+<dialog id="dt" aria-label="Thông tin chi tiết căn hộ"><div class="dtw" id="dtb"></div><div class="dtf" id="dtf"></div></dialog>
+<dialog id="lb" aria-label="Xem ảnh căn hộ"><button id="lbx" type="button" aria-label="Đóng">×</button><button id="lbp" type="button" aria-label="Ảnh trước">‹</button><img id="lbi" alt=""><button id="lbq" type="button" aria-label="Ảnh sau">›</button><div id="lbc"></div></dialog>
+
+<dialog id="adm">
+<h2 style="margin:0">Quản lý tin</h2>
+<p style="color:var(--mute);margin:4px 0 8px;font-size:14px">Thêm, sửa, xoá căn. Bấm “Lưu và đăng” để khách thấy.</p>
+<div class="f">
+<label>Tên hiển thị<input id="s-name"></label>
+<label>Số điện thoại<input id="s-phone" type="tel"></label>
+<label>Số Zalo<input id="s-zalo" type="tel"></label>
+<label class="w">Ảnh bìa trang chủ<input id="s-hero" type="file" accept="image/*"></label>
+</div>
+<div id="list"></div>
+<h3 id="ft-title">Thêm căn mới</h3>
+<form id="uf">
+<div class="f">
+<label>Loại<select id="u-type"><option value="sale">Bán</option><option value="rent">Cho thuê</option></select></label>
+<label>Mã căn<input id="u-code" required></label>
+<label>Phân khu<input id="u-zone" list="zl" required></label>
+<datalist id="zl"><option>The Rainbow</option><option>The Origami</option><option>The Manhattan</option><option>The Beverly</option><option>The Opus One</option><option>Lumière Boulevard</option><option>Masteri Centre Point</option><option>Glory Heights</option></datalist>
+<label>Loại căn<input id="u-beds" placeholder="Ví dụ: 1PN+ hoặc 2"></label>
+<label>Diện tích (m²)<input id="u-area" type="number" min="0" step="0.1"></label>
+<label>Giá (triệu đồng)<input id="u-price" type="number" min="0" step="1" required></label>
+<label>Hướng ban công<input id="u-dir"></label>
+<label>Nội thất<input id="u-furn" placeholder="Cơ bản / Đầy đủ…"></label>
+<label>View<input id="u-view" placeholder="Ví dụ: ngoại khu, thoáng"></label>
+<label>Pháp lý<input id="u-legal" placeholder="Ví dụ: đã có sổ"></label>
+<label>Tiền cọc (thuê)<input id="u-deposit" placeholder="Ví dụ: 2 tháng"></label>
+<label>Phí (thuê)<input id="u-fee" placeholder="Ví dụ: 1 tháng"></label>
+<label class="w">Điểm nhấn<input id="u-note" placeholder="Ví dụ: view hồ bơi"></label>
+<label class="w">Mô tả chi tiết<textarea id="u-desc" rows="3"></textarea></label>
+<label class="w">Hình ảnh (chọn được nhiều ảnh)<input id="u-img" type="file" accept="image/*" multiple></label>
+<label class="w" style="display:flex;align-items:center;gap:8px;grid-auto-flow:column;justify-content:start"><input id="u-hot" type="checkbox" style="width:auto"> Đánh dấu giá tốt</label>
+</div>
+<div class="cta"><button class="btn" type="submit">Lưu căn này</button><button class="btn ghost" type="button" id="u-reset">Nhập căn mới</button></div>
+</form>
+<div class="cta" style="margin-top:16px;justify-content:space-between"><button class="btn ghost" id="a-close" type="button">Đóng</button><button class="btn" id="a-pub" type="button">Lưu và đăng</button></div>
+<p id="a-msg" role="status" style="color:var(--mute);font-size:14px"></p>
+</dialog>
+
+<script id="data" type="application/json">{"name": "Hoàng Khai", "phone": "0934307196", "zalo": "0934307196", "units": []}</script>
+<script>
+const PRISTINE='<!doctype html>\n'+document.documentElement.outerHTML;
+const S=JSON.parse(document.getElementById('data').textContent);
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const PH='<svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="No photo yet"><rect class="c" width="160" height="100"/><circle class="b" cx="130" cy="24" r="10"/><g class="a"><rect x="30" y="34" width="26" height="52" opacity=".9"/><rect x="60" y="20" width="30" height="66"/><rect x="94" y="44" width="24" height="42" opacity=".8"/></g><rect class="a" y="86" width="160" height="14" opacity=".35"/></svg>';
+let mode='rent',art=null,asg=null,editId=null,imgs=[],G=[],gi=0;
+let LANG='vi';try{LANG=localStorage.getItem('hk_lang')==='en'?'en':'vi'}catch(e){}
+const EN={"Căn hộ": "Apartments", "Về mình": "About me", "Liên hệ": "Contact", "Mình giúp bạn chọn": "Let me help you choose", "ngôi nhà của bạn": "the home that's yours", "Đừng lo, mình sẽ đồng hành cùng bạn": "Don't worry, I'll be with you all the way", "Xem căn hộ": "View apartments", "Nhắn Zalo": "Message on Zalo", "Nhắn Zalo cho mình": "Message me on Zalo", "Căn hộ tuyển chọn": "Selected apartments", "Cập nhật thường xuyên. Nhắn Zalo để nhận danh sách mới nhất.": "Updated regularly. Message me on Zalo for the latest list.", "Mua": "Buy", "Thuê": "Rent", "Phân khu": "Zone", "Loại căn": "Type", "Hướng": "Facing", "Mức giá": "Price range", "Sắp xếp": "Sort by", "Nổi bật": "Featured", "Giá thấp đến cao": "Price: low to high", "Giá cao đến thấp": "Price: high to low", "Diện tích lớn nhất": "Largest area", "Xóa lọc": "Clear filters", "Mình là Khải, tư vấn căn hộ Vinhomes Grand Park tại Công ty TNHH Địa Ốc An Tín Gia. Mình làm việc theo ba cam kết đơn giản.": "I'm Khai, an apartment consultant for Vinhomes Grand Park at An Tin Gia Real Estate Co., Ltd. I work by three simple promises.", "Thông tin rõ ràng": "Clear information", "Cung cấp thông tin một cách trung thực và chính xác.": "Honest and accurate information, always.", "Phản hồi nhanh": "Quick replies", "Bạn nhắn Zalo hoặc gọi, mình sẽ trả lời sớm nhất có thể.": "Message me on Zalo or call, and I'll reply as soon as I can.", "Đồng hành cùng bạn": "By your side", "Trước, trong và sau khi nhận chìa khóa, mình luôn hỗ trợ trong khả năng của mình.": "Before, during and after you get your keys, I'll help in any way I can.", "Nhận tư vấn riêng": "Get personal advice", "Để lại thông tin, mình sẽ liên hệ và gửi bạn những căn phù hợp nhất.": "Leave your details and I'll get in touch with the apartments that suit you best.", "Họ và tên": "Your name", "Số điện thoại": "Phone number", "Nhận tư vấn": "Get advice", "Số 46 đường T2 (Khu C), dự án Khu dân cư và Công viên Phước Thiện, khu phố Phước Thiện, Phường Long Bình, Thành phố Hồ Chí Minh, Việt Nam": "No. 46, Street T2 (Zone C), Phuoc Thien Residential and Park Project, Phuoc Thien Quarter, Long Binh Ward, Ho Chi Minh City, Vietnam", "Gọi cho Khải": "Call Khai", "Hoang Khai Vinhomes": "Hoang Khai Vinhomes", "Mục chính": "Main menu", "Ngôn ngữ": "Language", "Loại giao dịch": "Transaction type", "Lọc theo phân khu": "Filter by zone", "Thông tin chi tiết căn hộ": "Apartment details", "Xem ảnh căn hộ": "Apartment photos", "Tất cả": "All", "Tất cả phân khu": "All zones", "Tất cả loại căn": "All types", "Tất cả hướng": "All directions", "Tất cả mức giá": "Any price", "Dưới 2 tỷ": "Under 2 billion", "2 – 3 tỷ": "2 – 3 billion", "3 – 6 tỷ": "3 – 6 billion", "Trên 6 tỷ": "Over 6 billion", "Dưới 10 triệu": "Under 10 million", "10 – 20 triệu": "10 – 20 million", "Trên 20 triệu": "Over 20 million", "Diện tích": "Area", "Nội thất": "Furnishing", "Pháp lý": "Legal status", "Giá tốt": "Great price", "Tin mẫu": "Sample", "Tìm hiểu thêm": "View details", "ảnh": "photos", "Lưu căn này": "Save this apartment", "Bỏ lưu căn này": "Remove from saved", "Chưa có căn đúng tiêu chí bạn chọn.": "No apartment matches your filters yet.", "Nhắn Zalo, mình sẽ báo ngay khi có căn phù hợp.": "Message me on Zalo and I'll let you know as soon as a suitable one comes up.", "Bạn chưa lưu căn nào.": "You haven't saved any apartments yet.", "Xem căn đã lưu": "View saved", "Xem tất cả căn": "View all", "Gửi cho Khải qua Zalo": "Send to Khai on Zalo", "Đã lưu": "Saved", "Đã chép danh sách. Bạn dán vào Zalo để gửi cho mình nhé.": "List copied. Paste it into Zalo to send it to me.", "Đã chép sẵn tin nhắn. Khi Zalo mở, bạn nhấn dán rồi gửi cho Khải nhé.": "Message copied. When Zalo opens, just paste it and send it to Khai.", "Cảm ơn bạn! Mình đã nhận thông tin và sẽ liên hệ sớm nhất.": "Thank you! I've received your details and will be in touch soon.", "Chưa gửi được, bạn thử lại hoặc gọi trực tiếp cho mình nhé.": "Couldn't send that. Please try again or call me directly.", "‹ Quay lại": "‹ Back", "Chia sẻ": "Share", "Đã chép link": "Link copied", "Gọi ngay": "Call now", "Thông tin căn": "Apartment details", "Tòa": "Building", "Tầng": "Floor", "View": "View", "Hình thức": "Listing type", "Cho thuê": "For rent", "Bán": "For sale", "Về căn này": "About this apartment", "Thông tin mang tính tham khảo, có thể thay đổi theo thời điểm. Liên hệ Khải để xác nhận chi tiết và xem căn thực tế.": "Information is for reference and may change over time. Contact Khai to confirm details and to view the apartment in person.", "Phân tích cho thuê": "Rental return", "Nếu mua căn này để cho thuê, bạn có thể thu về khoảng:": "If you buy this apartment to rent out, you could earn around:", "Giá thuê mỗi tháng": "Monthly rent", "Thu mỗi năm": "Yearly income", "Tỷ suất / năm": "Yield / year", "Mức thuê ban đầu là ước tính tham khảo (khoảng 4,5%/năm trên giá mua). Bạn kéo thanh trượt để xem các mức khác; mình sẽ báo giá thuê thực tế của căn này khi bạn hỏi.": "The starting rent is a rough estimate (about 4.5% a year on the purchase price). Drag the slider to see other levels, and ask me for the actual rent of this apartment.", "Mức thuê do Khải cập nhật theo giá thực tế của căn. Bạn kéo thanh trượt để xem thêm các mức khác.": "The rent was set by Khai based on this apartment's actual price. Drag the slider to see other levels.", "Chưa trừ phí quản lý, thuế và thời gian trống người thuê.": "Before management fees, taxes and vacancy periods.", "Chi phí thuê": "Rental costs", "Mỗi tháng": "Per month", "Đặt cọc": "Deposit", "Trao đổi": "To be discussed", "Phí quản lý": "Management fee", "Điều khoản thuê (thời hạn, thanh toán, nhận nhà) mình sẽ trao đổi rõ trước khi bạn quyết định.": "I'll go over the lease terms (duration, payment, handover) clearly with you before you decide.", "Link căn hộ:": "Apartment link:", "Chưa có ảnh căn hộ": "No photo yet"};
+const en=()=>LANG==='en';
+const T=s=>LANG==='en'&&Object.prototype.hasOwnProperty.call(EN,s)?EN[s]:s;
+const nz0=t=>String(t||'').toLowerCase().replace(/đ/g,'d').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+const DIR_EN={'dong':'East','tay':'West','nam':'South','bac':'North','dong nam':'South-East','dong bac':'North-East','tay nam':'South-West','tay bac':'North-West'};
+const tDir=v=>{if(!en())return v;const k=nz0(v);return DIR_EN[k]||v};
+const tFurn=v=>{if(!en()||!v)return v;const k=nz0(v);
+  if(/day du|full|dayd/.test(k))return 'Fully furnished';if(/co ban|ntcb|co bản/.test(k))return 'Basic furnishings';if(/cao cap/.test(k))return 'Premium furnishings';if(/^(nha )?trong$|khong noi that|nha trong/.test(k))return 'Unfurnished';return v};
+const tLegal=v=>{if(!en()||!v)return v;const k=nz0(v);
+  if(/hdmb/.test(k))return 'Sale & purchase agreement';if(/so hong|da co so|co so|so do/.test(k))return 'Title deed issued';return v};
+const tBeds=t=>{t=String(t||'');if(!en())return t;return t.replace(/^(\d+)\s*pn(\+?)$/i,'$1BR$2').replace(/^(\d+)\s*phòng ngủ$/i,(m,n)=>n+(n==='1'?' bedroom':' bedrooms'))};
+const tMoney=v=>{if(!en()||!v)return v;return String(v).replace(/cọc\s*/i,'').replace(/(\d+(?:[.,]\d+)?)\s*tháng/i,(m,n)=>n+(+n.replace(',','.')===1?' month':' months')).replace(/triệu/i,'million VND').replace(/tỷ|tỉ/i,'billion VND')};
+const fmt=x=>en()?String(x):String(x).replace('.',',');
+const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money=u=>{const p=u.price;if(en())return u.type==='rent'?p+' million VND/month':(p>=1000?+(p/1000).toFixed(2)+' billion VND':p+' million VND');return u.type==='rent'?p+' triệu/tháng':(p>=1000?String(+(p/1000).toFixed(2)).replace('.',',')+' tỷ':p+' triệu')};
+const imgsOf=u=>u.imgs&&u.imgs.length?u.imgs:(u.img?[u.img]:[]);
+const bedsLabel=u=>{const t=String(u.bedsText||u.beds||'');if(/^\d+$/.test(t))return en()?t+(t==='1'?' bedroom':' bedrooms'):t+' phòng ngủ';return tBeds(t)};
+const phAttr=u=>imgsOf(u).length?` data-id="${esc(u.id)}" tabindex="0" role="button" aria-label="${en()?'View '+imgsOf(u).length+' photos':'Xem '+imgsOf(u).length+' ảnh'}"`:'';
+const phImg=u=>{const a=imgsOf(u);return a.length?`<img src="${esc(a[0])}" alt="Căn hộ ${esc(u.zone)}" loading="lazy">`:PH};
+const cnt=u=>imgsOf(u).length>1?`<span class="cnt">${imgsOf(u).length} ${T('ảnh')}</span>`:'';
+const tel=()=>S.phone?'tel:'+S.phone.replace(/\s/g,''):'#';
+const zl=()=>S.zalo?'https://zalo.me/'+S.zalo.replace(/\D/g,''):'#';
+function head(){
+  if(S.hero)$('.hero').style.setProperty('--hero-img','url("'+String(S.hero).replace(/["\\)]/g,encodeURIComponent)+'")');
+  $$('[data-call]').forEach(a=>a.href=tel());
+  $$('[data-zalo]').forEach(a=>a.href=zl());
+}
+function zones(){
+  const z=[...new Set([...ZONES.map(x=>x[0]),...S.units.filter(u=>u.type===mode).map(u=>u.zone)])],cur=$('#fz').value;
+  $('#fz').innerHTML='<option value="">'+T('Tất cả phân khu')+'</option>'+z.map(x=>`<option${x===cur?' selected':''}>${esc(x)}</option>`).join('');fopts();
+}
+const nz=t=>String(t||'').toLowerCase().replace(/đ/g,'d').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const typeKey=u=>{let t=nz(u.bedsText||u.beds).replace(/\s/g,'').replace('phongngu','pn');return /^\d+$/.test(t)?t+'pn':t};
+const dirKey=u=>nz(u.dir).replace(/[^a-z]/g,'').replace(/dong/g,'d').replace(/tay/g,'t').replace(/nam/g,'n').replace(/bac/g,'b');
+const TYPES=[['studio','Studio'],['1pn','1PN'],['1pn+','1PN+'],['2pn','2PN'],['2pn+','2PN+'],['3pn','3PN']];
+const DIRS=[['d','Đông'],['t','Tây'],['n','Nam'],['b','Bắc'],['dn','Đông Nam'],['db','Đông Bắc'],['tn','Tây Nam'],['tb','Tây Bắc']];
+const PR={sale:[['Dưới 2 tỷ',0,2000],['2 – 3 tỷ',2000,3000],['3 – 6 tỷ',3000,6000],['Trên 6 tỷ',6000,1e12]],rent:[['Dưới 10 triệu',0,10],['10 – 20 triệu',10,20],['Trên 20 triệu',20,1e12]]};
+Object.keys(PR).forEach(k=>{const a=PR[k];PR[k]=a.reduce((o,x,i)=>(o[i]=[x[1],x[2]],o),{});PR[k].labels=a.map(x=>x[0])});
+function popts(){const L=PR[mode].labels,c=$('#fp').value;$('#fp').innerHTML='<option value="">'+T('Tất cả mức giá')+'</option>'+L.map((x,i)=>`<option value="${i}"${String(i)===c?' selected':''}>${T(x)}</option>`).join('')}
+function fopts(){popts();
+  const cur=$('#fb').value,cd=$('#fd').value;
+  const ex=[];S.units.filter(u=>u.type===mode).forEach(u=>{const k=typeKey(u);if(k&&!TYPES.some(x=>x[0]===k)&&!ex.some(x=>x[0]===k))ex.push([k,String(u.bedsText||u.beds)])});
+  $('#fb').innerHTML='<option value="">'+T('Tất cả loại căn')+'</option>'+[...TYPES,...ex].map(x=>`<option value="${esc(x[0])}"${x[0]===cur?' selected':''}>${esc(tBeds(x[1]))}</option>`).join('');
+  $('#fd').innerHTML='<option value="">'+T('Tất cả hướng')+'</option>'+DIRS.map(x=>`<option value="${x[0]}"${x[0]===cd?' selected':''}>${tDir(x[1])}</option>`).join('');
+}
+const FAV=(()=>{let m={};try{m=JSON.parse(localStorage.getItem('hk_fav')||'{}')||{}}catch(e){}return m})();
+const favSave=()=>{try{localStorage.setItem('hk_fav',JSON.stringify(FAV))}catch(e){}};
+let sortBy='new',onlyFav=false;
+const areaNum=u=>parseFloat(String(u.area||'').replace(',','.'))||0;
+const favList=()=>S.units.filter(u=>FAV[u.id]);
+const HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>';
+function card(u){const on=!!FAV[u.id];
+  return `<article class="unit"><div class="phw"><div class="ph"${phAttr(u)}>${phImg(u)}${u.hot?'<span class="tag">'+T('Giá tốt')+'</span>':''}${u.sample?'<span class="tag s">'+T('Tin mẫu')+'</span>':''}${cnt(u)}</div><button class="fav" type="button" data-fav="${esc(u.id)}" aria-pressed="${on}" aria-label="${on?T('Bỏ lưu căn này'):T('Lưu căn này')}">${HEART}</button></div><div class="body"><h3>${esc(u.zone)}</h3><div class="price">${money(u)}</div><dl class="spec">${[[T('Diện tích'),u.area?u.area+' m²':''],[T('Hướng'),tDir(u.dir)],[T('Nội thất'),tFurn(u.furn)],[T('Pháp lý'),tLegal(u.legal)]].filter(r=>r[1]).map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl><div class="row"><button class="btn more" type="button" data-more="${esc(u.id)}">${T('Tìm hiểu thêm')} <span aria-hidden="true">›</span></button></div></div></article>`}
+function chips(){const m=S.units.filter(u=>u.type===mode),by={};m.forEach(u=>{by[u.zone]=(by[u.zone]||0)+1});
+  const cur=$('#fz').value,zs=Object.keys(by);
+  $('#chips').innerHTML=zs.length?[`<button type="button" class="chip" data-z="" aria-pressed="${!cur}">${T('Tất cả')} <small>${m.length}</small></button>`].concat(zs.map(z=>`<button type="button" class="chip" data-z="${esc(z)}" aria-pressed="${z===cur}">${esc(z)} <small>${by[z]}</small></button>`)).join(''):''}
+function favbar(){const n=favList().length,el=$('#favbar');if(!el)return;el.hidden=!n;if(n){$('#favtxt').innerHTML='♥ '+T('Đã lưu')+' <b>'+n+'</b> '+(en()?(n===1?'apartment':'apartments'):'căn');$('#favsee').textContent=onlyFav?T('Xem tất cả căn'):T('Xem căn đã lưu');$('#favsend').textContent=T('Gửi cho Khải qua Zalo')}}
+function render(){
+  const z=$('#fz').value,b=$('#fb').value,d=$('#fd').value,r=PR[mode][$('#fp').value];
+  const filtered=!!(z||b||d||$('#fp').value);
+  let L=onlyFav?favList():S.units.filter(u=>u.type===mode&&(!z||u.zone===z)&&(!b||typeKey(u)===b)&&(!d||dirKey(u)===d)&&(!r||(u.price>=r[0]&&u.price<r[1])));
+  const cmp={new:(a,c)=>c.hot-a.hot,pa:(a,c)=>a.price-c.price,pd:(a,c)=>c.price-a.price,ar:(a,c)=>areaNum(c)-areaNum(a)}[sortBy]||((a,c)=>c.hot-a.hot);
+  L=L.slice().sort(cmp);
+  chips();favbar();
+  $('#rcnt').textContent=en()?(onlyFav?`${L.length} saved`:(L.length?`${L.length} ${L.length===1?'apartment':'apartments'} found`:'')):(onlyFav?`${L.length} căn đã lưu`:(L.length?`${L.length} căn phù hợp`:''));
+  $('#clr').hidden=!(filtered||onlyFav);
+  $('#grid').innerHTML=L.length?L.map(card).join(''):(onlyFav?'<div class="empty" style="grid-column:1/-1"><p>'+T('Bạn chưa lưu căn nào.')+'</p></div>':'<div class="empty" style="grid-column:1/-1"><p>'+T('Chưa có căn đúng tiêu chí bạn chọn.')+'</p><p>'+T('Nhắn Zalo, mình sẽ báo ngay khi có căn phù hợp.')+'</p><div class="cta" style="justify-content:center;margin-top:14px"><a class="btn" data-zalo target="_blank" rel="noopener">'+T('Nhắn Zalo cho mình')+'</a>'+(filtered?'<button class="btn ghost" type="button" data-clr>'+T('Xóa lọc')+'</button>':'')+'</div></div>');
+  $$('[data-zalo]').forEach(a=>a.href=zl());
+}
+function clearFilters(){['#fz','#fb','#fd','#fp'].forEach(x=>{$(x).value=''});onlyFav=false;render()}
+$('#clr').onclick=clearFilters;
+$('#fs').addEventListener('input',e=>{sortBy=e.target.value;render()});
+$('#chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;$('#fz').value=c.dataset.z;onlyFav=false;render()});
+$('#grid').addEventListener('click',e=>{
+  if(e.target.closest('[data-clr]')){clearFilters();return}
+  const f=e.target.closest('[data-fav]');if(!f)return;const id=f.dataset.fav;
+  if(FAV[id])delete FAV[id];else FAV[id]=1;favSave();
+  if(onlyFav)render();else{const on=!!FAV[id];f.setAttribute('aria-pressed',on);f.setAttribute('aria-label',on?'Bỏ lưu căn này':'Lưu căn này');favbar()}});
+function favMsg(){const L=favList(),d=u=>[bedsLabel(u),u.area?u.area+' m²':'',u.dir?(en()?'facing '+tDir(u.dir):'hướng '+u.dir):''].filter(Boolean).join(', ');
+  return (en()?'Hi Khai, I\'m interested in these '+L.length+' apartments, could you advise me?\n':'Mình quan tâm '+L.length+' căn này, nhờ bạn tư vấn giúp:\n')+L.map((u,i)=>(i+1)+') '+u.zone+', '+d(u)+' – '+money(u)+'\n'+location.href.split('#')[0]+'#can='+u.id).join('\n')}
+document.addEventListener('click',e=>{
+  if(e.target.closest('#favsee')){onlyFav=!onlyFav;render();$('#canho').scrollIntoView({behavior:'smooth'});return}
+  if(e.target.closest('#favsend')){copyTxt(favMsg());toast(T('Đã chép danh sách. Bạn dán vào Zalo để gửi cho mình nhé.'));setTimeout(()=>{window.open(zl(),'_blank','noopener')},700)}});
+$$('.tabs button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$$('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#fp').value='';zones();render()});
+['#fz','#fb','#fd','#fp'].forEach(s=>$(s).addEventListener('input',render));
+/* Form khách để lại số: dán 3 giá trị mà tao-form-khach.gs in ra */
+const LEAD={url:'https://docs.google.com/forms/d/e/1FAIpQLSegrQAAxyt8xzsH3f1F37exR351M4L-TIXs5YuJbzBsep2csA/formResponse',name:'738729489',phone:'369722426'};
+if($('#lf'))$('#lf').onsubmit=async e=>{e.preventDefault();
+  const n=$('#ln').value.trim(),t=$('#lp').value.trim(),btn=e.target.querySelector('button');
+  if(LEAD.url){
+    btn.disabled=true;
+    try{
+      await fetch(LEAD.url,{method:'POST',mode:'no-cors',body:new URLSearchParams({['entry.'+LEAD.name]:n,['entry.'+LEAD.phone]:t})});
+      e.target.innerHTML='<p class="lok">'+T('Cảm ơn bạn! Mình đã nhận thông tin và sẽ liên hệ sớm nhất.')+'</p>';
+    }catch(x){btn.disabled=false;alert(T('Chưa gửi được, bạn thử lại hoặc gọi trực tiếp cho mình nhé.'))}
+    return}
+  if(!S.phone){alert('Môi giới chưa cập nhật số điện thoại.');return}
+  location.href='sms:'+S.phone.replace(/\s/g,'')+'?body='+encodeURIComponent('Mình là '+n+', SĐT '+t+'. Nhờ bạn gọi lại tư vấn căn hộ Vinhomes Grand Park.')};
+
+/* ===== Phân khu & tiện ích ===== */
+const ZONES=[
+ ['The Rainbow','Cao tầng sôi động, nhiều tiện ích ngay dưới chân.','rb'],
+ ['The Origami','Phong cách Nhật, thanh lịch và tinh gọn.','og'],
+ ['The Beverly','Phong cách Mỹ, cảm hứng Hollywood.','bv'],
+ ['The Beverly Solari','Căn hộ view sông, lung linh về đêm.','sl'],
+ ['The Opus One','Căn hộ cao cấp, tầm nhìn thoáng.','op'],
+ ['Lumière Boulevard','Khu căn hộ mới, xanh và sang trọng.','lb'],
+ ['Masteri Centre Point','Căn hộ cao tầng, nổi bật về đêm.','mc'],
+ ['Glory Heights','Cao tầng sát trung tâm thương mại, sầm uất.','gh']];
+head();zones();render();
+/* ===== Tiếng Việt / English ===== */
+const SKIP='select:not(#fs),#grid,#chips,#rcnt,#favbar,dialog,script,style';
+function trNode(n){if(n.__vi===undefined)n.__vi=n.nodeValue;const k=n.__vi.trim();if(!k)return;
+  const e=(LANG==='en'&&Object.prototype.hasOwnProperty.call(EN,k))?EN[k]:k;n.nodeValue=n.__vi.replace(k,e)}
+function applyStatic(){
+  const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement&&!n.parentElement.closest(SKIP)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT});
+  let n;const L=[];while(n=w.nextNode())L.push(n);L.forEach(trNode);
+  $$('#fs option').forEach(o=>{if(o.__vi===undefined)o.__vi=o.textContent;o.textContent=T(o.__vi)});
+  $$('[placeholder],[aria-label],[title]').forEach(el=>{if(el.closest('dialog,#grid'))return;['placeholder','aria-label','title'].forEach(a=>{if(!el.hasAttribute(a))return;const k='vi_'+a.replace('-','_');if(el.dataset[k]===undefined)el.dataset[k]=el.getAttribute(a);el.setAttribute(a,T(el.dataset[k]))})});
+}
+function setLang(l){LANG=l==='en'?'en':'vi';try{localStorage.setItem('hk_lang',LANG)}catch(e){}
+  document.documentElement.lang=LANG;$$('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===LANG));
+  document.title=en()?'Vinhomes Grand Park Apartments – Hoang Khai':'Căn hộ Vinhomes Grand Park – Hoang Khai';
+  applyStatic();zones();render();if($('#dt').open&&dtId)dtOpen(dtId,true)}
+$$('.lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+if(LANG==='en')setLang('en');
+
+
+/* ===== Danh sách căn lấy từ Google Sheet (dán link CSV vào SHEET_CSV) ===== */
+const SHEET_CSV='https://docs.google.com/spreadsheets/d/e/2PACX-1vSHcr70-ByPB3DYMUNAXX4LMPpR8-XhCUyEAeGtUbtQSMS6qL1ETe6HHb1LgS4-EOynheizpYY2lwLn/pub?gid=553047661&single=true&output=csv';
+function csvRows(t){const r=[];let row=[],c='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];
+  if(q){if(ch==='"'){if(t[i+1]==='"'){c+='"';i++}else q=false}else c+=ch}
+  else if(ch==='"')q=true;else if(ch===','){row.push(c);c=''}
+  else if(ch==='\n'||ch==='\r'){if(ch==='\r'&&t[i+1]==='\n')i++;row.push(c);r.push(row);row=[];c=''}else c+=ch}
+  if(c!==''||row.length){row.push(c);r.push(row)}return r.filter(x=>x.some(v=>v.trim()))}
+const num=t=>{const m=String(t||'').replace(',','.').match(/\d+(\.\d+)?/);return m?parseFloat(m[0]):NaN};
+function driveIds(t){return String(t||'').split(/[,\s]+/).map(x=>{const m=x.match(/[?&]id=([\w-]{15,})/)||x.match(/\/d\/([\w-]{15,})/);return m?m[1]:''}).filter(Boolean)}
+function sheetUnits(csv){
+  const R=csvRows(csv);if(R.length<2)return [];
+  const H=R[0].map(h=>h.toLowerCase());const ix=(...k)=>H.findIndex(h=>k.some(x=>h.includes(x)));
+  const c={type:ix('loại','loai'),zone:ix('khu','phân khu'),beds:ix('phòng'),area:ix('diện tích','dien tich'),price:H.findIndex(h=>h.includes('giá')&&!h.includes('tốt')),dir:ix('hướng','huong'),furn:ix('nội thất','noi that'),legal:ix('pháp lý','phap ly'),img:ix('ảnh','hình'),hot:ix('nổi bật','giá tốt','noi bat'),hide:ix('ẩn','an căn','hide'),tower:ix('tòa','toa'),floor:ix('tầng','tang'),view:ix('view','cảnh'),desc:ix('mô tả','mo ta','ghi chú','ghi chu'),deposit:ix('cọc','coc'),fee:ix('phí quản','phi quan'),rentEst:ix('thuê dự kiến','thue du kien'),amen:ix('tiện ích','tien ich'),toVincom:ix('đến vincom','den vincom'),toNX:ix('nguyễn xiển','nguyen xien')};
+  const g=(row,k)=>c[k]>=0?String(row[c[k]]||'').trim():'';
+  return R.slice(1).map((row,n)=>{
+    if(/^(x|có|co|true|1|ẩn|an|đã bán|da ban|đã thuê|da thue)/i.test(g(row,'hide')))return null;
+    const rent=/thuê|thue/i.test(g(row,'type'));let raw=g(row,'price'),v=num(raw);if(isNaN(v))return null;
+    if(!rent&&(/tỷ|tỉ|ty|ti\b/i.test(raw)||v<100))v=Math.round(v*1000);
+    const bt=g(row,'beds'),ids=driveIds(g(row,'img'));
+    return{id:'g'+n,type:rent?'rent':'sale',zone:g(row,'zone'),bedsText:bt,beds:/^\d+$/.test(bt)?+bt:bt,area:(n=>isNaN(n)?'':String(n).replace('.',','))(num(g(row,'area'))),price:v,dir:g(row,'dir'),furn:g(row,'furn'),legal:g(row,'legal'),imgs:ids.map(i=>'https://drive.google.com/thumbnail?id='+i+'&sz=w1400'),hot:/^(x|có|co|true|1|giá tốt)/i.test(g(row,'hot')),tower:g(row,'tower'),floor:g(row,'floor'),view:g(row,'view'),desc:g(row,'desc'),deposit:g(row,'deposit'),fee:g(row,'fee'),rentEst:num(g(row,'rentEst')),amen:g(row,'amen'),toVincom:g(row,'toVincom'),toNX:g(row,'toNX')}
+  }).filter(Boolean)}
+async function loadSheet(){if(!SHEET_CSV)return;try{const r=await fetch(SHEET_CSV,{cache:'no-store'});if(!r.ok)return;const u=sheetUnits(await r.text());if(u.length){S.units=S.units.concat(u);zones();render();dtHash()}}catch(e){}}
+loadSheet();
+function lbShow(){$('#lbi').src=G[gi];$('#lbc').textContent=(gi+1)+' / '+G.length;const m=G.length>1;$('#lbp').hidden=!m;$('#lbq').hidden=!m}
+function lbGo(d){if(G.length<2)return;gi=(gi+d+G.length)%G.length;lbShow()}
+function lbOpen(el){const u=S.units.find(x=>x.id===el.dataset.id);if(!u)return;G=imgsOf(u);if(!G.length)return;gi=0;lbShow();$('#lb').showModal()}
+$('#grid').addEventListener('click',e=>{const p=e.target.closest('.ph[data-id]');if(p)lbOpen(p)});
+$('#grid').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const p=e.target.closest('.ph[data-id]');if(p){e.preventDefault();lbOpen(p)}}});
+$('#lbx').onclick=()=>$('#lb').close();$('#lbp').onclick=()=>lbGo(-1);$('#lbq').onclick=()=>lbGo(1);
+$('#lb').addEventListener('click',e=>{if(e.target.id==='lb')$('#lb').close()});
+$('#lb').addEventListener('keydown',e=>{if(e.key==='ArrowLeft')lbGo(-1);if(e.key==='ArrowRight')lbGo(1)});
+let tx=null;$('#lb').addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+$('#lb').addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(d)>50)lbGo(d<0?1:-1)},{passive:true});
+
+
+
+/* ===== Trang chi tiết căn ===== */
+function dtRent(u){
+  const base=u.rentEst&&u.rentEst>0?u.rentEst:+(u.price*0.045/12).toFixed(1),est=!(u.rentEst&&u.rentEst>0);
+  const lo=Math.max(1,+(base*.6).toFixed(1)),hi=+(base*1.6).toFixed(1);
+  return `<section class="dts"><h3>${T('Phân tích cho thuê')}</h3><div class="dtr"><p>${T('Nếu mua căn này để cho thuê, bạn có thể thu về khoảng:')}</p>
+  <label><span>${T('Giá thuê mỗi tháng')}</span><b id="rv">${base} ${en()?'million VND':'triệu'}</b></label><input id="rs" type="range" min="${lo}" max="${hi}" step="0.5" value="${base}" aria-label="${T('Giá thuê mỗi tháng')}">
+  <div class="big"><div><small>${T('Thu mỗi năm')}</small><b id="ry"></b></div><div><small>${T('Tỷ suất / năm')}</small><b id="rp"></b></div></div>
+  <div class="bar2"><i id="rg"></i></div>
+  <p class="note">${est?T('Mức thuê ban đầu là ước tính tham khảo (khoảng 4,5%/năm trên giá mua). Bạn kéo thanh trượt để xem các mức khác; mình sẽ báo giá thuê thực tế của căn này khi bạn hỏi.'):T('Mức thuê do Khải cập nhật theo giá thực tế của căn. Bạn kéo thanh trượt để xem thêm các mức khác.')} ${T('Chưa trừ phí quản lý, thuế và thời gian trống người thuê.')}</p></div></section>`}
+function dtRentCalc(u){const rs=$('#rs');if(!rs)return;const f=()=>{const r=+rs.value,y=r*12,p=y/u.price*100;
+  $('#rv').textContent=fmt(r)+(en()?' million VND':' triệu');$('#ry').textContent=(y>=1000?fmt(+(y/1000).toFixed(2))+(en()?' billion VND':' tỷ'):Math.round(y)+(en()?' million VND':' triệu'));
+  $('#rp').textContent=fmt(p.toFixed(1))+'%';$('#rg').style.width=Math.min(100,p*12)+'%'};
+  rs.oninput=f;f()}
+function dtRentOut(u){const m=u.price;
+  return `<section class="dts"><h3>${T('Chi phí thuê')}</h3><div class="dtr"><div class="big"><div><small>${T('Mỗi tháng')}</small><b>${m} ${en()?'million VND':'triệu'}</b></div><div><small>${T('Đặt cọc')}</small><b>${u.deposit?esc(tMoney(u.deposit)):T('Trao đổi')}</b></div></div>
+  <p class="note">${u.fee?T('Phí quản lý')+': '+esc(tMoney(u.fee))+'. ':''}${T('Điều khoản thuê (thời hạn, thanh toán, nhận nhà) mình sẽ trao đổi rõ trước khi bạn quyết định.')}</p></div></section>`}
+let dtId=null;
+function dtOpen(id,noHash){
+  const u=S.units.find(x=>x.id===id);if(!u)return;dtId=id;const a=imgsOf(u);
+  const chips=[bedsLabel(u),u.area?u.area+' m²':'',tDir(u.dir),tFurn(u.furn),u.view].filter(Boolean);
+  const rows=[[T('Phân khu'),u.zone],[T('Tòa'),u.tower],[T('Tầng'),u.floor],[T('Loại căn'),bedsLabel(u)],[T('Diện tích'),u.area?u.area+' m²':''],[T('Hướng'),tDir(u.dir)],[T('View'),u.view],[T('Nội thất'),tFurn(u.furn)],[T('Pháp lý'),tLegal(u.legal)],[T('Hình thức'),u.type==='rent'?T('Cho thuê'):T('Bán')]].filter(r=>r[1]);
+  const amen=u.amen?String(u.amen).split(/[;,\n]+/).map(x=>x.trim()).filter(Boolean).map(x=>[x,'']):null;
+  const near=a=>a.map(x=>`<div><b>${esc(x[0])}</b>${x[1]?`<span>${esc(x[1])}</span>`:''}</div>`).join('');
+  const q=encodeURIComponent('Vinhomes Grand Park '+(u.zone||''));
+  $('#dtb').innerHTML=`<div class="dtn"><button type="button" id="dtx">${T('‹ Quay lại')}</button><button type="button" id="dts">${T('Chia sẻ')}</button></div>
+  <div class="dtg" id="dtg">${a.length?`<img src="${esc(a[0])}" alt="Căn hộ ${esc(u.zone)}">`:PH}</div>
+  ${a.length>1?`<div class="dtt">${a.map((x,i)=>`<img src="${esc(x)}" alt="Ảnh ${i+1}" data-i="${i}" class="${i?'':'on'}">`).join('')}</div>`:''}
+  <div class="dth"><h2>${esc(u.zone)}</h2><div class="p">${money(u)}</div></div>
+  <div class="dtc">${chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div>
+  <section class="dts"><h3>${T('Thông tin căn')}</h3><dl class="dtd">${rows.map(r=>`<div><dt>${r[0]}</dt><dd>${esc(r[1])}</dd></div>`).join('')}</dl></section>
+  ${u.desc?`<section class="dts"><h3>${T('Về căn này')}</h3><p>${esc(u.desc).replace(/\n/g,'<br>')}</p></section>`:''}
+  
+  ${u.type==='rent'?dtRentOut(u):dtRent(u)}
+  <p class="note" style="font-size:13px;margin-top:30px">${T('Thông tin mang tính tham khảo, có thể thay đổi theo thời điểm. Liên hệ Khải để xác nhận chi tiết và xem căn thực tế.')}</p>
+`;
+  $('#dtf').innerHTML='<div><a class="c" href="'+tel()+'">'+T('Gọi ngay')+'</a><a class="z" href="'+zl()+'" target="_blank" rel="noopener">'+T('Nhắn Zalo')+'</a></div>';
+  G=a;gi=0;
+  $('#dtx').onclick=dtClose;
+  $('#dts').onclick=async()=>{const url=location.href.split('#')[0]+'#can='+id;try{if(navigator.share){await navigator.share({title:(en()?'Apartment ':'Căn hộ ')+u.zone,url});return}await navigator.clipboard.writeText(url);$('#dts').textContent=T('Đã chép link')}catch(e){prompt(T('Link căn hộ:'),url)}};
+  $('#dtg').onclick=()=>{if(G.length){lbShow();$('#lb').showModal()}};
+  $$('.dtt img').forEach(im=>im.onclick=()=>{gi=+im.dataset.i;$('#dtg img').src=G[gi];$$('.dtt img').forEach(x=>x.classList.toggle('on',x===im))});
+  if(u.type!=='rent')dtRentCalc(u);
+  const d=$('#dt');if(!d.open)d.showModal();$('#dtb').scrollTop=0;document.documentElement.style.overflow='hidden';
+  if(!noHash)history.replaceState(null,'','#can='+id);
+}
+function dtClose(){const d=$('#dt');if(d.open)d.close();document.documentElement.style.overflow='';history.replaceState(null,'',location.pathname+location.search)}
+$('#dt').addEventListener('cancel',()=>{document.documentElement.style.overflow='';history.replaceState(null,'',location.pathname+location.search)});
+$('#grid').addEventListener('click',e=>{const b=e.target.closest('[data-more]');if(b)dtOpen(b.dataset.more)});
+function dtHash(){const m=location.hash.match(/^#can=(.+)$/);if(m&&S.units.some(u=>u.id===decodeURIComponent(m[1])))dtOpen(decodeURIComponent(m[1]),true)}
+addEventListener('hashchange',dtHash);
+
+
+/* Zalo: soạn sẵn tin nhắn (Zalo không cho điền sẵn nội dung qua link, nên chép vào bộ nhớ để khách dán) */
+function toast(t){const d=document.querySelector('dialog[open]:not(#lb)')||document.body;document.querySelectorAll('.toast').forEach(x=>x.remove());const e=document.createElement('div');e.className='toast';e.setAttribute('role','status');e.textContent=t;d.appendChild(e);setTimeout(()=>e.remove(),5000)}
+function copyTxt(t){try{if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t).catch(()=>fb(t))}catch(e){}return fb(t)}
+function fb(t){const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
+function zaloMsg(u){
+  if(!u)return en()?"Hi Khai, I'd like advice on apartments at Vinhomes Grand Park.":'Mình cần tư vấn căn hộ tại Vinhomes Grand Park.';
+  const parts=[bedsLabel(u),u.area?u.area+' m²':'',u.dir?(en()?'facing '+tDir(u.dir):'hướng '+u.dir):''].filter(Boolean).join(', ');
+  const link=location.href.split('#')[0]+'#can='+u.id;
+  if(en())return "Hi Khai, I'd like advice on the apartment "+(u.type==='rent'?'for rent':'for sale')+': '+parts+(u.zone?' at '+u.zone:'')+', '+money(u)+'.\nLink: '+link;
+  return 'Mình cần tư vấn căn '+(u.type==='rent'?'cho thuê':'bán')+' '+parts+(u.zone?' tại '+u.zone:'')+', giá '+money(u)+'.\nLink căn: '+link}
+document.addEventListener('click',e=>{const a=e.target.closest('.dtf .z,.fab [data-zalo]');if(!a)return;
+  const u=a.closest('.dtf')?S.units.find(x=>x.id===dtId):null;copyTxt(zaloMsg(u));
+  toast(T('Đã chép sẵn tin nhắn. Khi Zalo mở, bạn nhấn dán rồi gửi cho Khải nhé.'))},true);
+
+/* ---- Owner admin ---- */
+function adminList(){
+  $('#list').innerHTML=S.units.map(u=>`<div class="li"><span>${u.type==='rent'?'Thuê':'Bán'} · ${esc(u.zone)} · ${esc(u.code)} · ${money(u)}</span><span><button class="btn ghost" data-e="${u.id}" type="button">Sửa</button> <button class="btn ghost" data-d="${u.id}" type="button">Xoá</button></span></div>`).join('')||'<p class="empty">Chưa có căn nào.</p>';
+  $$('[data-e]').forEach(b=>b.onclick=()=>fill(S.units.find(u=>u.id===b.dataset.e)));
+  $$('[data-d]').forEach(b=>b.onclick=()=>{if(confirm('Xoá căn này?')){S.units=S.units.filter(u=>u.id!==b.dataset.d);adminList();zones();render()}});
+}
+const F={type:'#u-type',code:'#u-code',zone:'#u-zone',beds:'#u-beds',area:'#u-area',price:'#u-price',dir:'#u-dir',furn:'#u-furn',view:'#u-view',legal:'#u-legal',deposit:'#u-deposit',fee:'#u-fee',note:'#u-note',desc:'#u-desc'};
+function fill(u){editId=u?u.id:null;imgs=u?imgsOf(u).slice():[];for(const k in F)$(F[k]).value=u?(k==='beds'?(u.bedsText||u.beds||''):(u[k]??'')):(k==='type'?'sale':'');$('#u-hot').checked=!!(u&&u.hot);$('#u-img').value='';$('#ft-title').textContent=u?'Sửa căn '+u.code:'Thêm căn mới'}
+$('#s-hero').onchange=async e=>{const f=e.target.files[0];if(!f)return;if(!asg){$('#a-msg').textContent='Chưa tải ảnh được trên trang này.';return}
+  try{$('#a-msg').textContent='Đang tải ảnh bìa…';S.hero=(await asg.upload(f)).url;head();$('#a-msg').textContent='Đã đổi ảnh bìa. Bấm “Lưu và đăng” để khách thấy.'}catch(x){$('#a-msg').textContent='Không tải được ảnh, hãy thử lại.'}};
+$('#u-reset').onclick=()=>fill(null);
+$('#u-img').onchange=async e=>{const fs=[...e.target.files];if(!fs.length)return;if(!asg){$('#a-msg').textContent='Chưa tải ảnh được trên trang này.';return}
+  try{const up=[];for(let i=0;i<fs.length;i++){$('#a-msg').textContent='Đang tải ảnh '+(i+1)+'/'+fs.length+'…';up.push((await asg.upload(fs[i])).url)}imgs=imgs.concat(up);$('#a-msg').textContent='Đã tải '+up.length+' ảnh. Hiện có '+imgs.length+' ảnh cho căn này.'}catch(x){$('#a-msg').textContent='Không tải được ảnh, hãy thử lại.'}};
+$('#uf').onsubmit=e=>{e.preventDefault();
+  const old=S.units.find(x=>x.id===editId)||{};
+  const u={...old,id:editId||'u'+Date.now(),hot:$('#u-hot').checked,imgs:imgs.slice(),img:imgs[0]||''};delete u.sample;
+  for(const k in F){const v=$(F[k]).value.trim();if(k==='beds'){u.bedsText=v;u.beds=parseInt(v)||0}else u[k]=['area','price'].includes(k)?(v===''?0:+v):v}
+  const i=S.units.findIndex(x=>x.id===u.id);i<0?S.units.unshift(u):S.units[i]=u;
+  fill(null);adminList();zones();render();$('#a-msg').textContent='Đã thêm vào danh sách. Bấm “Lưu và đăng” để khách thấy.'};
+$('#a-close').onclick=()=>$('#adm').close();
+$('#a-pub').onclick=async()=>{
+  S.name=$('#s-name').value.trim();S.phone=$('#s-phone').value.trim();S.zalo=$('#s-zalo').value.trim();
+  const json=JSON.stringify(S).replace(/</g,'\\u003c');
+  const html=PRISTINE.replace(/(<script id="data" type="application\/json">)[\s\S]*?(<\/script>)/,(m,a,b)=>a+json+b);
+  $('#a-msg').textContent='Đang đăng…';
+  try{await art.publish(html)}catch(x){$('#a-msg').textContent='Chưa đăng được ('+(x&&x.code||'lỗi')+'). Hãy thử lại.'}};
+(async()=>{
+  try{
+    if(typeof claude==='undefined')return;
+    const user=await claude.use('user');
+    if(!(user&&user.isOwner()))return;
+    art=await claude.use('artifact');asg=await claude.use('assets');
+    if(!art)return;
+    $('#adm-btn').hidden=false;
+    if(!S.phone||!S.zalo)$('#owner-warn').hidden=false;
+    $('#adm-btn').onclick=()=>{$('#s-name').value=S.name;$('#s-phone').value=S.phone;$('#s-zalo').value=S.zalo;fill(null);adminList();$('#a-msg').textContent='';$('#adm').showModal()};
+  }catch(e){}
+})();
+</script>
+
+
+
+
+
+<script>
+(function(){if(!('IntersectionObserver' in window))return;
+var SEL='.sec h2,.sec>.w>p,.sec>p,.zc,.bar,.unit,.empty,.am,.ab>*,.loc,.cta,.warn';
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+function scan(){document.querySelectorAll(SEL).forEach(function(el){if(el.__rv||el.closest('header,.hero,.fab,dialog'))return;el.__rv=1;
+ var sib=el.parentElement?[].slice.call(el.parentElement.children).indexOf(el):0;
+ el.style.setProperty('--d',(Math.min(sib,6)*0.09).toFixed(2)+'s');
+ var r=el.getBoundingClientRect();
+ el.classList.add('rv');
+ if(r.top<innerHeight*.9&&r.bottom>0){requestAnimationFrame(function(){requestAnimationFrame(function(){el.classList.add('in')})})}else io.observe(el)})}
+scan();new MutationObserver(function(){scan()}).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+
+</body>
+</html>
