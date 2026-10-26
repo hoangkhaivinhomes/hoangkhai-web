@@ -485,10 +485,22 @@ function sheetUnits(csv){
     const rent=/thuê|thue/i.test(g(row,'type'));let raw=g(row,'price'),v=num(raw);if(isNaN(v))return null;
     if(!rent&&(/tỷ|tỉ|ty|ti\b/i.test(raw)||v<100))v=Math.round(v*1000);
     const bt=g(row,'beds'),ids=driveIds(g(row,'img'));
-    return{id:'g'+n,type:rent?'rent':'sale',zone:g(row,'zone'),bedsText:bt,beds:/^\d+$/.test(bt)?+bt:bt,area:(n=>isNaN(n)?'':String(n).replace('.',','))(num(g(row,'area'))),price:v,dir:g(row,'dir'),furn:g(row,'furn'),legal:g(row,'legal'),imgs:ids.map(i=>'https://drive.google.com/thumbnail?id='+i+'&sz=w1400'),hot:/^(x|có|co|true|1|giá tốt)/i.test(g(row,'hot')),tower:g(row,'tower'),floor:g(row,'floor'),view:g(row,'view'),desc:g(row,'desc'),deposit:g(row,'deposit'),fee:g(row,'fee'),rentEst:num(g(row,'rentEst')),amen:g(row,'amen'),toVincom:g(row,'toVincom'),toNX:g(row,'toNX')}
+    return{id:'g'+n,n,type:rent?'rent':'sale',zone:g(row,'zone'),bedsText:bt,beds:/^\d+$/.test(bt)?+bt:bt,area:(n=>isNaN(n)?'':String(n).replace('.',','))(num(g(row,'area'))),price:v,dir:g(row,'dir'),furn:g(row,'furn'),legal:g(row,'legal'),imgs:ids.map(i=>'https://drive.google.com/thumbnail?id='+i+'&sz=w1400'),hot:/^(x|có|co|true|1|giá tốt)/i.test(g(row,'hot')),tower:g(row,'tower'),floor:g(row,'floor'),view:g(row,'view'),desc:g(row,'desc'),deposit:g(row,'deposit'),fee:g(row,'fee'),rentEst:num(g(row,'rentEst')),amen:g(row,'amen'),toVincom:g(row,'toVincom'),toNX:g(row,'toNX')}
   }).filter(Boolean)}
 async function loadSheet(){if(!SHEET_CSV)return;try{const r=await fetch(SHEET_CSV,{cache:'no-store'});if(!r.ok)return;const u=sheetUnits(await r.text());if(u.length){S.units=S.units.concat(u);zones();render();dtHash()}}catch(e){}}
 loadSheet();
+/* ---- Chế độ chủ web: chỉ máy đã nhập mã duyệt ở trang Đăng căn nhanh mới thấy mã căn thật ---- */
+const OWN={map:null,url:''};
+function ownCfg(){try{const u=localStorage.getItem('dc_url'),k=localStorage.getItem('dc_key'),c=localStorage.getItem('dc_chu');return u&&k&&c?{u,k,c}:null}catch(e){return null}}
+async function ownLoad(){const c=ownCfg();if(!c)return;try{const r=await fetch(c.u,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key:c.k,chu:c.c,action:'tra'})});const j=await r.json();if(j.ok){OWN.map=j.list||[];OWN.url=j.url||'';ownFill()}}catch(e){}}
+function ownOf(u){if(!OWN.map||!u)return null;const m=String((u.imgs||[])[0]||'').match(/id=([\w-]{15,})/);let x=m&&OWN.map.find(r=>r.a0===m[1]);if(!x&&typeof u.n==='number')x=OWN.map.find(r=>r.dong===u.n+2);return x||null}
+function ownFill(){const el=document.getElementById('own');if(!el)return;const u=S.units.find(x=>x.id===dtId);const x=ownOf(u);if(!x){el.innerHTML='';return}
+  el.innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;margin:14px 0 4px;padding:10px 14px;border-radius:12px;background:#fbf3dc;border:1px solid #e6cf8f;color:#5a4410;font-size:14px">
+    <span>🔑 <b style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px">${esc(x.ma||'(chưa có mã căn)')}</b></span>
+    <span>Người đăng: <b>${esc(x.nguoi||'—')}</b>${x.mg?' ('+esc(x.mg)+')':''}</span><span>Dòng ${x.dong}</span>
+    ${OWN.url?`<a href="${esc(OWN.url+'&range=A'+x.dong)}" target="_blank" rel="noopener" style="margin-left:auto;color:#5a4410;font-weight:700">Mở trong sheet ›</a>`:''}
+    <span style="flex-basis:100%;font-size:12px;opacity:.75">Chỉ máy của bạn thấy dòng này, khách không thấy.</span></div>`}
+ownLoad();
 function lbShow(){$('#lbi').src=G[gi];$('#lbc').textContent=(gi+1)+' / '+G.length;const m=G.length>1;$('#lbp').hidden=!m;$('#lbq').hidden=!m}
 function lbGo(d){if(G.length<2)return;gi=(gi+d+G.length)%G.length;lbShow()}
 function lbOpen(el){const u=S.units.find(x=>x.id===el.dataset.id);if(!u)return;G=imgsOf(u);if(!G.length)return;gi=0;lbShow();$('#lb').showModal()}
@@ -536,6 +548,7 @@ function dtOpen(id,noHash){
   $('#dtb').innerHTML=`<div class="dtn"><button type="button" id="dtx">${T('‹ Quay lại')}</button><button type="button" id="dts">${T('Chia sẻ')}</button></div>
   <div class="dtg" id="dtg">${a.length?`<img src="${esc(a[0])}" alt="Căn hộ ${esc(u.zone)}">`:PH}</div>
   ${a.length>1?`<div class="dtt">${a.map((x,i)=>`<img src="${esc(x)}" alt="Ảnh ${i+1}" data-i="${i}" class="${i?'':'on'}">`).join('')}</div>`:''}
+  <div id="own"></div>
   <div class="dth"><h2>${esc(u.zone)}</h2><div class="p">${money(u)}</div></div>
   <div class="dtc">${chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div>
   <section class="dts"><h3>${T('Thông tin căn')}</h3><dl class="dtd">${rows.map(r=>`<div><dt>${r[0]}</dt><dd>${esc(r[1])}</dd></div>`).join('')}</dl></section>
@@ -546,7 +559,7 @@ function dtOpen(id,noHash){
   <p class="note" style="font-size:13px;margin-top:30px">${T('Thông tin mang tính tham khảo, có thể thay đổi theo thời điểm. Liên hệ Khải để xác nhận chi tiết và xem căn thực tế.')}</p>
 `;
   $('#dtf').innerHTML='<div><a class="c" href="'+tel()+'">'+T('Gọi ngay')+'</a><a class="z" href="'+zl()+'" target="_blank" rel="noopener">'+T('Nhắn Zalo')+'</a></div>';
-  G=a;gi=0;
+  G=a;gi=0;ownFill();
   $('#dtx').onclick=dtClose;
   $('#dts').onclick=async()=>{const url=location.href.split('#')[0]+'#can='+id;try{if(navigator.share){await navigator.share({title:(en()?'Apartment ':'Căn hộ ')+u.zone,url});return}await navigator.clipboard.writeText(url);$('#dts').textContent=T('Đã chép link')}catch(e){prompt(T('Link căn hộ:'),url)}};
   $('#dtg').onclick=()=>{G=a;if(G.length){lbShow();$('#lb').showModal()}};
