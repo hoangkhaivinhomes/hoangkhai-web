@@ -38,7 +38,7 @@ a{color:var(--gold)}
 .chips span{background:rgba(248,220,142,.12);border:1px solid var(--line);border-radius:99px;padding:4px 11px;font-size:14px}
 .chips span.miss{border-color:var(--bad);color:var(--bad)}
 details#more{margin-top:10px}details#more summary{cursor:pointer;color:var(--gold);font-size:14px;margin-bottom:10px}
-.who{margin-top:4px}.drop{padding:30px 16px;font-size:17px;color:var(--ink)}
+.who{margin-top:4px}.hi{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;color:var(--mute);margin-top:4px}.hi b{color:var(--ink)}.hi a{font-size:13px}.drop{padding:30px 16px;font-size:17px;color:var(--ink)}
 h2{margin-top:22px}
 .mi{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
 .mi:first-child{border-top:0}.mi .t{font-size:14px;min-width:0}.mi .d{font-size:12.5px;color:var(--mute)}
@@ -52,15 +52,18 @@ h2{margin-top:22px}
 <div class="card" id="cfg" hidden><b>Link này chưa đúng.</b><p class="s" style="margin:6px 0 0">Bạn nhắn Khải (Zalo 0934.307.196) để lấy lại link đăng căn.</p></div>
 
 <div id="main">
-<div class="card who"><label for="nguoi">Tên và SĐT của bạn (để Khải liên hệ khi có khách)</label><input id="nguoi" placeholder="VD: Tuấn 0909 123 456" autocomplete="name"></div>
+<div class="card who" id="reg" hidden><b style="font-size:17px">Lần đầu dùng: cho Khải biết bạn là ai</b><p class="s" style="margin:4px 0 12px">Chỉ nhập một lần. Lần sau mở app sẽ tự nhận ra bạn.</p>
+<div class="g"><div><label for="rTen">Tên của bạn</label><input id="rTen" placeholder="VD: Tuấn" autocomplete="name"></div><div><label for="rSdt">Số điện thoại / Zalo</label><input id="rSdt" type="tel" inputmode="tel" placeholder="VD: 0909 123 456" autocomplete="tel"></div></div>
+<button class="btn" id="rGo" type="button" style="margin-top:12px;width:100%">Bắt đầu đăng căn</button><div id="rMsg"></div></div>
+<div class="hi" id="hi" hidden></div>
 
-<h2>1. Dán tin Zalo</h2>
+<h2 id="tinH">1. Dán tin Zalo</h2>
 <textarea id="tin" placeholder="Dán nguyên tin Zalo vào đây"></textarea>
 <div id="sum"></div><div id="dup"></div>
 <details id="more"><summary>Sửa thông tin</summary><div class="card"><div class="g" id="fm"></div>
 <div class="chk"><input type="checkbox" id="tot"><label for="tot" style="margin:0;color:var(--ink)">Giá tốt</label></div><div id="warn"></div></div></details>
 
-<h2>2. Thêm ảnh</h2>
+<h2 id="anhH">2. Thêm ảnh</h2>
 <div class="drop" id="drop">Bấm để chọn ảnh<br><span style="font-size:13px">(hoặc kéo thả, dán ảnh)</span><input id="fi" type="file" accept="image/*" multiple hidden></div>
 <div class="th" id="th"></div><p class="s" id="ts" style="margin-top:8px"></p>
 <div id="res"></div>
@@ -211,25 +214,41 @@ function renderSum(miss){const box=$('#sum');if(!box)return;if(!$('#tin').value.
   box.innerHTML=`<div class="chips">${parts.map(x=>`<span>${escH(x)}</span>`).join('')}${need.map(x=>`<span class="miss">Thiếu: ${escH(x)}</span>`).join('')}</div>`;
   if(need.length)$('#more').open=true}
 /* ---- căn đã đăng của môi giới (lưu trên máy) ---- */
-const MINE_K='dc_mine';let MST={};
+/* ---- môi giới: đăng ký một lần, lưu trên máy ---- */
+const PK='dc_mg';
+function getP(){try{return JSON.parse(ST.getItem(PK)||'null')}catch(e){return null}}
+function setP(p){try{p?ST.setItem(PK,JSON.stringify(p)):ST.removeItem(PK)}catch(e){}showP()}
+function showP(){const p=getP();$('#reg').hidden=!!p;$('#hi').hidden=!p;$('.bar').style.display=p?'block':'none';['#tinH','#tin','#sum','#dup','#more','#anhH','#drop','#th','#ts'].forEach(x=>{const e=$(x);if(e)e.style.display=p?'':'none'});
+  if(p)$('#hi').innerHTML=`<span>Xin chào <b>${escH(p.ten)}</b> · ${escH(p.sdt)}</span><a href="#" id="hiX">Không phải bạn?</a>`;
+  const x=$('#hiX');if(x)x.onclick=e=>{e.preventDefault();if(confirm('Đăng xuất để nhập tên khác trên máy này?')){setP(null);ST.removeItem(MINE_K);MLIST=null;drawMine()}};check();loadMine()}
+async function api(body){const url=ST.getItem('dc_url'),key=ST.getItem('dc_key');const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,...body})});return r.json()}
+async function dangKy(){const ten=$('#rTen').value.trim(),sdt=$('#rSdt').value.trim();const b=$('#rGo');
+  if(ten.length<2){$('#rMsg').innerHTML='<div class="note">Nhập tên của bạn.</div>';return}
+  if(sdt.replace(/\D/g,'').length<9){$('#rMsg').innerHTML='<div class="note">Số điện thoại chưa đúng.</div>';return}
+  b.disabled=true;b.textContent='Đang lưu…';$('#rMsg').innerHTML='';
+  try{const j=await api({action:'dangky',ten,sdt});if(j.ok){setP({ma:j.ma,ten:j.ten,sdt:j.sdt})}else $('#rMsg').innerHTML=`<div class="note">${escH(j.loi||'Chưa lưu được')}</div>`}
+  catch(e){$('#rMsg').innerHTML='<div class="note">Không kết nối được, thử lại sau.</div>'}
+  b.disabled=false;b.textContent='Bắt đầu đăng căn'}
+const MINE_K='dc_mine';let MST={},MLIST=null;
 function getMine(){try{return JSON.parse(ST.getItem(MINE_K)||'[]')}catch(e){return[]}}
-function saveMine(x){const a=getMine().filter(m=>m.id!==x.id);a.unshift(x);try{ST.setItem(MINE_K,JSON.stringify(a.slice(0,200)))}catch(e){}MST[x.id]={an:'',tt:'Còn'};drawMine()}
+function saveMine(x){if(MLIST){MLIST=[x,...MLIST.filter(m=>m.id!==x.id)]}const a=getMine().filter(m=>m.id!==x.id);a.unshift(x);try{ST.setItem(MINE_K,JSON.stringify(a.slice(0,200)))}catch(e){}MST[x.id]={an:'',tt:'Còn'};drawMine()}
 const fmtD=t=>{const d=new Date(t);return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear()};
-function drawMine(){const a=getMine();$('#mineH').hidden=!a.length;
+function drawMine(){const a=MLIST||getMine();$('#mineH').hidden=!a.length;
   $('#mine').innerHTML=a.length?`<div class="card">${a.map(m=>{const st=MST[m.id];const hidden=st&&st.an;const label=hidden?(st.tt||st.an):(st?'Đang hiện trên web':'');
     const done=m.loai==='Bán'?'Đã bán':'Đã cho thuê';
     return `<div class="mi"><div class="t">${escH(m.sum)}<div class="d">Đăng ${fmtD(m.at)}${label?`<span class="pill ${hidden?'off':'on'}">${escH(label)}</span>`:''}</div></div>
     <div class="acts">${hidden?`<button data-st="Còn" data-id="${escH(m.id)}">Còn hàng, hiện lại</button>`:`<button data-st="${done}" data-id="${escH(m.id)}">${done}</button>`}</div></div>`}).join('')}</div>`:'';
   document.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>doiTT(b.dataset.id,b.dataset.st,b))}
-async function loadMine(){const a=getMine();drawMine();if(!a.length)return;const url=ST.getItem('dc_url'),key=ST.getItem('dc_key');if(!url||!key)return;
+async function loadMine(){const p=getP();if(p&&ST.getItem('dc_url')){try{const j=await api({action:'trangthai',mg:p.ma});if(j.ok&&j.list){MLIST=j.list.filter(x=>x.id).map(x=>({id:x.id,at:x.at||Date.now(),loai:x.loai,sum:x.sum}));MST={};j.list.forEach(x=>MST[x.id]={an:x.an,tt:x.tt});drawMine();return}}catch(e){}}
+  const a=getMine();drawMine();if(!a.length)return;const url=ST.getItem('dc_url'),key=ST.getItem('dc_key');if(!url||!key)return;
   try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,action:'trangthai',ids:a.map(m=>m.id)})});const j=await r.json();if(j.ok&&j.st){MST=j.st;drawMine()}}catch(e){}}
-async function doiTT(id,st,btn){const m=getMine().find(x=>x.id===id);if(!m)return;
+async function doiTT(id,st,btn){const m=(MLIST||getMine()).find(x=>x.id===id);if(!m)return;
   if(!confirm(st==='Còn'?'Căn này còn hàng? Căn sẽ hiện lại trên web.':`Báo "${st}" cho căn:\n${m.sum}\n\nCăn sẽ tự ẩn khỏi web.`))return;
   const url=ST.getItem('dc_url'),key=ST.getItem('dc_key');btn.disabled=true;btn.textContent='Đang lưu…';
-  try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,action:'doi',id,st})});const j=await r.json();
+  try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,action:'doi',id,st,mg:(getP()||{}).ma})});const j=await r.json();
     if(j.ok){MST[id]={an:st==='Còn'?'':st,tt:st};drawMine()}else{alert('Chưa lưu được: '+(j.loi||'lỗi không rõ'));drawMine()}}
   catch(e){alert('Không kết nối được, thử lại sau.');drawMine()}}
-function check(){let miss=[];if($('#nguoi')&&!$('#nguoi').value.trim())miss.push('Tên và SĐT của bạn');FIELDS.filter(f=>f[4]).forEach(f=>{const e=document.querySelector(`.f[data-k="${f[0]}"]`);const m=!val(f[0]);e.classList.toggle('miss',m);if(m)miss.push(f[1])});
+function check(){let miss=[];if(!getP())miss.push('Tên và SĐT của bạn');FIELDS.filter(f=>f[4]).forEach(f=>{const e=document.querySelector(`.f[data-k="${f[0]}"]`);const m=!val(f[0]);e.classList.toggle('miss',m);if(m)miss.push(f[1])});
   dupCheck();renderSum(miss);const ok=!miss.length&&!busy;$('#go').disabled=!ok;$('#st').textContent=miss.length?'Còn thiếu: '+miss.map(x=>x.split(' (')[0]).join(', '):(imgs.length?'Sẵn sàng đăng · '+imgs.length+' ảnh':'Sẵn sàng đăng · chưa có ảnh')}
 const ZM=()=>{try{return JSON.parse(ST.getItem('dc_zm')||'{}')}catch(e){return{}}};
 let curTw='';
@@ -252,16 +271,16 @@ function cfgShow(){const has=ST.getItem('dc_url')&&ST.getItem('dc_key');$('#cfg'
 let cfgForce=false;
 /* đăng */
 $('#go').onclick=async()=>{if(busy)return;const url=ST.getItem('dc_url'),key=ST.getItem('dc_key');if(!url||!key){cfgForce=true;cfgShow();return}
-  const f={};['loai','khu','pn','dt','gia','huong','noithat','phaply','toa','ma','tang','view','coc','thue','mota'].forEach(k=>{const v=val(k);if(v)f[k]=v});if($('#tot').checked)f.tot='Có';f.nguoi=$('#nguoi').value.trim();
+  const f={};['loai','khu','pn','dt','gia','huong','noithat','phaply','toa','ma','tang','view','coc','thue','mota'].forEach(k=>{const v=val(k);if(v)f[k]=v});if($('#tot').checked)f.tot='Có';const P=getP()||{};f.nguoi=(P.ten||'')+' - '+(P.sdt||'');
   const sum=`${f.loai} · ${f.khu}\n${f.pn||''} ${f.dt?f.dt+' m²':''} · ${f.gia}\n${imgs.length} ảnh\n\nĐăng căn này lên web?`;if(!confirm((DUP.hits.length?(DUP.level==='trung'?'⚠ CĂN NÀY ĐÃ ĐĂNG TRÊN WEB RỒI:\n':'⚠ CÓ THỂ TRÙNG VỚI CĂN ĐÃ ĐĂNG:\n')+DUP.hits.slice(0,3).map(p=>'- '+[p.loai,p.khu,p.pn,p.dt?p.dt+' m²':'',p.gia,p.toa?'tòa '+p.toa+' tầng '+p.tang:''].filter(Boolean).join(' · ')).join('\n')+'\n\nVẫn đăng tiếp?\n\n':'')+sum))return;
   busy=true;$('#go').disabled=true;$('#st').textContent='Đang đăng, vui lòng chờ…';
   const id='c'+Date.now()+Math.random().toString(36).slice(2,6);
-  try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,id,fields:f,images:imgs.map(d=>({data:d.split(',')[1]}))})});const j=await r.json();
+  try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,id,mg:P.ma,fields:f,images:imgs.map(d=>({data:d.split(',')[1]}))})});const j=await r.json();
     if(j.ok){saveMine({id,at:Date.now(),loai:f.loai||'',sum:[f.loai,f.khu,f.pn,f.dt?f.dt+' m²':'',f.gia,f.toa?'tòa '+f.toa+(f.tang?' tầng '+f.tang:''):''].filter(Boolean).join(' · ')});if(POSTED)POSTED.push({loai:f.loai||'',khu:f.khu||'',pn:f.pn||'',dt:f.dt||'',gia:f.gia||'',toa:f.toa||'',tang:f.tang||'',an:''});$('#res').innerHTML=`<div class="ok"><b>Đã đăng.</b> ${j.trung?'(Căn này đã được gửi trước đó.)':''}Căn sẽ hiện trên web sau khoảng 5 phút.<div class="row" style="margin-top:12px"><button class="btn" id="nx">Đăng căn tiếp</button></div></div>`;$('#nx').onclick=reset;$('#st').textContent='Đã đăng';$('#res').scrollIntoView({behavior:'smooth'})}
-    else{$('#res').innerHTML=`<div class="note">Chưa đăng được: ${j.loi||'lỗi không rõ'}</div>`;busy=false;check()}}
+    else{if(j.dangky){setP(null)}$('#res').innerHTML=`<div class="note">Chưa đăng được: ${escH(j.loi||'lỗi không rõ')}${j.dangky?'. Bạn nhập lại tên và SĐT ở đầu trang nhé.':''}</div>`;busy=false;check()}}
   catch(e){$('#res').innerHTML='<div class="note">Không nhận được phản hồi. <b>Hãy kiểm tra Google Sheet xem căn đã có chưa trước khi bấm Đăng lại</b>, để tránh đăng trùng.</div>';busy=false;check()}};
 function reset(){$('#tin').value='';FIELDS.forEach(f=>$('#f_'+f[0]).value='');$('#tot').checked=false;imgs=[];drawImgs();$('#res').innerHTML='';$('#warn').innerHTML='';$('#dup').innerHTML='';DUP={level:'',hits:[]};busy=false;check();scrollTo({top:0,behavior:'smooth'})}
 
 
-build();check();cfgShow();loadPosted();loadMine();try{$('#nguoi').value=ST.getItem('dc_nguoi')||''}catch(e){}$('#nguoi').addEventListener('input',()=>{try{ST.setItem('dc_nguoi',$('#nguoi').value.trim())}catch(e){}check()});check();document.addEventListener('input',e=>{if(e.target.closest&&e.target.closest('#fm'))dupCheck()});document.addEventListener('change',e=>{if(e.target.closest&&e.target.closest('#fm'))dupCheck()});
+build();check();cfgShow();loadPosted();$('#rGo').onclick=dangKy;$('#rSdt').addEventListener('keydown',e=>{if(e.key==='Enter')dangKy()});if(ST.getItem('dc_url'))showP();document.addEventListener('input',e=>{if(e.target.closest&&e.target.closest('#fm'))dupCheck()});document.addEventListener('change',e=>{if(e.target.closest&&e.target.closest('#fm'))dupCheck()});
 </script></body></html>
