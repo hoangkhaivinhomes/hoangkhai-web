@@ -31,6 +31,10 @@ label{display:block;font-size:13px;color:var(--mute);margin:0 0 4px}
 .row{display:flex;gap:10px;flex-wrap:wrap}.row .btn{flex:1}
 .chk{display:flex;gap:8px;align-items:center;margin-top:12px}.chk input{width:auto}
 a{color:var(--gold)}
+.dupw{background:rgba(255,190,90,.14);border:1px solid rgba(255,190,90,.65);border-radius:12px;padding:12px 14px;margin-top:12px;font-size:14px}
+.dupw b{color:#ffd28a}.dupw ul{margin:6px 0 0;padding-left:18px}.dupw li{margin:3px 0}
+.dupok{background:rgba(140,220,140,.1);border:1px solid rgba(140,220,140,.45);border-radius:12px;padding:10px 12px;margin-top:12px;font-size:14px;color:#c9f0c9}
+.qk{display:flex;gap:8px}.qk input{flex:1}
 </style></head><body><div class="w">
 <h1>Đăng căn nhanh</h1><p class="s">Dán tin Zalo, thêm ảnh, kiểm tra rồi bấm Đăng. Căn sẽ tự lên web sau ít phút. Trang này chỉ dành cho riêng bạn, đừng gửi link cho người khác.</p>
 
@@ -40,9 +44,11 @@ a{color:var(--gold)}
 <button class="btn" id="cs" style="margin-top:12px">Lưu</button></div>
 
 <div id="main"><p class="s"><a href="#" id="ql" style="color:var(--gold)">Lấy link mở nhanh (không phải nhập lại)</a></p><div id="qlb" class="card" hidden></div>
+<h2>Kiểm tra nhanh căn đã đăng chưa</h2>
+<div class="card"><div class="qk"><input id="qk" placeholder="Gõ mã căn, VD: S2.03.15.12 hoặc BS8.01.02" autocomplete="off"></div><div id="qkr"></div><p class="s" id="qks" style="margin:8px 0 0"></p></div>
 <h2>1. Dán tin nhắn Zalo</h2>
 <textarea id="tin" placeholder="Dán nội dung căn vào đây, ví dụ: Bán 2PN The Origami 59m2 hướng Đông Nam, nội thất cơ bản, HĐMB, giá 3 tỷ 250"></textarea>
-<p class="s" style="margin-top:6px">Nội dung gốc không được đăng lên web, chỉ các ô ở bước 3.</p>
+<div id="dup"></div><p class="s" style="margin-top:6px">Nội dung gốc không được đăng lên web, chỉ các ô ở bước 3.</p>
 
 <h2>2. Ảnh căn</h2>
 <div class="drop" id="drop">Kéo ảnh vào đây, bấm để chọn ảnh, hoặc dán ảnh (Ctrl+V)<input id="fi" type="file" accept="image/*" multiple hidden></div>
@@ -152,10 +158,48 @@ const FIELDS=[['loai','Loại căn','select',['','Bán','Cho thuê'],1],['khu','
 function build(){$('#fm').innerHTML=FIELDS.map(f=>`<div class="f" data-k="${f[0]}"><label>${f[1]}${f[4]?' *':''}</label>${f[2]==='select'?`<select id="f_${f[0]}">${f[3].map(o=>`<option>${o}</option>`).join('')}</select>`:`<input id="f_${f[0]}">`}</div>`).join('');
   FIELDS.forEach(f=>$('#f_'+f[0]).addEventListener('input',check))}
 function val(k){return ($('#f_'+k).value||'').trim()}
-function fill(r){['loai','khu','pn','dt','gia','huong','noithat','phaply','toa','ma','tang','view','coc','mota'].forEach(k=>{if(r[k])$('#f_'+k).value=r[k]});$('#tot').checked=!!r.tot;
+function fill(r){['loai','khu','pn','dt','gia','huong','noithat','phaply','toa','ma','tang','view','coc','mota'].forEach(k=>{if(r[k])$('#f_'+k).value=r[k]});$('#tot').checked=!!r.tot;dupCheck();
   $('#warn').innerHTML=r.ghi&&r.ghi.length?r.ghi.map(x=>`<div class="note">${x}</div>`).join(''):'';check()}
+/* ---- kiểm tra trùng với căn đã đăng trên web ---- */
+const POSTED_CSV='https://docs.google.com/spreadsheets/d/e/2PACX-1vSHcr70-ByPB3DYMUNAXX4LMPpR8-XhCUyEAeGtUbtQSMS6qL1ETe6HHb1LgS4-EOynheizpYY2lwLn/pub?gid=553047661&single=true&output=csv';
+let POSTED=null,postedErr='',DUP={level:'',hits:[]};
+const escH=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function csvParse(t){const rows=[];let row=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=false}else f+=c}else if(c=='"')q=true;else if(c==','){row.push(f);f=''}else if(c=='\n'){row.push(f);rows.push(row);row=[];f=''}else if(c!='\r')f+=c}if(f||row.length){row.push(f);rows.push(row)}return rows}
+const normTw=x=>String(x||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+const dtNum=x=>parseFloat(String(x||'').replace(',','.'))||0;
+async function loadPosted(){try{const r=await fetch(POSTED_CSV+'&t='+Date.now());if(!r.ok)throw 0;const rows=csvParse(await r.text());const h=(rows.shift()||[]).map(x=>nz(x).trim());
+  const ex=k=>h.findIndex(x=>x===k),st=k=>h.findIndex(x=>x.startsWith(k));
+  const I={loai:st('loai can'),khu:st('phan khu'),pn:st('phong ngu'),dt:st('dien tich'),gia:h.findIndex(x=>/^gia(\s|\(|$)/.test(x)&&!/tot/.test(x)),toa:ex('toa'),tang:ex('tang'),an:ex('an')};
+  const g=(r,k)=>I[k]>=0?(r[I[k]]||'').trim():'';
+  POSTED=rows.filter(r=>r.some(x=>x&&x.trim())).map((r,i)=>({loai:g(r,'loai'),khu:g(r,'khu'),pn:g(r,'pn'),dt:g(r,'dt'),gia:g(r,'gia'),toa:g(r,'toa'),tang:g(r,'tang'),an:g(r,'an')}));postedErr=''}
+ catch(e){postedErr='Chưa tải được danh sách căn đã đăng để kiểm tra trùng.'}
+ dupCheck();quickCheck()}
+function findPosted(q){if(!POSTED)return {level:'',hits:[]};const toa=normTw(q.toa),tang=+q.tang||0,dt=dtNum(q.dt);
+  const sameDt=p=>!dt||!dtNum(p.dt)||Math.abs(dtNum(p.dt)-dt)<=0.3,sameLoai=p=>!q.loai||!p.loai||p.loai===q.loai;
+  if(toa&&tang){const h=POSTED.filter(p=>normTw(p.toa)===toa&&(+p.tang||0)===tang&&sameDt(p)&&sameLoai(p));if(h.length)return {level:dt?'trung':'cothe',hits:h}}
+  if(q.khu&&dt){const h=POSTED.filter(p=>p.khu===q.khu&&dtNum(p.dt)&&Math.abs(dtNum(p.dt)-dt)<=0.3&&sameLoai(p)&&(!q.pn||!p.pn||nz(p.pn)===nz(q.pn)));if(h.length)return {level:'cothe',hits:h}}
+  return {level:'',hits:[]}}
+const postedLine=p=>escH([p.loai,p.khu,p.pn,p.dt?p.dt+' m²':'',p.gia,p.toa?'tòa '+p.toa+(p.tang?' tầng '+p.tang:''):''].filter(Boolean).join(' · '))+(p.an?' <i>(đang ẩn trên web)</i>':'');
+function dupHtml(d,giaMoi){if(!d.hits.length)return '';const head=d.level==='trung'?'⚠ Căn này đã đăng trên web rồi':'⚠ Có thể trùng với căn đã đăng';
+  const gk=x=>nz(x).replace(/[^0-9,.]/g,'').replace(',','.');const diff=giaMoi&&d.hits.every(p=>p.gia&&gk(p.gia)!==gk(giaMoi))?`<div style="margin-top:6px">Giá trong tin mới: <b>${escH(giaMoi)}</b>. Nếu chủ đổi giá, bạn sửa giá ở dòng cũ trong Sheet thay vì đăng mới.</div>`:'';
+  return `<div class="dupw"><b>${head}</b><ul>${d.hits.slice(0,5).map(p=>`<li>${postedLine(p)}</li>`).join('')}</ul>${diff}</div>`}
+let dupT;function dupCheck(){clearTimeout(dupT);dupT=setTimeout(()=>{const box=$('#dup');if(!box)return;
+  const q={loai:val('loai'),khu:val('khu'),pn:val('pn'),dt:val('dt'),toa:val('toa'),tang:val('tang')};
+  if(!$('#tin').value.trim()&&!q.toa&&!q.dt){box.innerHTML='';DUP={level:'',hits:[]};return}
+  if(!POSTED){box.innerHTML=postedErr?`<div class="note">${postedErr}</div>`:'';return}
+  DUP=findPosted(q);
+  box.innerHTML=DUP.hits.length?dupHtml(DUP,val('gia')):((q.toa&&q.tang)||(q.khu&&q.dt)?`<div class="dupok">✓ Chưa thấy căn này trên web (đã so với ${POSTED.length} căn đã đăng).</div>`:'')},250)}
+function quickCheck(){const v=($('#qk')||{}).value||'';const out=$('#qkr'),s=$('#qks');if(!out)return;
+  if(!v.trim()){out.innerHTML='';s.textContent=POSTED?`Đang có ${POSTED.length} căn trên web.`:(postedErr||'Đang tải danh sách căn đã đăng…');return}
+  const ma=fmtMa(v),g=ma.split('.');let toa='',tang='';
+  if(g.length>=3){toa=g.slice(0,g.length-2).join('.');tang=String(+g[g.length-2]||'')}else{toa=ma}
+  if(!POSTED){out.innerHTML='';s.textContent=postedErr||'Đang tải…';return}
+  const d=tang?findPosted({toa,tang}):{level:'cothe',hits:POSTED.filter(p=>normTw(p.toa)===normTw(toa))};
+  s.textContent='';out.innerHTML=d.hits.length?`<div class="dupw"><b>${tang?`Tòa ${escH(toa)} tầng ${escH(tang)} đã có ${d.hits.length} căn trên web`:`Tòa ${escH(toa)} có ${d.hits.length} căn trên web`}</b><ul>${d.hits.slice(0,8).map(p=>`<li>${postedLine(p)}</li>`).join('')}</ul></div>`
+    :`<div class="dupok">✓ Chưa có căn ${escH(ma)} trên web${tang?` (đã so tòa ${escH(toa)} tầng ${escH(tang)})`:''}.</div>`;
+  const zz=zoneOfTower((toa.split('.')[0]||''));if(zz)out.insertAdjacentHTML('beforeend',`<p class="s" style="margin:6px 0 0">Phân khu: ${escH(zz)}</p>`)}
 function check(){let miss=[];FIELDS.filter(f=>f[4]).forEach(f=>{const e=document.querySelector(`.f[data-k="${f[0]}"]`);const m=!val(f[0]);e.classList.toggle('miss',m);if(m)miss.push(f[1])});
-  const ok=!miss.length&&!busy;$('#go').disabled=!ok;$('#st').textContent=miss.length?'Còn thiếu: '+miss.map(x=>x.split(' (')[0]).join(', '):(imgs.length?'Sẵn sàng đăng · '+imgs.length+' ảnh':'Sẵn sàng đăng · chưa có ảnh')}
+  dupCheck();const ok=!miss.length&&!busy;$('#go').disabled=!ok;$('#st').textContent=miss.length?'Còn thiếu: '+miss.map(x=>x.split(' (')[0]).join(', '):(imgs.length?'Sẵn sàng đăng · '+imgs.length+' ảnh':'Sẵn sàng đăng · chưa có ảnh')}
 const ZM=()=>{try{return JSON.parse(ST.getItem('dc_zm')||'{}')}catch(e){return{}}};
 let curTw='';
 let tm;$('#tin').addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(()=>{FIELDS.forEach(f=>$('#f_'+f[0]).value='');const r=parseTin($('#tin').value);curTw=r._tw||'';
@@ -178,18 +222,18 @@ let cfgForce=false;$('#cs').onclick=()=>{const u=$('#cu').value.trim(),k=$('#ck'
 /* đăng */
 $('#go').onclick=async()=>{if(busy)return;const url=ST.getItem('dc_url'),key=ST.getItem('dc_key');if(!url||!key){cfgForce=true;cfgShow();return}
   const f={};['loai','khu','pn','dt','gia','huong','noithat','phaply','toa','ma','tang','view','coc','thue','mota'].forEach(k=>{const v=val(k);if(v)f[k]=v});if($('#tot').checked)f.tot='Có';
-  const sum=`${f.loai} · ${f.khu}\n${f.pn||''} ${f.dt?f.dt+' m²':''} · ${f.gia}\n${imgs.length} ảnh\n\nĐăng căn này lên web?`;if(!confirm(sum))return;
+  const sum=`${f.loai} · ${f.khu}\n${f.pn||''} ${f.dt?f.dt+' m²':''} · ${f.gia}\n${imgs.length} ảnh\n\nĐăng căn này lên web?`;if(!confirm((DUP.hits.length?(DUP.level==='trung'?'⚠ CĂN NÀY ĐÃ ĐĂNG TRÊN WEB RỒI:\n':'⚠ CÓ THỂ TRÙNG VỚI CĂN ĐÃ ĐĂNG:\n')+DUP.hits.slice(0,3).map(p=>'- '+[p.loai,p.khu,p.pn,p.dt?p.dt+' m²':'',p.gia,p.toa?'tòa '+p.toa+' tầng '+p.tang:''].filter(Boolean).join(' · ')).join('\n')+'\n\nVẫn đăng tiếp?\n\n':'')+sum))return;
   busy=true;$('#go').disabled=true;$('#st').textContent='Đang đăng, vui lòng chờ…';
   const id='c'+Date.now()+Math.random().toString(36).slice(2,6);
   try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,id,fields:f,images:imgs.map(d=>({data:d.split(',')[1]}))})});const j=await r.json();
-    if(j.ok){$('#res').innerHTML=`<div class="ok"><b>Đã đăng.</b> ${j.trung?'(Căn này đã được gửi trước đó.)':''}Căn sẽ hiện trên web sau khoảng 5 phút.<div class="row" style="margin-top:12px"><button class="btn" id="nx">Đăng căn tiếp</button></div></div>`;$('#nx').onclick=reset;$('#st').textContent='Đã đăng';$('#res').scrollIntoView({behavior:'smooth'})}
+    if(j.ok){if(POSTED)POSTED.push({loai:f.loai||'',khu:f.khu||'',pn:f.pn||'',dt:f.dt||'',gia:f.gia||'',toa:f.toa||'',tang:f.tang||'',an:''});$('#res').innerHTML=`<div class="ok"><b>Đã đăng.</b> ${j.trung?'(Căn này đã được gửi trước đó.)':''}Căn sẽ hiện trên web sau khoảng 5 phút.<div class="row" style="margin-top:12px"><button class="btn" id="nx">Đăng căn tiếp</button></div></div>`;$('#nx').onclick=reset;$('#st').textContent='Đã đăng';$('#res').scrollIntoView({behavior:'smooth'})}
     else{$('#res').innerHTML=`<div class="note">Chưa đăng được: ${j.loi||'lỗi không rõ'}</div>`;busy=false;check()}}
   catch(e){$('#res').innerHTML='<div class="note">Không nhận được phản hồi. <b>Hãy kiểm tra Google Sheet xem căn đã có chưa trước khi bấm Đăng lại</b>, để tránh đăng trùng.</div>';busy=false;check()}};
-function reset(){$('#tin').value='';FIELDS.forEach(f=>$('#f_'+f[0]).value='');$('#tot').checked=false;imgs=[];drawImgs();$('#res').innerHTML='';$('#warn').innerHTML='';busy=false;check();scrollTo({top:0,behavior:'smooth'})}
+function reset(){$('#tin').value='';FIELDS.forEach(f=>$('#f_'+f[0]).value='');$('#tot').checked=false;imgs=[];drawImgs();$('#res').innerHTML='';$('#warn').innerHTML='';$('#dup').innerHTML='';DUP={level:'',hits:[]};busy=false;check();scrollTo({top:0,behavior:'smooth'})}
 $('#rs').onclick=()=>{if(confirm('Xóa hết để nhập căn mới?'))reset()};
 
 $('#ql').onclick=e=>{e.preventDefault();const l=quickLink();const b=$('#qlb');b.hidden=false;
  b.innerHTML='<p class="s" style="margin-top:0">Link này đã chứa sẵn cài đặt của bạn. <b>Chỉ bạn dùng, đừng gửi cho ai.</b> Mở link này trên điện thoại, rồi thêm vào màn hình chính (Safari: nút Chia sẻ → Thêm vào MH chính; Chrome: ⋮ → Thêm vào màn hình chính).</p><input id="qlv" readonly><button class="btn" id="qlc" style="margin-top:10px">Sao chép link</button>';
  $('#qlv').value=l;$('#qlc').onclick=async()=>{try{await navigator.clipboard.writeText(l)}catch(x){$('#qlv').select();document.execCommand('copy')}$('#qlc').textContent='Đã chép'}};
-build();check();cfgShow();
+build();check();cfgShow();loadPosted();$('#qk').addEventListener('input',quickCheck);document.addEventListener('input',e=>{if(e.target.closest&&e.target.closest('#fm'))dupCheck()});document.addEventListener('change',e=>{if(e.target.closest&&e.target.closest('#fm'))dupCheck()});
 </script></body></html>
