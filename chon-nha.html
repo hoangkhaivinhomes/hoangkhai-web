@@ -352,7 +352,7 @@ const tBeds=t=>{t=String(t||'');if(!en())return t;return t.replace(/^(\d+)\s*pn(
 const tMoney=v=>{if(!en()||!v)return v;return String(v).replace(/cọc\s*/i,'').replace(/(\d+(?:[.,]\d+)?)\s*tháng/i,(m,n)=>n+(+n.replace(',','.')===1?' month':' months')).replace(/triệu/i,'million VND').replace(/tỷ|tỉ/i,'billion VND')};
 const fmt=x=>en()?String(x):String(x).replace('.',',');
 const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const money=u=>{const p=u.price;if(en())return u.type==='rent'?p+' million VND/month':(p>=1000?+(p/1000).toFixed(2)+' billion VND':p+' million VND');return u.type==='rent'?p+' triệu/tháng':(p>=1000?String(+(p/1000).toFixed(2)).replace('.',',')+' tỷ':p+' triệu')};
+const money=u=>{const p=u.price;if(en())return u.type==='rent'?p+' million VND/month':(p>=1000?+(p/1000).toFixed(2)+' billion VND':p+' million VND');return u.type==='rent'?String(p).replace('.',',')+' triệu/tháng':(p>=1000?String(+(p/1000).toFixed(2)).replace('.',',')+' tỷ':p+' triệu')};
 const imgsOf=u=>u.imgs&&u.imgs.length?u.imgs:(u.img?[u.img]:[]);
 const bedsLabel=u=>{const t=String(u.bedsText||u.beds||'');if(/^\d+$/.test(t))return en()?t+(t==='1'?' bedroom':' bedrooms'):t+' phòng ngủ';return tBeds(t)};
 const phAttr=u=>imgsOf(u).length?` data-id="${esc(u.id)}" tabindex="0" role="button" aria-label="${en()?'View '+imgsOf(u).length+' photos':'Xem '+imgsOf(u).length+' ảnh'}"`:'';
@@ -478,17 +478,19 @@ function driveIds(t){return String(t||'').split(/[,\s]+/).map(x=>{const m=x.matc
 function sheetUnits(csv){
   const R=csvRows(csv);if(R.length<2)return [];
   const H=R[0].map(h=>h.toLowerCase());const ix=(...k)=>H.findIndex(h=>k.some(x=>h.includes(x)));
-  const c={type:ix('loại','loai'),zone:ix('khu','phân khu'),beds:ix('phòng'),area:ix('diện tích','dien tich'),price:H.findIndex(h=>h.includes('giá')&&!h.includes('tốt')),dir:ix('hướng','huong'),furn:ix('nội thất','noi that'),legal:ix('pháp lý','phap ly'),img:ix('ảnh','hình'),hot:ix('nổi bật','giá tốt','noi bat'),hide:ix('ẩn','an căn','hide'),upd:ix('ngày cập nhật','ngay cap nhat'),tower:ix('tòa','toa'),floor:ix('tầng','tang'),view:ix('view','cảnh'),desc:ix('mô tả','mo ta','ghi chú','ghi chu'),deposit:ix('cọc','coc'),fee:ix('phí quản','phi quan'),rentEst:ix('thuê dự kiến','thue du kien'),amen:ix('tiện ích','tien ich'),toVincom:ix('đến vincom','den vincom'),toNX:ix('nguyễn xiển','nguyen xien')};
+  const c={type:ix('loại','loai'),zone:ix('khu','phân khu'),beds:ix('phòng'),area:ix('diện tích','dien tich'),price:H.findIndex(h=>h.includes('giá')&&!h.includes('tốt')),dir:ix('hướng','huong'),furn:ix('nội thất','noi that'),legal:ix('pháp lý','phap ly'),img:ix('ảnh','hình'),hot:ix('nổi bật','giá tốt','noi bat'),hide:ix('ẩn','an căn','hide'),tower:ix('tòa','toa'),floor:ix('tầng','tang'),view:ix('view','cảnh'),desc:ix('mô tả','mo ta','ghi chú','ghi chu'),deposit:ix('cọc','coc'),fee:ix('phí quản','phi quan'),rentEst:ix('thuê dự kiến','thue du kien'),amen:ix('tiện ích','tien ich'),toVincom:ix('đến vincom','den vincom'),toNX:ix('nguyễn xiển','nguyen xien')};
   const g=(row,k)=>c[k]>=0?String(row[c[k]]||'').trim():'';
   return R.slice(1).map((row,n)=>{
     if(/^(x|có|co|true|1|ẩn|an|đã bán|da ban|đã thuê|da thue)/i.test(g(row,'hide')))return null;
-    const rent=/thuê|thue/i.test(g(row,'type'));
-    if(rent){const dm=g(row,'upd').match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(dm&&Date.now()-new Date(+dm[3],+dm[2]-1,+dm[1]).getTime()>8*864e5)return null}let raw=g(row,'price'),v=num(raw);if(isNaN(v))return null;
+    const rent=/thuê|thue/i.test(g(row,'type'));let raw=g(row,'price'),v=num(raw);if(isNaN(v))return null;
     if(!rent&&(/tỷ|tỉ|ty|ti\b/i.test(raw)||v<100))v=Math.round(v*1000);
     const bt=g(row,'beds'),ids=driveIds(g(row,'img'));
     return{id:'g'+n,type:rent?'rent':'sale',zone:g(row,'zone'),bedsText:bt,beds:/^\d+$/.test(bt)?+bt:bt,area:(n=>isNaN(n)?'':String(n).replace('.',','))(num(g(row,'area'))),price:v,dir:g(row,'dir'),furn:g(row,'furn'),legal:g(row,'legal'),imgs:ids.map(i=>'https://drive.google.com/thumbnail?id='+i+'&sz=w1400'),hot:/^(x|có|co|true|1|giá tốt)/i.test(g(row,'hot')),tower:g(row,'tower'),floor:g(row,'floor'),view:g(row,'view'),desc:g(row,'desc'),deposit:g(row,'deposit'),fee:g(row,'fee'),rentEst:num(g(row,'rentEst')),amen:g(row,'amen'),toVincom:g(row,'toVincom'),toNX:g(row,'toNX')}
   }).filter(Boolean)}
-async function loadSheet(){if(!SHEET_CSV)return;try{const r=await fetch(SHEET_CSV,{cache:'no-store'});if(!r.ok)return;const u=sheetUnits(await r.text());if(u.length){S.units=S.units.concat(u);zones();render();dtHash()}}catch(e){}}
+function useUnits(u){S.units=S.units.concat(u);zones();render();dtHash()}
+async function loadSheet(){if(!SHEET_CSV)return;let ok=false;
+  try{const r=await fetch(SHEET_CSV,{cache:'no-store'});if(r.ok){const u=sheetUnits(await r.text());if(u.length){ok=true;try{localStorage.setItem('hk_units',JSON.stringify({t:Date.now(),u}))}catch(e){}useUnits(u)}}}catch(e){}
+  if(!ok){try{const c=JSON.parse(localStorage.getItem('hk_units')||'null');if(c&&c.u&&c.u.length&&Date.now()-c.t<3*864e5)useUnits(c.u)}catch(e){}}}
 loadSheet();
 function lbShow(){$('#lbi').src=G[gi];$('#lbc').textContent=(gi+1)+' / '+G.length;const m=G.length>1;$('#lbp').hidden=!m;$('#lbq').hidden=!m}
 function lbGo(d){if(G.length<2)return;gi=(gi+d+G.length)%G.length;lbShow()}
