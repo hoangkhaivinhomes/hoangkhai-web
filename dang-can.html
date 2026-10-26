@@ -159,7 +159,7 @@ function parseTin(raw){
 const $=s=>document.querySelector(s);
 const MEM={};
 const ST=(()=>{let L=null;try{L=localStorage;L.setItem('dc_t','1');L.removeItem('dc_t')}catch(e){L=null}
-  return{getItem:k=>{try{const v=L&&L.getItem(k);if(v!==null&&v!==undefined)return v}catch(e){}return MEM[k]===undefined?null:MEM[k]},setItem:(k,v)=>{MEM[k]=v;try{L&&L.setItem(k,v)}catch(e){}}}})();
+  return{getItem:k=>{try{const v=L&&L.getItem(k);if(v!==null&&v!==undefined)return v}catch(e){}return MEM[k]===undefined?null:MEM[k]},setItem:(k,v)=>{MEM[k]=v;try{L&&L.setItem(k,v)}catch(e){}},removeItem:k=>{delete MEM[k];try{L&&L.removeItem(k)}catch(e){}}}})();
 /* link mở nhanh: #c=<mã hóa địa chỉ + mật khẩu> tự cài đặt, không phải nhập lại */
 (function(){const m=location.hash.match(/^#c=([A-Za-z0-9_\-]+)/);if(!m)return;try{const s=decodeURIComponent(escape(atob(m[1].replace(/-/g,'+').replace(/_/g,'/'))));const i=s.indexOf('\n');const u=s.slice(0,i),k=s.slice(i+1);if(/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(u)&&k){ST.setItem('dc_url',u);ST.setItem('dc_key',k)}}catch(e){}})();
 const quickLink=()=>{const u=ST.getItem('dc_url'),k=ST.getItem('dc_key');if(!u||!k)return'';return location.origin+location.pathname+'#c='+btoa(unescape(encodeURIComponent(u+'\n'+k))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')};
