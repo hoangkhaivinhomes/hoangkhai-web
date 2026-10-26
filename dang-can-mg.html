@@ -3,7 +3,8 @@
 <title>Cổng đăng tin đối tác – Hoàng Khải Vinhomes</title>
 <style>
 :root{--bg:#1a0f07;--card:#2a1a0d;--line:rgba(248,220,142,.3);--gold:#f8dc8e;--ink:#fbf1da;--mute:#cdb68a;--bad:#ff9b8a}
-*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif}
+*{box-sizing:border-box}[hidden]{display:none!important}
+.tag{flex:none;font-size:12.5px;font-weight:600;padding:6px 10px;border-radius:999px;max-width:46%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tag.wait{background:rgba(232,190,90,.16);color:#e8c46a}.tag.no{background:rgba(220,90,80,.16);color:#f0a097}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif}
 .w{max-width:760px;margin:0 auto;padding:18px 16px 120px}
 h1{font:600 28px Georgia,serif;margin:6px 0 4px}h2{font:600 18px Georgia,serif;margin:26px 0 10px;color:var(--gold)}
 p.s{color:var(--mute);margin:0 0 12px;font-size:14px}
@@ -224,7 +225,7 @@ function renderSum(miss){const box=$('#sum');if(!box)return;if(!$('#tin').value.
 /* ---- căn đã đăng của môi giới (lưu trên máy) ---- */
 /* ---- môi giới: đăng ký một lần, lưu trên máy ---- */
 const PK='dc_mg';
-function getP(){try{const p=JSON.parse(ST.getItem(PK)||'null');return p&&p.ma?p:null}catch(e){return null}}
+function getP(){try{const p=JSON.parse(ST.getItem(PK)||'null');return p&&p.ma&&p.tk?p:null}catch(e){return null}}
 function oldP(){try{return JSON.parse(ST.getItem(PK)||'null')}catch(e){return null}}
 function setP(p){try{p?ST.setItem(PK,JSON.stringify(p)):ST.removeItem(PK)}catch(e){}showP()}
 function showP(){const p=getP();if(!p){const o=oldP();if(o){if(o.ten&&!$('#rTen').value)$('#rTen').value=o.ten;if(o.sdt&&!$('#rSdt').value)$('#rSdt').value=o.sdt}}$('#reg').hidden=!!p;$('#hi').hidden=!p;$('.bar').style.display=p?'block':'none';['#tinH','#tin','#sum','#dup','#more','#anhH','#drop','#th','#ts'].forEach(x=>{const e=$(x);if(e)e.style.display=p?'':'none'});
@@ -235,17 +236,17 @@ async function dangKy(){const ten=$('#rTen').value.trim(),sdt=$('#rSdt').value.t
   if(ten.length<2){$('#rMsg').innerHTML='<div class="note">Nhập tên của bạn.</div>';return}
   if(sdt.replace(/\D/g,'').length<9){$('#rMsg').innerHTML='<div class="note">Số điện thoại chưa đúng.</div>';return}
   b.disabled=true;b.textContent='Đang lưu…';$('#rMsg').innerHTML='';
-  try{const j=await api({action:'dangky',ten,sdt,cu:getMine().map(m=>({id:m.id,at:m.at,loai:m.loai}))});if(j.ok){setP({ma:j.ma,ten:j.ten,sdt:j.sdt})}else $('#rMsg').innerHTML=`<div class="note">${escH(j.loi||'Chưa lưu được')}</div>`}
+  try{const j=await api({action:'dangky',ten,sdt,cu:getMine().map(m=>({id:m.id,at:m.at,loai:m.loai}))});if(j.ok){setP({ma:j.ma,ten:j.ten,sdt:j.sdt,tk:j.tk})}else $('#rMsg').innerHTML=`<div class="note">${escH(j.loi||'Chưa lưu được')}</div>`}
   catch(e){$('#rMsg').innerHTML='<div class="note">Không kết nối được, thử lại sau.</div>'}
   b.disabled=false;b.textContent='Bắt đầu đăng căn'}
 const MINE_K='dc_mine';let MST={},MLIST=null;
 function getMine(){try{return JSON.parse(ST.getItem(MINE_K)||'[]')}catch(e){return[]}}
-function saveMine(x){if(MLIST){MLIST=[x,...MLIST.filter(m=>m.id!==x.id)]}const a=getMine().filter(m=>m.id!==x.id);a.unshift(x);try{ST.setItem(MINE_K,JSON.stringify(a.slice(0,200)))}catch(e){}MST[x.id]={an:'',tt:'Còn'};drawMine()}
+function saveMine(x){if(MLIST){MLIST=[x,...MLIST.filter(m=>m.id!==x.id)]}const a=getMine().filter(m=>m.id!==x.id);a.unshift(x);try{ST.setItem(MINE_K,JSON.stringify(a.slice(0,200)))}catch(e){}MST[x.id]=x.cho?{an:'chờ',tt:'Chờ duyệt'}:{an:'',tt:'Còn'};drawMine()}
 const fmtD=t=>{const d=new Date(t);return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear()};
 function drawMine(){const a=MLIST||getMine();$('#mineH').hidden=!a.length;
   $('#mine').innerHTML=a.length?`<div class="card">${a.map(m=>{const st=MST[m.id];const hidden=!!(st&&st.an);const done=m.loai==='Bán'?'Đã bán':'Đã cho thuê';const ma=m.ma||(m.fields&&m.fields.ma)||'';
     return `<div class="mi${EDIT&&EDIT.id===m.id?' editing':''}"><div class="t" data-ed="${escH(m.id)}" role="button" tabindex="0">${ma?`<div class="ma">${escH(ma)}</div>`:''}${escH(m.sum)}<div class="d">Đăng ${fmtD(m.at)}${m.fields?' · <u>Xem / sửa</u>':''}</div></div>
-    <div class="seg" role="group" aria-label="Trạng thái"><button class="${hidden?'':'on'}" data-st="Còn" data-id="${escH(m.id)}" ${hidden?'':'disabled'}>Còn</button><button class="${hidden?'on off':''}" data-st="${done}" data-id="${escH(m.id)}" ${hidden?'disabled':''}>${done}</button></div></div>`}).join('')}</div>`:'';
+    ${st&&st.tt==='Chờ duyệt'?'<span class="tag wait">Đang kiểm duyệt</span>':st&&/^Không duyệt/.test(st.tt||'')?`<span class="tag no" title="${escH(st.tt)}">${escH(st.tt)}</span>`:`<div class="seg" role="group" aria-label="Trạng thái"><button class="${hidden?'':'on'}" data-st="Còn" data-id="${escH(m.id)}" ${hidden?'':'disabled'}>Còn</button><button class="${hidden?'on off':''}" data-st="${done}" data-id="${escH(m.id)}" ${hidden?'disabled':''}>${done}</button></div>`}</div>`}).join('')}</div>`:'';
   document.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>doiTT(b.dataset.id,b.dataset.st,b));
   document.querySelectorAll('[data-ed]').forEach(t=>{const go=()=>openEdit(t.dataset.ed);t.onclick=go;t.onkeydown=e=>{if(e.key==='Enter')go()}})}
 /* ---- sửa căn đã đăng ---- */
@@ -260,17 +261,17 @@ function exitEdit(){EDIT=null;$('#editb').hidden=true;$('#go').textContent='Đă
 async function saveEdit(){const m=EDIT;if(!m||busy)return;const f={};FIELDS.forEach(x=>{f[x[0]]=val(x[0])});f.tot=$('#tot').checked?'Có':'';delete f.nguoi;
   if(!confirm(`Lưu thay đổi cho căn ${m.ma||f.ma||''}?\n${[f.loai,f.khu,f.pn,f.dt?f.dt+' m²':'',f.gia].filter(Boolean).join(' · ')}\n${imgs.length} ảnh`))return;
   busy=true;$('#go').disabled=true;$('#st').textContent='Đang lưu…';
-  try{const j=await api({action:'sua',id:m.id,mg:(getP()||{}).ma,fields:f,anh:imgs.map(d=>typeof d==='string'?{data:d.split(',')[1]}:{url:d.url})});
+  try{const j=await api({action:'sua',id:m.id,mg:(getP()||{}).ma,tk:(getP()||{}).tk,fields:f,anh:imgs.map(d=>typeof d==='string'?{data:d.split(',')[1]}:{url:d.url})});
     if(j.ok){busy=false;EDIT=null;$('#editb').hidden=true;$('#go').textContent='Đăng';reset();$('#more').open=false;$('#res').innerHTML='<div class="ok"><b>Đã lưu thay đổi.</b> Web sẽ cập nhật sau khoảng 5 phút.</div>';await loadMine()}
     else{busy=false;$('#res').innerHTML=`<div class="note">Chưa lưu được: ${escH(j.loi||'lỗi không rõ')}</div>`;check()}}
   catch(e){busy=false;$('#res').innerHTML='<div class="note">Không kết nối được, thử lại sau.</div>';check()}}
-async function loadMine(){const p=getP();if(p&&ST.getItem('dc_url')){try{const j=await api({action:'trangthai',mg:p.ma});if(j.ok&&j.list){MLIST=j.list.filter(x=>x.id).map(x=>({id:x.id,at:x.at||Date.now(),loai:x.loai,sum:x.sum,ma:x.ma,fields:x.fields,anh:x.anh}));MST={};j.list.forEach(x=>MST[x.id]={an:x.an,tt:x.tt});drawMine();return}}catch(e){}}
+async function loadMine(){const p=getP();if(p&&ST.getItem('dc_url')){try{const j=await api({action:'trangthai',mg:p.ma,tk:p.tk});if(j.ok&&j.list){MLIST=j.list.filter(x=>x.id).map(x=>({id:x.id,at:x.at||Date.now(),loai:x.loai,sum:x.sum,ma:x.ma,fields:x.fields,anh:x.anh}));MST={};j.list.forEach(x=>MST[x.id]={an:x.an,tt:x.tt});drawMine();return}}catch(e){}}
   const a=getMine();drawMine();if(!a.length)return;const url=ST.getItem('dc_url'),key=ST.getItem('dc_key');if(!url||!key)return;
   try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,action:'trangthai',ids:a.map(m=>m.id)})});const j=await r.json();if(j.ok&&j.st){MST=j.st;drawMine()}}catch(e){}}
 async function doiTT(id,st,btn){const m=(MLIST||getMine()).find(x=>x.id===id);if(!m)return;
   if(!confirm(st==='Còn'?'Căn này còn hàng? Căn sẽ hiện lại trên web.':`Báo "${st}" cho căn:\n${m.sum}\n\nCăn sẽ tự ẩn khỏi web.`))return;
   const url=ST.getItem('dc_url'),key=ST.getItem('dc_key');btn.disabled=true;btn.textContent='Đang lưu…';
-  try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,action:'doi',id,st,mg:(getP()||{}).ma})});const j=await r.json();
+  try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,action:'doi',id,st,mg:(getP()||{}).ma,tk:(getP()||{}).tk})});const j=await r.json();
     if(j.ok){MST[id]={an:st==='Còn'?'':st,tt:st};drawMine()}else{alert('Chưa lưu được: '+(j.loi||'lỗi không rõ'));drawMine()}}
   catch(e){alert('Không kết nối được, thử lại sau.');drawMine()}}
 function check(){let miss=[];if(!getP())miss.push('Tên và SĐT của bạn');FIELDS.filter(f=>f[4]).forEach(f=>{const e=document.querySelector(`.f[data-k="${f[0]}"]`);const m=!val(f[0]);e.classList.toggle('miss',m);if(m)miss.push(f[1])});
@@ -301,8 +302,8 @@ $('#go').onclick=async()=>{if(busy)return;if(EDIT)return saveEdit();const url=ST
   const sum=`${f.loai} · ${f.khu}\n${f.pn||''} ${f.dt?f.dt+' m²':''} · ${f.gia}\n${imgs.length} ảnh\n\nĐăng căn này lên web?`;if(!confirm((DUP.hits.length?(DUP.level==='trung'?'⚠ CĂN NÀY ĐÃ ĐĂNG TRÊN WEB RỒI:\n':'⚠ CÓ THỂ TRÙNG VỚI CĂN ĐÃ ĐĂNG:\n')+DUP.hits.slice(0,3).map(p=>'- '+[p.loai,p.khu,p.pn,p.dt?p.dt+' m²':'',p.gia,p.toa?'tòa '+p.toa+' tầng '+p.tang:''].filter(Boolean).join(' · ')).join('\n')+'\n\nVẫn đăng tiếp?\n\n':'')+sum))return;
   busy=true;$('#go').disabled=true;$('#st').textContent='Đang đăng, vui lòng chờ…';
   const id='c'+Date.now()+Math.random().toString(36).slice(2,6);
-  try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,id,mg:P.ma,fields:f,images:imgs.map(d=>({data:d.split(',')[1]}))})});const j=await r.json();
-    if(j.ok){setTimeout(loadMine,200);saveMine({id,at:Date.now(),loai:f.loai||'',ma:f.ma||'',sum:[f.loai,f.khu,f.pn,f.dt?f.dt+' m²':'',f.gia,f.toa?'tòa '+f.toa+(f.tang?' tầng '+f.tang:''):''].filter(Boolean).join(' · ')});if(POSTED)POSTED.push({loai:f.loai||'',khu:f.khu||'',pn:f.pn||'',dt:f.dt||'',gia:f.gia||'',toa:f.toa||'',tang:f.tang||'',an:''});$('#res').innerHTML=`<div class="ok"><b>Đã đăng.</b> ${j.trung?'(Căn này đã được gửi trước đó.)':''}Căn sẽ hiện trên web sau khoảng 5 phút.<div class="row" style="margin-top:12px"><button class="btn" id="nx">Đăng căn tiếp</button></div></div>`;$('#nx').onclick=reset;$('#st').textContent='Đã đăng';$('#res').scrollIntoView({behavior:'smooth'})}
+  try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,id,mg:P.ma,tk:P.tk,fields:f,images:imgs.map(d=>({data:d.split(',')[1]}))})});const j=await r.json();
+    if(j.ok){setTimeout(loadMine,200);saveMine({id,at:Date.now(),cho:!!j.cho,loai:f.loai||'',ma:f.ma||'',sum:[f.loai,f.khu,f.pn,f.dt?f.dt+' m²':'',f.gia,f.toa?'tòa '+f.toa+(f.tang?' tầng '+f.tang:''):''].filter(Boolean).join(' · ')});if(POSTED)POSTED.push({loai:f.loai||'',khu:f.khu||'',pn:f.pn||'',dt:f.dt||'',gia:f.gia||'',toa:f.toa||'',tang:f.tang||'',an:''});$('#res').innerHTML=`<div class="ok"><b>Đã đăng.</b> ${j.trung?'(Căn này đã được gửi trước đó.)':''}${j.cho?'Tin đang được kiểm duyệt và sẽ lên web ngay khi xong. Bạn theo dõi trạng thái ở mục bên dưới.':'Căn sẽ hiện trên web sau khoảng 5 phút.'}<div class="row" style="margin-top:12px"><button class="btn" id="nx">Đăng căn tiếp</button></div></div>`;$('#nx').onclick=reset;$('#st').textContent='Đã đăng';$('#res').scrollIntoView({behavior:'smooth'})}
     else{if(j.dangky){setP(null)}$('#res').innerHTML=`<div class="note">Chưa đăng được: ${escH(j.loi||'lỗi không rõ')}${j.dangky?'. Bạn nhập lại tên và SĐT ở đầu trang nhé.':''}</div>`;busy=false;check()}}
   catch(e){$('#res').innerHTML='<div class="note">Không nhận được phản hồi. <b>Hãy kiểm tra Google Sheet xem căn đã có chưa trước khi bấm Đăng lại</b>, để tránh đăng trùng.</div>';busy=false;check()}};
 function reset(){$('#tin').value='';FIELDS.forEach(f=>$('#f_'+f[0]).value='');$('#tot').checked=false;imgs=[];drawImgs();$('#res').innerHTML='';$('#warn').innerHTML='';$('#dup').innerHTML='';DUP={level:'',hits:[]};busy=false;check();scrollTo({top:0,behavior:'smooth'})}
