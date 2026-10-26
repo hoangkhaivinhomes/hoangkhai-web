@@ -4,8 +4,10 @@
 <style>
 :root{--bg:#1a0f07;--card:#2a1a0d;--line:rgba(248,220,142,.3);--gold:#f8dc8e;--ink:#fbf1da;--mute:#cdb68a;--bad:#ff9b8a}
 *{box-sizing:border-box}[hidden]{display:none!important}
+.tbn{border-radius:12px;padding:12px 14px;margin-top:14px;font-size:14.5px;display:flex;gap:10px;justify-content:space-between;align-items:flex-start}.tbn.y{background:rgba(140,220,140,.12);border:1px solid rgba(140,220,140,.5)}.tbn.n{background:rgba(220,90,80,.12);border:1px solid rgba(220,90,80,.5)}.tbn button{background:none;border:0;color:var(--mute);font-size:18px;cursor:pointer;line-height:1}
 .tag{flex:none;font-size:12.5px;font-weight:600;padding:6px 10px;border-radius:999px;max-width:46%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tag.wait{background:rgba(232,190,90,.16);color:#e8c46a}.tag.no{background:rgba(220,90,80,.16);color:#f0a097}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif}
 .w{max-width:760px;margin:0 auto;padding:18px 16px 120px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.top h1{margin-right:auto}.rl{flex:none;margin-top:8px;font:600 14px Inter,sans-serif;color:var(--gold);background:none;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}.rl:active{transform:scale(.97)}
 h1{font:600 28px Georgia,serif;margin:6px 0 4px}h2{font:600 18px Georgia,serif;margin:26px 0 10px;color:var(--gold)}
 p.s{color:var(--mute);margin:0 0 12px;font-size:14px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
@@ -56,7 +58,7 @@ h2{margin-top:22px}
 .pill{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:1px 9px;margin-left:6px}
 .pill.on{background:rgba(140,220,140,.15);color:#a8e6a8}.pill.off{background:rgba(255,155,138,.15);color:var(--bad)}
 </style></head><body><div class="w">
-<h1>Cổng đăng tin đối tác</h1><p class="s">Dán tin Zalo, thêm ảnh, bấm Đăng. Căn sẽ lên web <a href="https://hoangkhaivinhomes.com.vn" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">hoangkhaivinhomes.com.vn</a> sau ít phút.</p>
+<div class="top"><h1>Cổng đăng tin đối tác</h1><button class="rl" id="rl" type="button" onclick="this.textContent='Đang tải…';location.reload()" aria-label="Tải lại trang"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Tải lại</button></div><p class="s">Dán tin Zalo, thêm ảnh, bấm Đăng. Căn sẽ lên web <a href="https://hoangkhaivinhomes.com.vn" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">hoangkhaivinhomes.com.vn</a> sau ít phút.</p>
 
 <div class="card" id="cfg" hidden><b>Link này chưa đúng.</b><p class="s" style="margin:6px 0 0">Bạn nhắn Khải (Zalo 0934.307.196) để lấy lại link đăng căn.</p></div>
 
@@ -64,7 +66,7 @@ h2{margin-top:22px}
 <div class="card who" id="reg" hidden><b style="font-size:17px">Chào mừng anh/chị hợp tác cùng Hoàng Khải</b><p class="s" style="margin:4px 0 12px">Anh/chị để lại tên và số Zalo giúp Khải nhé, để khách hỏi căn nào Khải biết liên hệ đúng người. Chỉ cần nhập lần này, lần sau trang tự nhớ.</p>
 <div class="g"><div><label for="rTen">Tên của bạn</label><input id="rTen" placeholder="VD: Tuấn" autocomplete="name"></div><div><label for="rSdt">Số điện thoại / Zalo</label><input id="rSdt" type="tel" inputmode="tel" placeholder="VD: 0909 123 456" autocomplete="tel"></div></div>
 <button class="btn" id="rGo" type="button" style="margin-top:12px;width:100%">Bắt đầu đăng căn</button><div id="rMsg"></div></div>
-<div class="hi" id="hi" hidden></div>
+<div class="hi" id="hi" hidden></div><div id="tb"></div>
 
 <div class="editb" id="editb" hidden></div><h2 id="tinH">1. Dán tin Zalo</h2>
 <textarea id="tin" placeholder="Dán nguyên tin Zalo vào đây"></textarea>
@@ -244,9 +246,10 @@ function getMine(){try{return JSON.parse(ST.getItem(MINE_K)||'[]')}catch(e){retu
 function saveMine(x){if(MLIST){MLIST=[x,...MLIST.filter(m=>m.id!==x.id)]}const a=getMine().filter(m=>m.id!==x.id);a.unshift(x);try{ST.setItem(MINE_K,JSON.stringify(a.slice(0,200)))}catch(e){}MST[x.id]=x.cho?{an:'chờ',tt:'Chờ duyệt'}:{an:'',tt:'Còn'};drawMine()}
 const fmtD=t=>{const d=new Date(t);return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear()};
 function drawMine(){const a=MLIST||getMine();$('#mineH').hidden=!a.length;
-  $('#mine').innerHTML=a.length?`<div class="card">${a.map(m=>{const st=MST[m.id];const hidden=!!(st&&st.an);const done=m.loai==='Bán'?'Đã bán':'Đã cho thuê';const ma=m.ma||(m.fields&&m.fields.ma)||'';
+  $('#mine').innerHTML=a.length?`${hasPending()&&'Notification' in window&&Notification.permission==='default'?'<p class="s" style="margin:0 0 8px"><a href="#" id="nOn">Bật thông báo khi căn được duyệt</a></p>':''}<div class="card">${a.map(m=>{const st=MST[m.id];const hidden=!!(st&&st.an);const done=m.loai==='Bán'?'Đã bán':'Đã cho thuê';const ma=m.ma||(m.fields&&m.fields.ma)||'';
     return `<div class="mi${EDIT&&EDIT.id===m.id?' editing':''}"><div class="t" data-ed="${escH(m.id)}" role="button" tabindex="0">${ma?`<div class="ma">${escH(ma)}</div>`:''}${escH(m.sum)}<div class="d">Đăng ${fmtD(m.at)}${m.fields?' · <u>Xem / sửa</u>':''}</div></div>
     ${st&&st.tt==='Chờ duyệt'?'<span class="tag wait">Đang kiểm duyệt</span>':st&&/^Không duyệt/.test(st.tt||'')?`<span class="tag no" title="${escH(st.tt)}">${escH(st.tt)}</span>`:`<div class="seg" role="group" aria-label="Trạng thái"><button class="${hidden?'':'on'}" data-st="Còn" data-id="${escH(m.id)}" ${hidden?'':'disabled'}>Còn</button><button class="${hidden?'on off':''}" data-st="${done}" data-id="${escH(m.id)}" ${hidden?'disabled':''}>${done}</button></div>`}</div>`}).join('')}</div>`:'';
+  const nOn=$('#nOn');if(nOn)nOn.onclick=e=>{e.preventDefault();Notification.requestPermission().then(drawMine)};
   document.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>doiTT(b.dataset.id,b.dataset.st,b));
   document.querySelectorAll('[data-ed]').forEach(t=>{const go=()=>openEdit(t.dataset.ed);t.onclick=go;t.onkeydown=e=>{if(e.key==='Enter')go()}})}
 /* ---- sửa căn đã đăng ---- */
@@ -265,7 +268,7 @@ async function saveEdit(){const m=EDIT;if(!m||busy)return;const f={};FIELDS.forE
     if(j.ok){busy=false;EDIT=null;$('#editb').hidden=true;$('#go').textContent='Đăng';reset();$('#more').open=false;$('#res').innerHTML='<div class="ok"><b>Đã lưu thay đổi.</b> Web sẽ cập nhật sau khoảng 5 phút.</div>';await loadMine()}
     else{busy=false;$('#res').innerHTML=`<div class="note">Chưa lưu được: ${escH(j.loi||'lỗi không rõ')}</div>`;check()}}
   catch(e){busy=false;$('#res').innerHTML='<div class="note">Không kết nối được, thử lại sau.</div>';check()}}
-async function loadMine(){const p=getP();if(p&&ST.getItem('dc_url')){try{const j=await api({action:'trangthai',mg:p.ma,tk:p.tk});if(j.ok&&j.list){MLIST=j.list.filter(x=>x.id).map(x=>({id:x.id,at:x.at||Date.now(),loai:x.loai,sum:x.sum,ma:x.ma,fields:x.fields,anh:x.anh}));MST={};j.list.forEach(x=>MST[x.id]={an:x.an,tt:x.tt});drawMine();return}}catch(e){}}
+async function loadMine(){const p=getP();if(p&&ST.getItem('dc_url')){try{const j=await api({action:'trangthai',mg:p.ma,tk:p.tk});if(j.ok&&j.list){MLIST=j.list.filter(x=>x.id).map(x=>({id:x.id,at:x.at||Date.now(),loai:x.loai,sum:x.sum,ma:x.ma,fields:x.fields,anh:x.anh}));MST={};j.list.forEach(x=>MST[x.id]={an:x.an,tt:x.tt});ttDiff(j.list);drawMine();return}}catch(e){}}
   const a=getMine();drawMine();if(!a.length)return;const url=ST.getItem('dc_url'),key=ST.getItem('dc_key');if(!url||!key)return;
   try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,action:'trangthai',ids:a.map(m=>m.id)})});const j=await r.json();if(j.ok&&j.st){MST=j.st;drawMine()}}catch(e){}}
 async function doiTT(id,st,btn){const m=(MLIST||getMine()).find(x=>x.id===id);if(!m)return;
@@ -274,6 +277,18 @@ async function doiTT(id,st,btn){const m=(MLIST||getMine()).find(x=>x.id===id);if
   try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,action:'doi',id,st,mg:(getP()||{}).ma,tk:(getP()||{}).tk})});const j=await r.json();
     if(j.ok){MST[id]={an:st==='Còn'?'':st,tt:st};drawMine()}else{alert('Chưa lưu được: '+(j.loi||'lỗi không rõ'));drawMine()}}
   catch(e){alert('Không kết nối được, thử lại sau.');drawMine()}}
+/* ---- báo khi căn được duyệt / không duyệt ---- */
+const TT_K='dc_tt';
+function ttDiff(list){let old;try{old=JSON.parse(ST.getItem(TT_K)||'{}')}catch(e){old={}}
+  const msgs=[];list.forEach(x=>{const o=old[x.id];if(o==='Chờ duyệt'&&x.tt!=='Chờ duyệt'){const ok=!/^Không duyệt/.test(x.tt||'');msgs.push({ok,ma:x.ma||'',t:ok?`Căn <b>${escH(x.ma||x.sum)}</b> đã được duyệt và đang hiện trên web.`:`Căn <b>${escH(x.ma||x.sum)}</b> chưa được duyệt${/: /.test(x.tt)?' – '+escH(x.tt.split(': ').slice(1).join(': ')):''}. Bạn có thể bấm vào căn để sửa và gửi lại.`})}
+    else if(o&&o!=='Chờ duyệt'&&!/^Không duyệt/.test(o)&&/^Không duyệt/.test(x.tt||'')){msgs.push({ok:false,ma:x.ma||'',t:`Căn <b>${escH(x.ma||x.sum)}</b> đã được gỡ khỏi web${/: /.test(x.tt)?' – '+escH(x.tt.split(': ').slice(1).join(': ')):''}.`})}});
+  const nw={};list.forEach(x=>nw[x.id]=x.tt||'');try{ST.setItem(TT_K,JSON.stringify(nw))}catch(e){}
+  if(!msgs.length)return;
+  $('#tb').insertAdjacentHTML('afterbegin',msgs.map(m=>`<div class="tbn ${m.ok?'y':'n'}"><span>${m.t}</span><button aria-label="Đóng" onclick="this.parentNode.remove()">×</button></div>`).join(''));
+  if('Notification' in window&&Notification.permission==='granted'&&document.hidden){try{new Notification(msgs.length===1?(msgs[0].ok?'Căn đã được duyệt':'Căn chưa được duyệt'):msgs.length+' cập nhật về căn của bạn',{body:msgs.map(m=>m.t.replace(/<[^>]+>/g,'')).join('\n'),tag:'dc-tt'})}catch(e){}}}
+function hasPending(){return Object.values(MST).some(v=>v&&v.tt==='Chờ duyệt')}
+setInterval(()=>{if(hasPending()&&!document.hidden)loadMine()},60000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&getP())loadMine()});
 function check(){let miss=[];if(!getP())miss.push('Tên và SĐT của bạn');FIELDS.filter(f=>f[4]).forEach(f=>{const e=document.querySelector(`.f[data-k="${f[0]}"]`);const m=!val(f[0]);e.classList.toggle('miss',m);if(m)miss.push(f[1])});
   dupCheck();renderSum(miss);const ok=!miss.length&&!busy;$('#go').disabled=!ok;$('#st').textContent=miss.length?'Còn thiếu: '+miss.map(x=>x.split(' (')[0]).join(', '):(EDIT?'Sửa xong bấm Lưu · '+imgs.length+' ảnh':imgs.length?'Sẵn sàng đăng · '+imgs.length+' ảnh':'Sẵn sàng đăng · chưa có ảnh')}
 const ZM=()=>{try{return JSON.parse(ST.getItem('dc_zm')||'{}')}catch(e){return{}}};

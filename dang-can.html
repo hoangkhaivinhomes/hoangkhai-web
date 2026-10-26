@@ -5,6 +5,7 @@
 :root{--bg:#1a0f07;--card:#2a1a0d;--line:rgba(248,220,142,.3);--gold:#f8dc8e;--ink:#fbf1da;--mute:#cdb68a;--bad:#ff9b8a}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif}
 .w{max-width:760px;margin:0 auto;padding:18px 16px 120px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.top h1{margin-right:auto}.rl{flex:none;margin-top:8px;font:600 14px Inter,sans-serif;color:var(--gold);background:none;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}.rl:active{transform:scale(.97)}
 h1{font:600 28px Georgia,serif;margin:6px 0 4px}h2{font:600 18px Georgia,serif;margin:26px 0 10px;color:var(--gold)}
 p.s{color:var(--mute);margin:0 0 12px;font-size:14px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
@@ -40,9 +41,11 @@ a{color:var(--gold)}
 .dz .ph{display:flex;gap:6px;margin:8px 0;overflow-x:auto}.dz .ph img{width:76px;height:76px;object-fit:cover;border-radius:10px;flex:none;background:#150b04}
 .dz .ds{font-size:14px;color:var(--mute);margin:4px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .dz .row{margin-top:10px}.dz .btn{padding:11px 16px;font-size:15px}
+.dzt{font-size:14px;color:var(--mute);font-weight:600;margin:4px 0 8px;text-transform:uppercase;letter-spacing:.04em}.dzt~.dzt{margin-top:18px}
+.badge.off{background:#5a4632;color:#e9d8bf}
 .badge{display:inline-block;min-width:22px;padding:1px 7px;border-radius:99px;background:#e8c764;color:#2a1f06;font:700 13px Inter,sans-serif;text-align:center;vertical-align:middle;margin-left:6px}
 </style></head><body><div class="w">
-<h1>Đăng căn nhanh</h1><p class="s">Dán tin Zalo, thêm ảnh, kiểm tra rồi bấm Đăng. Căn sẽ tự lên web sau ít phút. Trang này chỉ dành cho riêng bạn, đừng gửi link cho người khác.</p>
+<div class="top"><h1>Đăng căn nhanh</h1><button class="rl" id="rl" type="button" onclick="this.textContent='Đang tải…';location.reload()" aria-label="Tải lại trang"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Tải lại</button></div><p class="s">Dán tin Zalo, thêm ảnh, kiểm tra rồi bấm Đăng. Căn sẽ tự lên web sau ít phút. Trang này chỉ dành cho riêng bạn, đừng gửi link cho người khác.</p>
 
 <div class="card" id="cfg" hidden><h2 style="margin-top:0">Cài đặt (chỉ làm một lần)</h2>
 <div class="f"><label>Địa chỉ ứng dụng (kết thúc bằng /exec)</label><input id="cu" placeholder="https://script.google.com/macros/s/.../exec"></div>
@@ -243,36 +246,49 @@ $('#ql').onclick=e=>{e.preventDefault();const l=quickLink();const b=$('#qlb');b.
  b.innerHTML='<p class="s" style="margin-top:0">Link này đã chứa sẵn cài đặt của bạn. <b>Chỉ bạn dùng, đừng gửi cho ai.</b> Mở link này trên điện thoại, rồi thêm vào màn hình chính (Safari: nút Chia sẻ → Thêm vào MH chính; Chrome: ⋮ → Thêm vào màn hình chính).</p><input id="qlv" readonly><button class="btn" id="qlc" style="margin-top:10px">Sao chép link</button><h2 style="margin-top:22px">Link gửi cho môi giới</h2><p class="s">Gửi link này qua Zalo cho anh em môi giới để họ tự đăng căn lên web của bạn.</p><input id="mgv" readonly><button class="btn" id="mgc" style="margin-top:10px">Sao chép link môi giới</button>';
  $('#qlv').value=l;const mg=l.replace(/\/dang-can(\.html)?(?=#)/,'/dang-can-mg').replace('#c=','?c=');$('#mgv').value=mg;$('#mgc').onclick=async()=>{try{await navigator.clipboard.writeText(mg)}catch(x){$('#mgv').select();document.execCommand('copy')}$('#mgc').textContent='Đã chép'};$('#qlc').onclick=async()=>{try{await navigator.clipboard.writeText(l)}catch(x){$('#qlv').select();document.execCommand('copy')}$('#qlc').textContent='Đã chép'}};
 
-/* ---- Duyệt tin môi giới ---- */
-const DZ={list:[],seen:null,t:null};const T0=document.title;
+/* ---- Tin môi giới: chờ duyệt + mới đăng ---- */
+const DZ={list:[],moi:[],t:null};const T0=document.title;
 const dThumb=u=>{const m=String(u).match(/\/d\/([\w-]+)/);return m?'https://drive.google.com/thumbnail?id='+m[1]+'&sz=w200':''};
+const SEEN_K='dc_seen';const getSeen=()=>{try{return new Set(JSON.parse(ST.getItem(SEEN_K)||'[]'))}catch(e){return new Set()}};
+const putSeen=s=>{try{ST.setItem(SEEN_K,JSON.stringify([...s].slice(-400)))}catch(e){}};
 async function dzApi(b){const url=ST.getItem('dc_url'),key=ST.getItem('dc_key');const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,chu:ST.getItem('dc_chu')||'',...b})});return r.json()}
+const dzSum=f=>[f.loai,f.khu,f.pn,f.dt?f.dt+' m²':'',f.gia,f.huong?'Hướng '+f.huong:'',f.noithat,f.toa?'Tòa '+f.toa+(f.tang?' tầng '+f.tang:''):''].filter(Boolean).join(' · ');
+const dzTime=t=>t?new Date(t).toLocaleString('vi-VN',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'}):'';
+function dzItem(x,pending,isNew){const f=x.f,ph=String(f.anh||'').split(/\s*,\s*/).filter(Boolean).slice(0,6);const hid=!!x.an;
+  return `<div class="dz"><div class="mc">${escH(f.ma||'(chưa có mã căn)')}${isNew?'<span class="badge">Mới</span>':''}${hid?'<span class="badge off">Đang ẩn</span>':''}</div><div class="who">${escH(f.nguoi||'Môi giới')}${f.mg?' · '+escH(f.mg):''}${x.at?' · '+dzTime(x.at):''} · dòng ${x.dong} trong sheet</div>
+    <div>${escH(dzSum(f))}</div>${f.mota?`<p class="ds">${escH(f.mota)}</p>`:''}
+    ${ph.length?`<div class="ph">${ph.map(u=>`<a href="${escH(u)}" target="_blank" rel="noopener"><img src="${escH(dThumb(u))}" alt="Ảnh căn" loading="lazy"></a>`).join('')}</div>`:'<p class="s" style="margin:6px 0 0">Không có ảnh</p>'}
+    ${pending?`<div class="row"><button class="btn" data-dy="${escH(x.id)}">Duyệt lên web</button><button class="btn o" data-dn="${escH(x.id)}">Không duyệt</button></div>`
+      :hid?'':`<div class="row"><button class="btn o" data-dn="${escH(x.id)}">Gỡ khỏi web</button></div>`}</div>`}
 function dzDraw(msg){const box=$('#dzB');$('#dz').hidden=false;
-  if(!ST.getItem('dc_chu')){box.innerHTML=`<p class="s" style="margin:0 0 10px">Nhập mã duyệt (MA_DUYET trong Apps Script) để xem và duyệt tin môi giới gửi lên. Chỉ nhập một lần trên máy này.</p><div class="qk"><input id="dzK" type="password" placeholder="Mã duyệt"><button class="btn" id="dzS" style="padding:11px 18px">Lưu</button></div>${msg?`<div class="note">${escH(msg)}</div>`:''}`;
-    $('#dzS').onclick=()=>{const v=$('#dzK').value.trim();if(!v)return;ST.setItem('dc_chu',v);dzLoad()};$('#dzH').innerHTML='Tin môi giới chờ duyệt';return}
-  const a=DZ.list;$('#dzH').innerHTML='Tin môi giới chờ duyệt'+(a.length?`<span class="badge">${a.length}</span>`:'');
-  document.title=(a.length?'('+a.length+') ':'')+T0;
+  if(!ST.getItem('dc_chu')){box.innerHTML=`<p class="s" style="margin:0 0 10px">Nhập mã duyệt (MA_DUYET trong Apps Script) để đăng căn và xem tin môi giới gửi lên. Chỉ nhập một lần trên máy này.</p><div class="qk"><input id="dzK" type="password" placeholder="Mã duyệt"><button class="btn" id="dzS" style="padding:11px 18px">Lưu</button></div>${msg?`<div class="note">${escH(msg)}</div>`:''}`;
+    $('#dzS').onclick=()=>{const v=$('#dzK').value.trim();if(!v)return;ST.setItem('dc_chu',v);dzLoad()};$('#dzH').innerHTML='Tin môi giới';return}
+  const seen=getSeen(),a=DZ.list,m=DZ.moi,nNew=m.filter(x=>!seen.has(x.id)).length,n=a.length+nNew;
+  $('#dzH').innerHTML='Tin môi giới'+(n?`<span class="badge">${n}</span>`:'');document.title=(n?'('+n+') ':'')+T0;
   const canN='Notification' in window&&Notification.permission==='default';
-  box.innerHTML=(a.length?a.map(x=>{const f=x.f,ph=String(f.anh||'').split(/\s*,\s*/).filter(Boolean).slice(0,6);
-    const sum=[f.loai,f.khu,f.pn,f.dt?f.dt+' m²':'',f.gia,f.huong?'Hướng '+f.huong:'',f.noithat,f.toa?'Tòa '+f.toa+(f.tang?' tầng '+f.tang:''):''].filter(Boolean).join(' · ');
-    return `<div class="dz"><div class="mc">${escH(f.ma||'(chưa có mã căn)')}</div><div class="who">${escH(f.nguoi||'Môi giới')}${f.mg?' · '+escH(f.mg):''}${x.at?' · '+new Date(x.at).toLocaleString('vi-VN',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'}):''} · dòng ${x.dong} trong sheet</div>
-      <div>${escH(sum)}</div>${f.mota?`<p class="ds">${escH(f.mota)}</p>`:''}
-      ${ph.length?`<div class="ph">${ph.map(u=>`<a href="${escH(u)}" target="_blank" rel="noopener"><img src="${escH(dThumb(u))}" alt="Ảnh căn" loading="lazy"></a>`).join('')}</div>`:'<p class="s" style="margin:6px 0 0">Không có ảnh</p>'}
-      <div class="row"><button class="btn" data-dy="${escH(x.id)}">Duyệt lên web</button><button class="btn o" data-dn="${escH(x.id)}">Không duyệt</button></div></div>`}).join(''):`<p class="s" style="margin:0">Chưa có tin nào chờ duyệt.</p>`)
-    +(canN?`<p class="s" style="margin:12px 0 0"><a href="#" id="dzN">Bật thông báo khi có tin mới</a> (khi trang này đang mở)</p>`:'')+(msg?`<div class="note">${escH(msg)}</div>`:'');
-  const n=$('#dzN');if(n)n.onclick=e=>{e.preventDefault();Notification.requestPermission().then(()=>dzDraw())};
+  box.innerHTML=(a.length?`<h3 class="dzt">Chờ duyệt (${a.length})</h3>`+a.map(x=>dzItem(x,true,false)).join(''):'')
+    +(m.length?`<h3 class="dzt">Mới đăng lên web · 7 ngày</h3>`+m.map(x=>dzItem(x,false,!seen.has(x.id))).join(''):'')
+    +(!a.length&&!m.length?`<p class="s" style="margin:0">Chưa có tin môi giới nào trong 7 ngày qua.</p>`:'')
+    +(nNew?`<p class="s" style="margin:10px 0 0"><a href="#" id="dzR">Đánh dấu đã xem hết</a></p>`:'')
+    +(canN?`<p class="s" style="margin:10px 0 0"><a href="#" id="dzN">Bật thông báo khi có tin mới</a></p>`:'')+(msg?`<div class="note">${escH(msg)}</div>`:'');
+  const r=$('#dzR');if(r)r.onclick=e=>{e.preventDefault();const s=getSeen();m.forEach(x=>s.add(x.id));putSeen(s);dzDraw()};
+  const nb=$('#dzN');if(nb)nb.onclick=e=>{e.preventDefault();Notification.requestPermission().then(()=>dzDraw())};
   box.querySelectorAll('[data-dy]').forEach(b=>b.onclick=()=>dzAct(b.dataset.dy,true,b));
-  box.querySelectorAll('[data-dn]').forEach(b=>b.onclick=()=>{const l=prompt('Lý do không duyệt (môi giới sẽ thấy). Có thể để trống:','');if(l===null)return;dzAct(b.dataset.dn,false,b,l)})}
+  box.querySelectorAll('[data-dn]').forEach(b=>b.onclick=()=>{const l=prompt('Lý do (môi giới sẽ thấy). Có thể để trống:','');if(l===null)return;dzAct(b.dataset.dn,false,b,l)})}
 async function dzAct(id,ok,btn,lydo){btn.disabled=true;btn.textContent='Đang lưu…';
-  try{const j=await dzApi({action:'duyet',id,ok,lydo:lydo||''});if(j.ok){DZ.list=DZ.list.filter(x=>x.id!==id);dzDraw(ok?'':'' );if(ok)toastDz('Đã duyệt. Căn lên web sau khoảng 5 phút.')}else dzDraw(j.loi||'Chưa lưu được')}
+  try{const j=await dzApi({action:'duyet',id,ok,lydo:lydo||''});if(j.ok){const s=getSeen();s.add(id);putSeen(s);await dzLoad();dzToast(ok?'Đã duyệt. Căn lên web sau khoảng 5 phút.':'Đã gỡ khỏi web.')}else dzDraw(j.loi||'Chưa lưu được')}
   catch(e){dzDraw('Không kết nối được, thử lại sau.')}}
-function toastDz(t){const d=document.createElement('div');d.className='ok';d.textContent=t;$('#dzB').prepend(d);setTimeout(()=>d.remove(),4000)}
+function dzToast(t){const d=document.createElement('div');d.className='ok';d.style.marginTop='0';d.style.marginBottom='10px';d.textContent=t;$('#dzB').prepend(d);setTimeout(()=>d.remove(),4000)}
+function dzNotify(items){if(!items.length)return;const body=items.map(x=>(x.f.ma||'Căn mới')+' – '+(x.f.nguoi||'')).join('\n');
+  if('Notification' in window&&Notification.permission==='granted'){try{new Notification(items.length+' tin môi giới mới',{body,tag:'dc-moi'})}catch(e){}}}
 async function dzLoad(){if(!ST.getItem('dc_url')||!ST.getItem('dc_key'))return;if(!ST.getItem('dc_chu')){dzDraw();return}
   try{const j=await dzApi({action:'choduyet'});
-    if(!j.ok){if(j.maduyet){ST.removeItem('dc_chu');dzDraw(/DOI-MA/.test(j.loi||'')?'':'Mã duyệt chưa đúng (hoặc Apps Script chưa đổi MA_DUYET).');}else if(DZ.list.length===0)$('#dz').hidden=true;return}
-    const old=DZ.seen;DZ.list=j.list||[];const ids=new Set(DZ.list.map(x=>x.id));
-    if(old){const neu=DZ.list.filter(x=>!old.has(x.id));if(neu.length&&'Notification' in window&&Notification.permission==='granted'&&document.hidden){try{new Notification('Tin môi giới mới chờ duyệt',{body:neu.map(x=>(x.f.ma||'')+' – '+(x.f.nguoi||'')).join('\n')})}catch(e){}}}
-    DZ.seen=ids;dzDraw()}catch(e){}}
+    if(!j.ok){if(j.maduyet){ST.removeItem('dc_chu');dzDraw('Mã duyệt chưa đúng (hoặc Apps Script chưa đổi MA_DUYET).')}return}
+    DZ.list=j.list||[];DZ.moi=j.moi||[];
+    let noti;try{noti=new Set(JSON.parse(ST.getItem('dc_noti')||'[]'))}catch(e){noti=new Set()}
+    const fresh=[...DZ.list,...DZ.moi].filter(x=>x.id&&!noti.has(x.id)&&!getSeen().has(x.id));
+    if(fresh.length){dzNotify(fresh);fresh.forEach(x=>noti.add(x.id));try{ST.setItem('dc_noti',JSON.stringify([...noti].slice(-400)))}catch(e){}}
+    dzDraw()}catch(e){}}
 function dzStart(){dzLoad();clearInterval(DZ.t);DZ.t=setInterval(dzLoad,60000)}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)dzLoad()});
 build();check();cfgShow();loadPosted();dzStart();$('#qk').addEventListener('input',quickCheck);document.addEventListener('input',e=>{if(e.target.closest&&e.target.closest('#fm'))dupCheck()});document.addEventListener('change',e=>{if(e.target.closest&&e.target.closest('#fm'))dupCheck()});
