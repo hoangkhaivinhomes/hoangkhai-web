@@ -130,7 +130,8 @@ details{font-size:14px;color:var(--mute)}details summary{cursor:pointer;color:va
 .lead{margin:72px 0 0;background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:clamp(24px,5vw,44px);display:grid;gap:10px}
 .lead h2{margin:0;font-size:clamp(26px,4vw,34px)}
 .lead .lsub{margin:0 0 12px;color:var(--mute);font-size:15.5px}
-.lead form{display:flex;gap:10px;flex-wrap:wrap}.lead input{flex:1 1 200px;padding:13px 14px}
+.lead form{display:flex;gap:10px;flex-wrap:wrap}
+.dlf{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0 0;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--soft)}.dlf b{flex-basis:100%;font-size:15px}.dlf input{flex:1 1 140px;padding:11px 12px;min-width:0}.dlf .btn{padding:11px 18px}.lead input{flex:1 1 200px;padding:13px 14px}
 .lok{margin:6px 0;font-weight:600}
 .hero-txt{container-type:inline-size;position:relative;width:min(660px,100%);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 17%}
 .enso svg{display:block;width:100%;height:100%}
@@ -278,6 +279,8 @@ dialog::backdrop{background:rgba(20,18,15,.5)}
 </div>
 <div class="rbar"><span id="rcnt" role="status"></span><span class="rtools"><button type="button" class="lnk" id="clr" hidden>Xóa lọc</button><label class="sort">Sắp xếp<select id="fs"><option value="new">Nổi bật</option><option value="pa">Giá thấp đến cao</option><option value="pd">Giá cao đến thấp</option><option value="ar">Diện tích lớn nhất</option></select></label></span></div>
 <div id="grid" class="grid"></div>
+<section class="lead" id="goilai"><h2>Để lại số, mình gọi lại</h2><p class="lsub">Bạn cho mình biết đang tìm căn thế nào, mình gửi vài căn hợp nhất qua Zalo trong ngày.</p>
+<form id="lf"><input id="ln" placeholder="Tên của bạn" autocomplete="name"><input id="lp" type="tel" inputmode="tel" placeholder="Số điện thoại / Zalo" autocomplete="tel" required><input id="lq" placeholder="Bạn tìm căn thế nào? VD: thuê 2PN dưới 10 triệu"><input id="lw" name="web" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true"><button class="btn" type="submit">Gửi cho Khải</button></form></section>
 <section class="sec" id="vemink"><h2>Về mình</h2><p>Mình là Khải, tư vấn căn hộ Vinhomes Grand Park tại Công ty TNHH Địa Ốc An Tín Gia. Mình làm việc theo ba cam kết đơn giản.</p></section>
 <div class="ab">
 <div class="am"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM9 12l2 2 4-4"/></svg><b>Thông tin rõ ràng</b><span>Cung cấp thông tin một cách trung thực và chính xác.</span></div>
@@ -425,7 +428,19 @@ $$('.tabs button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$$('.tabs button')
 ['#fz','#fb','#fd','#fp'].forEach(s=>$(s).addEventListener('input',render));
 /* Form khách để lại số: dán 3 giá trị mà tao-form-khach.gs in ra */
 const LEAD={url:'https://docs.google.com/forms/d/e/1FAIpQLSegrQAAxyt8xzsH3f1F37exR351M4L-TIXs5YuJbzBsep2csA/formResponse',name:'738729489',phone:'369722426'};
+const LEAD_API='https://atg-cham-khach.web.app/lead';
+async function sendLead(ten,sdt,nhucau,can,web){const r=await fetch(LEAD_API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({ten,sdt,nhucau,can,web})});const j=await r.json().catch(()=>({}));if(!r.ok||!j.ok)throw new Error(j.loi||'Chưa gửi được');return j}
+document.addEventListener('submit',async e=>{if(e.target.id!=='dlf')return;e.preventDefault();const f=e.target,b=f.querySelector('button');const sdt=f.querySelector('[name=p]').value.trim();
+  if(sdt.replace(/\D/g,'').length<9){alert(T('Bạn nhập giúp mình số điện thoại nhé.'));return}
+  b.disabled=true;const u=S.units.find(x=>x.id===dtId);
+  try{await sendLead(f.querySelector('[name=n]').value.trim(),sdt,'',u?[u.zone,bedsLabel(u),money(u)].filter(Boolean).join(' · ')+' – '+location.href.split('#')[0]+'#can='+u.id:'',f.querySelector('[name=web]').value);f.innerHTML='<p class="lok">'+T('Cảm ơn bạn! Mình đã nhận thông tin và sẽ liên hệ sớm nhất.')+'</p>'}
+  catch(x){b.disabled=false;alert(T('Chưa gửi được, bạn thử lại hoặc gọi trực tiếp cho mình nhé.'))}});
 if($('#lf'))$('#lf').onsubmit=async e=>{e.preventDefault();
+  {const n0=$('#ln').value.trim(),t0=$('#lp').value.trim(),b0=e.target.querySelector('button');
+   if(t0.replace(/\D/g,'').length<9){alert(T('Bạn nhập giúp mình số điện thoại nhé.'));return}
+   b0.disabled=true;
+   try{await sendLead(n0,t0,($('#lq')||{}).value||'','',$('#lw').value);e.target.innerHTML='<p class="lok">'+T('Cảm ơn bạn! Mình đã nhận thông tin và sẽ liên hệ sớm nhất.')+'</p>';return}
+   catch(x){b0.disabled=false}}
   const n=$('#ln').value.trim(),t=$('#lp').value.trim(),btn=e.target.querySelector('button');
   if(LEAD.url){
     btn.disabled=true;
@@ -478,11 +493,12 @@ function driveIds(t){return String(t||'').split(/[,\s]+/).map(x=>{const m=x.matc
 function sheetUnits(csv){
   const R=csvRows(csv);if(R.length<2)return [];
   const H=R[0].map(h=>h.toLowerCase());const ix=(...k)=>H.findIndex(h=>k.some(x=>h.includes(x)));
-  const c={type:ix('loại','loai'),zone:ix('khu','phân khu'),beds:ix('phòng'),area:ix('diện tích','dien tich'),price:H.findIndex(h=>h.includes('giá')&&!h.includes('tốt')),dir:ix('hướng','huong'),furn:ix('nội thất','noi that'),legal:ix('pháp lý','phap ly'),img:ix('ảnh','hình'),hot:ix('nổi bật','giá tốt','noi bat'),hide:ix('ẩn','an căn','hide'),tower:ix('tòa','toa'),floor:ix('tầng','tang'),view:ix('view','cảnh'),desc:ix('mô tả','mo ta','ghi chú','ghi chu'),deposit:ix('cọc','coc'),fee:ix('phí quản','phi quan'),rentEst:ix('thuê dự kiến','thue du kien'),amen:ix('tiện ích','tien ich'),toVincom:ix('đến vincom','den vincom'),toNX:ix('nguyễn xiển','nguyen xien')};
+  const c={type:ix('loại','loai'),zone:ix('khu','phân khu'),beds:ix('phòng'),area:ix('diện tích','dien tich'),price:H.findIndex(h=>h.includes('giá')&&!h.includes('tốt')),dir:ix('hướng','huong'),furn:ix('nội thất','noi that'),legal:ix('pháp lý','phap ly'),img:ix('ảnh','hình'),hot:ix('nổi bật','giá tốt','noi bat'),hide:ix('ẩn','an căn','hide'),upd:ix('ngày cập nhật','ngay cap nhat'),tower:ix('tòa','toa'),floor:ix('tầng','tang'),view:ix('view','cảnh'),desc:ix('mô tả','mo ta','ghi chú','ghi chu'),deposit:ix('cọc','coc'),fee:ix('phí quản','phi quan'),rentEst:ix('thuê dự kiến','thue du kien'),amen:ix('tiện ích','tien ich'),toVincom:ix('đến vincom','den vincom'),toNX:ix('nguyễn xiển','nguyen xien')};
   const g=(row,k)=>c[k]>=0?String(row[c[k]]||'').trim():'';
   return R.slice(1).map((row,n)=>{
     if(/^(x|có|co|true|1|ẩn|an|đã bán|da ban|đã thuê|da thue)/i.test(g(row,'hide')))return null;
-    const rent=/thuê|thue/i.test(g(row,'type'));let raw=g(row,'price'),v=num(raw);if(isNaN(v))return null;
+    const rent=/thuê|thue/i.test(g(row,'type'));
+    if(rent){const dm=g(row,'upd').match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(dm&&Date.now()-new Date(+dm[3],+dm[2]-1,+dm[1]).getTime()>8*864e5)return null} // căn thuê quá 7 ngày chưa xác nhận còn: tự ẩnlet raw=g(row,'price'),v=num(raw);if(isNaN(v))return null;
     if(!rent&&(/tỷ|tỉ|ty|ti\b/i.test(raw)||v<100))v=Math.round(v*1000);
     const bt=g(row,'beds'),ids=driveIds(g(row,'img'));
     return{id:'g'+n,n,type:rent?'rent':'sale',zone:g(row,'zone'),bedsText:bt,beds:/^\d+$/.test(bt)?+bt:bt,area:(n=>isNaN(n)?'':String(n).replace('.',','))(num(g(row,'area'))),price:v,dir:g(row,'dir'),furn:g(row,'furn'),legal:g(row,'legal'),imgs:ids.map(i=>'https://drive.google.com/thumbnail?id='+i+'&sz=w1400'),hot:/^(x|có|co|true|1|giá tốt)/i.test(g(row,'hot')),tower:g(row,'tower'),floor:g(row,'floor'),view:g(row,'view'),desc:g(row,'desc'),deposit:g(row,'deposit'),fee:g(row,'fee'),rentEst:num(g(row,'rentEst')),amen:g(row,'amen'),toVincom:g(row,'toVincom'),toNX:g(row,'toNX')}
@@ -551,6 +567,7 @@ function dtOpen(id,noHash){
   <div id="own"></div>
   <div class="dth"><h2>${esc(u.zone)}</h2><div class="p">${money(u)}</div></div>
   <div class="dtc">${chips.map(c=>`<span>${esc(c)}</span>`).join('')}</div>
+  <form id="dlf" class="dlf"><b>${T('Nhờ Khải gọi lại về căn này')}</b><input name="n" placeholder="${T('Tên của bạn')}" autocomplete="name"><input name="p" type="tel" inputmode="tel" placeholder="${T('Số điện thoại / Zalo')}" autocomplete="tel"><input name="web" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true"><button class="btn" type="submit">${T('Gửi')}</button></form>
   <section class="dts"><h3>${T('Thông tin căn')}</h3><dl class="dtd">${rows.map(r=>`<div><dt>${r[0]}</dt><dd>${esc(r[1])}</dd></div>`).join('')}</dl></section>
   ${u.desc?`<section class="dts"><h3>${T('Về căn này')}</h3><p>${esc(u.desc).replace(/\n/g,'<br>')}</p></section>`:''}
   
