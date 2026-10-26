@@ -497,7 +497,7 @@ function ownOf(u){if(!OWN.map||!u)return null;const m=String((u.imgs||[])[0]||''
 function ownFill(){const el=document.getElementById('own');if(!el)return;const u=S.units.find(x=>x.id===dtId);const x=ownOf(u);if(!x){el.innerHTML='';return}
   el.innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;margin:14px 0 4px;padding:10px 14px;border-radius:12px;background:#fbf3dc;border:1px solid #e6cf8f;color:#5a4410;font-size:14px">
     <span>🔑 <b style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px">${esc(x.ma||'(chưa có mã căn)')}</b></span>
-    <span>Người đăng: <b>${esc(x.nguoi||'—')}</b>${x.mg?' ('+esc(x.mg)+')':''}</span><span>Dòng ${x.dong}</span>
+    <span>Người đăng: <b>${esc(x.nguoi||'—')}</b>${x.mg?' ('+esc(x.mg)+')':''}</span>${x.nam?`<span>Nắm hàng: <b>${esc(x.nam)}</b>${/\d{9,}/.test(x.nam)?` · <a href="https://zalo.me/${esc((x.nam.match(/0\d{9}/)||[''])[0])}" target="_blank" rel="noopener" style="color:#5a4410">Zalo</a>`:''}</span>`:''}<span>Dòng ${x.dong}</span>
     ${OWN.url?`<a href="${esc(OWN.url+'&range=A'+x.dong)}" target="_blank" rel="noopener" style="margin-left:auto;color:#5a4410;font-weight:700">Mở trong sheet ›</a>`:''}
     <span style="flex-basis:100%;font-size:12px;opacity:.75">Chỉ máy của bạn thấy dòng này, khách không thấy.</span></div>`}
 ownLoad();

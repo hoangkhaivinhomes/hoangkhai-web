@@ -153,6 +153,9 @@ function parseTin(raw){
   if(/phi\b.*tien nha|hoa hong|xem nha|cho pass|chu nha dan/.test(n))r.ghi.push('Đã bỏ qua phí môi giới và cách xem nhà (thông tin nội bộ, không đăng lên web).');
   if(!r.dt)r.ghi.push('Tin chưa ghi diện tích, bạn điền thêm nếu có.');
   if(!r.huong)r.ghi.push('Tin chưa ghi hướng, bạn điền thêm nếu có.');
+  {const ph=t.match(/(?:\+?84|0)(?:[\s.\-]?\d){9}\b/);if(ph){const so=ph[0].replace(/[\s.\-]/g,'').replace(/^\+?84/,'0');const pre=t.slice(Math.max(0,ph.index-40),ph.index);
+    const nm=pre.match(/(?:lh|liên hệ|lien he|zalo|gọi|goi|call|sđt|sdt)?[:\s]*((?:a|c|anh|chị|chi|em|mr|ms)\.?\s*)?([A-ZĐÀ-Ỹ][a-zà-ỹđ]+(?:\s[A-ZĐÀ-Ỹ][a-zà-ỹđ]+){0,2})\s*[:\-–(]?\s*$/u);
+    r.nam=(nm?nm[2]+' ':'')+so}}
   delete r._sale;delete r._rent;return r}
 
 
@@ -164,11 +167,11 @@ const ST=(()=>{let L=null;try{L=localStorage;L.setItem('dc_t','1');L.removeItem(
 (function(){const m=location.hash.match(/^#c=([A-Za-z0-9_\-]+)/);if(!m)return;try{const s=decodeURIComponent(escape(atob(m[1].replace(/-/g,'+').replace(/_/g,'/'))));const i=s.indexOf('\n');const u=s.slice(0,i),k=s.slice(i+1);if(/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(u)&&k){ST.setItem('dc_url',u);ST.setItem('dc_key',k)}}catch(e){}})();
 const quickLink=()=>{const u=ST.getItem('dc_url'),k=ST.getItem('dc_key');if(!u||!k)return'';return location.origin+location.pathname+'#c='+btoa(unescape(encodeURIComponent(u+'\n'+k))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')};
 let imgs=[],busy=false;
-const FIELDS=[['loai','Loại căn','select',['','Bán','Cho thuê'],1],['khu','Phân khu','select',['',...ZONES],1],['pn','Loại căn hộ (Studio, 1PN, 2PN+…)','text','',0],['dt','Diện tích (m²)','text','',0],['gia','Giá (ví dụ 3,25 tỷ hoặc 9 triệu)','text','',1],['huong','Hướng','text','',0],['noithat','Nội thất','text','',0],['phaply','Pháp lý','text','',0],['toa','Tòa','text','',0],['ma','Mã căn (chỉ để bạn xem trong Sheet, không hiện lên web)','text','',0],['tang','Tầng','text','',0],['view','View','text','',0],['coc','Đặt cọc (căn thuê)','text','',0],['thue','Thuê dự kiến, triệu/tháng (căn bán)','text','',0],['mota','Mô tả ngắn cho khách','text','',0]];
+const FIELDS=[['loai','Loại căn','select',['','Bán','Cho thuê'],1],['khu','Phân khu','select',['',...ZONES],1],['pn','Loại căn hộ (Studio, 1PN, 2PN+…)','text','',0],['dt','Diện tích (m²)','text','',0],['gia','Giá (ví dụ 3,25 tỷ hoặc 9 triệu)','text','',1],['huong','Hướng','text','',0],['noithat','Nội thất','text','',0],['phaply','Pháp lý','text','',0],['toa','Tòa','text','',0],['ma','Mã căn (chỉ để bạn xem trong Sheet, không hiện lên web)','text','',0],['nam','MG nắm hàng: tên + SĐT (không hiện lên web)','text','',0],['tang','Tầng','text','',0],['view','View','text','',0],['coc','Đặt cọc (căn thuê)','text','',0],['thue','Thuê dự kiến, triệu/tháng (căn bán)','text','',0],['mota','Mô tả ngắn cho khách','text','',0]];
 function build(){$('#fm').innerHTML=FIELDS.map(f=>`<div class="f" data-k="${f[0]}"><label>${f[1]}${f[4]?' *':''}</label>${f[2]==='select'?`<select id="f_${f[0]}">${f[3].map(o=>`<option>${o}</option>`).join('')}</select>`:`<input id="f_${f[0]}">`}</div>`).join('');
   FIELDS.forEach(f=>$('#f_'+f[0]).addEventListener('input',check))}
 function val(k){return ($('#f_'+k).value||'').trim()}
-function fill(r){['loai','khu','pn','dt','gia','huong','noithat','phaply','toa','ma','tang','view','coc','mota'].forEach(k=>{if(r[k])$('#f_'+k).value=r[k]});$('#tot').checked=!!r.tot;dupCheck();
+function fill(r){if(r.nam&&!$('#f_nam').value)$('#f_nam').value=r.nam;['loai','khu','pn','dt','gia','huong','noithat','phaply','toa','ma','tang','view','coc','mota'].forEach(k=>{if(r[k])$('#f_'+k).value=r[k]});$('#tot').checked=!!r.tot;dupCheck();
   $('#warn').innerHTML=r.ghi&&r.ghi.length?r.ghi.map(x=>`<div class="note">${x}</div>`).join(''):'';check()}
 /* ---- kiểm tra trùng với căn đã đăng trên web ---- */
 const POSTED_CSV='https://docs.google.com/spreadsheets/d/e/2PACX-1vSHcr70-ByPB3DYMUNAXX4LMPpR8-XhCUyEAeGtUbtQSMS6qL1ETe6HHb1LgS4-EOynheizpYY2lwLn/pub?gid=553047661&single=true&output=csv';
@@ -212,7 +215,7 @@ function check(){let miss=[];FIELDS.filter(f=>f[4]).forEach(f=>{const e=document
   dupCheck();const ok=!miss.length&&!busy;$('#go').disabled=!ok;$('#st').textContent=miss.length?'Còn thiếu: '+miss.map(x=>x.split(' (')[0]).join(', '):(imgs.length?'Sẵn sàng đăng · '+imgs.length+' ảnh':'Sẵn sàng đăng · chưa có ảnh')}
 const ZM=()=>{try{return JSON.parse(ST.getItem('dc_zm')||'{}')}catch(e){return{}}};
 let curTw='';
-let tm;$('#tin').addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(()=>{FIELDS.forEach(f=>$('#f_'+f[0]).value='');const r=parseTin($('#tin').value);curTw=r._tw||'';
+let tm;$('#tin').addEventListener('input',()=>{clearTimeout(tm);tm=setTimeout(()=>{FIELDS.forEach(f=>{if(f[0]!=='nam')$('#f_'+f[0]).value=''});const r=parseTin($('#tin').value);curTw=r._tw||'';
   if(!r.khu&&curTw&&ZM()[curTw]){r.khu=ZM()[curTw];r.ghi=r.ghi.filter(x=>!/không ghi tên phân khu/.test(x));r.ghi.push('Phân khu tự điền theo lần trước (tòa '+curTw+' = '+r.khu+'). Sai thì bạn chọn lại.')}
   fill(r)},350)});
 document.addEventListener('change',ev=>{if(ev.target.id!=='f_khu')return;if(curTw&&val('khu')){const m=ZM();m[curTw]=val('khu');try{ST.setItem('dc_zm',JSON.stringify(m))}catch(e){}}});
@@ -261,8 +264,8 @@ function dzItem(x,pending,isNew){const f=x.f,ph=String(f.anh||'').split(/\s*,\s*
     ${pending?`<div class="row"><button class="btn" data-dy="${escH(x.id)}">Duyệt lên web</button><button class="btn o" data-dn="${escH(x.id)}">Không duyệt</button></div>`
       :hid?'':`<div class="row"><button class="btn o" data-dn="${escH(x.id)}">Gỡ khỏi web</button></div>`}</div>`}
 function dzDraw(msg){const box=$('#dzB');$('#dz').hidden=false;
-  if(!ST.getItem('dc_chu')){box.innerHTML=`<p class="s" style="margin:0 0 10px">Nhập mã duyệt (MA_DUYET trong Apps Script) để đăng căn và xem tin môi giới gửi lên. Chỉ nhập một lần trên máy này.</p><div class="qk"><input id="dzK" type="password" placeholder="Mã duyệt"><button class="btn" id="dzS" style="padding:11px 18px">Lưu</button></div>${msg?`<div class="note">${escH(msg)}</div>`:''}`;
-    $('#dzS').onclick=()=>{const v=$('#dzK').value.trim();if(!v)return;ST.setItem('dc_chu',v);dzLoad()};$('#dzH').innerHTML='Tin môi giới';return}
+  if(!ST.getItem('dc_chu')){box.innerHTML=`<p class="s" style="margin:0 0 10px">Nhập mã duyệt (MA_DUYET trong Apps Script) để đăng căn và xem tin môi giới gửi lên. Chỉ nhập một lần trên máy này.</p><div class="qk"><input id="dzK" type="text" autocomplete="off" placeholder="Mã duyệt (dòng 5 Apps Script)" autocapitalize="off" autocorrect="off" spellcheck="false"><button class="btn" id="dzS" style="padding:11px 18px">Lưu</button></div>${msg?`<div class="note">${escH(msg)}</div>`:''}`;
+    $('#dzS').onclick=()=>{const v=$('#dzK').value.trim().normalize('NFC');if(!v)return;ST.setItem('dc_chu',v);dzLoad()};$('#dzH').innerHTML='Tin môi giới';return}
   const seen=getSeen(),a=DZ.list,m=DZ.moi,nNew=m.filter(x=>!seen.has(x.id)).length,n=a.length+nNew;
   $('#dzH').innerHTML='Tin môi giới'+(n?`<span class="badge">${n}</span>`:'');document.title=(n?'('+n+') ':'')+T0;
   const canN='Notification' in window&&Notification.permission==='default';
@@ -283,7 +286,7 @@ function dzNotify(items){if(!items.length)return;const body=items.map(x=>(x.f.ma
   if('Notification' in window&&Notification.permission==='granted'){try{new Notification(items.length+' tin môi giới mới',{body,tag:'dc-moi'})}catch(e){}}}
 async function dzLoad(){if(!ST.getItem('dc_url')||!ST.getItem('dc_key'))return;if(!ST.getItem('dc_chu')){dzDraw();return}
   try{const j=await dzApi({action:'choduyet'});
-    if(!j.ok){if(j.maduyet){ST.removeItem('dc_chu');dzDraw('Mã duyệt chưa đúng (hoặc Apps Script chưa đổi MA_DUYET).')}else dzDraw('Apps Script trả lỗi: '+(j.loi||'không rõ')+'. Có thể link mở nhanh của bạn đang trỏ tới bản triển khai chưa cập nhật “Phiên bản mới”.');return}
+    if(!j.ok){if(j.maduyet){ST.removeItem('dc_chu');dzDraw(j.loi||'Mã duyệt chưa đúng.')}else dzDraw('Apps Script trả lỗi: '+(j.loi||'không rõ')+'. Có thể link mở nhanh của bạn đang trỏ tới bản triển khai chưa cập nhật “Phiên bản mới”.');return}
     DZ.list=j.list||[];DZ.moi=j.moi||[];
     let noti;try{noti=new Set(JSON.parse(ST.getItem('dc_noti')||'[]'))}catch(e){noti=new Set()}
     const fresh=[...DZ.list,...DZ.moi].filter(x=>x.id&&!noti.has(x.id)&&!getSeen().has(x.id));
