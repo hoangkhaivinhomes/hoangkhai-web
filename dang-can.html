@@ -67,6 +67,16 @@ function fmtMa(x){let v=String(x).toUpperCase().replace(/\s+/g,'');
   const c=v.replace(/[.\-\/]/g,''),m=c.match(/^([A-Z]+)(\d+)$/);
   if(m&&m[2].length>=5){const d=m[2];return m[1]+d.slice(0,-4)+'.'+d.slice(-4,-2)+'.'+d.slice(-2)}
   return v}
+function zoneOfTower(tw){
+  tw=String(tw||'').toUpperCase().replace(/\s+/g,'');let m;
+  if((m=tw.match(/^S(\d{1,2})$/))){const k=+m[1];return k>=1&&k<=5?'The Rainbow':k>=6&&k<=10?'The Origami':''}
+  if(/^BS\d*$/.test(tw))return 'The Beverly Solari';
+  if(/^BE\d*$/.test(tw))return 'The Beverly';
+  if(/^GH\d*$/.test(tw))return 'Glory Heights';
+  if(/^OS\d*$/.test(tw))return 'The Opus One';
+  if(/^(LBV|LB|L)\d*$/.test(tw))return 'Lumière Boulevard';
+  if(/^(MCP|MC)[A-Z]?\d*$/.test(tw))return 'Masteri Centre Point';
+  return ''}
 function parseTin(raw){
   const t=String(raw||'').replace(/ /g,' '),n=nz(t),r={loai:'',khu:'',pn:'',dt:'',gia:'',huong:'',noithat:'',phaply:'',tang:'',toa:'',ma:'',mota:'',view:'',coc:'',tot:false,ghi:[]};
   /* mua / thuê */
@@ -84,7 +94,11 @@ function parseTin(raw){
   if(code){r.toa='S'+code[1]+'.'+code[2];r.tang=String(+code[3]);r.ma='S'+code[1]+'.'+code[2]+'.'+code[3].padStart(2,'0')+'.'+code[4].padStart(2,'0');r._tw='S'+code[1];r.ghi.push('Đã đọc mã căn: tòa '+r.toa+', tầng '+r.tang+'. Số phòng được bỏ đi, không hiện lên web.')}
   if(!code){const m1=t.match(/(?:m[ãa]\s*c[ăa]n|m[ãa]\s*s[ốo]|code)\s*[:：\-]?\s*([A-Za-z]{0,4}\d[A-Za-z0-9]*(?:\s*[.\-\/]\s*[A-Za-z0-9]+)*)/i)||t.match(/(?:^|[\s(\[])([A-Za-z]{1,4}\d{0,2}(?:[.\-][A-Za-z0-9]{1,4}){2,4})(?=$|[\s,;)\]])/)||t.match(/(?:^|[\s(\[])([A-Za-z]{1,3}\d{1,5}(?:[.\-]\d{1,3})?)(?=$|[\s,;)\]])/);
     if(m1&&fmtMa(m1[1]).split('.').length>=3){r.ma=fmtMa(m1[1]);const g=r.ma.split('.');if(g.length>=3){r.toa=g.slice(0,g.length-2).join('.');r.tang=String(+g[g.length-2]||'')||''}r.ghi.push('Đã đọc mã căn: '+r.ma+'. Mã chỉ để bạn xem trong Sheet, không hiện lên web.')}}
-  if(!r.khu&&code)r.ghi.push('Tin không ghi tên phân khu, bạn chọn giúp. Trang sẽ nhớ để lần sau tòa '+r._tw+' tự điền.');
+  /* phân khu theo mã tòa: S1–S5 Rainbow, S6–S10 Origami, BS Beverly Solari, BE Beverly, GH Glory Heights, OS Opus One, LBV Lumière, MCP Masteri */
+  if(!r.khu){const tw=(r.ma||r.toa||'').split('.')[0].toUpperCase();const z=zoneOfTower(tw);
+    if(z){r.khu=z;r.ghi.push('Phân khu tự nhận theo mã tòa '+tw+': '+z+'.')}
+    else if(tw){r._tw=r._tw||tw;if(/^[A-E]\d?$/.test(tw))r.ghi.push('Tòa '+tw+' có ở cả Lumière Boulevard và Masteri Centre Point, bạn chọn giúp phân khu.')}}
+  if(!r.khu&&(code||r.ma)&&!/c[aả] Lumi[eè]re Boulevard v[aà] Masteri/.test(r.ghi.join(' ')))r.ghi.push('Tin không ghi tên phân khu, bạn chọn giúp. Trang sẽ nhớ để lần sau tòa '+r._tw+' tự điền.');
   /* phòng ngủ */
   if(/studio|\bst\b/.test(n))r.pn='Studio';
   else{const b=n.match(/(\d)\s*(?:pn|phong ngu|p\.?n)\s*(\+)?/);if(b)r.pn=b[1]+'PN'+(b[2]?'+':'');else{const b2=n.match(/\b(\d)\s*(?:\+\s*1|\+)\s*pn/);if(b2)r.pn=b2[1]+'PN+'}}
