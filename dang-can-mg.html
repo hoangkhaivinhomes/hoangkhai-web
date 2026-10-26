@@ -224,9 +224,10 @@ function renderSum(miss){const box=$('#sum');if(!box)return;if(!$('#tin').value.
 /* ---- căn đã đăng của môi giới (lưu trên máy) ---- */
 /* ---- môi giới: đăng ký một lần, lưu trên máy ---- */
 const PK='dc_mg';
-function getP(){try{return JSON.parse(ST.getItem(PK)||'null')}catch(e){return null}}
+function getP(){try{const p=JSON.parse(ST.getItem(PK)||'null');return p&&p.ma?p:null}catch(e){return null}}
+function oldP(){try{return JSON.parse(ST.getItem(PK)||'null')}catch(e){return null}}
 function setP(p){try{p?ST.setItem(PK,JSON.stringify(p)):ST.removeItem(PK)}catch(e){}showP()}
-function showP(){const p=getP();$('#reg').hidden=!!p;$('#hi').hidden=!p;$('.bar').style.display=p?'block':'none';['#tinH','#tin','#sum','#dup','#more','#anhH','#drop','#th','#ts'].forEach(x=>{const e=$(x);if(e)e.style.display=p?'':'none'});
+function showP(){const p=getP();if(!p){const o=oldP();if(o){if(o.ten&&!$('#rTen').value)$('#rTen').value=o.ten;if(o.sdt&&!$('#rSdt').value)$('#rSdt').value=o.sdt}}$('#reg').hidden=!!p;$('#hi').hidden=!p;$('.bar').style.display=p?'block':'none';['#tinH','#tin','#sum','#dup','#more','#anhH','#drop','#th','#ts'].forEach(x=>{const e=$(x);if(e)e.style.display=p?'':'none'});
   if(p)$('#hi').innerHTML=`<span>Xin chào <b>${escH(p.ten)}</b> · ${escH(p.sdt)}</span><a href="#" id="hiX">Không phải bạn?</a>`;
   const x=$('#hiX');if(x)x.onclick=e=>{e.preventDefault();if(confirm('Đăng xuất để nhập tên khác trên máy này?')){setP(null);ST.removeItem(MINE_K);MLIST=null;drawMine()}};check();loadMine()}
 async function api(body){const url=ST.getItem('dc_url'),key=ST.getItem('dc_key');const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,...body})});return r.json()}
@@ -234,7 +235,7 @@ async function dangKy(){const ten=$('#rTen').value.trim(),sdt=$('#rSdt').value.t
   if(ten.length<2){$('#rMsg').innerHTML='<div class="note">Nhập tên của bạn.</div>';return}
   if(sdt.replace(/\D/g,'').length<9){$('#rMsg').innerHTML='<div class="note">Số điện thoại chưa đúng.</div>';return}
   b.disabled=true;b.textContent='Đang lưu…';$('#rMsg').innerHTML='';
-  try{const j=await api({action:'dangky',ten,sdt});if(j.ok){setP({ma:j.ma,ten:j.ten,sdt:j.sdt})}else $('#rMsg').innerHTML=`<div class="note">${escH(j.loi||'Chưa lưu được')}</div>`}
+  try{const j=await api({action:'dangky',ten,sdt,cu:getMine().map(m=>({id:m.id,at:m.at,loai:m.loai}))});if(j.ok){setP({ma:j.ma,ten:j.ten,sdt:j.sdt})}else $('#rMsg').innerHTML=`<div class="note">${escH(j.loi||'Chưa lưu được')}</div>`}
   catch(e){$('#rMsg').innerHTML='<div class="note">Không kết nối được, thử lại sau.</div>'}
   b.disabled=false;b.textContent='Bắt đầu đăng căn'}
 const MINE_K='dc_mine';let MST={},MLIST=null;
@@ -301,7 +302,7 @@ $('#go').onclick=async()=>{if(busy)return;if(EDIT)return saveEdit();const url=ST
   busy=true;$('#go').disabled=true;$('#st').textContent='Đang đăng, vui lòng chờ…';
   const id='c'+Date.now()+Math.random().toString(36).slice(2,6);
   try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({key,id,mg:P.ma,fields:f,images:imgs.map(d=>({data:d.split(',')[1]}))})});const j=await r.json();
-    if(j.ok){setTimeout(loadMine,200);saveMine({id,at:Date.now(),loai:f.loai||'',sum:[f.loai,f.khu,f.pn,f.dt?f.dt+' m²':'',f.gia,f.toa?'tòa '+f.toa+(f.tang?' tầng '+f.tang:''):''].filter(Boolean).join(' · ')});if(POSTED)POSTED.push({loai:f.loai||'',khu:f.khu||'',pn:f.pn||'',dt:f.dt||'',gia:f.gia||'',toa:f.toa||'',tang:f.tang||'',an:''});$('#res').innerHTML=`<div class="ok"><b>Đã đăng.</b> ${j.trung?'(Căn này đã được gửi trước đó.)':''}Căn sẽ hiện trên web sau khoảng 5 phút.<div class="row" style="margin-top:12px"><button class="btn" id="nx">Đăng căn tiếp</button></div></div>`;$('#nx').onclick=reset;$('#st').textContent='Đã đăng';$('#res').scrollIntoView({behavior:'smooth'})}
+    if(j.ok){setTimeout(loadMine,200);saveMine({id,at:Date.now(),loai:f.loai||'',ma:f.ma||'',sum:[f.loai,f.khu,f.pn,f.dt?f.dt+' m²':'',f.gia,f.toa?'tòa '+f.toa+(f.tang?' tầng '+f.tang:''):''].filter(Boolean).join(' · ')});if(POSTED)POSTED.push({loai:f.loai||'',khu:f.khu||'',pn:f.pn||'',dt:f.dt||'',gia:f.gia||'',toa:f.toa||'',tang:f.tang||'',an:''});$('#res').innerHTML=`<div class="ok"><b>Đã đăng.</b> ${j.trung?'(Căn này đã được gửi trước đó.)':''}Căn sẽ hiện trên web sau khoảng 5 phút.<div class="row" style="margin-top:12px"><button class="btn" id="nx">Đăng căn tiếp</button></div></div>`;$('#nx').onclick=reset;$('#st').textContent='Đã đăng';$('#res').scrollIntoView({behavior:'smooth'})}
     else{if(j.dangky){setP(null)}$('#res').innerHTML=`<div class="note">Chưa đăng được: ${escH(j.loi||'lỗi không rõ')}${j.dangky?'. Bạn nhập lại tên và SĐT ở đầu trang nhé.':''}</div>`;busy=false;check()}}
   catch(e){$('#res').innerHTML='<div class="note">Không nhận được phản hồi. <b>Hãy kiểm tra Google Sheet xem căn đã có chưa trước khi bấm Đăng lại</b>, để tránh đăng trùng.</div>';busy=false;check()}};
 function reset(){$('#tin').value='';FIELDS.forEach(f=>$('#f_'+f[0]).value='');$('#tot').checked=false;imgs=[];drawImgs();$('#res').innerHTML='';$('#warn').innerHTML='';$('#dup').innerHTML='';DUP={level:'',hits:[]};busy=false;check();scrollTo({top:0,behavior:'smooth'})}
