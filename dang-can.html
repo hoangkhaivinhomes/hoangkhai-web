@@ -283,12 +283,12 @@ function dzNotify(items){if(!items.length)return;const body=items.map(x=>(x.f.ma
   if('Notification' in window&&Notification.permission==='granted'){try{new Notification(items.length+' tin môi giới mới',{body,tag:'dc-moi'})}catch(e){}}}
 async function dzLoad(){if(!ST.getItem('dc_url')||!ST.getItem('dc_key'))return;if(!ST.getItem('dc_chu')){dzDraw();return}
   try{const j=await dzApi({action:'choduyet'});
-    if(!j.ok){if(j.maduyet){ST.removeItem('dc_chu');dzDraw('Mã duyệt chưa đúng (hoặc Apps Script chưa đổi MA_DUYET).')}return}
+    if(!j.ok){if(j.maduyet){ST.removeItem('dc_chu');dzDraw('Mã duyệt chưa đúng (hoặc Apps Script chưa đổi MA_DUYET).')}else dzDraw('Apps Script trả lỗi: '+(j.loi||'không rõ')+'. Có thể link mở nhanh của bạn đang trỏ tới bản triển khai chưa cập nhật “Phiên bản mới”.');return}
     DZ.list=j.list||[];DZ.moi=j.moi||[];
     let noti;try{noti=new Set(JSON.parse(ST.getItem('dc_noti')||'[]'))}catch(e){noti=new Set()}
     const fresh=[...DZ.list,...DZ.moi].filter(x=>x.id&&!noti.has(x.id)&&!getSeen().has(x.id));
     if(fresh.length){dzNotify(fresh);fresh.forEach(x=>noti.add(x.id));try{ST.setItem('dc_noti',JSON.stringify([...noti].slice(-400)))}catch(e){}}
-    dzDraw()}catch(e){}}
+    dzDraw()}catch(e){dzDraw('Không tải được tin môi giới ('+(e.message||e)+'). Bấm Tải lại để thử lại.')}}
 function dzStart(){dzLoad();clearInterval(DZ.t);DZ.t=setInterval(dzLoad,60000)}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)dzLoad()});
 build();check();cfgShow();loadPosted();dzStart();$('#qk').addEventListener('input',quickCheck);document.addEventListener('input',e=>{if(e.target.closest&&e.target.closest('#fm'))dupCheck()});document.addEventListener('change',e=>{if(e.target.closest&&e.target.closest('#fm'))dupCheck()});
