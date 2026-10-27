@@ -479,7 +479,9 @@ function sheetUnits(csv){
   const R=csvRows(csv);if(R.length<2)return [];
   const H=R[0].map(h=>h.toLowerCase());const ix=(...k)=>H.findIndex(h=>k.some(x=>h.includes(x)));
   const c={type:ix('loại','loai'),zone:ix('khu','phân khu'),beds:ix('phòng'),area:ix('diện tích','dien tich'),price:H.findIndex(h=>h.includes('giá')&&!h.includes('tốt')),dir:ix('hướng','huong'),furn:ix('nội thất','noi that'),legal:ix('pháp lý','phap ly'),img:ix('ảnh','hình'),hot:ix('nổi bật','giá tốt','noi bat'),hide:ix('ẩn','an căn','hide'),tower:ix('tòa','toa'),floor:ix('tầng','tang'),view:ix('view','cảnh'),desc:ix('mô tả','mo ta','ghi chú','ghi chu'),deposit:ix('cọc','coc'),fee:ix('phí quản','phi quan'),rentEst:ix('thuê dự kiến','thue du kien'),amen:ix('tiện ích','tien ich'),toVincom:ix('đến vincom','den vincom'),toNX:ix('nguyễn xiển','nguyen xien')};
-  const g=(row,k)=>c[k]>=0?String(row[c[k]]||'').trim():'';
+  const CAP=new Set(['zone','dir','furn','legal','view','desc','deposit','fee','amen']);
+  const cap=t=>t?t.charAt(0).toLocaleUpperCase('vi')+t.slice(1):t;
+  const g=(row,k)=>{const t=c[k]>=0?String(row[c[k]]||'').trim():'';return CAP.has(k)?cap(t):t};
   return R.slice(1).map((row,n)=>{
     if(/^(x|có|co|true|1|ẩn|an|đã bán|da ban|đã thuê|da thue)/i.test(g(row,'hide')))return null;
     const rent=/thuê|thue/i.test(g(row,'type'));let raw=g(row,'price'),v=num(raw);if(isNaN(v))return null;
