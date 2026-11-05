@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /dang-can
+Disallow: /dang-can-mg
+
+Sitemap: https://hoangkhaivinhomes.com.vn/sitemap.xml

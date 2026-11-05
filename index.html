@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Chọn nhà đúng gu">
+<meta name="description" content="Căn hộ bán và cho thuê tại Vinhomes Grand Park, TP. Thủ Đức: The Origami, The Rainbow, The Beverly, Beverly Solari, Glory Heights, Masteri, Lumière. Ảnh thật, giá rõ ràng, tư vấn Zalo 0934 307 196.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hoang Khai Vinhomes">
 <meta property="og:title" content="Hoang Khai Vinhomes">
@@ -133,14 +133,14 @@ details{font-size:14px;color:var(--mute)}details summary{cursor:pointer;color:va
 .lead .lsub{margin:0 0 12px;color:var(--mute);font-size:15.5px}
 .lead form{display:flex;gap:10px;flex-wrap:wrap}.lead input{flex:1 1 200px;padding:13px 14px}
 .lok{margin:6px 0;font-weight:600}
-.hero-txt{container-type:inline-size;position:relative;width:min(660px,100%);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 17%}
+.hero-txt{container-type:inline-size;position:relative;width:min(520px,100%);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 17%}
 .enso svg{display:block;width:100%;height:100%}
 .enso.enso-in{color:var(--accent);inset:7.5%}.enso-in .rv-p{animation-delay:.9s}
 .enso{position:absolute;inset:0;color:var(--ink);pointer-events:none;}
 .rv-p{stroke-dasharray:100;stroke-dashoffset:0;animation:ens 2.2s cubic-bezier(.4,.1,.3,1) .1s both}
 @keyframes ens{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
 @media(prefers-reduced-motion:reduce){.rv-p{animation:none}}
-@media(max-width:600px){.hero h1{font-size:8vw}.hero p.sub{font-size:13px;margin-top:12px}.hero-txt{padding:0 16%}.hero::after{margin-top:12px}}
+@media(max-width:600px){.hero{padding:8px 0 4px}.hero-txt{width:min(240px,66vw);padding:0 15%}.hero h1{font-size:min(26px,7vw)}.hero p.sub{font-size:12px;margin-top:8px}.hero::after{display:none}#canho{margin-top:20px;padding-top:0}}
 footer{color:var(--mute);font-size:13.5px;line-height:1.65;padding:36px 0 56px;max-width:48em}footer strong{color:var(--ink)}
 .fkg{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}.fkg a{color:var(--ink);font-weight:600;text-underline-offset:3px}
 .warn{background:var(--soft);border-radius:10px;padding:10px 12px;font-size:14px;margin-bottom:14px}
@@ -359,7 +359,7 @@ const money=u=>{const p=u.price;if(en())return u.type==='rent'?p+' million VND/m
 const imgsOf=u=>u.imgs&&u.imgs.length?u.imgs:(u.img?[u.img]:[]);
 const bedsLabel=u=>{const t=String(u.bedsText||u.beds||'');if(/^\d+$/.test(t))return en()?t+(t==='1'?' bedroom':' bedrooms'):t+' phòng ngủ';return tBeds(t)};
 const phAttr=u=>imgsOf(u).length?` data-id="${esc(u.id)}" tabindex="0" role="button" aria-label="${en()?'View '+imgsOf(u).length+' photos':'Xem '+imgsOf(u).length+' ảnh'}"`:'';
-const phImg=u=>{const a=imgsOf(u);return a.length?`<img src="${esc(a[0])}" alt="Căn hộ ${esc(u.zone)}" loading="lazy">`:PH};
+const phImg=u=>{const a=imgsOf(u);return a.length?`<img src="${esc(String(a[0]).replace(/^\/img\/([\w-]+)\?sz=w1400$/,'/img/$1?sz=w720'))}" alt="Căn hộ ${esc(u.zone)}" loading="lazy">`:PH};
 const cnt=u=>imgsOf(u).length>1?`<span class="cnt">${imgsOf(u).length} ${T('ảnh')}</span>`:'';
 const tel=()=>S.phone?'tel:'+S.phone.replace(/\s/g,''):'#';
 const zl=()=>S.zalo?'https://zalo.me/'+S.zalo.replace(/\D/g,''):'#';
@@ -495,7 +495,7 @@ function sheetUnits(csv){
     const bt=g(row,'beds'),ids=driveIds(g(row,'img'));
     let key=g(row,'rid')||g(row,'ts')||ids[0]||[rent?'t':'b',g(row,'zone'),g(row,'tower'),g(row,'floor'),bt,g(row,'area')].join('|'),id=hid(key);
     while(seen.has(id))id=hid(key+'#'+n+seen.size);seen.add(id);
-    return{id,lid:'g'+n,type:rent?'rent':'sale',zone:g(row,'zone'),bedsText:bt,beds:/^\d+$/.test(bt)?+bt:bt,area:(n=>isNaN(n)?'':String(n).replace('.',','))(num(g(row,'area'))),price:v,dir:g(row,'dir'),furn:g(row,'furn'),legal:g(row,'legal'),imgs:ids.map(i=>'https://drive.google.com/thumbnail?id='+i+'&sz=w1400'),hot:/^(x|có|co|true|1|giá tốt)/i.test(g(row,'hot')),tower:g(row,'tower'),floor:g(row,'floor'),view:g(row,'view'),desc:g(row,'desc'),deposit:g(row,'deposit'),fee:g(row,'fee'),rentEst:num(g(row,'rentEst')),amen:g(row,'amen'),toVincom:g(row,'toVincom'),toNX:g(row,'toNX')}
+    return{id,lid:'g'+n,type:rent?'rent':'sale',zone:g(row,'zone'),bedsText:bt,beds:/^\d+$/.test(bt)?+bt:bt,area:(n=>isNaN(n)?'':String(n).replace('.',','))(num(g(row,'area'))),price:v,dir:g(row,'dir'),furn:g(row,'furn'),legal:g(row,'legal'),imgs:ids.map(i=>'/img/'+i+'?sz=w1400'),hot:/^(x|có|co|true|1|giá tốt)/i.test(g(row,'hot')),tower:g(row,'tower'),floor:g(row,'floor'),view:g(row,'view'),desc:g(row,'desc'),deposit:g(row,'deposit'),fee:g(row,'fee'),rentEst:num(g(row,'rentEst')),amen:g(row,'amen'),toVincom:g(row,'toVincom'),toNX:g(row,'toNX')}
   }).filter(Boolean)}
 function useUnits(u){S.units=S.units.concat(u);zones();render();dtHash()}
 async function loadSheet(){if(!SHEET_CSV)return;let ok=false;
@@ -600,7 +600,7 @@ function zaloMsg(u){
   if(en())return "Hi Khai, I'd like advice on the apartment "+(u.type==='rent'?'for rent':'for sale')+': '+parts+(u.zone?' at '+u.zone:'')+', '+money(u)+'.\nLink: '+link;
   return 'Mình cần tư vấn căn '+(u.type==='rent'?'cho thuê':'bán')+' '+parts+(u.zone?' tại '+u.zone:'')+', giá '+money(u)+'.\nLink căn: '+link}
 document.addEventListener('click',e=>{const a=e.target.closest('.dtf .z,.fab [data-zalo]');if(!a)return;
-  const u=a.closest('.dtf')?S.units.find(x=>x.id===dtId):null;copyTxt(zaloMsg(u));
+  const u=(a.closest('.dtf')||$('#dt').open)?S.units.find(x=>x.id===dtId):null;copyTxt(zaloMsg(u));
   toast(T('Đã chép sẵn tin nhắn. Khi Zalo mở, bạn nhấn dán rồi gửi cho Khải nhé.'))},true);
 
 /* ---- Owner admin ---- */

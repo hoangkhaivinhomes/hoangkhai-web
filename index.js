@@ -2,7 +2,7 @@
    Khi link có ?can=<mã ngắn>, gắn thẻ Open Graph riêng của căn đó (tiêu đề: loại căn + phân khu + giá, ảnh: ảnh đầu tiên)
    để Facebook, Zalo, Messenger hiện đúng ảnh và giá khi chia sẻ. Không có ?can= thì trả trang tĩnh như cũ.
    Cách tạo mã ngắn phải giữ giống hàm sheetUnits() trong index.html. */
-const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHcr70-ByPB3DYMUNAXX4LMPpR8-XhCUyEAeGtUbtQSMS6qL1ETe6HHb1LgS4-EOynheizpYY2lwLn/pub?gid=553047661&single=true&output=csv';
+export const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHcr70-ByPB3DYMUNAXX4LMPpR8-XhCUyEAeGtUbtQSMS6qL1ETe6HHb1LgS4-EOynheizpYY2lwLn/pub?gid=553047661&single=true&output=csv';
 
 export function csvRows(t) { const r = []; let row = [], c = '', q = false; for (let i = 0; i < t.length; i++) { const ch = t[i];
   if (q) { if (ch === '"') { if (t[i + 1] === '"') { c += '"'; i++ } else q = false } else c += ch }
